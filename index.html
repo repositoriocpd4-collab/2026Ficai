@@ -2914,16 +2914,52 @@ $('#btnActionAtribuir')?.addEventListener('click', () => {
 let currentCancTarget = { ficai: '0021', student: 'Ana Clara Nascimento', turma: '7B', escola: 'E.M. Elmir Figueira', status: 'Ativa', date: '18/08/2026' };
 
 function openCancelamentoModal(ficaiNum) {
-  if (ficaiNum) {
-    const row = document.querySelector(`.canc-row[data-ficai="${ficaiNum}"]`);
-    if (row) {
-      selectCancRow(row);
-    }
+  const sel = getSelectedFicaiRow();
+  const rawNum = ficaiNum || sel.ficai || '0020/2026';
+  const cleanNum = String(rawNum).split('/')[0].padStart(4, '0');
+  
+  let row = document.querySelector(`.canc-row[data-ficai="${cleanNum}"]`) || document.querySelector(`.canc-row[data-ficai="${rawNum}"]`);
+  
+  if (!row && $('#cancTableBody')) {
+    const tr = document.createElement('tr');
+    tr.className = 'canc-row active';
+    tr.dataset.ficai = cleanNum;
+    tr.dataset.student = sel.student;
+    tr.dataset.turma = sel.turma || '7B';
+    tr.dataset.escola = 'E.M. Elmir Figueira';
+    tr.dataset.status = 'Ativa';
+    tr.dataset.date = sel.date || '20/08/2026';
+    tr.style.cursor = 'pointer';
+    tr.style.background = '#eff6ff';
+    tr.innerHTML = `
+      <td style="padding: 12px; font-weight: 800; color: #1d4ed8;">${cleanNum}</td>
+      <td style="padding: 12px; font-weight: 700; color: #0f172a;">${escapeHtml(sel.student)}</td>
+      <td style="padding: 12px; font-weight: 600;">${escapeHtml(sel.turma || '7B')}</td>
+      <td style="padding: 12px; color: #64748b;">E.M. Elmir Figueira</td>
+      <td style="padding: 12px;"><span class="chip" style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 11px;">Ativa</span></td>
+      <td style="padding: 12px; text-align: center;">
+        <div style="display: inline-flex; gap: 6px;">
+          <button type="button" class="btn small soft canc-select-btn" style="padding: 5px 10px; font-size: 11.5px; font-weight: 600;"><i class="fa-solid fa-eye"></i> Visualizar</button>
+          <button type="button" class="btn small canc-trigger-btn" style="padding: 5px 10px; font-size: 11.5px; color: #ef4444; border: 1px solid #fca5a5; background: #fff5f5; font-weight: 700;"><i class="fa-solid fa-circle-xmark"></i> Cancelar</button>
+        </div>
+      </td>
+    `;
+    tr.addEventListener('click', () => selectCancRow(tr));
+    $('#cancTableBody').prepend(tr);
+    row = tr;
+  }
+
+  if (row) {
+    selectCancRow(row);
   } else {
-    const sel = getSelectedFicaiRow();
-    const row = document.querySelector(`.canc-row[data-ficai="${sel.ficai}"]`);
-    if (row) selectCancRow(row);
-    else updateCancDetails({ ficai: sel.ficai, student: sel.student, turma: sel.turma || '7B', escola: 'E.M. Elmir Figueira', status: 'Ativa', date: '18/08/2026' });
+    updateCancDetails({
+      ficai: cleanNum,
+      student: sel.student,
+      turma: sel.turma || '7B',
+      escola: 'E.M. Elmir Figueira',
+      status: 'Ativa',
+      date: sel.date || '20/08/2026'
+    });
   }
 
   if ($('#cancData')) $('#cancData').value = new Date().toISOString().split('T')[0];
@@ -2959,6 +2995,39 @@ function updateCancDetails(data) {
       chip.style.background = '#dcfce7'; chip.style.color = '#15803d';
     }
   }
+
+  // Linha do Tempo do Modal
+  if ($('#cancTimelineBox')) {
+    const history = getStoredFicaiEntries(data.ficai);
+    let historyHtml = `
+      <div style="position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: #e2e8f0;"></div>
+      <div style="position: relative;">
+        <div style="position: absolute; left: -20px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: #10b981; color: #fff; display: grid; place-items: center; font-size: 9px;"><i class="fa-solid fa-check"></i></div>
+        <div style="font-size: 11px; color: #64748b; font-weight: 600;">${data.date || '18/08/2026'} - 09:15</div>
+        <div style="font-size: 12.5px; font-weight: 700; color: #0f172a;">FICAI criada</div>
+        <div style="font-size: 11.5px; color: #475569;">Usuário: Sistema (Registro de Aviso de Faltas)</div>
+      </div>
+      <div style="position: relative;">
+        <div style="position: absolute; left: -20px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: #2563eb; color: #fff; display: grid; place-items: center; font-size: 9px;"><i class="fa-solid fa-paper-plane"></i></div>
+        <div style="font-size: 11px; color: #64748b; font-weight: 600;">19/08/2026 - 14:22</div>
+        <div style="font-size: 12.5px; font-weight: 700; color: #0f172a;">Acompanhamento iniciado</div>
+        <div style="font-size: 11.5px; color: #475569;">Usuário: Maria Oliveira (Secretaria Escolar)</div>
+      </div>
+    `;
+
+    if (history && history.length > 0) {
+      historyHtml += history.map(h => `
+        <div style="position: relative;">
+          <div style="position: absolute; left: -20px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: ${h.type.includes('Cancelamento')?'#ef4444':'#f59e0b'}; color: #fff; display: grid; place-items: center; font-size: 9px;"><i class="fa-solid ${h.type.includes('Cancelamento')?'fa-circle-xmark':'fa-clock-rotate-left'}"></i></div>
+          <div style="font-size: 11px; color: #64748b; font-weight: 600;">${fmtDate(h.date)} - 10:40</div>
+          <div style="font-size: 12.5px; font-weight: 700; color: #0f172a;">${escapeHtml(h.type)}</div>
+          <div style="font-size: 11.5px; color: #475569;">Usuário: ${escapeHtml(h.responsible)} — ${escapeHtml(h.text)}</div>
+        </div>
+      `).join('');
+    }
+    $('#cancTimelineBox').innerHTML = historyHtml;
+  }
+}
 
 // Lógica da Tela Dedicada de Cancelamento (#view-cancelamento)
 let currentCancScreenTarget = { ficai: '0021', student: 'Ana Clara Nascimento', turma: '7B', escola: 'E.M. Elmir Figueira', status: 'Ativa', date: '18/08/2026' };
@@ -3082,32 +3151,6 @@ $('#btnScreenTriggerConfirmModal')?.addEventListener('click', () => {
   $('#subModalConfirmCancelamento')?.classList.add('open');
 });
 
-  // Atualiza histórico da linha do tempo
-  if ($('#cancTimelineBox')) {
-    $('#cancTimelineBox').innerHTML = `
-      <div style="position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: #e2e8f0;"></div>
-      <div style="position: relative;">
-        <div style="position: absolute; left: -20px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: #10b981; color: #fff; display: grid; place-items: center; font-size: 9px;"><i class="fa-solid fa-check"></i></div>
-        <div style="font-size: 11px; color: #64748b; font-weight: 600;">${data.date || '18/08/2026'} - 09:15</div>
-        <div style="font-size: 12.5px; font-weight: 700; color: #0f172a;">FICAI criada</div>
-        <div style="font-size: 11.5px; color: #475569;">Usuário: Sistema (Registro de Aviso de Faltas)</div>
-      </div>
-      <div style="position: relative;">
-        <div style="position: absolute; left: -20px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: #2563eb; color: #fff; display: grid; place-items: center; font-size: 9px;"><i class="fa-solid fa-paper-plane"></i></div>
-        <div style="font-size: 11px; color: #64748b; font-weight: 600;">19/08/2026 - 14:22</div>
-        <div style="font-size: 12.5px; font-weight: 700; color: #0f172a;">Acompanhamento iniciado</div>
-        <div style="font-size: 11.5px; color: #475569;">Usuário: Maria Oliveira (Secretaria Escolar)</div>
-      </div>
-      <div style="position: relative;">
-        <div style="position: absolute; left: -20px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: #f59e0b; color: #fff; display: grid; place-items: center; font-size: 9px;"><i class="fa-solid fa-clock-rotate-left"></i></div>
-        <div style="font-size: 11px; color: #64748b; font-weight: 600;">20/08/2026 - 10:40</div>
-        <div style="font-size: 12.5px; font-weight: 700; color: #0f172a;">Solicitação de cancelamento iniciada</div>
-        <div style="font-size: 11.5px; color: #475569;">Usuário: Maria Oliveira</div>
-      </div>
-    `;
-  }
-}
-
 function selectCancRow(row) {
   document.querySelectorAll('.canc-row').forEach(r => {
     r.style.background = '';
@@ -3145,7 +3188,7 @@ $('#cancJustificativa')?.addEventListener('input', e => {
   if ($('#cancJustCharCount')) $('#cancJustCharCount').textContent = `${len}/500`;
 });
 
-// Trigger do Pop-up de Confirmação Final
+// Trigger do Pop-up de Confirmação Final no Modal
 $('#btnTriggerConfirmModal')?.addEventListener('click', () => {
   const motivo = $('#cancMotivo')?.value;
   const just = $('#cancJustificativa')?.value?.trim();
@@ -3180,7 +3223,7 @@ $('#btnPopConfirmar')?.addEventListener('click', () => {
   const motivo = $('#cancScreenMotivo')?.value || $('#cancMotivo')?.value || 'Solicitação de cancelamento';
   const just = $('#cancScreenJustificativa')?.value || $('#cancJustificativa')?.value || 'Cancelamento registrado.';
   const resp = $('#cancScreenResponsavel')?.value || $('#cancResponsavel')?.value || 'Maria Oliveira';
-  const target = currentCancScreenTarget.ficai ? currentCancScreenTarget : currentCancTarget;
+  const target = (currentCancTarget && currentCancTarget.ficai) ? currentCancTarget : currentCancScreenTarget;
 
   // Registrar histórico
   let existing = getStoredFicaiEntries(target.ficai);
@@ -3194,7 +3237,8 @@ $('#btnPopConfirmar')?.addEventListener('click', () => {
   saveStoredFicaiEntries(target.ficai, existing);
 
   // Atualizar status na tabela da tela dedicada
-  const activeScreenRow = document.querySelector(`.canc-screen-row[data-ficai="${target.ficai}"]`);
+  const cleanTargetNum = String(target.ficai).split('/')[0].padStart(4, '0');
+  const activeScreenRow = document.querySelector(`.canc-screen-row[data-ficai="${cleanTargetNum}"]`);
   if (activeScreenRow) {
     activeScreenRow.dataset.status = 'Cancelada';
     const statusTd = activeScreenRow.cells[4];
@@ -3202,12 +3246,36 @@ $('#btnPopConfirmar')?.addEventListener('click', () => {
   }
 
   // Atualizar status na tabela do modal
-  const activeModalRow = document.querySelector(`.canc-row[data-ficai="${target.ficai}"]`);
+  const activeModalRow = document.querySelector(`.canc-row[data-ficai="${cleanTargetNum}"]`);
   if (activeModalRow) {
     activeModalRow.dataset.status = 'Cancelada';
     const statusTd = activeModalRow.cells[4];
     if (statusTd) statusTd.innerHTML = '<span class="chip" style="background: #fef2f2; color: #dc2626; font-weight: 700; font-size: 11px;">Cancelada</span>';
   }
+
+  // Atualizar linha correspondente no Dashboard (Gerados / Recebidos CT)
+  document.querySelectorAll('.dash-list-row').forEach(row => {
+    const rNum = (row.dataset.ficai || '').split('/')[0].padStart(4, '0');
+    if (rNum === cleanTargetNum || row.dataset.student === target.student) {
+      row.dataset.sit = 'Cancelada';
+      const contentDiv = row.querySelector('.dash-row-content');
+      if (contentDiv && !contentDiv.querySelector('.chip-cancelada')) {
+        const chip = document.createElement('span');
+        chip.className = 'chip chip-cancelada';
+        chip.style.cssText = 'background: #fef2f2; color: #dc2626; border: 1px solid #fca5a5; font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 99px; margin-left: 8px; vertical-align: middle;';
+        chip.textContent = 'CANCELADA';
+        contentDiv.appendChild(chip);
+      }
+      const iconDiv = row.querySelector('.dash-row-status-icon');
+      if (iconDiv) {
+        iconDiv.className = 'dash-row-status-icon alert-warn';
+        iconDiv.style.background = '#fef2f2';
+        iconDiv.style.borderColor = '#fca5a5';
+        iconDiv.innerHTML = '<i class="fa-solid fa-circle-xmark" style="color: #ef4444;"></i>';
+        iconDiv.setAttribute('data-tooltip', 'FICAI Cancelada');
+      }
+    }
+  });
 
   target.status = 'Cancelada';
   if (typeof updateCancScreenDetails === 'function') updateCancScreenDetails(target);
@@ -3221,22 +3289,7 @@ $('#btnPopConfirmar')?.addEventListener('click', () => {
 
 $('#btnActionEncerrar')?.addEventListener('click', () => {
   const sel = getSelectedFicaiRow();
-  showView('cancelamento');
-  
-  const matchingRow = document.querySelector(`.canc-screen-row[data-ficai="${sel.ficai}"]`);
-  if (matchingRow) {
-    selectCancScreenRow(matchingRow);
-  } else {
-    updateCancScreenDetails({
-      ficai: sel.ficai,
-      student: sel.student,
-      turma: sel.turma || '7B',
-      escola: 'E.M. Elmir Figueira',
-      status: 'Ativa',
-      date: '20/08/2026'
-    });
-  }
-  toast(`Redirecionado para a tela de Cancelamento (FICAI ${sel.ficai}).`);
+  openCancelamentoModal(sel.ficai);
 });
 
 $('#btnActionHistorico')?.addEventListener('click', () => {
