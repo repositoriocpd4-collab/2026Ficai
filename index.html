@@ -1498,6 +1498,147 @@ body.dark .wizard-footer-bar {
     font-size: 13px;
   }
 }
+
+/* ==============================================================================
+   DESIGN FIDEDIGNO DA TELA 'GERAR FICAI' (CONFORME IMAGEM DE REFERÊNCIA DE UX/UI)
+   ============================================================================== */
+.form-card {
+  padding: 24px 32px 32px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 20px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Toolbar superior com botões limpos */
+.form-toolbar {
+  padding: 16px 20px !important;
+  background: #ffffff !important;
+  border-bottom: 1.5px solid #f1f5f9 !important;
+  margin-bottom: 24px !important;
+  border-radius: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.form-toolbar .ficai-id {
+  font-size: 15px !important;
+  color: #475569 !important;
+  font-weight: 500 !important;
+  font-family: 'Alexandria', sans-serif !important;
+}
+
+.form-toolbar .ficai-id strong {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+.form-toolbar .ficai-id span {
+  color: #475569 !important;
+  font-weight: 600 !important;
+}
+
+.form-toolbar-btn {
+  background: #ffffff !important;
+  border: 1.5px solid #dbeafe !important;
+  color: #2563eb !important;
+  border-radius: 12px !important;
+  padding: 8px 18px !important;
+  font-weight: 700 !important;
+  font-size: 13.5px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+}
+
+.form-toolbar-btn:hover {
+  background: #f8fafc !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Banner de Título da Seção (Design idêntico à imagem anexa) */
+.form-section .section-title {
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #dbeafe 100%) !important;
+  border: 1px solid #c7d2fe !important;
+  border-radius: 14px !important;
+  padding: 16px 24px !important;
+  margin: 0 0 24px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 2px 8px rgba(0, 0, 0, 0.02) !important;
+}
+
+body.dark .form-section .section-title {
+  background: linear-gradient(135deg, #1e293b 0%, #1e1b4b 100%) !important;
+  border-color: #3730a3 !important;
+}
+
+.form-section .section-number {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #0284c7 0%, #1d4ed8 100%) !important;
+  color: #ffffff !important;
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  display: grid !important;
+  place-items: center !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35) !important;
+}
+
+.form-section .section-title-text {
+  font-size: 18.5px !important;
+  font-weight: 800 !important;
+  color: #1e3a8a !important;
+  letter-spacing: -0.2px !important;
+}
+
+body.dark .form-section .section-title-text {
+  color: #c7d2fe !important;
+}
+
+/* Campos de entrada, selects e labels */
+.form-card label {
+  display: block !important;
+  font-weight: 700 !important;
+  font-size: 13.5px !important;
+  color: #1e293b !important;
+  margin: 0 0 8px 0 !important;
+}
+
+.form-card input:not([type="checkbox"]):not([type="radio"]),
+.form-card select {
+  height: 48px !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #cbd5e1 !important;
+  background: #ffffff !important;
+  padding: 0 16px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #1e293b !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.form-card input:focus,
+.form-card select:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12) !important;
+  background: #ffffff !important;
+}
+
+.form-card input[readonly] {
+  background: #f8fafc !important;
+  color: #64748b !important;
+  border-color: #e2e8f0 !important;
+}
 </style>
 </head>
 <body>
@@ -1842,10 +1983,26 @@ body.dark .wizard-footer-bar {
   </div>
 
   <form class="card form-card" id="ficaiForm" onsubmit="return false">
-    <div class="form-toolbar"><div class="ficai-id"><strong>FICAI:</strong> <span id="ficaiHeaderNumber">00001/2026</span></div><div class="action-row"><button class="btn small soft" id="openCurrentInfo" data-tooltip="Ver histórico completo, linha do tempo e ocorrências"><i class="fa-solid fa-circle-info"></i> Informações</button><button class="btn small" id="saveDraft" data-tooltip="Gravar dados temporários no navegador para não perder o preenchimento"><i class="fa-solid fa-floppy-disk"></i> Salvar rascunho</button><button class="btn small soft" id="clearDraft" data-tooltip="Limpar todos os campos do formulário"><i class="fa-solid fa-eraser"></i> Limpar</button></div></div>
+    <div class="form-toolbar">
+      <div class="ficai-id"><strong>FICAI:</strong> <span id="ficaiHeaderNumber">00001/2026</span></div>
+      <div class="action-row">
+        <button class="form-toolbar-btn" id="openCurrentInfo" type="button" data-tooltip="Ver histórico completo, linha do tempo e ocorrências">
+          <i class="fa-solid fa-circle-info" style="color: #0284c7;"></i> Informações
+        </button>
+        <button class="form-toolbar-btn" id="saveDraft" type="button" data-tooltip="Gravar dados temporários no navegador para não perder o preenchimento">
+          <i class="fa-solid fa-floppy-disk" style="color: #2563eb;"></i> Salvar rascunho
+        </button>
+        <button class="form-toolbar-btn" id="clearDraft" type="button" data-tooltip="Limpar todos os campos do formulário">
+          <i class="fa-solid fa-eraser" style="color: #2563eb;"></i> Limpar
+        </button>
+      </div>
+    </div>
 
     <section class="form-section active-step-section" id="sec1">
-      <h2 class="section-title"><span class="section-number">1</span> Dados sobre a Escola e Identificação do Aluno</h2>
+      <h2 class="section-title">
+        <span class="section-number">1</span>
+        <span class="section-title-text">Dados sobre a Escola e Identificação do Aluno</span>
+      </h2>
       <div class="grid g4">
         <div class="meta-field meta-year"><label>Ano Letivo</label><select id="anoLetivo"></select></div>
         <div class="meta-field meta-number">
@@ -1876,7 +2033,10 @@ body.dark .wizard-footer-bar {
     </section>
 
     <section class="form-section" id="sec2">
-      <h2 class="section-title"><span class="section-number">2</span> Dados sobre a Situação Escolar do Aluno</h2>
+      <h2 class="section-title">
+        <span class="section-number">2</span>
+        <span class="section-title-text">Dados sobre a Situação Escolar do Aluno</span>
+      </h2>
       <div class="grid g5">
         <div><label>Ano Escolar</label><select id="anoEscolar"><option value="">Selecione</option><option>Pré I</option><option>Pré II</option><option>1º Ano</option><option>2º Ano</option><option>3º Ano</option><option>4º Ano</option><option>5º Ano</option><option>6º Ano</option><option>7º Ano</option><option>8º Ano</option><option>9º Ano</option><option>NCEJA VI</option></select></div>
         <div><label>Turma</label><select id="turma"><option value="">Selecione</option><option data-modalidade="Ensino Fundamental">6º Ano A</option><option data-modalidade="Ensino Fundamental">7º Ano B</option><option data-modalidade="Ensino Fundamental">8º Ano C</option><option data-modalidade="Ensino Fundamental">9º Ano A</option><option data-modalidade="EJA">NCEJA VI A</option><option data-modalidade="Educação Infantil">Pré II A</option></select></div>
@@ -1891,7 +2051,10 @@ body.dark .wizard-footer-bar {
     </section>
 
     <section class="form-section" id="sec3">
-      <h2 class="section-title"><span class="section-number">3</span> Procedimentos da Escola</h2>
+      <h2 class="section-title">
+        <span class="section-number">3</span>
+        <span class="section-title-text">Procedimentos da Escola</span>
+      </h2>
       <div class="procedures">
         <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Comunicação/bilhete ao responsável"><span>Comunicação / bilhete ao responsável</span></label><input type="date" data-proc-date="Comunicação/bilhete ao responsável"></div>
         <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Retorno do estudante à escola"><span>Retorno do estudante à escola</span></label><input type="date" data-proc-date="Retorno do estudante à escola"></div>
@@ -1905,7 +2068,10 @@ body.dark .wizard-footer-bar {
     </section>
 
     <section class="form-section" id="sec4">
-      <h2 class="section-title"><span class="section-number">4</span> Motivos da Ausência, Situação e Vulnerabilidades</h2>
+      <h2 class="section-title">
+        <span class="section-number">4</span>
+        <span class="section-title-text">Motivos da Ausência, Situação e Vulnerabilidades</span>
+      </h2>
       <div class="inline-card"><h4>4.1 Constatação dos motivos da ausência / falta do estudante</h4><div class="option-grid" id="motivosGrid">
         <label class="check"><input type="checkbox" value="Mudança de endereço com pedido de transferência"><span>Mudança de endereço do aluno com pedido de transferência escolar</span></label>
         <label class="check"><input type="checkbox" value="Aluno está trabalhando"><span>Aluno está trabalhando</span></label>
@@ -1949,7 +2115,10 @@ body.dark .wizard-footer-bar {
     </section>
 
     <section class="form-section" id="sec5">
-      <h2 class="section-title"><span class="section-number">5</span> Tela de Diagnóstico da Evasão</h2>
+      <h2 class="section-title">
+        <span class="section-number">5</span>
+        <span class="section-title-text">Tela de Diagnóstico da Evasão</span>
+      </h2>
       <div class="notice warning" style="margin-bottom:15px"><strong>Diagnóstico multifatorial:</strong> marque todos os fatores identificados. O registro será usado nos indicadores, histórico da FICAI e relatórios.</div>
       <div class="diagnosis-grid" id="diagnosisGrid">
         <div class="diagnosis-box" data-group="Estrutural"><h4><i class="fa-solid fa-school"></i> Estrutural</h4><label class="check"><input type="checkbox" value="Falta de Vaga na Escola"><span>Falta de Vaga na Escola</span></label><label class="check"><input type="checkbox" value="Dificuldade de Transporte"><span>Dificuldade de Transporte</span></label><label class="check"><input type="checkbox" value="Distância da Residência"><span>Distância da Residência</span></label><label class="check"><input type="checkbox" value="Barreiras Arquitetônicas"><span>Barreiras Arquitetônicas</span></label><label class="check"><input type="checkbox" value="Falta de recursos"><span>Falta de recursos (didático, vestuário)</span></label><label class="check"><input type="checkbox" value="Falta de políticas escolares"><span>Falta de políticas escolares</span></label><label class="check"><input type="checkbox" value="Falta de educação especial"><span>Falta de educação especial</span></label></div>
@@ -1963,8 +2132,10 @@ body.dark .wizard-footer-bar {
     </section>
 
     <section class="form-section" id="sec6">
-      <h2 class="section-title"><span class="section-number">6</span> Revisão, Histórico e Emissão</h2>
-      <div class="grid g2"><div class="inline-card"><h4>Participação do Conselho Tutelar</h4><label>Recebimento da FICAI (data e comentário)</label><textarea id="ctRecebimento"></textarea><label style="margin-top:12px">Diligências efetuadas</label><textarea id="ctDiligencias"></textarea><label style="margin-top:12px">Devolução ou encaminhamento (data e comentário)</label><textarea id="ctDevolucao"></textarea><label style="margin-top:12px">Conselheiro(a)</label><input id="ctConselheiro"></div><div class="inline-card"><h4>Atuação das Promotorias de Justiça</h4><label class="check"><input id="prom1" type="checkbox"><span>Recebimento da FICAI</span></label><label class="check"><input id="prom2" type="checkbox"><span>Acompanhamento da representação do Conselho Tutelar</span></label><label class="check"><input id="prom3" type="checkbox"><span>Notificação do Responsável</span></label><label class="check"><input id="prom4" type="checkbox"><span>Propositura de ação de suspensão ou destituição do poder dos pais</span></label><div style="margin-top:15px"><label>Promotor(a)</label><input id="promotor"></div><div style="margin-top:12px"><label>Data</label><input id="promData" type="date"></div></div></div>
+      <h2 class="section-title">
+        <span class="section-number">6</span>
+        <span class="section-title-text">Revisão, Histórico e Emissão</span>
+      </h2>
       <div class="notice purple" style="margin-top:16px">A impressão foi configurada para <strong>A4, orientação retrato, uma única folha</strong>. Relatos muito extensos permanecem no registro eletrônico e aparecem de forma resumida na folha impressa.</div>
       
       <div class="form-footer" style="margin-top: 20px; padding-top: 16px; border-top: 1.5px dashed #cbd5e1;"><div class="action-row"><button class="btn" id="saveBottom" data-tooltip="Salvar ficha no banco de dados e cadastrar histórico"><i class="fa-solid fa-floppy-disk"></i> Salvar FICAI</button><button class="btn purple" data-go="conselho"><i class="fa-solid fa-gavel"></i> Encaminhar ao CT</button></div><div class="action-row"><button class="btn soft" id="previewBtn" data-tooltip="Conferir espelho A4 antes de imprimir"><i class="fa-solid fa-eye"></i> Pré-visualizar A4</button><button class="btn primary" id="printBtn" data-tooltip="Gerar documento oficial em PDF (A4 - 1 página retrato)"><i class="fa-solid fa-print"></i> Imprimir / Salvar PDF</button></div></div>
