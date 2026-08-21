@@ -1875,6 +1875,30 @@ body.dark .login-page-footer {
   color: #94a3b8;
 }
 
+
+.auto-num-badge-btn {
+  background: #e0f2fe !important;
+  color: #0284c7 !important;
+  border: 1.5px solid #bae6fd !important;
+  border-radius: 12px !important;
+  padding: 0 14px !important;
+  height: 48px !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  white-space: nowrap !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.auto-num-badge-btn:hover {
+  background: #bae6fd !important;
+  color: #0369a1 !important;
+  transform: translateY(-1px) !important;
+}
+
 </style>
 </head>
 <body>
@@ -2308,13 +2332,15 @@ body.dark .login-page-footer {
       <div class="grid g4">
         <div class="meta-field meta-year"><label>Ano Letivo</label><select id="anoLetivo"></select></div>
         <div class="meta-field meta-number">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-            <label for="numeroFicai" style="margin-bottom:0">Número FICAI</label>
-            <span class="auto-num-badge" id="btnAutoNum" data-tooltip="Recalcular o próximo número sequencial automaticamente"><i class="fa-solid fa-wand-magic-sparkles"></i> Auto</span>
-          </div>
-          <div class="input-with-action">
-            <input id="numeroFicai" type="text" value="00022/2026" maxlength="10" inputmode="numeric" placeholder="00001/2026" data-tooltip="Gerado automaticamente pela sequência do ano. Você também pode digitar se necessário.">
-            <button class="btn-input-icon" type="button" id="btnRefreshFicaiNum" data-tooltip="Recalcular próximo número da FICAI"><i class="fa-solid fa-arrows-rotate"></i></button>
+          <label for="numeroFicai">Número FICAI</label>
+          <div class="number-input-row" style="display: flex; align-items: center; gap: 8px;">
+            <div class="input-with-action" style="flex: 1;">
+              <input id="numeroFicai" type="text" value="00022/2026" maxlength="10" inputmode="numeric" placeholder="00001/2026" data-tooltip="Gerado automaticamente pela sequência do ano. Você também pode digitar se necessário.">
+              <button class="btn-input-icon" type="button" id="btnRefreshFicaiNum" data-tooltip="Recalcular próximo número da FICAI"><i class="fa-solid fa-arrows-rotate"></i></button>
+            </div>
+            <button type="button" class="auto-num-badge-btn" id="btnAutoNum" data-tooltip="Recalcular o próximo número sequencial automaticamente">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Auto
+            </button>
           </div>
         </div>
         <div class="span2"><label>Escola</label><select id="escola"><option value="">Selecione...</option><option value="aparecida">C. M. Aparecida Azêdo</option><option value="elmir">E.M. Elmir Figueira</option><option value="mignone">CIEP 496 Maestro Francisco Mignone</option></select></div>
@@ -2440,7 +2466,24 @@ body.dark .login-page-footer {
       </h2>
       <div class="notice purple" style="margin-top:16px">A impressão foi configurada para <strong>A4, orientação retrato, uma única folha</strong>. Relatos muito extensos permanecem no registro eletrônico e aparecem de forma resumida na folha impressa.</div>
       
-      <div class="form-footer" style="margin-top: 20px; padding-top: 16px; border-top: 1.5px dashed #cbd5e1;"><div class="action-row"><button class="btn" id="saveBottom" data-tooltip="Salvar ficha no banco de dados e cadastrar histórico"><i class="fa-solid fa-floppy-disk"></i> Salvar FICAI</button><button class="btn purple" data-go="conselho"><i class="fa-solid fa-gavel"></i> Encaminhar ao CT</button></div><div class="action-row"><button class="btn soft" id="previewBtn" data-tooltip="Conferir espelho A4 antes de imprimir"><i class="fa-solid fa-eye"></i> Pré-visualizar A4</button><button class="btn primary" id="printBtn" data-tooltip="Gerar documento oficial em PDF (A4 - 1 página retrato)"><i class="fa-solid fa-print"></i> Imprimir / Salvar PDF</button></div></div>
+      <div class="form-footer" style="margin-top: 20px; padding-top: 16px; border-top: 1.5px dashed #cbd5e1;">
+        <div class="action-row">
+          <button class="btn" id="saveBottom" type="button" data-tooltip="Salvar ficha no banco de dados e cadastrar histórico">
+            <i class="fa-solid fa-floppy-disk"></i> Salvar FICAI
+          </button>
+          <button class="btn purple" type="button" data-go="conselho">
+            <i class="fa-solid fa-gavel"></i> Encaminhar ao CT
+          </button>
+        </div>
+        <div class="action-row">
+          <button class="btn soft" id="previewBtn" type="button" data-tooltip="Conferir espelho A4 antes de imprimir">
+            <i class="fa-solid fa-eye"></i> Pré-visualizar A4
+          </button>
+          <button class="btn primary" id="printBtn" type="button" data-tooltip="Gerar documento oficial em PDF (A4 - 1 página retrato)">
+            <i class="fa-solid fa-print"></i> Imprimir / Salvar PDF
+          </button>
+        </div>
+      </div>
     </section>
 
     <!-- Wizard Footer Bar (Navegação Anterior e Próximo com Validação Obrigatória) -->
@@ -5054,7 +5097,7 @@ function syncPrint(){normalizeNumber();const school=$('#escola').selectedOptions
   const procs=$$('[data-proc]').map(c=>({label:c.dataset.proc,checked:c.checked,date:fmtDate($(`[data-proc-date="${CSS.escape(c.dataset.proc)}"]`)?.value||'')}));$('#pProcedimentos').innerHTML=procs.map(x=>`<div class="p-check"><span class="p-box">${x.checked?'X':''}</span><span>${escapeHtml(x.label)}${x.date?` <b>Data:</b> ${x.date}`:''}</span></div>`).join('');
   const allMotivos=$$('#motivosGrid input').map(c=>({label:c.parentElement.innerText.trim(),checked:c.checked}));$('#pMotivos').innerHTML=allMotivos.map(x=>`<div class="p-check"><span class="p-box">${x.checked?'X':''}</span><span>${escapeHtml(x.label)}</span></div>`).join('');
   const diag=[];$$('#diagnosisGrid .diagnosis-box').forEach(box=>{const vals=[...box.querySelectorAll('input:checked')].map(i=>i.value);diag.push(`<div class="p-diag"><b>${escapeHtml(box.dataset.group)}</b><span>${escapeHtml(vals.join(', ')||'—')}</span></div>`)});$('#pDiagnostico').innerHTML=diag.join('');
-  const prom=[['prom1','Recebimento da FICAI'],['prom2','Acompanhamento da representação do Conselho Tutelar'],['prom3','Notificação do Responsável'],['prom4','Propositura de ação de suspensão ou destituição do poder dos pais']];$('#pPromotoria').innerHTML=prom.map(([id,l])=>`<div class="p-check"><span class="p-box">${$('#'+id).checked?'X':''}</span><span>${escapeHtml(l)}</span></div><div><b>Data:</b> ${fmtDate(text('#promData'))}</div>`).join('');
+  const prom=[['prom1','Recebimento da FICAI'],['prom2','Acompanhamento da representação do Conselho Tutelar'],['prom3','Notificação do Responsável'],['prom4','Propositura de ação de suspensão ou destituição do poder dos pais']];$('#pPromotoria').innerHTML=prom.map(([id,l])=>`<div class="p-check"><span class="p-box">${$('#'+id)?.checked?'X':''}</span><span>${escapeHtml(l)}</span></div><div><b>Data:</b> ${fmtDate(text('#promData'))}</div>`).join('');
 
   // 7.0 - Histórico de acompanhamento após a geração
   const histBox = $('#pHistoricoEntries');
@@ -7542,7 +7585,65 @@ function initAuthSystem() {
   }
 }
 
-initConfigCatalogs();loadCustomOptionCatalogs();bindSchoolSelectAutoFill();initAuthSystem();restore();autoPopulateLoggedSchoolInForm();syncPrint();loadSavedStudents();loadSavedFicais();setWizardStep(1);
+initConfigCatalogs();loadCustomOptionCatalogs();bindSchoolSelectAutoFill();
+// ==============================================================================
+// BINDING ROBUSTO DE TODOS OS BOTÕES DE AÇÃO (PRÉ-VISUALIZAR, IMPRIMIR, RASCUNHO, WIZARD)
+// ==============================================================================
+function initActionButtonsBindings() {
+  // 1. Botões de Pré-visualização A4
+  const previewButtons = ['#topPreview', '#previewBtn', '#btnPrevisualizarA4Sec6', '#btnVisualizarA4BottomSec6'];
+  previewButtons.forEach(selector => {
+    $(selector).forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openPreview();
+      });
+    });
+  });
+
+  // 2. Botões de Impressão / Salvar PDF
+  const printButtons = ['#printBtn', '#modalPrint', '#btnImprimirPDFSec6'];
+  printButtons.forEach(selector => {
+    $(selector).forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        doPrint();
+      });
+    });
+  });
+
+  // 3. Botões de Salvar Rascunho
+  const draftButtons = ['#saveDraft', '#btnSaveDraftToolbar'];
+  draftButtons.forEach(selector => {
+    $(selector).forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        saveDraft();
+      });
+    });
+  });
+
+  // 4. Botão Salvar FICAI
+  const saveButtons = ['#saveBottom', '#saveFicaiBtnSec6'];
+  saveButtons.forEach(selector => {
+    $(selector).forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        await saveFicaiDatabase();
+      });
+    });
+  });
+
+  // 5. Botão Auto Número
+  $('#btnAutoNum')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    autoGenerateFicaiNumber(true);
+    toast('Número da FICAI recalculado automaticamente.');
+  });
+}
+
+initActionButtonsBindings();
+initAuthSystem();restore();autoPopulateLoggedSchoolInForm();syncPrint();loadSavedStudents();loadSavedFicais();setWizardStep(1);
 </script>
 </body>
 </html>

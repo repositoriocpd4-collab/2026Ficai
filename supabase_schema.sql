@@ -567,7 +567,10 @@ BEGIN
   FOR usr_record IN SELECT * FROM temp_users_seed LOOP
     encrypted_pw := crypt(usr_record.password, gen_salt('bf', 10));
 
-    IF EXISTS (SELECT 1 FROM auth.users WHERE lower(email) = lower(usr_record.email)) THEN
+    -- Verifica se o usuário já existe em auth.users
+    SELECT id INTO usr_id FROM auth.users WHERE lower(email) = lower(usr_record.email);
+
+    IF usr_id IS NOT NULL THEN
       UPDATE auth.users
       SET
         encrypted_password = encrypted_pw,
@@ -575,7 +578,17 @@ BEGIN
         raw_app_meta_data = '{"provider":"email","providers":["email"]}'::jsonb,
         raw_user_meta_data = jsonb_build_object('role', usr_record.role),
         updated_at = now()
-      WHERE lower(email) = lower(usr_record.email);
+      WHERE id = usr_id;
+
+      -- Atualiza ou insere em auth.identities
+      IF NOT EXISTS (SELECT 1 FROM auth.identities WHERE user_id = usr_id) THEN
+        INSERT INTO auth.identities (
+          id, provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at
+        ) VALUES (
+          gen_random_uuid(), usr_id::text, usr_id, jsonb_build_object('sub', usr_id::text, 'email', usr_record.email),
+          'email', now(), now(), now()
+        );
+      END IF;
     ELSE
       usr_id := gen_random_uuid();
 
@@ -589,11 +602,11 @@ BEGIN
       );
 
       INSERT INTO auth.identities (
-        id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at
+        id, provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at
       ) VALUES (
-        gen_random_uuid(), usr_id, jsonb_build_object('sub', usr_id, 'email', usr_record.email),
+        gen_random_uuid(), usr_id::text, usr_id, jsonb_build_object('sub', usr_id::text, 'email', usr_record.email),
         'email', now(), now(), now()
       );
     END IF;
   END LOOP;
-END $;
+END $$;
