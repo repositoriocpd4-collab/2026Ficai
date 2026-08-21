@@ -1639,9 +1639,302 @@ body.dark .form-section .section-title-text {
   color: #64748b !important;
   border-color: #e2e8f0 !important;
 }
+
+/* ==============================================================================
+   TELA DE LOGIN (DESIGN FIDEDIGNO À IMAGEM ANEXA)
+   ============================================================================== */
+.login-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(135deg, #e4effb 0%, #d5e5f7 40%, #eaf2fc 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  font-family: 'Alexandria', sans-serif;
+}
+
+body.dark .login-wrapper {
+  background: linear-gradient(135deg, #0b1322 0%, #0f1c30 100%);
+}
+
+.login-card {
+  width: 450px;
+  max-width: 94vw;
+  background: #ffffff;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 25px 65px -10px rgba(12, 40, 78, 0.22), 0 0 0 1px rgba(255, 255, 255, 0.6);
+  animation: modalZoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.dark .login-card {
+  background: #141e2e;
+  box-shadow: 0 25px 65px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.login-card-head {
+  background: linear-gradient(180deg, #002d62 0%, #003a7a 65%, #00224d 100%);
+  padding: 34px 24px 28px;
+  text-align: center;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.login-crest-badge {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: #ffffff;
+  padding: 4px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+  margin-bottom: 16px;
+}
+
+.login-sub-tag {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 6px;
+}
+
+.login-title {
+  font-size: 27px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.5px;
+}
+
+.login-subtitle {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+  font-weight: 400;
+}
+
+.login-card-body {
+  padding: 32px 34px 30px;
+  background: #ffffff;
+}
+
+body.dark .login-card-body {
+  background: #141e2e;
+}
+
+.login-section-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: #1e3a8a;
+  margin: 0 0 6px 0;
+}
+
+body.dark .login-section-title {
+  color: #93c5fd;
+}
+
+.login-title-bar {
+  width: 34px;
+  height: 3px;
+  background: #0284c7;
+  margin: 0 auto 24px;
+  border-radius: 99px;
+}
+
+.login-field label {
+  display: block;
+  font-weight: 700;
+  font-size: 13.5px;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+body.dark .login-field label {
+  color: #cbd5e1;
+}
+
+.input-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-left-icon {
+  position: absolute;
+  left: 14px;
+  color: #2563eb;
+  font-size: 16px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.input-icon-wrap input {
+  padding-left: 44px !important;
+  padding-right: 44px !important;
+  height: 48px !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #cbd5e1 !important;
+  font-size: 14px !important;
+  color: #1e293b !important;
+  width: 100% !important;
+  background: #ffffff !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+body.dark .input-icon-wrap input {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+.input-icon-wrap input:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12) !important;
+}
+
+.btn-toggle-password {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 6px;
+  display: grid;
+  place-items: center;
+  transition: color 0.15s ease;
+  z-index: 2;
+}
+
+.btn-toggle-password:hover {
+  color: #2563eb;
+}
+
+.forgot-link {
+  display: block;
+  text-align: right;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.forgot-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.btn-login-submit {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(135deg, #0284c7 0%, #1d4ed8 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 16px;
+  margin-top: 24px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-login-submit:hover {
+  background: linear-gradient(135deg, #0369a1 0%, #1e40af 100%);
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.4);
+  transform: translateY(-1.5px);
+}
+
+.login-page-footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+body.dark .login-page-footer {
+  color: #94a3b8;
+}
+
 </style>
 </head>
 <body>
+
+<!-- TELA DE LOGIN (DESIGN FIDEDIGNO À IMAGEM ANEXA) -->
+<div id="view-login" class="login-wrapper">
+  <div class="login-card">
+    <div class="login-card-head">
+      <div class="login-crest-badge">
+        <svg width="52" height="52" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="48" fill="#003a7a" stroke="#dbeafe" stroke-width="3"/>
+          <path d="M50 15 L78 30 V60 C78 75 50 90 50 90 C50 90 22 75 22 60 V30 Z" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
+          <rect x="42" y="32" width="16" height="12" fill="#dc2626" rx="2"/>
+          <text x="50" y="41" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">P.I.</text>
+          <path d="M30 52 Q50 46 70 52 Q50 58 30 52 Z" fill="#f59e0b"/>
+          <text x="50" y="70" font-size="8" font-weight="900" fill="#ffffff" text-anchor="middle">ITAGUAÍ</text>
+        </svg>
+      </div>
+      <div class="login-sub-tag">SMEDU | FICAI</div>
+      <h1 class="login-title">Sistema FICAI</h1>
+      <p class="login-subtitle">Ficha de Comunicação do Aluno Infrequente</p>
+    </div>
+
+    <div class="login-card-body">
+      <h3 class="login-section-title">Acesso ao Sistema</h3>
+      <div class="login-title-bar"></div>
+
+      <form id="loginForm" onsubmit="return false;">
+        <div class="login-field">
+          <label for="loginEmail">E-mail institucional</label>
+          <div class="input-icon-wrap">
+            <i class="fa-regular fa-envelope input-left-icon"></i>
+            <input type="email" id="loginEmail" placeholder="exemplo@edu.itaguai.rj.gov.br" required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="login-field" style="margin-top: 18px;">
+          <label for="loginPassword">Senha</label>
+          <div class="input-icon-wrap">
+            <i class="fa-solid fa-lock input-left-icon"></i>
+            <input type="password" id="loginPassword" placeholder="Sua senha" required autocomplete="current-password">
+            <button type="button" class="btn-toggle-password" id="btnTogglePassword" title="Mostrar/ocultar senha">
+              <i class="fa-regular fa-eye" id="togglePasswordIcon"></i>
+            </button>
+          </div>
+          <a href="#" id="forgotPasswordLink" class="forgot-link">Esqueceu a senha?</a>
+        </div>
+
+        <button type="submit" id="btnLoginSubmit" class="btn-login-submit">
+          Entrar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="login-page-footer">
+    Prefeitura Municipal de Itaguaí — SMEDU/CPD
+  </footer>
+</div>
+
 <div class="app-shell">
 <aside class="sidebar" id="sidebar">
   <div class="brand"><span class="brand-full">FICAI/SMEDU</span><span class="brand-short">F</span></div>
@@ -1670,7 +1963,16 @@ body.dark .form-section .section-title-text {
   <div class="bottom-row">
     <button class="hamb" id="hamb" type="button" data-tooltip="Recolher ou expandir menu lateral" aria-label="Recolher menu lateral" aria-expanded="true"><i class="fa-solid fa-bars"></i></button>
     <div class="breadcrumb"><span>Secretaria Municipal de Educação</span><span class="sep">|</span><span>SMEDU | FICAI</span><span class="sep">|</span><span class="school">E.M. Elmir Figueira</span></div>
-    <div class="user"><i class="fa-solid fa-circle-user"></i><span>Usuário</span></div>
+    <div class="user-header-wrap" style="display:flex;align-items:center;gap:12px;">
+      <div class="user" style="display:flex;align-items:center;gap:8px;">
+        <i class="fa-solid fa-circle-user" style="font-size:18px;color:#2563eb;"></i>
+        <div style="display:flex;flex-direction:column;line-height:1.2;">
+          <span id="headerUserName" style="font-weight:700;font-size:12.5px;">Usuário</span>
+          <small id="headerUserUnit" style="font-size:10px;color:#64748b;">Acesso ao Sistema</small>
+        </div>
+      </div>
+      <button id="btnLogout" class="header-icon-btn" type="button" data-tooltip="Sair do sistema (Fazer Logout)"><i class="fa-solid fa-right-from-bracket"></i></button>
+    </div>
   </div>
 </header>
 
@@ -7003,6 +7305,188 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#btnWizardNext')?.addEventListener('click', nextWizardStep);
 });
 
+
+// ==============================================================================
+// SISTEMA DE AUTENTICAÇÃO E SESSÃO DO USUÁRIO (SUPABASE + CREDENCIAIS OFICIAIS)
+// ==============================================================================
+const AUTH_SESSION_KEY = 'ficaiUserSessionV2';
+
+function getActiveSession() {
+  try {
+    const raw = localStorage.getItem(AUTH_SESSION_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (_e) {}
+  return null;
+}
+
+function setActiveSession(sessionData) {
+  localStorage.setItem(AUTH_SESSION_KEY, JSON.stringify(sessionData));
+  applyUserSession(sessionData);
+}
+
+function clearUserSession() {
+  localStorage.removeItem(AUTH_SESSION_KEY);
+  try { getSupabase()?.auth?.signOut(); } catch (_e) {}
+  showLoginView();
+  toast('Você saiu do sistema.');
+}
+
+function applyUserSession(session) {
+  if (!session) {
+    showLoginView();
+    return;
+  }
+  
+  const loginView = $('#view-login');
+  const appShell = $('.app-shell');
+  
+  if (loginView) loginView.style.display = 'none';
+  if (appShell) appShell.style.display = 'grid';
+
+  const headerUserName = $('#headerUserName');
+  const headerUserUnit = $('#headerUserUnit');
+  const headerSchool = $('.breadcrumb .school');
+
+  if (headerUserName) headerUserName.textContent = session.nome || session.email;
+  if (headerUserUnit) headerUserUnit.textContent = session.unidade || session.nivel;
+  if (headerSchool) headerSchool.textContent = session.unidade || 'Unidade Escolar';
+
+  // Se for usuário de escola, selecionar automaticamente no formulário Gerar FICAI
+  if (session.escolaId && $('#escola')) {
+    const schoolSel = $('#escola');
+    if ([...schoolSel.options].some(o => o.value === session.escolaId)) {
+      schoolSel.value = session.escolaId;
+      schoolSel.dispatchEvent(new Event('change'));
+    }
+  }
+}
+
+function showLoginView() {
+  const loginView = $('#view-login');
+  const appShell = $('.app-shell');
+  
+  if (appShell) appShell.style.display = 'none';
+  if (loginView) loginView.style.display = 'flex';
+}
+
+async function handleLoginSubmit() {
+  const emailInput = $('#loginEmail')?.value || '';
+  const passwordInput = $('#loginPassword')?.value || '';
+  
+  const email = emailInput.trim().toLowerCase();
+  const password = passwordInput.trim();
+
+  if (!email || !password) {
+    toast('Por favor, informe o e-mail e a senha.');
+    return;
+  }
+
+  let authenticated = false;
+  let sessionData = null;
+
+  // 1. Tentar Autenticação via Supabase Auth API
+  try {
+    const sb = getSupabase();
+    if (sb && sb.auth) {
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
+      if (!error && data?.user) {
+        authenticated = true;
+      }
+    }
+  } catch (_e) {}
+
+  // 2. Verificar Administrador CPD (cpdinfra@edu.itaguai.rj.gov.br / T3c4n3x0)
+  const isAdmin = (email === 'cpdinfra@edu.itaguai.rj.gov.br' && password === 'T3c4n3x0');
+
+  // 3. Verificar Usuários de Escolas (e-mail institucional / Ficai2026@)
+  const schoolList = (configData && configData.escolas) ? configData.escolas : [];
+  const matchedSchool = schoolList.find(e => (e.email || '').trim().toLowerCase() === email || (e.email || '').toLowerCase().includes(email));
+  const isSchoolLogin = ((matchedSchool || email.endsWith('@edu.itaguai.rj.gov.br')) && password === 'Ficai2026@');
+
+  if (isAdmin) {
+    authenticated = true;
+    sessionData = {
+      email,
+      nome: 'CPD Infra / SMEDU',
+      unidade: 'SMEDU / CPD (Administrador)',
+      nivel: 'Administrador',
+      isSystemAdmin: true,
+      loggedInAt: new Date().toISOString()
+    };
+  } else if (isSchoolLogin) {
+    authenticated = true;
+    const schoolName = matchedSchool ? matchedSchool.nome : 'Escola Municipal de Itaguaí';
+    const schoolId = matchedSchool ? matchedSchool.id : null;
+    sessionData = {
+      email,
+      nome: schoolName,
+      unidade: schoolName,
+      nivel: 'Escola',
+      escolaId: schoolId,
+      loggedInAt: new Date().toISOString()
+    };
+  } else if (authenticated) {
+    sessionData = {
+      email,
+      nome: email.split('@')[0],
+      unidade: 'Usuário Autenticado',
+      nivel: 'Operacional',
+      loggedInAt: new Date().toISOString()
+    };
+  }
+
+  if (authenticated && sessionData) {
+    setActiveSession(sessionData);
+    toast(`Login realizado com sucesso! Bem-vindo(a), ${sessionData.nome}`);
+  } else {
+    toast('E-mail ou senha incorretos. Verifique suas credenciais e tente novamente.');
+  }
+}
+
+function initAuthSystem() {
+  const loginForm = $('#loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      handleLoginSubmit();
+    });
+  }
+
+  const btnTogglePassword = $('#btnTogglePassword');
+  const passwordInput = $('#loginPassword');
+  const toggleIcon = $('#togglePasswordIcon');
+  if (btnTogglePassword && passwordInput && toggleIcon) {
+    btnTogglePassword.addEventListener('click', () => {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      toggleIcon.className = isPassword ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
+    });
+  }
+
+  const forgotLink = $('#forgotPasswordLink');
+  if (forgotLink) {
+    forgotLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Para redefinir sua senha de acesso, entre em contato com o CPD/SMEDU:\n\n• E-mail: cpdinfra@edu.itaguai.rj.gov.br\n• Ramal: 3041 / 3064');
+    });
+  }
+
+  const btnLogout = $('#btnLogout');
+  if (btnLogout) {
+    btnLogout.addEventListener('click', () => {
+      clearUserSession();
+    });
+  }
+
+  const session = getActiveSession();
+  if (session) {
+    applyUserSession(session);
+  } else {
+    showLoginView();
+  }
+}
+
+initAuthSystem();
 initConfigCatalogs();loadCustomOptionCatalogs();restore();syncPrint();loadSavedStudents();loadSavedFicais();setWizardStep(1);
 </script>
 </body>

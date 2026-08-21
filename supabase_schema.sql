@@ -465,3 +465,19 @@ INSERT INTO public.students (key, nome, social, nascimento, cpf, rg, filiacao, r
 ('ana-clara-nascimento', 'Ana Clara Nascimento', '', '2012-03-11', '', '', 'Dados cadastrados no sistema', 'Responsável cadastrado', 'Itaguaí/RJ', '(21) 99999-1111', 'Referência cadastrada'),
 ('bruno-henrique-silva', 'Bruno Henrique Silva', '', '2013-07-21', '', '', 'Dados cadastrados no sistema', 'Responsável cadastrado', 'Itaguaí/RJ', '(21) 99999-2222', 'Referência cadastrada')
 ON CONFLICT (key) DO NOTHING;
+
+-- ==============================================================================
+-- 6. AUTENTICAÇÃO E CREDENCIAIS DE ACESSO (SUPABASE AUTH)
+-- ==============================================================================
+-- Credenciais Oficiais do Sistema FICAI 4.0:
+--
+-- 1. Administrador (CPD / SMEDU):
+--    • E-mail: cpdinfra@edu.itaguai.rj.gov.br
+--    • Senha:  T3c4n3x0
+--    • Nível:  Administrador / SMEDU
+--
+-- 2. Usuários Comuns (Unidades Escolares):
+--    • E-mail: E-mail institucional de cada escola (ex.: em.veramericorodriguesdeamorim@edu.itaguai.rj.gov.br)
+--    • Senha:  Ficai2026@
+--    • Nível:  Escola
+
