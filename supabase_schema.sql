@@ -474,7 +474,7 @@ ON CONFLICT (key) DO NOTHING;
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
-DO $
+DO $$
 DECLARE
   usr_record RECORD;
   usr_id UUID;
