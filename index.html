@@ -1011,6 +1011,286 @@ body.dark-mode .btn-input-icon:hover {
   background: #1e2f47;
   color: #38bdf8;
 }
+
+/* ==============================================================================
+   STYLING FOR MARCADOR MODALS & TAG BADGES (MATCHING UI SCREENS)
+   ============================================================================== */
+.marcador-modal-card {
+  background: #ffffff;
+  width: min(92vw, 680px);
+  border-radius: 6px;
+  border-top: 4px solid #0084ad;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.28);
+  overflow: hidden;
+  font-family: var(--font);
+}
+.marcador-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 10px;
+  background: #ffffff;
+}
+.marcador-modal-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.2px;
+}
+.marcador-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-marcador-save, .btn-marcador-voltar, .btn-marcador-remove {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+  padding: 5px 15px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  user-select: none;
+}
+.btn-marcador-save:hover {
+  background: #f8fafc;
+  border-color: #0084ad;
+  color: #0084ad;
+}
+.btn-marcador-remove {
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+.btn-marcador-remove:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+}
+.btn-marcador-voltar:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+.marcador-modal-body {
+  padding: 10px 20px 24px;
+}
+.marcador-target-info {
+  font-size: 12px;
+  color: #0284c7;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  padding: 6px 12px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+.marcador-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+.marcador-select-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.custom-marcador-dropdown {
+  position: relative;
+  width: 320px;
+  max-width: 100%;
+}
+.marcador-selected-box {
+  background: #ececec;
+  border: 1px solid #cccccc;
+  border-radius: 2px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13.5px;
+  color: #1e293b;
+  cursor: pointer;
+  user-select: none;
+}
+.marcador-selected-box:hover {
+  border-color: #999999;
+}
+.marcador-selected-box .caret-icon {
+  font-size: 12px;
+  color: #475569;
+}
+.marcador-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  z-index: 1000;
+  max-height: 240px;
+  overflow-y: auto;
+  border-radius: 2px;
+  margin-top: 2px;
+}
+.marcador-dropdown-menu.hidden {
+  display: none !important;
+}
+.marcador-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  font-size: 13px;
+  color: #1e293b;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.12s;
+}
+.marcador-dropdown-item:last-child {
+  border-bottom: none;
+}
+.marcador-dropdown-item:hover {
+  background: #f1f5f9;
+}
+.marcador-dropdown-item i {
+  font-size: 15px;
+  width: 18px;
+  text-align: center;
+}
+.btn-add-marcador-catalog {
+  border: none;
+  background: transparent;
+  color: #00a884;
+  font-size: 22px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  transition: transform 0.16s ease;
+}
+.btn-add-marcador-catalog:hover {
+  transform: scale(1.15);
+  color: #059669;
+}
+.marcador-textarea {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 2px;
+  padding: 8px 10px;
+  font-size: 13px;
+  outline: none;
+  resize: vertical;
+  background: #ffffff;
+  min-height: 90px;
+  font-family: inherit;
+}
+.marcador-textarea:focus {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 2px rgba(2,132,199,0.15);
+}
+.dash-row-tags-container {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.dash-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ==============================================================================
+   MODAL NOVO MARCADOR (FIDELIDADE TOTAL À IMAGEM ANEXA)
+   ============================================================================== */
+.novo-marcador-window {
+  background: #ffffff;
+  width: min(92vw, 650px);
+  border-radius: 4px;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.35);
+  overflow: hidden;
+  font-family: var(--font);
+  animation: modalZoomIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.novo-marcador-window-header {
+  height: 38px;
+  background: #005a9c;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px 0 16px;
+}
+.novo-marcador-window-header .window-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.novo-marcador-window-header .win-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
+  width: 26px;
+  height: 26px;
+  border-radius: 3px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.14s;
+}
+.novo-marcador-window-header .win-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+.novo-marcador-window-header .win-close:hover {
+  background: #dc2626;
+}
+.novo-marcador-window-body {
+  padding: 24px 28px 32px;
+  background: #ffffff;
+}
+.novo-marcador-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.novo-marcador-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+}
+.novo-marcador-fields-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.marcador-input-text {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 3px;
+  padding: 8px 12px;
+  font-size: 13.5px;
+  outline: none;
+  color: #0f172a;
+  background: #ffffff;
+  transition: border-color 0.16s, box-shadow 0.16s;
+}
+.marcador-input-text:focus {
+  border-color: #005a9c;
+  box-shadow: 0 0 0 3px rgba(0, 90, 156, 0.15);
+}
 </style>
 </head>
 <body>
@@ -2580,6 +2860,122 @@ body.dark-mode .btn-input-icon:hover {
   </div>
 </div>
 
+<!-- MODAL ADICIONAR MARCADOR (Fidelidade visual total com protótipo FICAI) -->
+<div class="modal" id="modalAddMarcador" aria-hidden="true">
+  <div class="marcador-modal-card" role="dialog" aria-modal="true" aria-labelledby="titleAddMarcador">
+    <div class="marcador-modal-head">
+      <h3 class="marcador-modal-title" id="titleAddMarcador">Adicionar Marcador</h3>
+      <div class="marcador-head-actions">
+        <button type="button" class="btn-marcador-save" id="btnSaveAddMarcador">Salvar</button>
+        <button type="button" class="btn-marcador-voltar" id="btnVoltarAddMarcador"><u>V</u>oltar</button>
+      </div>
+    </div>
+    <div class="marcador-modal-body">
+      <div class="marcador-target-info" id="addMarcadorTargetInfo"></div>
+      
+      <div class="marcador-form-group">
+        <label class="marcador-label">Marcador:</label>
+        <div class="marcador-select-row">
+          <div class="custom-marcador-dropdown" id="customMarcadorSelect">
+            <div class="marcador-selected-box" id="marcadorSelectedBox">
+              <span id="marcadorSelectedContent"><i class="fa-solid fa-tag" style="color: #6b7280;"></i> Cadastro SEI</span>
+              <i class="fa-solid fa-caret-down caret-icon"></i>
+            </div>
+            <div class="marcador-dropdown-menu hidden" id="marcadorDropdownMenu">
+              <!-- Renderizado dinamicamente pelo catálogo de marcadores -->
+            </div>
+          </div>
+          <button type="button" class="btn-add-marcador-catalog" id="btnAddTagCatalogOption" data-tooltip="Cadastrar Novo Marcador no Catálogo">
+            <i class="fa-solid fa-circle-plus"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="marcador-form-group" style="margin-top: 14px;">
+        <label class="marcador-label">Texto:</label>
+        <textarea id="textAddMarcador" class="marcador-textarea" rows="4"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL REMOVER MARCADOR -->
+<div class="modal" id="modalRemoveMarcador" aria-hidden="true">
+  <div class="marcador-modal-card" role="dialog" aria-modal="true" aria-labelledby="titleRemoveMarcador">
+    <div class="marcador-modal-head">
+      <h3 class="marcador-modal-title" id="titleRemoveMarcador">Remover Marcador</h3>
+      <div class="marcador-head-actions">
+        <button type="button" class="btn-marcador-remove" id="btnSaveRemoveMarcador">Remover</button>
+        <button type="button" class="btn-marcador-voltar" id="btnVoltarRemoveMarcador"><u>V</u>oltar</button>
+      </div>
+    </div>
+    <div class="marcador-modal-body">
+      <div class="marcador-target-info" id="removeMarcadorTargetInfo"></div>
+      
+      <div class="marcador-form-group">
+        <label class="marcador-label">Selecione o Marcador para remover:</label>
+        <div class="marcador-select-row">
+          <div class="custom-marcador-dropdown" id="customRemoveMarcadorSelect" style="width: 100%;">
+            <div class="marcador-selected-box" id="removeMarcadorSelectedBox">
+              <span id="removeMarcadorSelectedContent">Selecione o marcador...</span>
+              <i class="fa-solid fa-caret-down caret-icon"></i>
+            </div>
+            <div class="marcador-dropdown-menu hidden" id="removeMarcadorDropdownMenu">
+              <!-- Renderizado com os marcadores do aluno -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="marcador-form-group" style="margin-top: 14px;">
+        <label class="marcador-label">Texto / Motivo da remoção (opcional):</label>
+        <textarea id="textRemoveMarcador" class="marcador-textarea" rows="3" placeholder="Observações sobre a remoção do marcador..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL NOVO MARCADOR (FIDELIDADE TOTAL À IMAGEM ANEXA) -->
+<div class="modal" id="modalNovoMarcador" aria-hidden="true" style="z-index: 10020;">
+  <div class="novo-marcador-window" role="dialog" aria-modal="true" aria-labelledby="titleNovoMarcador">
+    <div class="novo-marcador-window-header">
+      <span class="window-title-stub"></span>
+      <div class="window-controls">
+        <button type="button" class="win-btn win-max" title="Maximizar"><i class="fa-regular fa-square"></i></button>
+        <button type="button" class="win-btn win-close" id="closeModalNovoMarcador" title="Fechar">×</button>
+      </div>
+    </div>
+    <div class="novo-marcador-window-body">
+      <div class="novo-marcador-head-row">
+        <h2 class="novo-marcador-title" id="titleNovoMarcador">Novo Marcador</h2>
+        <button type="button" class="btn-marcador-save" id="btnSaveNovoMarcador"><u>S</u>alvar</button>
+      </div>
+
+      <div class="novo-marcador-fields-grid">
+        <div class="novo-marcador-field-col">
+          <label class="marcador-label">Ícone:</label>
+          <div class="custom-marcador-dropdown" id="customNovoMarcadorColorSelect" style="width: 100%;">
+            <div class="marcador-selected-box" id="novoMarcadorColorSelectedBox">
+              <span id="novoMarcadorColorSelectedContent">
+                <i class="fa-solid fa-tag" style="color: #eab308;"></i> Amarelo
+              </span>
+              <i class="fa-solid fa-caret-down caret-icon"></i>
+            </div>
+            <div class="marcador-dropdown-menu hidden" id="novoMarcadorColorDropdownMenu">
+              <!-- Renderizado dinamicamente com as cores -->
+            </div>
+          </div>
+        </div>
+
+        <div class="novo-marcador-field-col">
+          <label class="marcador-label">Nome:</label>
+          <input type="text" id="inputNovoMarcadorNome" class="marcador-input-text" placeholder="Digite o nome do marcador..." autocomplete="off">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL PREVIEW -->
 <!-- MODAL GENÉRICO DE CADASTROS -->
 <div class="modal" id="configModal" aria-hidden="true">
@@ -3297,22 +3693,513 @@ $('#btnActionHistorico')?.addEventListener('click', () => {
   openInfoModal(sel.ficai);
 });
 
-$('#btnActionPdf')?.addEventListener('click', () => {
-  openPreview();
+// ==============================================================================
+// GESTÃO DE MARCADORES (TAGS) E VISUALIZAÇÃO DE PDF VIA CHECKBOX (FIDELIDADE TOTAL)
+// ==============================================================================
+const MARCADORES_KEY = 'ficai4MarcadoresCatalogV2';
+const STUDENT_TAGS_KEY = 'ficai4StudentTagsMapV2';
+
+const DEFAULT_MARCADORES = [
+  { id: 'sei', name: 'Cadastro SEI', color: '#6b7280' },
+  { id: 'ad', name: 'Criação Login AD', color: '#111827' },
+  { id: 'proto', name: 'Criação Usuário Protocolo', color: '#1d4ed8' },
+  { id: 'sec', name: 'Of. Secretário', color: '#16a34a' },
+  { id: 'seirj', name: 'Orientação SEI-RJ', color: '#78350f' },
+  { id: 'mayara', name: 'Problema da Mayara', color: '#0284c7' },
+  { id: 'videos', name: 'Vídeos', color: '#d97706' }
+];
+
+function getMarcadoresCatalog() {
+  try {
+    const list = JSON.parse(localStorage.getItem(MARCADORES_KEY));
+    if (Array.isArray(list) && list.length > 0) return list;
+  } catch(_e){}
+  localStorage.setItem(MARCADORES_KEY, JSON.stringify(DEFAULT_MARCADORES));
+  return DEFAULT_MARCADORES;
+}
+
+function saveMarcadoresCatalog(list) {
+  localStorage.setItem(MARCADORES_KEY, JSON.stringify(list));
+}
+
+function getStudentTagsMap() {
+  try {
+    const map = JSON.parse(localStorage.getItem(STUDENT_TAGS_KEY));
+    if (map && typeof map === 'object') return map;
+  } catch(_e){}
+  return {};
+}
+
+function saveStudentTagsMap(map) {
+  localStorage.setItem(STUDENT_TAGS_KEY, JSON.stringify(map));
+}
+
+// Retorna todos os alunos cujas checkboxes estão marcadas
+function getSelectedFicaiRows() {
+  const checkedNodes = document.querySelectorAll('.dash-list-row input[type="checkbox"]:checked, table tbody input[type="checkbox"]:checked');
+  const results = [];
+  checkedNodes.forEach(chk => {
+    const row = chk.closest('.dash-list-row') || chk.closest('tr');
+    if (row && row.style.display !== 'none') {
+      const ficai = row.dataset.ficai || row.dataset.dbFicai || row.querySelector('.dash-item-link')?.dataset.ficai || '0015/2026';
+      const student = row.dataset.student || row.querySelector('.dash-item-link')?.dataset.student || 'Aluno';
+      const turma = row.dataset.turma || '';
+      results.push({ element: row, checkbox: chk, ficai: ficai.trim(), student: student.trim(), turma: turma.trim() });
+    }
+  });
+  return results;
+}
+
+// ------------------------------------------------------------------------------
+// 1. VISUALIZAR PDF DO ALUNO MARCADO NA CHECKBOX
+// ------------------------------------------------------------------------------
+async function openPreviewMulti(selectedItems) {
+  syncPrint();
+  const host = $('#previewHost');
+  if (!host) return;
+  host.innerHTML = '';
+
+  for (let i = 0; i < selectedItems.length; i++) {
+    const item = selectedItems[i];
+    let r = null;
+    try { r = await dbGet('ficais', item.ficai); } catch(_e){}
+    if (!r) {
+      try {
+        const all = await dbGetAll('ficais');
+        r = all.find(x => x.numero === item.ficai || x.aluno === item.student);
+      } catch(_e){}
+    }
+    if (!r) r = demoRecordFromTable(item.ficai);
+
+    if (r && r.data) {
+      applyFormData(r.data);
+    } else {
+      $('#numeroFicai').value = item.ficai.split('/')[0] || item.ficai;
+      $('#nomeCompleto').value = item.student;
+      if ($('#aluno')) $('#aluno').value = item.student;
+      syncPrint();
+    }
+
+    const clone1 = $('#printPage').cloneNode(true);
+    clone1.removeAttribute('id');
+    clone1.style.transform = 'scale(.82)';
+    clone1.style.transformOrigin = 'top center';
+    clone1.style.marginBottom = '-45mm';
+    if (i > 0) clone1.style.pageBreakBefore = 'always';
+
+    host.appendChild(clone1);
+
+    const clone2 = document.querySelector('.print-page.page-2')?.cloneNode(true);
+    if (clone2) {
+      const clone2Copy = clone2.cloneNode(true);
+      clone2Copy.style.transform = 'scale(.82)';
+      clone2Copy.style.transformOrigin = 'top center';
+      clone2Copy.style.marginBottom = '-45mm';
+      host.appendChild(clone2Copy);
+    }
+  }
+
+  $('#previewModal').classList.add('open');
+  toast(`Exibindo PDF A4 de ${selectedItems.length} aluno(s) selecionado(s).`);
+}
+
+$('#btnActionPdf')?.addEventListener('click', async () => {
+  const selected = getSelectedFicaiRows();
+  if (selected.length === 0) {
+    toast('Selecione pelo menos um aluno na checkbox para visualizar o PDF.');
+    return;
+  }
+  await openPreviewMulti(selected);
 });
 
-$('#btnActionAddTag')?.addEventListener('click', () => {
-  const sel = getSelectedFicaiRow();
-  const tag = prompt(`Adicionar Marcador para a FICAI ${sel.ficai}:`, 'Prioridade Alta');
-  if (tag) {
-    toast(`Marcador "${tag}" adicionado à FICAI ${sel.ficai}.`);
+// ------------------------------------------------------------------------------
+// 2. CADASTRAR / ADICIONAR MARCADOR
+// ------------------------------------------------------------------------------
+let selectedAddTagObj = null;
+let currentSelectedStudentsForTag = [];
+
+function renderAddMarcadorDropdown() {
+  const catalog = getMarcadoresCatalog();
+  const menu = $('#marcadorDropdownMenu');
+  if (!menu) return;
+  menu.innerHTML = '';
+
+  catalog.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'marcador-dropdown-item';
+    div.dataset.id = item.id;
+    div.dataset.name = item.name;
+    div.dataset.color = item.color;
+    div.innerHTML = `<i class="fa-solid fa-tag" style="color: ${item.color};"></i> <span>${escapeHtml(item.name)}</span>`;
+    div.addEventListener('click', () => {
+      selectAddMarcadorOption(item);
+      menu.classList.add('hidden');
+    });
+    menu.appendChild(div);
+  });
+
+  if (catalog.length > 0 && !selectedAddTagObj) {
+    selectAddMarcadorOption(catalog[0]);
+  }
+}
+
+function selectAddMarcadorOption(item) {
+  selectedAddTagObj = item;
+  const content = $('#marcadorSelectedContent');
+  if (content) {
+    content.innerHTML = `<i class="fa-solid fa-tag" style="color: ${item.color};"></i> <span>${escapeHtml(item.name)}</span>`;
+  }
+}
+
+$('#marcadorSelectedBox')?.addEventListener('click', (e) => {
+  e.stopPropagation();
+  $('#marcadorDropdownMenu')?.classList.toggle('hidden');
+});
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#customMarcadorSelect')) {
+    $('#marcadorDropdownMenu')?.classList.add('hidden');
+  }
+  if (!e.target.closest('#customRemoveMarcadorSelect')) {
+    $('#removeMarcadorDropdownMenu')?.classList.add('hidden');
   }
 });
 
-$('#btnActionRemoveTag')?.addEventListener('click', () => {
-  const sel = getSelectedFicaiRow();
-  toast(`Marcador removido da FICAI ${sel.ficai}.`);
+// Catálogo de Cores de Marcadores (Fidelidade total à imagem anexa)
+const TAG_COLOR_OPTIONS = [
+  { name: 'Amarelo', hex: '#eab308' },
+  { name: 'Amarelo Claro', hex: '#fde047' },
+  { name: 'Amarelo Ouro', hex: '#f59e0b' },
+  { name: 'Azul', hex: '#2563eb' },
+  { name: 'Azul Céu', hex: '#0284c7' },
+  { name: 'Azul Marinho', hex: '#1e3a8a' },
+  { name: 'Azul Riviera', hex: '#0f766e' },
+  { name: 'Bege', hex: '#f59e0b' },
+  { name: 'Branco', hex: '#ffffff', border: '#334155' },
+  { name: 'Cinza', hex: '#6b7280' },
+  { name: 'Laranja', hex: '#ea580c' },
+  { name: 'Preto', hex: '#111827' },
+  { name: 'Rosa', hex: '#ec4899' },
+  { name: 'Roxo', hex: '#7c3aed' },
+  { name: 'Verde', hex: '#16a34a' },
+  { name: 'Verde Claro', hex: '#84cc16' },
+  { name: 'Vermelho', hex: '#dc2626' }
+];
+
+let selectedNovoMarcadorColorObj = TAG_COLOR_OPTIONS[0];
+
+function renderNovoMarcadorColorDropdown() {
+  const menu = $('#novoMarcadorColorDropdownMenu');
+  if (!menu) return;
+  menu.innerHTML = '';
+
+  TAG_COLOR_OPTIONS.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'marcador-dropdown-item';
+    const borderStyle = item.border ? `; -webkit-text-stroke: 1px ${item.border};` : '';
+    div.innerHTML = `<i class="fa-solid fa-tag" style="color: ${item.hex}${borderStyle}"></i> <span>${escapeHtml(item.name)}</span>`;
+    div.addEventListener('click', () => {
+      selectNovoMarcadorColor(item);
+      menu.classList.add('hidden');
+    });
+    menu.appendChild(div);
+  });
+}
+
+function selectNovoMarcadorColor(item) {
+  selectedNovoMarcadorColorObj = item;
+  const content = $('#novoMarcadorColorSelectedContent');
+  if (content) {
+    const borderStyle = item.border ? `; -webkit-text-stroke: 1px ${item.border};` : '';
+    content.innerHTML = `<i class="fa-solid fa-tag" style="color: ${item.hex}${borderStyle}"></i> <span>${escapeHtml(item.name)}</span>`;
+  }
+}
+
+$('#novoMarcadorColorSelectedBox')?.addEventListener('click', (e) => {
+  e.stopPropagation();
+  $('#novoMarcadorColorDropdownMenu')?.classList.toggle('hidden');
 });
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#customNovoMarcadorColorSelect')) {
+    $('#novoMarcadorColorDropdownMenu')?.classList.add('hidden');
+  }
+});
+
+function openNovoMarcadorModal() {
+  renderNovoMarcadorColorDropdown();
+  selectNovoMarcadorColor(TAG_COLOR_OPTIONS[0]);
+  if ($('#inputNovoMarcadorNome')) $('#inputNovoMarcadorNome').value = '';
+  $('#modalNovoMarcador')?.classList.add('open');
+  $('#modalNovoMarcador')?.setAttribute('aria-hidden', 'false');
+  setTimeout(() => $('#inputNovoMarcadorNome')?.focus(), 150);
+}
+
+function closeNovoMarcadorModal() {
+  $('#modalNovoMarcador')?.classList.remove('open');
+  $('#modalNovoMarcador')?.setAttribute('aria-hidden', 'true');
+}
+
+$('#closeModalNovoMarcador')?.addEventListener('click', closeNovoMarcadorModal);
+$('#modalNovoMarcador')?.addEventListener('click', (e) => {
+  if (e.target === $('#modalNovoMarcador')) closeNovoMarcadorModal();
+});
+
+// Botão '+' verde ao lado do marcador: Abre a janela dedicada 'Novo Marcador' (Fidelidade total com a imagem anexa)
+$('#btnAddTagCatalogOption')?.addEventListener('click', () => {
+  openNovoMarcadorModal();
+});
+
+// Salvar Novo Marcador vindo da janela dedicada
+$('#btnSaveNovoMarcador')?.addEventListener('click', () => {
+  const nameInput = $('#inputNovoMarcadorNome');
+  const name = nameInput?.value.trim() || '';
+
+  if (!name) {
+    toast('Por favor, digite o nome do marcador.');
+    nameInput?.focus();
+    return;
+  }
+
+  const catalog = getMarcadoresCatalog();
+  if (catalog.some(x => sameText(x.name, name))) {
+    toast(`O marcador "${name}" já existe no catálogo.`);
+    return;
+  }
+
+  const newTag = {
+    id: 'tag-' + Date.now(),
+    name: name,
+    color: selectedNovoMarcadorColorObj.hex
+  };
+
+  catalog.push(newTag);
+  saveMarcadoresCatalog(catalog);
+  renderAddMarcadorDropdown();
+  selectAddMarcadorOption(newTag);
+  closeNovoMarcadorModal();
+  toast(`Novo marcador "${name}" cadastrado no catálogo com sucesso!`);
+});
+
+function openAddMarcadorModal(selectedItems) {
+  currentSelectedStudentsForTag = selectedItems;
+  const targetInfo = $('#addMarcadorTargetInfo');
+  if (targetInfo) {
+    if (selectedItems.length === 1) {
+      targetInfo.textContent = `Aluno selecionado: FICAI ${selectedItems[0].ficai} — ${selectedItems[0].student}`;
+    } else {
+      targetInfo.textContent = `${selectedItems.length} alunos selecionados nas checkboxes.`;
+    }
+  }
+
+  renderAddMarcadorDropdown();
+  if ($('#textAddMarcador')) $('#textAddMarcador').value = '';
+  $('#modalAddMarcador')?.classList.add('open');
+  $('#modalAddMarcador')?.setAttribute('aria-hidden', 'false');
+}
+
+function closeAddMarcadorModal() {
+  $('#modalAddMarcador')?.classList.remove('open');
+  $('#modalAddMarcador')?.setAttribute('aria-hidden', 'true');
+}
+
+$('#btnVoltarAddMarcador')?.addEventListener('click', closeAddMarcadorModal);
+$('#modalAddMarcador')?.addEventListener('click', (e) => {
+  if (e.target === $('#modalAddMarcador')) closeAddMarcadorModal();
+});
+
+$('#btnActionAddTag')?.addEventListener('click', () => {
+  const selected = getSelectedFicaiRows();
+  if (selected.length === 0) {
+    toast('Selecione pelo menos um aluno na checkbox para adicionar marcador.');
+    return;
+  }
+  openAddMarcadorModal(selected);
+});
+
+$('#btnSaveAddMarcador')?.addEventListener('click', () => {
+  if (!selectedAddTagObj) {
+    toast('Selecione um marcador.');
+    return;
+  }
+  if (currentSelectedStudentsForTag.length === 0) {
+    toast('Nenhum aluno selecionado.');
+    return;
+  }
+
+  const textNote = $('#textAddMarcador')?.value.trim() || '';
+  const map = getStudentTagsMap();
+
+  currentSelectedStudentsForTag.forEach(item => {
+    const list = map[item.ficai] || [];
+    if (!list.some(x => sameText(x.name, selectedAddTagObj.name))) {
+      list.push({
+        id: selectedAddTagObj.id,
+        name: selectedAddTagObj.name,
+        color: selectedAddTagObj.color,
+        text: textNote,
+        addedAt: new Date().toISOString()
+      });
+      map[item.ficai] = list;
+    }
+  });
+
+  saveStudentTagsMap(map);
+  refreshAllRowTags();
+  closeAddMarcadorModal();
+  toast(`Marcador "${selectedAddTagObj.name}" adicionado com sucesso a ${currentSelectedStudentsForTag.length} aluno(s).`);
+});
+
+// ------------------------------------------------------------------------------
+// 3. REMOVER MARCADOR
+// ------------------------------------------------------------------------------
+let selectedRemoveTagObj = null;
+let currentSelectedStudentsForRemoveTag = [];
+
+function openRemoveMarcadorModal(selectedItems) {
+  currentSelectedStudentsForRemoveTag = selectedItems;
+  const targetInfo = $('#removeMarcadorTargetInfo');
+  if (targetInfo) {
+    if (selectedItems.length === 1) {
+      targetInfo.textContent = `Aluno: FICAI ${selectedItems[0].ficai} — ${selectedItems[0].student}`;
+    } else {
+      targetInfo.textContent = `${selectedItems.length} alunos selecionados nas checkboxes.`;
+    }
+  }
+
+  const map = getStudentTagsMap();
+  const activeTagsSet = new Map();
+  selectedItems.forEach(item => {
+    const list = map[item.ficai] || [];
+    list.forEach(t => activeTagsSet.set(t.name, t));
+  });
+
+  const menu = $('#removeMarcadorDropdownMenu');
+  if (menu) {
+    menu.innerHTML = '';
+    if (activeTagsSet.size === 0) {
+      menu.innerHTML = `<div class="marcador-dropdown-item" style="color: #64748b;"><em>Nenhum marcador ativo encontrado</em></div>`;
+      $('#removeMarcadorSelectedContent').textContent = 'Nenhum marcador para remover';
+      selectedRemoveTagObj = null;
+    } else {
+      const allDiv = document.createElement('div');
+      allDiv.className = 'marcador-dropdown-item';
+      allDiv.innerHTML = `<i class="fa-solid fa-trash-can" style="color: #dc2626;"></i> <strong>Remover Todos os Marcadores</strong>`;
+      allDiv.addEventListener('click', () => {
+        selectedRemoveTagObj = { name: '__ALL__' };
+        $('#removeMarcadorSelectedContent').innerHTML = `<i class="fa-solid fa-trash-can" style="color: #dc2626;"></i> <strong>Todos os Marcadores</strong>`;
+        menu.classList.add('hidden');
+      });
+      menu.appendChild(allDiv);
+
+      activeTagsSet.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'marcador-dropdown-item';
+        div.innerHTML = `<i class="fa-solid fa-tag" style="color: ${item.color};"></i> <span>${escapeHtml(item.name)}</span>`;
+        div.addEventListener('click', () => {
+          selectedRemoveTagObj = item;
+          $('#removeMarcadorSelectedContent').innerHTML = `<i class="fa-solid fa-tag" style="color: ${item.color};"></i> <span>${escapeHtml(item.name)}</span>`;
+          menu.classList.add('hidden');
+        });
+        menu.appendChild(div);
+      });
+
+      const firstTag = activeTagsSet.values().next().value;
+      selectedRemoveTagObj = firstTag;
+      $('#removeMarcadorSelectedContent').innerHTML = `<i class="fa-solid fa-tag" style="color: ${firstTag.color};"></i> <span>${escapeHtml(firstTag.name)}</span>`;
+    }
+  }
+
+  if ($('#textRemoveMarcador')) $('#textRemoveMarcador').value = '';
+  $('#modalRemoveMarcador')?.classList.add('open');
+  $('#modalRemoveMarcador')?.setAttribute('aria-hidden', 'false');
+}
+
+$('#removeMarcadorSelectedBox')?.addEventListener('click', (e) => {
+  e.stopPropagation();
+  $('#removeMarcadorDropdownMenu')?.classList.toggle('hidden');
+});
+
+function closeRemoveMarcadorModal() {
+  $('#modalRemoveMarcador')?.classList.remove('open');
+  $('#modalRemoveMarcador')?.setAttribute('aria-hidden', 'true');
+}
+
+$('#btnVoltarRemoveMarcador')?.addEventListener('click', closeRemoveMarcadorModal);
+$('#modalRemoveMarcador')?.addEventListener('click', (e) => {
+  if (e.target === $('#modalRemoveMarcador')) closeRemoveMarcadorModal();
+});
+
+$('#btnActionRemoveTag')?.addEventListener('click', () => {
+  const selected = getSelectedFicaiRows();
+  if (selected.length === 0) {
+    toast('Selecione pelo menos um aluno na checkbox para remover marcador.');
+    return;
+  }
+  openRemoveMarcadorModal(selected);
+});
+
+$('#btnSaveRemoveMarcador')?.addEventListener('click', () => {
+  if (!selectedRemoveTagObj) {
+    toast('Nenhum marcador selecionado para remoção.');
+    return;
+  }
+
+  const map = getStudentTagsMap();
+  currentSelectedStudentsForRemoveTag.forEach(item => {
+    if (selectedRemoveTagObj.name === '__ALL__') {
+      map[item.ficai] = [];
+    } else {
+      const list = map[item.ficai] || [];
+      map[item.ficai] = list.filter(x => !sameText(x.name, selectedRemoveTagObj.name));
+    }
+  });
+
+  saveStudentTagsMap(map);
+  refreshAllRowTags();
+  closeRemoveMarcadorModal();
+  toast('Marcador removido com sucesso!');
+});
+
+// Renderizar marcadores ativos nas linhas das tabelas
+function refreshAllRowTags() {
+  const map = getStudentTagsMap();
+  const rows = document.querySelectorAll('.dash-list-row, #fichaTable tbody tr');
+
+  rows.forEach(row => {
+    const ficaiNum = row.dataset.ficai || row.dataset.dbFicai || row.querySelector('.dash-item-link')?.dataset.ficai || '';
+    if (!ficaiNum) return;
+
+    const tags = map[ficaiNum.trim()] || [];
+    let container = row.querySelector('.dash-row-tags-container');
+
+    if (tags.length > 0) {
+      if (!container) {
+        container = document.createElement('div');
+        container.className = 'dash-row-tags-container';
+        const contentBox = row.querySelector('.dash-row-content') || row.cells?.[1];
+        if (contentBox) contentBox.appendChild(container);
+      }
+      container.innerHTML = '';
+      tags.forEach(t => {
+        const chip = document.createElement('span');
+        chip.className = 'dash-tag-chip';
+        chip.style.cssText = `background: ${t.color}15; color: ${t.color}; border: 1px solid ${t.color}40;`;
+        chip.dataset.tooltip = t.text ? `${t.name}: ${t.text}` : t.name;
+        chip.innerHTML = `<i class="fa-solid fa-tag"></i> ${escapeHtml(t.name)}`;
+        container.appendChild(chip);
+      });
+    } else if (container) {
+      container.remove();
+    }
+  });
+}
+
+// Chamar renderização inicial de marcadores
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(refreshAllRowTags, 400);
+});
+setTimeout(refreshAllRowTags, 1000);
 
 $('#escola').addEventListener('change',e=>{const d=schoolData[e.target.value]||{};setText('#escolaEndereco',d.address);setText('#escolaTelefone',d.phone)});
 $('#aluno').addEventListener('change',e=>{if(!e.target.value)return;const d=studentData[e.target.value];if(!d)return;setText('#nomeCompleto',d.nome);setText('#nomeSocial',d.social);setText('#nascimento',d.nascimento);setText('#cpf',d.cpf);setText('#rg',d.rg);setText('#filiacao',d.filiacao);setText('#responsavel',d.responsavel);setText('#residencia',d.residencia);setText('#telefoneAluno',d.telefone);setText('#referencia',d.referencia)});
