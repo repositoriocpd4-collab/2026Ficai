@@ -3694,28 +3694,25 @@ $('#btnActionHistorico')?.addEventListener('click', () => {
 });
 
 // ==============================================================================
-// GESTÃO DE MARCADORES (TAGS) E VISUALIZAÇÃO DE PDF VIA CHECKBOX (FIDELIDADE TOTAL)
+// GESTÃO DE MARCADORES (TAGS) E VISUALIZAR PDF VIA CHECKBOX (CATÁLOGO ZERADO)
 // ==============================================================================
-const MARCADORES_KEY = 'ficai4MarcadoresCatalogV2';
-const STUDENT_TAGS_KEY = 'ficai4StudentTagsMapV2';
+const MARCADORES_KEY = 'ficai4MarcadoresCatalogV3';
+const STUDENT_TAGS_KEY = 'ficai4StudentTagsMapV3';
 
-const DEFAULT_MARCADORES = [
-  { id: 'sei', name: 'Cadastro SEI', color: '#6b7280' },
-  { id: 'ad', name: 'Criação Login AD', color: '#111827' },
-  { id: 'proto', name: 'Criação Usuário Protocolo', color: '#1d4ed8' },
-  { id: 'sec', name: 'Of. Secretário', color: '#16a34a' },
-  { id: 'seirj', name: 'Orientação SEI-RJ', color: '#78350f' },
-  { id: 'mayara', name: 'Problema da Mayara', color: '#0284c7' },
-  { id: 'videos', name: 'Vídeos', color: '#d97706' }
-];
+// Zerar catálogos anteriores com dados demonstrativos para iniciar totalmente limpo
+try {
+  ['ficai4MarcadoresCatalog', 'ficai4MarcadoresCatalogV1', 'ficai4MarcadoresCatalogV2'].forEach(k => localStorage.removeItem(k));
+} catch(_e){}
 
 function getMarcadoresCatalog() {
   try {
-    const list = JSON.parse(localStorage.getItem(MARCADORES_KEY));
-    if (Array.isArray(list) && list.length > 0) return list;
+    const raw = localStorage.getItem(MARCADORES_KEY);
+    if (raw !== null) {
+      const list = JSON.parse(raw);
+      if (Array.isArray(list)) return list;
+    }
   } catch(_e){}
-  localStorage.setItem(MARCADORES_KEY, JSON.stringify(DEFAULT_MARCADORES));
-  return DEFAULT_MARCADORES;
+  return [];
 }
 
 function saveMarcadoresCatalog(list) {
@@ -3824,6 +3821,21 @@ function renderAddMarcadorDropdown() {
   if (!menu) return;
   menu.innerHTML = '';
 
+  if (catalog.length === 0) {
+    selectedAddTagObj = null;
+    const emptyDiv = document.createElement('div');
+    emptyDiv.className = 'marcador-dropdown-item';
+    emptyDiv.style.cssText = 'color: #64748b; cursor: default; justify-content: center; padding: 12px; font-size: 12.5px;';
+    emptyDiv.innerHTML = `<em>Nenhum marcador cadastrado. Clique no '+' ao lado para criar.</em>`;
+    menu.appendChild(emptyDiv);
+
+    const content = $('#marcadorSelectedContent');
+    if (content) {
+      content.innerHTML = `<span style="color: #64748b; font-style: italic; font-size: 13px;">Nenhum marcador (clique no '+' ao lado)</span>`;
+    }
+    return;
+  }
+
   catalog.forEach(item => {
     const div = document.createElement('div');
     div.className = 'marcador-dropdown-item';
@@ -3838,8 +3850,10 @@ function renderAddMarcadorDropdown() {
     menu.appendChild(div);
   });
 
-  if (catalog.length > 0 && !selectedAddTagObj) {
-    selectAddMarcadorOption(catalog[0]);
+  if (catalog.length > 0) {
+    if (!selectedAddTagObj || !catalog.some(x => sameText(x.name, selectedAddTagObj.name))) {
+      selectAddMarcadorOption(catalog[0]);
+    }
   }
 }
 
@@ -4019,7 +4033,7 @@ $('#btnActionAddTag')?.addEventListener('click', () => {
 
 $('#btnSaveAddMarcador')?.addEventListener('click', () => {
   if (!selectedAddTagObj) {
-    toast('Selecione um marcador.');
+    toast('Nenhum marcador cadastrado. Clique no botão "+" verde ao lado para criar um novo marcador.');
     return;
   }
   if (currentSelectedStudentsForTag.length === 0) {
