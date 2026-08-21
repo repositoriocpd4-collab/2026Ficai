@@ -1329,6 +1329,175 @@ body.dark-mode .btn-input-icon:hover {
   box-shadow: 0 0 0 2.5px #005a9c;
   transform: scale(1.15);
 }
+
+/* ==============================================================================
+   STEPPER HORIZONTAL DE 6 ETAPAS (FIDELIDADE TOTAL AO DESIGN SOLICITADO)
+   ============================================================================== */
+.wizard-header-card {
+  width: 100%;
+  margin-bottom: 24px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 22px 32px 18px;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.05);
+}
+body.dark .wizard-header-card {
+  background: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.3);
+}
+
+.horizontal-stepper-track {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.stepper-line-bg {
+  position: absolute;
+  top: 22px;
+  left: 6%;
+  right: 6%;
+  height: 3px;
+  background: #e2e8f0;
+  z-index: 1;
+  border-radius: 99px;
+}
+body.dark .stepper-line-bg {
+  background: #334155;
+}
+
+.stepper-line-fill {
+  position: absolute;
+  top: 22px;
+  left: 6%;
+  height: 3px;
+  background: linear-gradient(90deg, #10b981 0%, #1d4ed8 100%);
+  z-index: 1;
+  border-radius: 99px;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.step-item {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: 16%;
+  text-decoration: none;
+  transition: transform 0.18s ease;
+}
+
+.step-item:hover {
+  transform: translateY(-2px);
+}
+
+.step-item-node {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #64748b;
+  font-size: 15px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+body.dark .step-item-node {
+  background: #334155;
+  color: #94a3b8;
+}
+
+.step-item-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #64748b;
+  text-align: center;
+  white-space: nowrap;
+  transition: color 0.2s ease, font-weight 0.2s ease;
+}
+body.dark .step-item-title {
+  color: #94a3b8;
+}
+
+/* 1. Concluído */
+.step-item.completed .step-item-node {
+  background: #10b981;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+.step-item.completed .step-item-title {
+  color: #10b981;
+  font-weight: 700;
+}
+
+/* 2. Ativo */
+.step-item.active .step-item-node {
+  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
+  color: #ffffff;
+  box-shadow: 0 0 0 6px rgba(29, 78, 216, 0.2), 0 6px 18px rgba(29, 78, 216, 0.4);
+  transform: scale(1.1);
+}
+.step-item.active .step-item-title {
+  color: #1d4ed8;
+  font-weight: 800;
+}
+body.dark .step-item.active .step-item-title {
+  color: #60a5fa;
+}
+
+/* Wizard Footer Bar */
+.wizard-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  border-radius: 0 0 14px 14px;
+  margin-top: 24px;
+}
+body.dark .wizard-footer-bar {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+/* Seções do Formulário (Exibição 1 por vez no Wizard) */
+#ficaiForm .form-section {
+  display: none;
+  animation: fadeInStep 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+#ficaiForm .form-section.active-step-section {
+  display: block;
+}
+
+@keyframes fadeInStep {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .step-item-title {
+    font-size: 10px;
+  }
+  .step-item-node {
+    width: 36px;
+    height: 36px;
+    font-size: 13px;
+  }
+}
 </style>
 </head>
 <body>
@@ -1630,148 +1799,193 @@ body.dark-mode .btn-input-icon:hover {
   </div>
 </section>
 
-<!-- GERAR FICAI -->
+<!-- GERAR FICAI (FORMATO WIZARD HORIZONTAL 6 ETAPAS) -->
 <section class="view" id="view-gerar">
   <div class="page-head"><div><h1 class="page-title">Gerar FICAI</h1><p class="page-subtitle">Cadastro, diagnóstico, acompanhamento e emissão da ficha oficial em A4.</p></div><div class="action-row"><button class="btn soft" id="loadDemo" data-tooltip="Preencher formulário com dados demonstrativos para teste rápido"><i class="fa-solid fa-wand-magic-sparkles"></i> Carregar exemplo</button><button class="btn primary" id="topPreview" data-tooltip="Abrir pré-visualização do espelho oficial A4 para impressão"><i class="fa-solid fa-file-pdf"></i> Visualizar A4</button></div></div>
-  <div class="form-layout">
-    <aside class="card step-nav">
-      <a class="step-link active" href="#sec1"><span class="step-dot">1</span><span>Escola e aluno</span></a>
-      <a class="step-link" href="#sec2"><span class="step-dot">2</span><span>Situação escolar</span></a>
-      <a class="step-link" href="#sec3"><span class="step-dot">3</span><span>Procedimentos</span></a>
-      <a class="step-link" href="#sec4"><span class="step-dot">4</span><span>Motivos e situação</span></a>
-      <a class="step-link" href="#sec5"><span class="step-dot">5</span><span>Diagnóstico</span></a>
-      <a class="step-link" href="#sec6"><span class="step-dot">6</span><span>Revisão e PDF</span></a>
-    </aside>
-    <form class="card form-card" id="ficaiForm" onsubmit="return false">
-      <div class="form-toolbar"><div class="ficai-id"><strong>FICAI:</strong> <span id="ficaiHeaderNumber">00001/2026</span></div><div class="action-row"><button class="btn small soft" id="openCurrentInfo" data-tooltip="Ver histórico completo, linha do tempo e ocorrências"><i class="fa-solid fa-circle-info"></i> Informações</button><button class="btn small" id="saveDraft" data-tooltip="Gravar dados temporários no navegador para não perder o preenchimento"><i class="fa-solid fa-floppy-disk"></i> Salvar rascunho</button><button class="btn small soft" id="clearDraft" data-tooltip="Limpar todos os campos do formulário"><i class="fa-solid fa-eraser"></i> Limpar</button></div></div>
+  
+  <!-- Stepper Horizontal de 6 Etapas (Fidelidade Total à Imagem Anexa) -->
+  <div class="wizard-header-card">
+    <div class="horizontal-stepper-track" id="horizontalStepper">
+      <div class="stepper-line-bg"></div>
+      <div class="stepper-line-fill" id="stepperLineFill" style="width: 0%;"></div>
 
-      <section class="form-section" id="sec1">
-        <h2 class="section-title"><span class="section-number">1</span> Dados sobre a Escola e Identificação do Aluno</h2>
-        <div class="grid g4">
-          <div class="meta-field meta-year"><label>Ano Letivo</label><select id="anoLetivo"></select></div>
-          <div class="meta-field meta-number">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-              <label for="numeroFicai" style="margin-bottom:0">Número FICAI</label>
-              <span class="auto-num-badge" id="btnAutoNum" data-tooltip="Recalcular o próximo número sequencial automaticamente"><i class="fa-solid fa-wand-magic-sparkles"></i> Auto</span>
-            </div>
-            <div class="input-with-action">
-              <input id="numeroFicai" type="text" value="00022/2026" maxlength="10" inputmode="numeric" placeholder="00001/2026" data-tooltip="Gerado automaticamente pela sequência do ano. Você também pode digitar se necessário.">
-              <button class="btn-input-icon" type="button" id="btnRefreshFicaiNum" data-tooltip="Recalcular próximo número da FICAI"><i class="fa-solid fa-arrows-rotate"></i></button>
-            </div>
-          </div>
-          <div class="span2"><label>Escola</label><select id="escola"><option value="">Selecione...</option><option value="aparecida">C. M. Aparecida Azêdo</option><option value="elmir">E.M. Elmir Figueira</option><option value="mignone">CIEP 496 Maestro Francisco Mignone</option></select></div>
-          <div class="span3"><label>Endereço completo</label><input id="escolaEndereco" readonly placeholder="Preenchido automaticamente"></div>
-          <div><label>Telefone</label><input id="escolaTelefone" readonly placeholder="Telefone da unidade"></div>
-          <div class="span2"><label>Aluno cadastrado <span class="db-pill" id="alunoDbStatus"><i class="fa-solid fa-database"></i> banco local</span></label><div class="input-action"><select id="aluno" aria-label="Aluno cadastrado"><option value="">Selecione ou cadastre um aluno...</option><option value="demo">Aluno Demonstrativo</option><option value="ana">Ana Clara Nascimento</option><option value="bruno">Bruno Henrique Silva</option><option value="carla">Carla Souza Ribeiro</option><option value="diego">Diego Santos Alves</option><option value="eduarda">Eduarda Gomes</option><option value="lucas">Lucas Mendonça</option></select><button class="btn inline-mini" type="button" id="newStudentBtn" data-tooltip="Cadastrar novo aluno na base do sistema"><i class="fa-solid fa-user-plus"></i> Novo</button></div></div>
-          <div class="span2"><label>Nome completo <span class="required">*</span></label><input id="nomeCompleto" autocomplete="name" placeholder="Digite o nome completo do estudante"><div class="field-help">Ao salvar a FICAI, este aluno ficará disponível para buscas futuras neste navegador.</div></div>
-          <div class="span2"><label>Nome social</label><input id="nomeSocial" placeholder="Quando houver"></div>
-          <div><label>Data de nascimento</label><input id="nascimento" type="date"></div>
-          <div><label>CPF</label><input id="cpf" placeholder="000.000.000-00"></div>
-          <div><label>RG</label><input id="rg" placeholder="Documento"></div>
-          <div class="span2"><label>Nome dos pais / filiação</label><input id="filiacao" placeholder="Pais ou filiação registrada"></div>
-          <div class="span2"><label>Responsável legal</label><input id="responsavel" placeholder="Nome do responsável legal"></div>
-          <div class="span3"><label>Endereço residencial</label><input id="residencia" placeholder="Logradouro, nº, bairro, município"></div>
-          <div><label>Telefone(s)</label><input id="telefoneAluno" placeholder="(21) 00000-0000"></div>
-          <div class="span4"><label>Nome e endereço de parente ou outra referência</label><input id="referencia" placeholder="Referência familiar ou comunitária"></div>
-        </div>
-      </section>
+      <button type="button" class="step-item active" data-step="1" id="stepNode1">
+        <div class="step-item-node"><span class="node-icon">1</span></div>
+        <span class="step-item-title">Escola e aluno</span>
+      </button>
 
-      <section class="form-section" id="sec2">
-        <h2 class="section-title"><span class="section-number">2</span> Dados sobre a Situação Escolar do Aluno</h2>
-        <div class="grid g5">
-          <div><label>Ano Escolar</label><select id="anoEscolar"><option value="">Selecione</option><option>Pré I</option><option>Pré II</option><option>1º Ano</option><option>2º Ano</option><option>3º Ano</option><option>4º Ano</option><option>5º Ano</option><option>6º Ano</option><option>7º Ano</option><option>8º Ano</option><option>9º Ano</option><option>NCEJA VI</option></select></div>
-          <div><label>Turma</label><select id="turma"><option value="">Selecione</option><option data-modalidade="Ensino Fundamental">6º Ano A</option><option data-modalidade="Ensino Fundamental">7º Ano B</option><option data-modalidade="Ensino Fundamental">8º Ano C</option><option data-modalidade="Ensino Fundamental">9º Ano A</option><option data-modalidade="EJA">NCEJA VI A</option><option data-modalidade="Educação Infantil">Pré II A</option></select></div>
-          <div><label>Turno</label><select id="turno"><option value="">Selecione</option><option>Manhã</option><option>Tarde</option><option>Noite</option></select></div>
-          <div class="span2"><label>Modalidade <span class="hint">(automática pela turma)</span></label><input id="modalidade" readonly placeholder="Aguardando turma"></div>
-          <div><label>Início do período de faltas</label><input id="faltaInicio" type="date"></div>
-          <div><label>Fim do período de faltas</label><input id="faltaFim" type="date"></div>
-          <div><label>Data da Comunicação</label><input id="dataComunicacao" type="date"></div>
-          <div class="span2"><label>Professor regente / Orientador / Coord. Pedagógico</label><input id="profissional" placeholder="Nome do profissional"></div>
-          <div class="span5"><label>Assinatura e matrícula do profissional</label><input id="assinaturaProf" placeholder="Nome, matrícula ou identificação funcional"></div>
-        </div>
-      </section>
+      <button type="button" class="step-item" data-step="2" id="stepNode2">
+        <div class="step-item-node"><span class="node-icon">2</span></div>
+        <span class="step-item-title">Situação escolar</span>
+      </button>
 
-      <section class="form-section" id="sec3">
-        <h2 class="section-title"><span class="section-number">3</span> Procedimentos da Escola</h2>
-        <div class="procedures">
-          <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Comunicação/bilhete ao responsável"><span>Comunicação / bilhete ao responsável</span></label><input type="date" data-proc-date="Comunicação/bilhete ao responsável"></div>
-          <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Retorno do estudante à escola"><span>Retorno do estudante à escola</span></label><input type="date" data-proc-date="Retorno do estudante à escola"></div>
-          <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Contato telefônico com o responsável"><span>Contato telefônico com o responsável</span></label><input type="date" data-proc-date="Contato telefônico com o responsável"></div>
-          <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Não retorno do aluno à escola"><span>Não retorno do aluno à escola</span></label><input type="date" data-proc-date="Não retorno do aluno à escola"></div>
-          <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Telegrama ao responsável"><span>Telegrama ao responsável</span></label><input type="date" data-proc-date="Telegrama ao responsável"></div>
-          <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Visita ao domicílio do aluno"><span>Visita ao domicílio do aluno</span></label><input type="date" data-proc-date="Visita ao domicílio do aluno"></div>
-          <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Comparecimento do responsável"><span>Comparecimento do responsável e assinatura do termo de responsabilidade</span></label><input type="date" data-proc-date="Comparecimento do responsável"></div>
-        </div>
-        <div style="margin-top:16px"><label>Visita domiciliar – Relato <span class="counter" id="relatoCount">0 / 8000 palavras</span></label><textarea id="relatoVisita" class="textarea-large" data-wordlimit="8000" data-counter="relatoCount" placeholder="Registre o relato completo da visita domiciliar..."></textarea></div>
-      </section>
+      <button type="button" class="step-item" data-step="3" id="stepNode3">
+        <div class="step-item-node"><span class="node-icon">3</span></div>
+        <span class="step-item-title">Procedimentos</span>
+      </button>
 
-      <section class="form-section" id="sec4">
-        <h2 class="section-title"><span class="section-number">4</span> Motivos da Ausência, Situação e Vulnerabilidades</h2>
-        <div class="inline-card"><h4>4.1 Constatação dos motivos da ausência / falta do estudante</h4><div class="option-grid" id="motivosGrid">
-          <label class="check"><input type="checkbox" value="Mudança de endereço com pedido de transferência"><span>Mudança de endereço do aluno com pedido de transferência escolar</span></label>
-          <label class="check"><input type="checkbox" value="Aluno está trabalhando"><span>Aluno está trabalhando</span></label>
-          <label class="check"><input type="checkbox" value="Mudança de endereço sem pedido de transferência"><span>Mudança de endereço do aluno sem pedido de transferência escolar</span></label>
-          <label class="check"><input type="checkbox" value="Falta recurso para transporte escolar"><span>Falta recurso para o transporte escolar</span></label>
-          <label class="check"><input type="checkbox" value="Matrícula em outra Unidade Educacional"><span>Informação de matrícula em outra Unidade Educacional</span></label>
-          <label class="check"><input type="checkbox" value="Falta de motivação"><span>Falta de motivação para ir à escola</span></label>
-          <label class="check"><input type="checkbox" value="Aluno ficou doente"><span>Aluno ficou doente (internação, receita, atestado, cuidados caseiros)</span></label>
-          <label class="check"><input type="checkbox" value="Baixo interesse do responsável"><span>Baixo interesse do responsável (omissão, negligência)</span></label>
-          <label class="check"><input type="checkbox" value="Violência no local de moradia"><span>Violência no local de moradia</span></label>
-        </div><div style="margin-top:13px"><label>Outros; especifique <span class="counter" id="outrosCount">0 / 8000 palavras</span></label><textarea id="outrosMotivos" data-wordlimit="8000" data-counter="outrosCount" placeholder="Descreva outros motivos..."></textarea></div></div>
+      <button type="button" class="step-item" data-step="4" id="stepNode4">
+        <div class="step-item-node"><span class="node-icon">4</span></div>
+        <span class="step-item-title">Motivos e situação</span>
+      </button>
 
-        <div class="inline-card" style="margin-top:15px">
-          <div class="option-card-head"><h4>Situação do Aluno</h4><button type="button" class="option-add-btn" id="toggleStudentSituationAdd"><i class="fa-solid fa-plus"></i> Nova situação</button></div>
-          <div class="quick-add-panel situation" id="studentSituationAddPanel">
-            <div><label>Nome da situação</label><input id="newStudentSituationName" maxlength="80" placeholder="Ex.: Acompanhamento especial"></div>
-            <div><label>Descrição curta <span class="hint">(opcional)</span></label><input id="newStudentSituationDescription" maxlength="140" placeholder="Explique quando esta situação deve ser usada"></div>
-            <button type="button" class="btn small" id="saveStudentSituation"><i class="fa-solid fa-check"></i> Adicionar</button>
-            <button type="button" class="btn small soft" id="cancelStudentSituation">Cancelar</button>
-          </div>
-          <div class="radio-cards" id="studentSituationGrid">
-            <label class="radio-card"><input type="radio" name="situacaoAluno" value="Infrequente"><span><strong>Infrequente</strong><small>Faltas consecutivas ou alternadas.</small></span></label>
-            <label class="radio-card"><input type="radio" name="situacaoAluno" value="Evadido"><span><strong>Evadido</strong><small>Abandono total das atividades.</small></span></label>
-            <label class="radio-card"><input type="radio" name="situacaoAluno" value="Sem Acesso"><span><strong>Sem Acesso</strong><small>Impedimentos tecnológicos ou físicos.</small></span></label>
-          </div>
-        </div>
+      <button type="button" class="step-item" data-step="5" id="stepNode5">
+        <div class="step-item-node"><span class="node-icon">5</span></div>
+        <span class="step-item-title">Diagnóstico</span>
+      </button>
 
-        <div class="inline-card" style="margin-top:15px">
-          <div class="option-card-head"><h4>Situações de Vulnerabilidade</h4><button type="button" class="option-add-btn" id="toggleVulnerabilityAdd"><i class="fa-solid fa-plus"></i> Nova vulnerabilidade</button></div>
-          <div class="quick-add-panel vulnerability" id="vulnerabilityAddPanel">
-            <div><label>Nome da vulnerabilidade</label><input id="newVulnerabilityName" maxlength="100" placeholder="Ex.: Insegurança habitacional"></div>
-            <button type="button" class="btn small" id="saveVulnerability"><i class="fa-solid fa-check"></i> Adicionar</button>
-            <button type="button" class="btn small soft" id="cancelVulnerability">Cancelar</button>
-          </div>
-          <div class="option-grid three" id="vulnGrid">
-            <label class="check"><input type="checkbox" value="Violência Física"><span>Violência Física</span></label><label class="check"><input type="checkbox" value="Violência Psicológica"><span>Violência Psicológica</span></label><label class="check"><input type="checkbox" value="Abuso Sexual"><span>Abuso Sexual</span></label><label class="check"><input type="checkbox" value="Negligência"><span>Negligência</span></label><label class="check"><input type="checkbox" value="Abandono"><span>Abandono</span></label><label class="check"><input type="checkbox" value="Risco Social"><span>Risco Social</span></label>
-          </div>
-        </div>
-
-        <div class="grid g2" style="margin-top:15px"><div><label>Outras situações cadastradas</label><div class="chips" id="customSituations"><span class="chip">Baixa participação <button type="button" title="Remover">×</button></span></div><button type="button" class="btn small soft" id="addSituation" style="margin-top:9px"><i class="fa-solid fa-plus"></i> Adicionar situação</button></div><div><label>Observação Inicial</label><textarea id="observacaoInicial" placeholder="Observações relevantes para abertura do caso..."></textarea></div></div>
-      </section>
-
-      <section class="form-section" id="sec5">
-        <h2 class="section-title"><span class="section-number">5</span> Tela de Diagnóstico da Evasão</h2>
-        <div class="notice warning" style="margin-bottom:15px"><strong>Diagnóstico multifatorial:</strong> marque todos os fatores identificados. O registro será usado nos indicadores, histórico da FICAI e relatórios.</div>
-        <div class="diagnosis-grid" id="diagnosisGrid">
-          <div class="diagnosis-box" data-group="Estrutural"><h4><i class="fa-solid fa-school"></i> Estrutural</h4><label class="check"><input type="checkbox" value="Falta de Vaga na Escola"><span>Falta de Vaga na Escola</span></label><label class="check"><input type="checkbox" value="Dificuldade de Transporte"><span>Dificuldade de Transporte</span></label><label class="check"><input type="checkbox" value="Distância da Residência"><span>Distância da Residência</span></label><label class="check"><input type="checkbox" value="Barreiras Arquitetônicas"><span>Barreiras Arquitetônicas</span></label><label class="check"><input type="checkbox" value="Falta de recursos"><span>Falta de recursos (didático, vestuário)</span></label><label class="check"><input type="checkbox" value="Falta de políticas escolares"><span>Falta de políticas escolares</span></label><label class="check"><input type="checkbox" value="Falta de educação especial"><span>Falta de educação especial</span></label></div>
-          <div class="diagnosis-box" data-group="Social/Familiar"><h4><i class="fa-solid fa-people-roof"></i> Social / Familiar</h4><label class="check"><input type="checkbox" value="Trabalho Infantil"><span>Trabalho Infantil</span></label><label class="check"><input type="checkbox" value="Conflito Familiar"><span>Conflito Familiar</span></label><label class="check"><input type="checkbox" value="Gravidez na Adolescência"><span>Gravidez na Adolescência</span></label><label class="check"><input type="checkbox" value="Vulnerabilidade Social"><span>Vulnerabilidade Social</span></label><label class="check"><input type="checkbox" value="Cuidados familiares"><span>Cuidados familiares</span></label></div>
-          <div class="diagnosis-box" data-group="Saúde"><h4><i class="fa-solid fa-heart-pulse"></i> Saúde</h4><label class="check"><input type="checkbox" value="Saúde do Aluno (Física)"><span>Saúde do Aluno (Física)</span></label><label class="check"><input type="checkbox" value="Saúde Mental (Aluno)"><span>Saúde Mental (Aluno)</span></label><label class="check"><input type="checkbox" value="Doença na Família"><span>Doença na Família</span></label><label class="check"><input type="checkbox" value="Dependência Química"><span>Dependência Química</span></label></div>
-          <div class="diagnosis-box" data-group="Educacional"><h4><i class="fa-solid fa-book-open"></i> Educacional</h4><label class="check"><input type="checkbox" value="Dificuldade de Aprendizagem"><span>Dificuldade de Aprendizagem</span></label><label class="check"><input type="checkbox" value="Evasão por Bullying"><span>Evasão por Bullying</span></label><label class="check"><input type="checkbox" value="Falta de Motivação"><span>Falta de Motivação</span></label><label class="check"><input type="checkbox" value="Desajuste de Nível/Idade"><span>Desajuste de Nível/Idade</span></label><label class="check"><input type="checkbox" value="Risco de reprovação"><span>Risco de reprovação</span></label></div>
-          <div class="diagnosis-box" data-group="Segurança"><h4><i class="fa-solid fa-shield-halved"></i> Segurança Pública e Violência</h4><label class="check"><input type="checkbox" value="Ameaça ou Violência no Trajeto"><span>Ameaça ou Violência no Trajeto</span></label><label class="check"><input type="checkbox" value="Envolvimento com Tráfico"><span>Envolvimento com Tráfico</span></label><label class="check"><input type="checkbox" value="Violência Doméstica"><span>Violência Doméstica</span></label><label class="check"><input type="checkbox" value="Medida Socioeducativa"><span>Medida Socioeducativa</span></label></div>
-          <div class="diagnosis-box" data-group="Econômica"><h4><i class="fa-solid fa-coins"></i> Econômica</h4><label class="check"><input type="checkbox" value="Inserção no Mercado de Trabalho"><span>Inserção no Mercado de Trabalho</span></label><label class="check"><input type="checkbox" value="Falta de Recursos Materiais"><span>Falta de Recursos Materiais</span></label><label class="check"><input type="checkbox" value="Insegurança Alimentar"><span>Insegurança Alimentar</span></label><label class="check"><input type="checkbox" value="Mudança de Domicílio/Migração"><span>Mudança de Domicílio/Migração</span></label></div>
-          <div class="diagnosis-box" data-group="Outros"><h4><i class="fa-solid fa-circle-exclamation"></i> Outros</h4><label class="check"><input type="checkbox" value="Violência"><span>Violência</span></label><label class="check"><input type="checkbox" value="Bullying"><span>Bullying</span></label><label class="check"><input type="checkbox" value="Preconceito"><span>Preconceito</span></label></div>
-        </div>
-      </section>
-
-      <section class="form-section" id="sec6">
-        <h2 class="section-title"><span class="section-number">6</span> Revisão, Histórico e Emissão</h2>
-        <div class="grid g2"><div class="inline-card"><h4>Participação do Conselho Tutelar</h4><label>Recebimento da FICAI (data e comentário)</label><textarea id="ctRecebimento"></textarea><label style="margin-top:12px">Diligências efetuadas</label><textarea id="ctDiligencias"></textarea><label style="margin-top:12px">Devolução ou encaminhamento (data e comentário)</label><textarea id="ctDevolucao"></textarea><label style="margin-top:12px">Conselheiro(a)</label><input id="ctConselheiro"></div><div class="inline-card"><h4>Atuação das Promotorias de Justiça</h4><label class="check"><input id="prom1" type="checkbox"><span>Recebimento da FICAI</span></label><label class="check"><input id="prom2" type="checkbox"><span>Acompanhamento da representação do Conselho Tutelar</span></label><label class="check"><input id="prom3" type="checkbox"><span>Notificação do Responsável</span></label><label class="check"><input id="prom4" type="checkbox"><span>Propositura de ação de suspensão ou destituição do poder dos pais</span></label><div style="margin-top:15px"><label>Promotor(a)</label><input id="promotor"></div><div style="margin-top:12px"><label>Data</label><input id="promData" type="date"></div></div></div>
-        <div class="notice purple" style="margin-top:16px">A impressão foi configurada para <strong>A4, orientação retrato, uma única folha</strong>. Relatos muito extensos permanecem no registro eletrônico e aparecem de forma resumida na folha impressa.</div>
-      </section>
-
-      <div class="form-footer"><div class="action-row"><button class="btn" id="saveBottom" data-tooltip="Salvar ficha no banco de dados e cadastrar histórico"><i class="fa-solid fa-floppy-disk"></i> Salvar FICAI</button><button class="btn purple" data-go="conselho"><i class="fa-solid fa-gavel"></i> Encaminhar ao CT</button></div><div class="action-row"><button class="btn soft" id="previewBtn" data-tooltip="Conferir espelho A4 antes de imprimir"><i class="fa-solid fa-eye"></i> Pré-visualizar A4</button><button class="btn primary" id="printBtn" data-tooltip="Gerar documento oficial em PDF (A4 - 1 página retrato)"><i class="fa-solid fa-print"></i> Imprimir / Salvar PDF</button></div></div>
-    </form>
+      <button type="button" class="step-item" data-step="6" id="stepNode6">
+        <div class="step-item-node"><span class="node-icon">6</span></div>
+        <span class="step-item-title">Revisão e PDF</span>
+      </button>
+    </div>
   </div>
+
+  <form class="card form-card" id="ficaiForm" onsubmit="return false">
+    <div class="form-toolbar"><div class="ficai-id"><strong>FICAI:</strong> <span id="ficaiHeaderNumber">00001/2026</span></div><div class="action-row"><button class="btn small soft" id="openCurrentInfo" data-tooltip="Ver histórico completo, linha do tempo e ocorrências"><i class="fa-solid fa-circle-info"></i> Informações</button><button class="btn small" id="saveDraft" data-tooltip="Gravar dados temporários no navegador para não perder o preenchimento"><i class="fa-solid fa-floppy-disk"></i> Salvar rascunho</button><button class="btn small soft" id="clearDraft" data-tooltip="Limpar todos os campos do formulário"><i class="fa-solid fa-eraser"></i> Limpar</button></div></div>
+
+    <section class="form-section active-step-section" id="sec1">
+      <h2 class="section-title"><span class="section-number">1</span> Dados sobre a Escola e Identificação do Aluno</h2>
+      <div class="grid g4">
+        <div class="meta-field meta-year"><label>Ano Letivo</label><select id="anoLetivo"></select></div>
+        <div class="meta-field meta-number">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+            <label for="numeroFicai" style="margin-bottom:0">Número FICAI</label>
+            <span class="auto-num-badge" id="btnAutoNum" data-tooltip="Recalcular o próximo número sequencial automaticamente"><i class="fa-solid fa-wand-magic-sparkles"></i> Auto</span>
+          </div>
+          <div class="input-with-action">
+            <input id="numeroFicai" type="text" value="00022/2026" maxlength="10" inputmode="numeric" placeholder="00001/2026" data-tooltip="Gerado automaticamente pela sequência do ano. Você também pode digitar se necessário.">
+            <button class="btn-input-icon" type="button" id="btnRefreshFicaiNum" data-tooltip="Recalcular próximo número da FICAI"><i class="fa-solid fa-arrows-rotate"></i></button>
+          </div>
+        </div>
+        <div class="span2"><label>Escola</label><select id="escola"><option value="">Selecione...</option><option value="aparecida">C. M. Aparecida Azêdo</option><option value="elmir">E.M. Elmir Figueira</option><option value="mignone">CIEP 496 Maestro Francisco Mignone</option></select></div>
+        <div class="span3"><label>Endereço completo</label><input id="escolaEndereco" readonly placeholder="Preenchido automaticamente"></div>
+        <div><label>Telefone</label><input id="escolaTelefone" readonly placeholder="Telefone da unidade"></div>
+        <div class="span2"><label>Aluno cadastrado <span class="db-pill" id="alunoDbStatus"><i class="fa-solid fa-database"></i> banco local</span></label><div class="input-action"><select id="aluno" aria-label="Aluno cadastrado"><option value="">Selecione ou cadastre um aluno...</option><option value="demo">Aluno Demonstrativo</option><option value="ana">Ana Clara Nascimento</option><option value="bruno">Bruno Henrique Silva</option><option value="carla">Carla Souza Ribeiro</option><option value="diego">Diego Santos Alves</option><option value="eduarda">Eduarda Gomes</option><option value="lucas">Lucas Mendonça</option></select><button class="btn inline-mini" type="button" id="newStudentBtn" data-tooltip="Cadastrar novo aluno na base do sistema"><i class="fa-solid fa-user-plus"></i> Novo</button></div></div>
+        <div class="span2"><label>Nome completo <span class="required">*</span></label><input id="nomeCompleto" autocomplete="name" placeholder="Digite o nome completo do estudante"><div class="field-help">Ao salvar a FICAI, este aluno ficará disponível para buscas futuras neste navegador.</div></div>
+        <div class="span2"><label>Nome social</label><input id="nomeSocial" placeholder="Quando houver"></div>
+        <div><label>Data de nascimento</label><input id="nascimento" type="date"></div>
+        <div><label>CPF</label><input id="cpf" placeholder="000.000.000-00"></div>
+        <div><label>RG</label><input id="rg" placeholder="Documento"></div>
+        <div class="span2"><label>Nome dos pais / filiação</label><input id="filiacao" placeholder="Pais ou filiação registrada"></div>
+        <div class="span2"><label>Responsável legal</label><input id="responsavel" placeholder="Nome do responsável legal"></div>
+        <div class="span3"><label>Endereço residencial</label><input id="residencia" placeholder="Logradouro, nº, bairro, município"></div>
+        <div><label>Telefone(s)</label><input id="telefoneAluno" placeholder="(21) 00000-0000"></div>
+        <div class="span4"><label>Nome e endereço de parente ou outra referência</label><input id="referencia" placeholder="Referência familiar ou comunitária"></div>
+      </div>
+    </section>
+
+    <section class="form-section" id="sec2">
+      <h2 class="section-title"><span class="section-number">2</span> Dados sobre a Situação Escolar do Aluno</h2>
+      <div class="grid g5">
+        <div><label>Ano Escolar</label><select id="anoEscolar"><option value="">Selecione</option><option>Pré I</option><option>Pré II</option><option>1º Ano</option><option>2º Ano</option><option>3º Ano</option><option>4º Ano</option><option>5º Ano</option><option>6º Ano</option><option>7º Ano</option><option>8º Ano</option><option>9º Ano</option><option>NCEJA VI</option></select></div>
+        <div><label>Turma</label><select id="turma"><option value="">Selecione</option><option data-modalidade="Ensino Fundamental">6º Ano A</option><option data-modalidade="Ensino Fundamental">7º Ano B</option><option data-modalidade="Ensino Fundamental">8º Ano C</option><option data-modalidade="Ensino Fundamental">9º Ano A</option><option data-modalidade="EJA">NCEJA VI A</option><option data-modalidade="Educação Infantil">Pré II A</option></select></div>
+        <div><label>Turno</label><select id="turno"><option value="">Selecione</option><option>Manhã</option><option>Tarde</option><option>Noite</option></select></div>
+        <div class="span2"><label>Modalidade <span class="hint">(automática pela turma)</span></label><input id="modalidade" readonly placeholder="Aguardando turma"></div>
+        <div><label>Início do período de faltas</label><input id="faltaInicio" type="date"></div>
+        <div><label>Fim do período de faltas</label><input id="faltaFim" type="date"></div>
+        <div><label>Data da Comunicação</label><input id="dataComunicacao" type="date"></div>
+        <div class="span2"><label>Professor regente / Orientador / Coord. Pedagógico</label><input id="profissional" placeholder="Nome do profissional"></div>
+        <div class="span5"><label>Assinatura e matrícula do profissional</label><input id="assinaturaProf" placeholder="Nome, matrícula ou identificação funcional"></div>
+      </div>
+    </section>
+
+    <section class="form-section" id="sec3">
+      <h2 class="section-title"><span class="section-number">3</span> Procedimentos da Escola</h2>
+      <div class="procedures">
+        <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Comunicação/bilhete ao responsável"><span>Comunicação / bilhete ao responsável</span></label><input type="date" data-proc-date="Comunicação/bilhete ao responsável"></div>
+        <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Retorno do estudante à escola"><span>Retorno do estudante à escola</span></label><input type="date" data-proc-date="Retorno do estudante à escola"></div>
+        <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Contato telefônico com o responsável"><span>Contato telefônico com o responsável</span></label><input type="date" data-proc-date="Contato telefônico com o responsável"></div>
+        <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Não retorno do aluno à escola"><span>Não retorno do aluno à escola</span></label><input type="date" data-proc-date="Não retorno do aluno à escola"></div>
+        <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Telegrama ao responsável"><span>Telegrama ao responsável</span></label><input type="date" data-proc-date="Telegrama ao responsável"></div>
+        <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Visita ao domicílio do aluno"><span>Visita ao domicílio do aluno</span></label><input type="date" data-proc-date="Visita ao domicílio do aluno"></div>
+        <div class="procedure-row"><label class="check"><input type="checkbox" data-proc="Comparecimento do responsável"><span>Comparecimento do responsável e assinatura do termo de responsabilidade</span></label><input type="date" data-proc-date="Comparecimento do responsável"></div>
+      </div>
+      <div style="margin-top:16px"><label>Visita domiciliar – Relato <span class="counter" id="relatoCount">0 / 8000 palavras</span></label><textarea id="relatoVisita" class="textarea-large" data-wordlimit="8000" data-counter="relatoCount" placeholder="Registre o relato completo da visita domiciliar..."></textarea></div>
+    </section>
+
+    <section class="form-section" id="sec4">
+      <h2 class="section-title"><span class="section-number">4</span> Motivos da Ausência, Situação e Vulnerabilidades</h2>
+      <div class="inline-card"><h4>4.1 Constatação dos motivos da ausência / falta do estudante</h4><div class="option-grid" id="motivosGrid">
+        <label class="check"><input type="checkbox" value="Mudança de endereço com pedido de transferência"><span>Mudança de endereço do aluno com pedido de transferência escolar</span></label>
+        <label class="check"><input type="checkbox" value="Aluno está trabalhando"><span>Aluno está trabalhando</span></label>
+        <label class="check"><input type="checkbox" value="Mudança de endereço sem pedido de transferência"><span>Mudança de endereço do aluno sem pedido de transferência escolar</span></label>
+        <label class="check"><input type="checkbox" value="Falta recurso para transporte escolar"><span>Falta recurso para o transporte escolar</span></label>
+        <label class="check"><input type="checkbox" value="Matrícula em outra Unidade Educacional"><span>Informação de matrícula em outra Unidade Educacional</span></label>
+        <label class="check"><input type="checkbox" value="Falta de motivação"><span>Falta de motivação para ir à escola</span></label>
+        <label class="check"><input type="checkbox" value="Aluno ficou doente"><span>Aluno ficou doente (internação, receita, atestado, cuidados caseiros)</span></label>
+        <label class="check"><input type="checkbox" value="Baixo interesse do responsável"><span>Baixo interesse do responsável (omissão, negligência)</span></label>
+        <label class="check"><input type="checkbox" value="Violência no local de moradia"><span>Violência no local de moradia</span></label>
+      </div><div style="margin-top:13px"><label>Outros; especifique <span class="counter" id="outrosCount">0 / 8000 palavras</span></label><textarea id="outrosMotivos" data-wordlimit="8000" data-counter="outrosCount" placeholder="Descreva outros motivos..."></textarea></div></div>
+
+      <div class="inline-card" style="margin-top:15px">
+        <div class="option-card-head"><h4>Situação do Aluno</h4><button type="button" class="option-add-btn" id="toggleStudentSituationAdd"><i class="fa-solid fa-plus"></i> Nova situação</button></div>
+        <div class="quick-add-panel situation" id="studentSituationAddPanel">
+          <div><label>Nome da situação</label><input id="newStudentSituationName" maxlength="80" placeholder="Ex.: Acompanhamento especial"></div>
+          <div><label>Descrição curta <span class="hint">(opcional)</span></label><input id="newStudentSituationDescription" maxlength="140" placeholder="Explique quando esta situação deve ser usada"></div>
+          <button type="button" class="btn small" id="saveStudentSituation"><i class="fa-solid fa-check"></i> Adicionar</button>
+          <button type="button" class="btn small soft" id="cancelStudentSituation">Cancelar</button>
+        </div>
+        <div class="radio-cards" id="studentSituationGrid">
+          <label class="radio-card"><input type="radio" name="situacaoAluno" value="Infrequente"><span><strong>Infrequente</strong><small>Faltas consecutivas ou alternadas.</small></span></label>
+          <label class="radio-card"><input type="radio" name="situacaoAluno" value="Evadido"><span><strong>Evadido</strong><small>Abandono total das atividades.</small></span></label>
+          <label class="radio-card"><input type="radio" name="situacaoAluno" value="Sem Acesso"><span><strong>Sem Acesso</strong><small>Impedimentos tecnológicos ou físicos.</small></span></label>
+        </div>
+      </div>
+
+      <div class="inline-card" style="margin-top:15px">
+        <div class="option-card-head"><h4>Situações de Vulnerabilidade</h4><button type="button" class="option-add-btn" id="toggleVulnerabilityAdd"><i class="fa-solid fa-plus"></i> Nova vulnerabilidade</button></div>
+        <div class="quick-add-panel vulnerability" id="vulnerabilityAddPanel">
+          <div><label>Nome da vulnerabilidade</label><input id="newVulnerabilityName" maxlength="100" placeholder="Ex.: Insegurança habitacional"></div>
+          <button type="button" class="btn small" id="saveVulnerability"><i class="fa-solid fa-check"></i> Adicionar</button>
+          <button type="button" class="btn small soft" id="cancelVulnerability">Cancelar</button>
+        </div>
+        <div class="option-grid three" id="vulnGrid">
+          <label class="check"><input type="checkbox" value="Violência Física"><span>Violência Física</span></label><label class="check"><input type="checkbox" value="Violência Psicológica"><span>Violência Psicológica</span></label><label class="check"><input type="checkbox" value="Abuso Sexual"><span>Abuso Sexual</span></label><label class="check"><input type="checkbox" value="Negligência"><span>Negligência</span></label><label class="check"><input type="checkbox" value="Abandono"><span>Abandono</span></label><label class="check"><input type="checkbox" value="Risco Social"><span>Risco Social</span></label>
+        </div>
+      </div>
+
+      <div class="grid g2" style="margin-top:15px"><div><label>Outras situações cadastradas</label><div class="chips" id="customSituations"><span class="chip">Baixa participação <button type="button" title="Remover">×</button></span></div><button type="button" class="btn small soft" id="addSituation" style="margin-top:9px"><i class="fa-solid fa-plus"></i> Adicionar situação</button></div><div><label>Observação Inicial</label><textarea id="observacaoInicial" placeholder="Observações relevantes para abertura do caso..."></textarea></div></div>
+    </section>
+
+    <section class="form-section" id="sec5">
+      <h2 class="section-title"><span class="section-number">5</span> Tela de Diagnóstico da Evasão</h2>
+      <div class="notice warning" style="margin-bottom:15px"><strong>Diagnóstico multifatorial:</strong> marque todos os fatores identificados. O registro será usado nos indicadores, histórico da FICAI e relatórios.</div>
+      <div class="diagnosis-grid" id="diagnosisGrid">
+        <div class="diagnosis-box" data-group="Estrutural"><h4><i class="fa-solid fa-school"></i> Estrutural</h4><label class="check"><input type="checkbox" value="Falta de Vaga na Escola"><span>Falta de Vaga na Escola</span></label><label class="check"><input type="checkbox" value="Dificuldade de Transporte"><span>Dificuldade de Transporte</span></label><label class="check"><input type="checkbox" value="Distância da Residência"><span>Distância da Residência</span></label><label class="check"><input type="checkbox" value="Barreiras Arquitetônicas"><span>Barreiras Arquitetônicas</span></label><label class="check"><input type="checkbox" value="Falta de recursos"><span>Falta de recursos (didático, vestuário)</span></label><label class="check"><input type="checkbox" value="Falta de políticas escolares"><span>Falta de políticas escolares</span></label><label class="check"><input type="checkbox" value="Falta de educação especial"><span>Falta de educação especial</span></label></div>
+        <div class="diagnosis-box" data-group="Social/Familiar"><h4><i class="fa-solid fa-people-roof"></i> Social / Familiar</h4><label class="check"><input type="checkbox" value="Trabalho Infantil"><span>Trabalho Infantil</span></label><label class="check"><input type="checkbox" value="Conflito Familiar"><span>Conflito Familiar</span></label><label class="check"><input type="checkbox" value="Gravidez na Adolescência"><span>Gravidez na Adolescência</span></label><label class="check"><input type="checkbox" value="Vulnerabilidade Social"><span>Vulnerabilidade Social</span></label><label class="check"><input type="checkbox" value="Cuidados familiares"><span>Cuidados familiares</span></label></div>
+        <div class="diagnosis-box" data-group="Saúde"><h4><i class="fa-solid fa-heart-pulse"></i> Saúde</h4><label class="check"><input type="checkbox" value="Saúde do Aluno (Física)"><span>Saúde do Aluno (Física)</span></label><label class="check"><input type="checkbox" value="Saúde Mental (Aluno)"><span>Saúde Mental (Aluno)</span></label><label class="check"><input type="checkbox" value="Doença na Família"><span>Doença na Família</span></label><label class="check"><input type="checkbox" value="Dependência Química"><span>Dependência Química</span></label></div>
+        <div class="diagnosis-box" data-group="Educacional"><h4><i class="fa-solid fa-book-open"></i> Educacional</h4><label class="check"><input type="checkbox" value="Dificuldade de Aprendizagem"><span>Dificuldade de Aprendizagem</span></label><label class="check"><input type="checkbox" value="Evasão por Bullying"><span>Evasão por Bullying</span></label><label class="check"><input type="checkbox" value="Falta de Motivação"><span>Falta de Motivação</span></label><label class="check"><input type="checkbox" value="Desajuste de Nível/Idade"><span>Desajuste de Nível/Idade</span></label><label class="check"><input type="checkbox" value="Risco de reprovação"><span>Risco de reprovação</span></label></div>
+        <div class="diagnosis-box" data-group="Segurança"><h4><i class="fa-solid fa-shield-halved"></i> Segurança Pública e Violência</h4><label class="check"><input type="checkbox" value="Ameaça ou Violência no Trajeto"><span>Ameaça ou Violência no Trajeto</span></label><label class="check"><input type="checkbox" value="Envolvimento com Tráfico"><span>Envolvimento com Tráfico</span></label><label class="check"><input type="checkbox" value="Violência Doméstica"><span>Violência Doméstica</span></label><label class="check"><input type="checkbox" value="Medida Socioeducativa"><span>Medida Socioeducativa</span></label></div>
+        <div class="diagnosis-box" data-group="Econômica"><h4><i class="fa-solid fa-coins"></i> Econômica</h4><label class="check"><input type="checkbox" value="Inserção no Mercado de Trabalho"><span>Inserção no Mercado de Trabalho</span></label><label class="check"><input type="checkbox" value="Falta de Recursos Materiais"><span>Falta de Recursos Materiais</span></label><label class="check"><input type="checkbox" value="Insegurança Alimentar"><span>Insegurança Alimentar</span></label><label class="check"><input type="checkbox" value="Mudança de Domicílio/Migração"><span>Mudança de Domicílio/Migração</span></label></div>
+        <div class="diagnosis-box" data-group="Outros"><h4><i class="fa-solid fa-circle-exclamation"></i> Outros</h4><label class="check"><input type="checkbox" value="Violência"><span>Violência</span></label><label class="check"><input type="checkbox" value="Bullying"><span>Bullying</span></label><label class="check"><input type="checkbox" value="Preconceito"><span>Preconceito</span></label></div>
+      </div>
+    </section>
+
+    <section class="form-section" id="sec6">
+      <h2 class="section-title"><span class="section-number">6</span> Revisão, Histórico e Emissão</h2>
+      <div class="grid g2"><div class="inline-card"><h4>Participação do Conselho Tutelar</h4><label>Recebimento da FICAI (data e comentário)</label><textarea id="ctRecebimento"></textarea><label style="margin-top:12px">Diligências efetuadas</label><textarea id="ctDiligencias"></textarea><label style="margin-top:12px">Devolução ou encaminhamento (data e comentário)</label><textarea id="ctDevolucao"></textarea><label style="margin-top:12px">Conselheiro(a)</label><input id="ctConselheiro"></div><div class="inline-card"><h4>Atuação das Promotorias de Justiça</h4><label class="check"><input id="prom1" type="checkbox"><span>Recebimento da FICAI</span></label><label class="check"><input id="prom2" type="checkbox"><span>Acompanhamento da representação do Conselho Tutelar</span></label><label class="check"><input id="prom3" type="checkbox"><span>Notificação do Responsável</span></label><label class="check"><input id="prom4" type="checkbox"><span>Propositura de ação de suspensão ou destituição do poder dos pais</span></label><div style="margin-top:15px"><label>Promotor(a)</label><input id="promotor"></div><div style="margin-top:12px"><label>Data</label><input id="promData" type="date"></div></div></div>
+      <div class="notice purple" style="margin-top:16px">A impressão foi configurada para <strong>A4, orientação retrato, uma única folha</strong>. Relatos muito extensos permanecem no registro eletrônico e aparecem de forma resumida na folha impressa.</div>
+      
+      <div class="form-footer" style="margin-top: 20px; padding-top: 16px; border-top: 1.5px dashed #cbd5e1;"><div class="action-row"><button class="btn" id="saveBottom" data-tooltip="Salvar ficha no banco de dados e cadastrar histórico"><i class="fa-solid fa-floppy-disk"></i> Salvar FICAI</button><button class="btn purple" data-go="conselho"><i class="fa-solid fa-gavel"></i> Encaminhar ao CT</button></div><div class="action-row"><button class="btn soft" id="previewBtn" data-tooltip="Conferir espelho A4 antes de imprimir"><i class="fa-solid fa-eye"></i> Pré-visualizar A4</button><button class="btn primary" id="printBtn" data-tooltip="Gerar documento oficial em PDF (A4 - 1 página retrato)"><i class="fa-solid fa-print"></i> Imprimir / Salvar PDF</button></div></div>
+    </section>
+
+    <!-- Wizard Footer Bar (Navegação Anterior e Próximo com Validação Obrigatória) -->
+    <div class="wizard-footer-bar">
+      <button type="button" class="btn soft" id="btnWizardPrev" style="padding: 10px 20px; font-weight: 700; visibility: hidden;">
+        <i class="fa-solid fa-arrow-left"></i> Anterior
+      </button>
+
+      <div id="wizardStepIndicator" style="font-weight: 700; font-size: 13px; color: #475569; display: flex; align-items: center; gap: 8px;">
+        <i class="fa-solid fa-layer-group" style="color: #2563eb;"></i>
+        <span id="wizardStepIndicatorText">Etapa 1 de 6 — Escola e aluno</span>
+      </div>
+
+      <button type="button" class="btn primary" id="btnWizardNext" style="padding: 10px 24px; font-weight: 700; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); border: none;">
+        Próximo <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </form>
 </section>
 
 <!-- DADOS DA FICHA -->
@@ -2453,37 +2667,37 @@ body.dark-mode .btn-input-icon:hover {
 
 <!-- MODAL COMPLETO DE CANCELAMENTO DE FICAI -->
 <div class="modal" id="modalCancelamentoFicai" aria-hidden="true">
-  <div class="modal-card config-form-modal" role="dialog" aria-modal="true" style="max-width: 1120px; width: 95vw; max-height: 92vh; display: flex; flex-direction: column; overflow: hidden; padding: 0;">
+  <div class="modal-card config-form-modal" role="dialog" aria-modal="true" style="max-width: 1320px; width: 96vw; max-height: 96vh; display: flex; flex-direction: column; overflow: hidden; padding: 0; border-radius: 14px;">
     <!-- Head -->
-    <div class="modal-head" style="background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px;">
+    <div class="modal-head" style="background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 12px 20px; flex: 0 0 auto;">
       <div>
-        <h2 style="font-size: 20px; font-weight: 800; color: #0f172a; margin: 0; display: flex; align-items: center; gap: 10px;">
+        <h2 style="font-size: 18px; font-weight: 800; color: #0f172a; margin: 0; display: flex; align-items: center; gap: 8px;">
           <i class="fa-solid fa-circle-xmark" style="color: #ef4444;"></i> Cancelamento de FICAI
         </h2>
-        <div style="font-size: 13px; color: #64748b; margin-top: 2px;">
+        <div style="font-size: 12px; color: #64748b; margin-top: 1px;">
           Gerencie solicitações de cancelamento com segurança e rastreabilidade.
         </div>
       </div>
-      <button class="close" type="button" id="closeModalCancelamento" aria-label="Fechar" style="font-size: 24px; color: #64748b;">×</button>
+      <button class="close" type="button" id="closeModalCancelamento" aria-label="Fechar" style="font-size: 22px; color: #64748b;">×</button>
     </div>
 
-    <!-- Body Scrollable -->
-    <div class="modal-body" style="padding: 20px 24px; overflow-y: auto; flex: 1; background: #f8fafc;">
+    <!-- Body Compact (No Scrollbars Needed) -->
+    <div class="modal-body" style="padding: 14px 18px; overflow: hidden; flex: 1; background: #f8fafc; display: flex; flex-direction: column; gap: 12px;">
       
       <!-- 1. Barra de Filtros -->
-      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
-        <div style="display: grid; grid-template-columns: 140px 1fr 160px 160px auto auto; gap: 12px; align-items: flex-end;">
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); flex: 0 0 auto;">
+        <div style="display: grid; grid-template-columns: 130px 1fr 140px 140px auto auto; gap: 10px; align-items: flex-end;">
           <div>
-            <label style="font-size: 11.5px; font-weight: 700; color: #334155; display: block; margin-bottom: 4px;">N.º FICAI</label>
-            <input type="text" id="cancFilterNum" placeholder="Ex.: 0021" style="width: 100%; padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px;">
+            <label style="font-size: 11px; font-weight: 700; color: #334155; display: block; margin-bottom: 3px;">N.º FICAI</label>
+            <input type="text" id="cancFilterNum" placeholder="Ex.: 0021" style="width: 100%; padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 12px;">
           </div>
           <div>
-            <label style="font-size: 11.5px; font-weight: 700; color: #334155; display: block; margin-bottom: 4px;">Nome do Aluno</label>
-            <input type="text" id="cancFilterNome" placeholder="Digite o nome do aluno" style="width: 100%; padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px;">
+            <label style="font-size: 11px; font-weight: 700; color: #334155; display: block; margin-bottom: 3px;">Nome do Aluno</label>
+            <input type="text" id="cancFilterNome" placeholder="Digite o nome do aluno" style="width: 100%; padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 12px;">
           </div>
           <div>
-            <label style="font-size: 11.5px; font-weight: 700; color: #334155; display: block; margin-bottom: 4px;">Turma</label>
-            <select id="cancFilterTurma" style="width: 100%; padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px;">
+            <label style="font-size: 11px; font-weight: 700; color: #334155; display: block; margin-bottom: 3px;">Turma</label>
+            <select id="cancFilterTurma" style="width: 100%; padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 12px;">
               <option value="">Selecione</option>
               <option value="6A">6A</option>
               <option value="7B">7B</option>
@@ -2492,8 +2706,8 @@ body.dark-mode .btn-input-icon:hover {
             </select>
           </div>
           <div>
-            <label style="font-size: 11.5px; font-weight: 700; color: #334155; display: block; margin-bottom: 4px;">Status</label>
-            <select id="cancFilterStatus" style="width: 100%; padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px;">
+            <label style="font-size: 11px; font-weight: 700; color: #334155; display: block; margin-bottom: 3px;">Status</label>
+            <select id="cancFilterStatus" style="width: 100%; padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 12px;">
               <option value="">Selecione</option>
               <option value="Ativa">Ativa</option>
               <option value="Em análise">Em análise</option>
@@ -2501,74 +2715,74 @@ body.dark-mode .btn-input-icon:hover {
               <option value="Cancelada">Cancelada</option>
             </select>
           </div>
-          <button type="button" id="btnCancSearch" class="btn primary" style="background: #2563eb; padding: 8px 18px; font-weight: 700; border-radius: 8px; font-size: 13px;">
+          <button type="button" id="btnCancSearch" class="btn primary" style="background: #2563eb; padding: 6px 14px; font-weight: 700; border-radius: 6px; font-size: 12px;">
             <i class="fa-solid fa-magnifying-glass"></i> Buscar
           </button>
-          <button type="button" id="btnCancClear" class="btn soft" style="padding: 8px 16px; font-size: 13px; font-weight: 600; border-radius: 8px;">
-            <i class="fa-solid fa-filter-circle-xmark"></i> Limpar filtros
+          <button type="button" id="btnCancClear" class="btn soft" style="padding: 6px 12px; font-size: 12px; font-weight: 600; border-radius: 6px;">
+            <i class="fa-solid fa-filter-circle-xmark"></i> Limpar
           </button>
         </div>
       </div>
 
       <!-- 2. Grid de 2 Colunas -->
-      <div style="display: grid; grid-template-columns: 1fr 420px; gap: 20px;">
+      <div style="display: grid; grid-template-columns: 1fr 400px; gap: 12px; align-items: start; flex: 1; overflow: hidden;">
         
         <!-- Coluna Esquerda -->
-        <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 12px; height: 100%;">
           <!-- Tabela de FICAIs encontradas -->
-          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
-            <h3 style="font-size: 14px; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 12px;">
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+            <h3 style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 8px;">
               FICAIs encontradas
             </h3>
             <div style="overflow-x: auto;">
-              <table style="width: 100%; border-collapse: collapse; font-size: 12.5px;">
+              <table style="width: 100%; border-collapse: collapse; font-size: 11.5px;">
                 <thead>
                   <tr style="border-bottom: 1.5px solid #e2e8f0; text-align: left; color: #475569; font-weight: 700;">
-                    <th style="padding: 8px;">N.º FICAI</th>
-                    <th style="padding: 8px;">Aluno</th>
-                    <th style="padding: 8px;">Turma</th>
-                    <th style="padding: 8px;">Escola</th>
-                    <th style="padding: 8px;">Status</th>
-                    <th style="padding: 8px; text-align: center;">Ações</th>
+                    <th style="padding: 6px;">N.º FICAI</th>
+                    <th style="padding: 6px;">Aluno</th>
+                    <th style="padding: 6px;">Turma</th>
+                    <th style="padding: 6px;">Escola</th>
+                    <th style="padding: 6px;">Status</th>
+                    <th style="padding: 6px; text-align: center;">Ações</th>
                   </tr>
                 </thead>
                 <tbody id="cancTableBody">
                   <tr class="canc-row active" data-ficai="0021" data-student="Ana Clara Nascimento" data-turma="7B" data-escola="E.M. Elmir Figueira" data-status="Ativa" data-date="18/08/2026" style="cursor: pointer; background: #eff6ff;">
-                    <td style="padding: 10px 8px; font-weight: 700; color: #1d4ed8;">0021</td>
-                    <td style="padding: 10px 8px; font-weight: 600;">Ana Clara Nascimento</td>
-                    <td style="padding: 10px 8px;">7B</td>
-                    <td style="padding: 10px 8px; color: #64748b;">E.M. Elmir Figueira</td>
-                    <td style="padding: 10px 8px;"><span class="chip" style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 11px;">Ativa</span></td>
-                    <td style="padding: 10px 8px; text-align: center;">
-                      <div style="display: inline-flex; gap: 6px;">
-                        <button type="button" class="btn small soft canc-select-btn" style="padding: 4px 8px; font-size: 11px;"><i class="fa-solid fa-eye"></i> Visualizar</button>
-                        <button type="button" class="btn small canc-trigger-btn" style="padding: 4px 8px; font-size: 11px; color: #ef4444; border: 1px solid #fca5a5; background: #fff5f5; font-weight: 700;"><i class="fa-solid fa-circle-xmark"></i> Cancelar</button>
+                    <td style="padding: 7px 6px; font-weight: 700; color: #1d4ed8;">0021</td>
+                    <td style="padding: 7px 6px; font-weight: 600;">Ana Clara Nascimento</td>
+                    <td style="padding: 7px 6px;">7B</td>
+                    <td style="padding: 7px 6px; color: #64748b;">E.M. Elmir Figueira</td>
+                    <td style="padding: 7px 6px;"><span class="chip" style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 10.5px;">Ativa</span></td>
+                    <td style="padding: 7px 6px; text-align: center;">
+                      <div style="display: inline-flex; gap: 4px;">
+                        <button type="button" class="btn small soft canc-select-btn" style="padding: 3px 6px; font-size: 10.5px;"><i class="fa-solid fa-eye"></i> Visualizar</button>
+                        <button type="button" class="btn small canc-trigger-btn" style="padding: 3px 6px; font-size: 10.5px; color: #ef4444; border: 1px solid #fca5a5; background: #fff5f5; font-weight: 700;"><i class="fa-solid fa-circle-xmark"></i> Cancelar</button>
                       </div>
                     </td>
                   </tr>
                   <tr class="canc-row" data-ficai="0022" data-student="João Pedro Lima" data-turma="8A" data-escola="E.M. Elmir Figueira" data-status="Em análise" data-date="19/08/2026" style="cursor: pointer;">
-                    <td style="padding: 10px 8px; font-weight: 700;">0022</td>
-                    <td style="padding: 10px 8px; font-weight: 600;">João Pedro Lima</td>
-                    <td style="padding: 10px 8px;">8A</td>
-                    <td style="padding: 10px 8px; color: #64748b;">E.M. Elmir Figueira</td>
-                    <td style="padding: 10px 8px;"><span class="chip" style="background: #fef3c7; color: #b45309; font-weight: 700; font-size: 11px;">Em análise</span></td>
-                    <td style="padding: 10px 8px; text-align: center;">
-                      <div style="display: inline-flex; gap: 6px;">
-                        <button type="button" class="btn small soft canc-select-btn" style="padding: 4px 8px; font-size: 11px;"><i class="fa-solid fa-eye"></i> Visualizar</button>
-                        <button type="button" class="btn small canc-trigger-btn" style="padding: 4px 8px; font-size: 11px; color: #ef4444; border: 1px solid #fca5a5; background: #fff5f5; font-weight: 700;"><i class="fa-solid fa-circle-xmark"></i> Cancelar</button>
+                    <td style="padding: 7px 6px; font-weight: 700;">0022</td>
+                    <td style="padding: 7px 6px; font-weight: 600;">João Pedro Lima</td>
+                    <td style="padding: 7px 6px;">8A</td>
+                    <td style="padding: 7px 6px; color: #64748b;">E.M. Elmir Figueira</td>
+                    <td style="padding: 7px 6px;"><span class="chip" style="background: #fef3c7; color: #b45309; font-weight: 700; font-size: 10.5px;">Em análise</span></td>
+                    <td style="padding: 7px 6px; text-align: center;">
+                      <div style="display: inline-flex; gap: 4px;">
+                        <button type="button" class="btn small soft canc-select-btn" style="padding: 3px 6px; font-size: 10.5px;"><i class="fa-solid fa-eye"></i> Visualizar</button>
+                        <button type="button" class="btn small canc-trigger-btn" style="padding: 3px 6px; font-size: 10.5px; color: #ef4444; border: 1px solid #fca5a5; background: #fff5f5; font-weight: 700;"><i class="fa-solid fa-circle-xmark"></i> Cancelar</button>
                       </div>
                     </td>
                   </tr>
                   <tr class="canc-row" data-ficai="0015" data-student="Eduarda Gomes" data-turma="7B" data-escola="E.M. Elmir Figueira" data-status="Ativa" data-date="20/08/2026" style="cursor: pointer;">
-                    <td style="padding: 10px 8px; font-weight: 700;">0015</td>
-                    <td style="padding: 10px 8px; font-weight: 600;">Eduarda Gomes</td>
-                    <td style="padding: 10px 8px;">7B</td>
-                    <td style="padding: 10px 8px; color: #64748b;">E.M. Elmir Figueira</td>
-                    <td style="padding: 10px 8px;"><span class="chip" style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 11px;">Ativa</span></td>
-                    <td style="padding: 10px 8px; text-align: center;">
-                      <div style="display: inline-flex; gap: 6px;">
-                        <button type="button" class="btn small soft canc-select-btn" style="padding: 4px 8px; font-size: 11px;"><i class="fa-solid fa-eye"></i> Visualizar</button>
-                        <button type="button" class="btn small canc-trigger-btn" style="padding: 4px 8px; font-size: 11px; color: #ef4444; border: 1px solid #fca5a5; background: #fff5f5; font-weight: 700;"><i class="fa-solid fa-circle-xmark"></i> Cancelar</button>
+                    <td style="padding: 7px 6px; font-weight: 700;">0015</td>
+                    <td style="padding: 7px 6px; font-weight: 600;">Eduarda Gomes</td>
+                    <td style="padding: 7px 6px;">7B</td>
+                    <td style="padding: 7px 6px; color: #64748b;">E.M. Elmir Figueira</td>
+                    <td style="padding: 7px 6px;"><span class="chip" style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 10.5px;">Ativa</span></td>
+                    <td style="padding: 7px 6px; text-align: center;">
+                      <div style="display: inline-flex; gap: 4px;">
+                        <button type="button" class="btn small soft canc-select-btn" style="padding: 3px 6px; font-size: 10.5px;"><i class="fa-solid fa-eye"></i> Visualizar</button>
+                        <button type="button" class="btn small canc-trigger-btn" style="padding: 3px 6px; font-size: 10.5px; color: #ef4444; border: 1px solid #fca5a5; background: #fff5f5; font-weight: 700;"><i class="fa-solid fa-circle-xmark"></i> Cancelar</button>
                       </div>
                     </td>
                   </tr>
@@ -2578,83 +2792,77 @@ body.dark-mode .btn-input-icon:hover {
           </div>
 
           <!-- Histórico da FICAI selecionada (Timeline) -->
-          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
-            <h3 style="font-size: 14px; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+            <h3 style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
               <span>Histórico da FICAI selecionada</span>
-              <span id="cancSelectedFicaiBadge" style="font-size: 12px; color: #2563eb; font-weight: 700;">FICAI 0021</span>
+              <span id="cancSelectedFicaiBadge" style="font-size: 11.5px; color: #2563eb; font-weight: 700;">FICAI 0021</span>
             </h3>
             
-            <div id="cancTimelineBox" style="display: flex; flex-direction: column; gap: 14px; position: relative; padding-left: 20px;">
-              <div style="position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: #e2e8f0;"></div>
+            <div id="cancTimelineBox" style="display: flex; flex-direction: column; gap: 8px; position: relative; padding-left: 18px;">
+              <div style="position: absolute; left: 6px; top: 6px; bottom: 6px; width: 2px; background: #e2e8f0;"></div>
               
               <div style="position: relative;">
-                <div style="position: absolute; left: -20px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: #10b981; color: #fff; display: grid; place-items: center; font-size: 9px;"><i class="fa-solid fa-check"></i></div>
-                <div style="font-size: 11px; color: #64748b; font-weight: 600;">18/08/2026 - 09:15</div>
-                <div style="font-size: 12.5px; font-weight: 700; color: #0f172a;">FICAI criada</div>
-                <div style="font-size: 11.5px; color: #475569;">Usuário: Sistema (Registro de Aviso de Faltas)</div>
+                <div style="position: absolute; left: -18px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: #10b981; color: #fff; display: grid; place-items: center; font-size: 8px;"><i class="fa-solid fa-check"></i></div>
+                <div style="font-size: 10.5px; color: #64748b; font-weight: 600;">18/08/2026 - 09:15</div>
+                <div style="font-size: 12px; font-weight: 700; color: #0f172a;">FICAI criada</div>
+                <div style="font-size: 11px; color: #475569;">Usuário: Sistema (Registro de Aviso de Faltas)</div>
               </div>
 
               <div style="position: relative;">
-                <div style="position: absolute; left: -20px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: #2563eb; color: #fff; display: grid; place-items: center; font-size: 9px;"><i class="fa-solid fa-paper-plane"></i></div>
-                <div style="font-size: 11px; color: #64748b; font-weight: 600;">19/08/2026 - 14:22</div>
-                <div style="font-size: 12.5px; font-weight: 700; color: #0f172a;">Encaminhada ao Conselho Tutelar</div>
-                <div style="font-size: 11.5px; color: #475569;">Usuário: Maria Oliveira (Secretaria Escolar)</div>
+                <div style="position: absolute; left: -18px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: #2563eb; color: #fff; display: grid; place-items: center; font-size: 8px;"><i class="fa-solid fa-paper-plane"></i></div>
+                <div style="font-size: 10.5px; color: #64748b; font-weight: 600;">19/08/2026 - 14:22</div>
+                <div style="font-size: 12px; font-weight: 700; color: #0f172a;">Encaminhada ao Conselho Tutelar</div>
+                <div style="font-size: 11px; color: #475569;">Usuário: Maria Oliveira (Secretaria Escolar)</div>
               </div>
 
               <div style="position: relative;">
-                <div style="position: absolute; left: -20px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: #f59e0b; color: #fff; display: grid; place-items: center; font-size: 9px;"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                <div style="font-size: 11px; color: #64748b; font-weight: 600;">20/08/2026 - 10:40</div>
-                <div style="font-size: 12.5px; font-weight: 700; color: #0f172a;">Solicitação de cancelamento iniciada</div>
-                <div style="font-size: 11.5px; color: #475569;">Usuário: Maria Oliveira</div>
+                <div style="position: absolute; left: -18px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: #f59e0b; color: #fff; display: grid; place-items: center; font-size: 8px;"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <div style="font-size: 10.5px; color: #64748b; font-weight: 600;">20/08/2026 - 10:40</div>
+                <div style="font-size: 12px; font-weight: 700; color: #0f172a;">Solicitação de cancelamento iniciada</div>
+                <div style="font-size: 11px; color: #475569;">Usuário: Maria Oliveira</div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Coluna Direita (Dados + Form) -->
-        <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
           <!-- Card 1: Dados da FICAI -->
-          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
-            <h3 style="font-size: 14px; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+            <h3 style="font-size: 13px; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
               <i class="fa-solid fa-file-invoice" style="color: #2563eb;"></i> Dados da FICAI
             </h3>
             
-            <div style="display: grid; grid-template-columns: 130px 1fr; row-gap: 8px; font-size: 12.5px;">
+            <div style="display: grid; grid-template-columns: 115px 1fr; row-gap: 5px; font-size: 11.5px;">
               <span style="font-weight: 700; color: #475569;">N.º FICAI:</span>
               <strong id="cancDetailNum" style="color: #0f172a;">0021</strong>
 
               <span style="font-weight: 700; color: #475569;">Aluno:</span>
               <strong id="cancDetailAluno" style="color: #0f172a;">Ana Clara Nascimento</strong>
 
-              <span style="font-weight: 700; color: #475569;">Turma:</span>
-              <span id="cancDetailTurma" style="color: #1e293b; font-weight: 600;">7B</span>
+              <span style="font-weight: 700; color: #475569;">Turma / Escola:</span>
+              <span id="cancDetailTurma" style="color: #1e293b; font-weight: 600;">7B — <span id="cancDetailEscola" style="font-weight: 400;">E.M. Elmir Figueira</span></span>
 
-              <span style="font-weight: 700; color: #475569;">Escola:</span>
-              <span id="cancDetailEscola" style="color: #1e293b;">E.M. Elmir Figueira</span>
-
-              <span style="font-weight: 700; color: #475569;">Data de emissão:</span>
-              <span id="cancDetailDate" style="color: #1e293b;">18/08/2026</span>
+              <span style="font-weight: 700; color: #475569;">Emissão / Atualiz.:</span>
+              <span id="cancDetailDate" style="color: #1e293b;">18/08/2026 (<span id="cancDetailUpdated" style="color: #64748b;">20/08 10:40</span>)</span>
 
               <span style="font-weight: 700; color: #475569;">Situação atual:</span>
-              <div><span class="chip" id="cancDetailStatusChip" style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 11px;">Ativa</span></div>
-
-              <span style="font-weight: 700; color: #475569;">Última atualização:</span>
-              <span id="cancDetailUpdated" style="color: #64748b;">20/08/2026 10:40</span>
+              <div><span class="chip" id="cancDetailStatusChip" style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 10.5px;">Ativa</span></div>
             </div>
           </div>
 
           <!-- Card 2: Formulário de Cancelamento -->
-          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
-            <h3 style="font-size: 14px; font-weight: 800; color: #ef4444; margin-top: 0; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+            <h3 style="font-size: 13px; font-weight: 800; color: #ef4444; margin-top: 0; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
               <i class="fa-solid fa-circle-xmark"></i> Formulário de cancelamento
             </h3>
 
             <form id="formCancelamentoFicai" autocomplete="off" onsubmit="return false">
-              <div style="margin-bottom: 12px;">
-                <label style="font-weight: 700; font-size: 12px; color: #1e293b; display: block; margin-bottom: 4px;">
+              <div style="margin-bottom: 8px;">
+                <label style="font-weight: 700; font-size: 11.5px; color: #1e293b; display: block; margin-bottom: 3px;">
                   Motivo do cancelamento <span style="color: #ef4444;">*</span>
                 </label>
-                <select id="cancMotivo" style="width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 12.5px;">
+                <select id="cancMotivo" style="width: 100%; padding: 6px 8px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 12px;">
                   <option value="">Selecione o motivo</option>
                   <option value="Duplicidade de cadastro">Duplicidade de cadastro / Ficha repetida</option>
                   <option value="Transferência para outra rede">Transferência para rede estadual / privada</option>
@@ -2665,48 +2873,48 @@ body.dark-mode .btn-input-icon:hover {
                 </select>
               </div>
 
-              <div style="margin-bottom: 12px;">
-                <label style="font-weight: 700; font-size: 12px; color: #1e293b; display: block; margin-bottom: 4px;">
+              <div style="margin-bottom: 8px;">
+                <label style="font-weight: 700; font-size: 11.5px; color: #1e293b; display: block; margin-bottom: 3px;">
                   Justificativa detalhada <span style="color: #ef4444;">*</span>
                 </label>
-                <textarea id="cancJustificativa" rows="3" maxlength="500" style="width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 12.5px; resize: vertical;" placeholder="Descreva detalhadamente o motivo do cancelamento..."></textarea>
-                <div style="font-size: 10.5px; color: #94a3b8; text-align: right; margin-top: 2px;" id="cancJustCharCount">0/500</div>
+                <textarea id="cancJustificativa" rows="2" maxlength="500" style="width: 100%; padding: 6px 8px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 12px; resize: vertical;" placeholder="Descreva detalhadamente o motivo do cancelamento..."></textarea>
+                <div style="font-size: 10px; color: #94a3b8; text-align: right; margin-top: 1px;" id="cancJustCharCount">0/500</div>
               </div>
 
-              <div style="display: grid; grid-template-columns: 1fr 130px; gap: 10px; margin-bottom: 12px;">
+              <div style="display: grid; grid-template-columns: 1fr 125px; gap: 8px; margin-bottom: 8px;">
                 <div>
-                  <label style="font-weight: 700; font-size: 12px; color: #1e293b; display: block; margin-bottom: 4px;">
+                  <label style="font-weight: 700; font-size: 11.5px; color: #1e293b; display: block; margin-bottom: 3px;">
                     Responsável pelo cancelamento <span style="color: #ef4444;">*</span>
                   </label>
-                  <input type="text" id="cancResponsavel" value="Maria Oliveira" style="width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 12.5px;">
+                  <input type="text" id="cancResponsavel" value="Maria Oliveira" style="width: 100%; padding: 6px 8px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 12px;">
                 </div>
                 <div>
-                  <label style="font-weight: 700; font-size: 12px; color: #1e293b; display: block; margin-bottom: 4px;">
+                  <label style="font-weight: 700; font-size: 11.5px; color: #1e293b; display: block; margin-bottom: 3px;">
                     Data <span style="color: #ef4444;">*</span>
                   </label>
-                  <input type="date" id="cancData" style="width: 100%; padding: 8px 6px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 12px;">
+                  <input type="date" id="cancData" style="width: 100%; padding: 6px 6px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 11.5px;">
                 </div>
               </div>
 
-              <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 11.5px; color: #334155; cursor: pointer; margin-bottom: 14px;">
-                <input type="checkbox" id="cancCheckConfirm" style="margin-top: 2px;">
+              <label style="display: flex; align-items: center; gap: 6px; font-size: 11px; color: #334155; cursor: pointer; margin-bottom: 10px;">
+                <input type="checkbox" id="cancCheckConfirm" style="margin-top: 0;">
                 <span>Confirmo que revisei as informações antes de cancelar.</span>
               </label>
 
               <!-- Warning Callout -->
-              <div style="background: #fffbeb; border: 1px solid #fef08a; border-radius: 8px; padding: 10px 12px; font-size: 11.5px; color: #92400e; display: flex; gap: 8px; align-items: flex-start; margin-bottom: 16px;">
-                <i class="fa-solid fa-triangle-exclamation" style="color: #d97706; font-size: 14px; margin-top: 1px;"></i>
+              <div style="background: #fffbeb; border: 1px solid #fef08a; border-radius: 6px; padding: 8px 10px; font-size: 11px; color: #92400e; display: flex; gap: 6px; align-items: flex-start; margin-bottom: 12px;">
+                <i class="fa-solid fa-triangle-exclamation" style="color: #d97706; font-size: 13px; margin-top: 1px;"></i>
                 <div>
-                  <strong>Atenção:</strong> o cancelamento desta FICAI poderá impactar o acompanhamento do caso e ficará registrado no histórico do sistema.
+                  <strong>Atenção:</strong> o cancelamento desta FICAI poderá impactar o caso e ficará registrado no histórico.
                 </div>
               </div>
 
-              <div style="display: flex; justify-content: space-between; gap: 10px;">
-                <button type="button" id="btnCancVoltar" class="btn soft" style="padding: 9px 16px; font-weight: 600; font-size: 13px;">
+              <div style="display: flex; justify-content: space-between; gap: 8px;">
+                <button type="button" id="btnCancVoltar" class="btn soft" style="padding: 7px 14px; font-weight: 600; font-size: 12px;">
                   <i class="fa-solid fa-chevron-left"></i> Voltar
                 </button>
 
-                <button type="button" id="btnTriggerConfirmModal" class="btn primary" style="background: #dc2626; padding: 9px 20px; font-weight: 700; border-radius: 8px; font-size: 13px; display: flex; align-items: center; gap: 6px; border: none;">
+                <button type="button" id="btnTriggerConfirmModal" class="btn primary" style="background: #dc2626; padding: 7px 18px; font-weight: 700; border-radius: 6px; font-size: 12px; display: flex; align-items: center; gap: 6px; border: none;">
                   <i class="fa-solid fa-circle-xmark"></i> Confirmar cancelamento
                 </button>
               </div>
@@ -5551,7 +5759,187 @@ function toast(msg){let t=$('#toast');if(!t){t=document.createElement('div');t.i
   window.addEventListener('scroll',()=>hideTooltip(),{passive:true});
 })();
 
-initConfigCatalogs();loadCustomOptionCatalogs();restore();syncPrint();loadSavedStudents();loadSavedFicais();
+// ==============================================================================
+// LÓGICA DO STEPPER HORIZONTAL DE 6 ETAPAS (WIZARD DEDICADO - GERAR FICAI)
+// ==============================================================================
+let currentWizardStep = 1;
+const TOTAL_WIZARD_STEPS = 6;
+
+const WIZARD_STEP_TITLES = [
+  'Escola e aluno',
+  'Situação escolar',
+  'Procedimentos',
+  'Motivos e situação',
+  'Diagnóstico',
+  'Revisão e PDF'
+];
+
+function setWizardStep(step) {
+  if (step < 1) step = 1;
+  if (step > TOTAL_WIZARD_STEPS) step = TOTAL_WIZARD_STEPS;
+  currentWizardStep = step;
+
+  // 1. Alterna visibilidade das seções do formulário (1 etapa por vez)
+  for (let i = 1; i <= TOTAL_WIZARD_STEPS; i++) {
+    const sec = $('#sec' + i);
+    if (sec) {
+      if (i === currentWizardStep) {
+        sec.classList.add('active-step-section');
+      } else {
+        sec.classList.remove('active-step-section');
+      }
+    }
+  }
+
+  // 2. Atualiza estado visual dos nós no Stepper Horizontal (Circulos + Cores)
+  for (let i = 1; i <= TOTAL_WIZARD_STEPS; i++) {
+    const node = $('#stepNode' + i);
+    if (!node) continue;
+
+    node.classList.remove('completed', 'active');
+    const iconSpan = node.querySelector('.node-icon');
+
+    if (i < currentWizardStep) {
+      node.classList.add('completed');
+      if (iconSpan) iconSpan.innerHTML = '<i class="fa-solid fa-check"></i>';
+    } else if (i === currentWizardStep) {
+      node.classList.add('active');
+      if (iconSpan) iconSpan.textContent = i;
+    } else {
+      if (iconSpan) iconSpan.textContent = i;
+    }
+  }
+
+  // 3. Atualiza preenchimento da linha conectora do Stepper
+  const fillBar = $('#stepperLineFill');
+  if (fillBar) {
+    const pct = ((currentWizardStep - 1) / (TOTAL_WIZARD_STEPS - 1)) * 88;
+    fillBar.style.width = `${pct}%`;
+  }
+
+  // 4. Atualiza estado dos botões de navegação (Anterior / Próximo)
+  const prevBtn = $('#btnWizardPrev');
+  if (prevBtn) {
+    prevBtn.style.visibility = currentWizardStep === 1 ? 'hidden' : 'visible';
+  }
+
+  const nextBtn = $('#btnWizardNext');
+  if (nextBtn) {
+    if (currentWizardStep === TOTAL_WIZARD_STEPS) {
+      nextBtn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Visualizar A4';
+      nextBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+    } else {
+      nextBtn.innerHTML = 'Próximo <i class="fa-solid fa-arrow-right"></i>';
+      nextBtn.style.background = 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)';
+    }
+  }
+
+  const indicatorText = $('#wizardStepIndicatorText');
+  if (indicatorText) {
+    indicatorText.textContent = `Etapa ${currentWizardStep} de ${TOTAL_WIZARD_STEPS} — ${WIZARD_STEP_TITLES[currentWizardStep - 1]}`;
+  }
+
+  // Rola suavemente até o topo da área do formulário
+  $('#view-gerar')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function validateWizardStep(step) {
+  if (step === 1) {
+    const escola = $('#escola')?.value;
+    const nome = $('#nomeCompleto')?.value?.trim();
+    if (!escola) {
+      toast('Por favor, selecione a Escola para avançar.');
+      $('#escola')?.focus();
+      return false;
+    }
+    if (!nome) {
+      toast('Por favor, preencha o Nome Completo do Aluno para avançar.');
+      $('#nomeCompleto')?.focus();
+      return false;
+    }
+    return true;
+  }
+
+  if (step === 2) {
+    const ano = $('#anoEscolar')?.value;
+    const turma = $('#turma')?.value;
+    if (!ano) {
+      toast('Por favor, selecione o Ano Escolar do aluno para avançar.');
+      $('#anoEscolar')?.focus();
+      return false;
+    }
+    if (!turma) {
+      toast('Por favor, selecione a Turma do aluno para avançar.');
+      $('#turma')?.focus();
+      return false;
+    }
+    return true;
+  }
+
+  if (step === 3) {
+    return true;
+  }
+
+  if (step === 4) {
+    const sitRadio = document.querySelector('input[name="situacaoAluno"]:checked');
+    if (!sitRadio) {
+      toast('Por favor, selecione a Situação do Aluno (Infrequente, Evadido ou Sem Acesso) para avançar.');
+      return false;
+    }
+    return true;
+  }
+
+  if (step === 5) {
+    const diagChecked = document.querySelectorAll('#diagnosisGrid input[type="checkbox"]:checked');
+    if (diagChecked.length === 0) {
+      toast('Por favor, selecione ao menos 1 fator no Diagnóstico da Evasão para avançar.');
+      return false;
+    }
+    return true;
+  }
+
+  return true;
+}
+
+function nextWizardStep() {
+  if (validateWizardStep(currentWizardStep)) {
+    if (currentWizardStep < TOTAL_WIZARD_STEPS) {
+      setWizardStep(currentWizardStep + 1);
+    } else {
+      $('#topPreview')?.click();
+    }
+  }
+}
+
+function prevWizardStep() {
+  if (currentWizardStep > 1) {
+    setWizardStep(currentWizardStep - 1);
+  }
+}
+
+function goToWizardStep(targetStep) {
+  if (targetStep > currentWizardStep) {
+    for (let i = currentWizardStep; i < targetStep; i++) {
+      if (!validateWizardStep(i)) return;
+    }
+  }
+  setWizardStep(targetStep);
+}
+
+// Binds dos botões do Wizard
+document.addEventListener('DOMContentLoaded', () => {
+  $$('#horizontalStepper .step-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const step = parseInt(btn.dataset.step, 10);
+      if (step) goToWizardStep(step);
+    });
+  });
+
+  $('#btnWizardPrev')?.addEventListener('click', prevWizardStep);
+  $('#btnWizardNext')?.addEventListener('click', nextWizardStep);
+});
+
+initConfigCatalogs();loadCustomOptionCatalogs();restore();syncPrint();loadSavedStudents();loadSavedFicais();setWizardStep(1);
 </script>
 </body>
 </html>
