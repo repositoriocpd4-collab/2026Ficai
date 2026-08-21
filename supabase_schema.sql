@@ -23,10 +23,16 @@ $$ LANGUAGE plpgsql;
 -- Tabela: Escolas
 CREATE TABLE IF NOT EXISTS public.escolas (
     id TEXT PRIMARY KEY DEFAULT ('esc-' || gen_random_uuid()),
+    inep TEXT,
     nome TEXT NOT NULL UNIQUE,
+    diretor TEXT,
     endereco TEXT,
+    bairro TEXT,
     telefone TEXT,
+    ramal TEXT,
     email TEXT,
+    modalidade TEXT,
+    maps_link TEXT,
     ativo BOOLEAN NOT NULL DEFAULT true,
     created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now()),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())

@@ -160,6 +160,25 @@ const MarcadorService = {
   }
 };
 
+// Serviços para Escolas
+const EscolaService = {
+  async getAll() {
+    const sb = getSupabase();
+    if (!sb) return [];
+    const { data, error } = await sb.from('escolas').select('*').order('nome');
+    if (error) throw error;
+    return data;
+  },
+
+  async bulkUpsert(escolasArray) {
+    const sb = getSupabase();
+    if (!sb) return null;
+    const { data, error } = await sb.from('escolas').upsert(escolasArray, { onConflict: 'nome' }).select();
+    if (error) throw error;
+    return data;
+  }
+};
+
 // Exporta para escopo global se em navegador
 if (typeof window !== 'undefined') {
   window.SupabaseConfig = { SUPABASE_URL, SUPABASE_ANON_KEY };
@@ -167,4 +186,5 @@ if (typeof window !== 'undefined') {
   window.StudentService = StudentService;
   window.FicaiService = FicaiService;
   window.MarcadorService = MarcadorService;
+  window.EscolaService = EscolaService;
 }
