@@ -105,10 +105,66 @@ const FicaiService = {
   }
 };
 
+// Serviços para Marcadores (Tags)
+const MarcadorService = {
+  async getCatalog() {
+    const sb = getSupabase();
+    if (!sb) return [];
+    const { data, error } = await sb.from('marcadores').select('*').eq('ativo', true).order('nome');
+    if (error) throw error;
+    return data;
+  },
+
+  async addMarcadorToCatalog(name, color) {
+    const sb = getSupabase();
+    if (!sb) return null;
+    const { data, error } = await sb.from('marcadores').upsert({ nome: name, cor: color, ativo: true }, { onConflict: 'nome' }).select();
+    if (error) throw error;
+    return data?.[0];
+  },
+
+  async getStudentTags(ficaiNumero) {
+    const sb = getSupabase();
+    if (!sb) return [];
+    const { data, error } = await sb.from('student_tags').select('*').eq('ficai_numero', ficaiNumero);
+    if (error) throw error;
+    return data;
+  },
+
+  async addStudentTag(ficaiNumero, studentKey, tagNome, tagCor, texto) {
+    const sb = getSupabase();
+    if (!sb) return null;
+    const payload = {
+      ficai_numero: ficaiNumero,
+      student_key: studentKey,
+      tag_nome: tagNome,
+      tag_cor: tagCor,
+      texto: texto || ''
+    };
+    const { data, error } = await sb.from('student_tags').insert(payload).select();
+    if (error) throw error;
+    return data?.[0];
+  },
+
+  async removeStudentTag(ficaiNumero, tagNome) {
+    const sb = getSupabase();
+    if (!sb) return null;
+    if (tagNome === '__ALL__') {
+      const { error } = await sb.from('student_tags').delete().eq('ficai_numero', ficaiNumero);
+      if (error) throw error;
+    } else {
+      const { error } = await sb.from('student_tags').delete().eq('ficai_numero', ficaiNumero).eq('tag_nome', tagNome);
+      if (error) throw error;
+    }
+    return true;
+  }
+};
+
 // Exporta para escopo global se em navegador
 if (typeof window !== 'undefined') {
   window.SupabaseConfig = { SUPABASE_URL, SUPABASE_ANON_KEY };
   window.getSupabase = getSupabase;
   window.StudentService = StudentService;
   window.FicaiService = FicaiService;
+  window.MarcadorService = MarcadorService;
 }

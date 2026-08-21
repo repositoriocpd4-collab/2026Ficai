@@ -161,6 +161,33 @@ CREATE TABLE IF NOT EXISTS public.catalogo_personalizado (
     created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
 );
 
+-- Tabela: Catálogo de Marcadores (Tags)
+CREATE TABLE IF NOT EXISTS public.marcadores (
+    id TEXT PRIMARY KEY DEFAULT ('tag-' || gen_random_uuid()),
+    nome TEXT NOT NULL UNIQUE,
+    cor TEXT NOT NULL DEFAULT '#6b7280',
+    ativo BOOLEAN NOT NULL DEFAULT true,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now()),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
+);
+
+CREATE TRIGGER set_marcadores_updated_at
+BEFORE UPDATE ON public.marcadores
+FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+
+-- Tabela: Associação de Marcadores por Aluno/FICAI
+CREATE TABLE IF NOT EXISTS public.student_tags (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    ficai_numero TEXT NOT NULL REFERENCES public.ficais(numero) ON DELETE CASCADE,
+    student_key TEXT,
+    tag_nome TEXT NOT NULL,
+    tag_cor TEXT NOT NULL DEFAULT '#6b7280',
+    texto TEXT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
+);
+
+CREATE INDEX IF NOT EXISTS idx_student_tags_ficai ON public.student_tags(ficai_numero);
+
 -- ==============================================================================
 -- 3. TABELA DE ALUNOS (ESTUDANTES)
 -- ==============================================================================
@@ -291,6 +318,8 @@ ALTER TABLE public.pessoas ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.procedimentos ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.motivos ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.catalogo_personalizado ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.marcadores ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.student_tags ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.students ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.ficais ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.ficai_info_entries ENABLE ROW LEVEL SECURITY;
@@ -419,3 +448,15 @@ INSERT INTO public.students (key, nome, social, nascimento, cpf, rg, filiacao, r
 ('ana-clara-nascimento', 'Ana Clara Nascimento', '', '2012-03-11', '', '', 'Dados cadastrados no sistema', 'Responsável cadastrado', 'Itaguaí/RJ', '(21) 99999-1111', 'Referência cadastrada'),
 ('bruno-henrique-silva', 'Bruno Henrique Silva', '', '2013-07-21', '', '', 'Dados cadastrados no sistema', 'Responsável cadastrado', 'Itaguaí/RJ', '(21) 99999-2222', 'Referência cadastrada')
 ON CONFLICT (key) DO NOTHING;
+
+-- Seed: Catálogo de Marcadores Padrão
+INSERT INTO public.marcadores (id, nome, cor, ativo) VALUES
+('sei', 'Cadastro SEI', '#6b7280', true),
+('ad', 'Criação Login AD', '#111827', true),
+('proto', 'Criação Usuário Protocolo', '#1d4ed8', true),
+('sec', 'Of. Secretário', '#16a34a', true),
+('seirj', 'Orientação SEI-RJ', '#78350f', true),
+('mayara', 'Problema da Mayara', '#0284c7', true),
+('videos', 'Vídeos', '#d97706', true)
+ON CONFLICT (nome) DO NOTHING;
+
