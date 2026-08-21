@@ -7457,7 +7457,7 @@ async function handleLoginSubmit() {
   // 3. Verificar Usuários de Escolas (e-mail institucional / Ficai2026@)
   const schoolList = (configData && configData.escolas) ? configData.escolas : [];
   const matchedSchool = schoolList.find(e => (e.email || '').trim().toLowerCase() === email || (e.email || '').toLowerCase().includes(email));
-  const isSchoolLogin = ((matchedSchool || email.endsWith('@edu.itaguai.rj.gov.br')) && password === 'Ficai2026@');
+  const isSchoolLogin = ((matchedSchool || email.endsWith('@edu.itaguai.rj.gov.br')) && (password === 'Ficai22026' || (password === 'Ficai22026' || password === 'Ficai2026@')));
 
   if (isAdmin) {
     authenticated = true;

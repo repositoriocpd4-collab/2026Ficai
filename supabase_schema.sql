@@ -467,17 +467,133 @@ INSERT INTO public.students (key, nome, social, nascimento, cpf, rg, filiacao, r
 ON CONFLICT (key) DO NOTHING;
 
 -- ==============================================================================
--- 6. AUTENTICAÇÃO E CREDENCIAIS DE ACESSO (SUPABASE AUTH)
 -- ==============================================================================
--- Credenciais Oficiais do Sistema FICAI 4.0:
---
--- 1. Administrador (CPD / SMEDU):
---    • E-mail: cpdinfra@edu.itaguai.rj.gov.br
---    • Senha:  T3c4n3x0
---    • Nível:  Administrador / SMEDU
---
--- 2. Usuários Comuns (Unidades Escolares):
---    • E-mail: E-mail institucional de cada escola (ex.: em.veramericorodriguesdeamorim@edu.itaguai.rj.gov.br)
---    • Senha:  Ficai2026@
---    • Nível:  Escola
+-- CADASTRO EM MASSA DE USUÁRIOS NO AUTHENTICATOR DO SUPABASE (auth.users)
+-- Execute no SQL Editor do Supabase: https://supabase.com/dashboard/project/ojvxsrvmmkjxfgyczypm/sql/new
+-- ==============================================================================
 
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+DO $
+DECLARE
+  usr_record RECORD;
+  usr_id UUID;
+  encrypted_pw TEXT;
+BEGIN
+  -- Tabela temporária de dados para inserção em massa
+  CREATE TEMP TABLE IF NOT EXISTS temp_users_seed (
+    email TEXT PRIMARY KEY,
+    password TEXT,
+    role TEXT
+  ) ON COMMIT DROP;
+
+  TRUNCATE temp_users_seed;
+
+  -- Inserir Administrador CPD (Senha: T3c4n3x0)
+  INSERT INTO temp_users_seed (email, password, role) VALUES
+    ('cpdinfra@edu.itaguai.rj.gov.br', 'T3c4n3x0', 'Administrador')
+  ON CONFLICT (email) DO UPDATE SET password = EXCLUDED.password;
+
+  -- Inserir os 65 E-mails de Escolas (Senha: Ficai22026)
+  INSERT INTO temp_users_seed (email, password, role) VALUES
+    ('carmem.menezes.adm@gmail.com', 'Ficai22026', 'Escola'),
+    ('cemaee@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cesmi@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('ciep300@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('ciep496@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('ciep497@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.aparecidaazedo@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.daniellebatistadasilva@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.edsoncruzamado@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.elianelopesbarbosa@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.estreladoceu@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.euclydesjoseborges@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.florentinoelias@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.franciscoxavierdemourabrito@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.jardimmar@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.joaquiminoue@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.mariacristinapadelacabraldasilva@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.mariadelurdessgarcia@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.mariaeduvigesdorosariosilva@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.mariarosagomesdonascimento@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.renatobarbosaladislau@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.ritaferreirafeijo@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.senadorteotoniovilella@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.taniamaramottademenezes@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('cm.teresinhadejesuscamposdefarias@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('eem.camilocuquejo@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('eem.carmemmenezesdireito@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('eem.chapero@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('eem.drjorgeabrahao@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('eem.fazsantacandida@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('eem.santarosa@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('eem.tacianobasilio@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('eemcamilocuquejo@gmail.com', 'Ficai22026', 'Escola'),
+    ('em.acacias@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.alexandreignacio@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.amauriferreira@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.antoniotupinamba@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.argentinacoutinho@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.celalzirosantiago@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.eiderribeirodantas@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.elmirafigueira@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.elmobaptistacoelho@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.fusaofukmati@edu.itaguai.gov.br', 'Ficai22026', 'Escola'),
+    ('em.jardimmar@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.joaovicentesoares@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.jorgefloresdasilva@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.mariaguilherminadesouzafreire@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.oscarjosedesouza@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.padrerafaelscarfo@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.prefalbeilardgoulartdesouza@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.prefotonirocha@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.prefwilsonpedrofrancisco@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.renatogoncalvesmartins@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.saosebastiao@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.severinadosramosdesousa@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.severinosalustianodefrarias@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.terezadearaujosagario@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.veramericorodriguesdeamorim@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.vereadorgalliacoprata@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.verprofessorarthurbritodecastro@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.vertaianofernandesnunes@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('em.yolandarangelpereira@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('emei.hypolitovieradecarvalho@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('emei.monteirolobato@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola'),
+    ('emei.prefisoldacksoncruzdebrito@edu.itaguai.rj.gov.br', 'Ficai22026', 'Escola')
+  ON CONFLICT (email) DO UPDATE SET password = EXCLUDED.password;
+
+  -- Processar inserção/atualização automática no Authenticator (auth.users e auth.identities)
+  FOR usr_record IN SELECT * FROM temp_users_seed LOOP
+    encrypted_pw := crypt(usr_record.password, gen_salt('bf', 10));
+
+    IF EXISTS (SELECT 1 FROM auth.users WHERE lower(email) = lower(usr_record.email)) THEN
+      UPDATE auth.users
+      SET
+        encrypted_password = encrypted_pw,
+        email_confirmed_at = COALESCE(email_confirmed_at, now()),
+        raw_app_meta_data = '{"provider":"email","providers":["email"]}'::jsonb,
+        raw_user_meta_data = jsonb_build_object('role', usr_record.role),
+        updated_at = now()
+      WHERE lower(email) = lower(usr_record.email);
+    ELSE
+      usr_id := gen_random_uuid();
+
+      INSERT INTO auth.users (
+        id, instance_id, email, encrypted_password, email_confirmed_at,
+        raw_app_meta_data, raw_user_meta_data, is_super_admin, role, aud, created_at, updated_at
+      ) VALUES (
+        usr_id, '00000000-0000-0000-0000-000000000000', usr_record.email, encrypted_pw, now(),
+        '{"provider":"email","providers":["email"]}'::jsonb, jsonb_build_object('role', usr_record.role),
+        false, 'authenticated', 'authenticated', now(), now()
+      );
+
+      INSERT INTO auth.identities (
+        id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at
+      ) VALUES (
+        gen_random_uuid(), usr_id, jsonb_build_object('sub', usr_id, 'email', usr_record.email),
+        'email', now(), now(), now()
+      );
+    END IF;
+  END LOOP;
+END $;
