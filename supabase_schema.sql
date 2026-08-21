@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS public.escolas (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
 );
 
+DROP TRIGGER IF EXISTS set_escolas_updated_at ON public.escolas;
 CREATE TRIGGER set_escolas_updated_at
 BEFORE UPDATE ON public.escolas
 FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
@@ -46,6 +47,7 @@ CREATE TABLE IF NOT EXISTS public.modalidades (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
 );
 
+DROP TRIGGER IF EXISTS set_modalidades_updated_at ON public.modalidades;
 CREATE TRIGGER set_modalidades_updated_at
 BEFORE UPDATE ON public.modalidades
 FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
@@ -63,6 +65,7 @@ CREATE TABLE IF NOT EXISTS public.turmas (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
 );
 
+DROP TRIGGER IF EXISTS set_turmas_updated_at ON public.turmas;
 CREATE TRIGGER set_turmas_updated_at
 BEFORE UPDATE ON public.turmas
 FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
@@ -81,6 +84,7 @@ CREATE TABLE IF NOT EXISTS public.usuarios (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
 );
 
+DROP TRIGGER IF EXISTS set_usuarios_updated_at ON public.usuarios;
 CREATE TRIGGER set_usuarios_updated_at
 BEFORE UPDATE ON public.usuarios
 FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
@@ -98,6 +102,7 @@ CREATE TABLE IF NOT EXISTS public.permissoes (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
 );
 
+DROP TRIGGER IF EXISTS set_permissoes_updated_at ON public.permissoes;
 CREATE TRIGGER set_permissoes_updated_at
 BEFORE UPDATE ON public.permissoes
 FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
@@ -117,6 +122,7 @@ CREATE TABLE IF NOT EXISTS public.pessoas (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
 );
 
+DROP TRIGGER IF EXISTS set_pessoas_updated_at ON public.pessoas;
 CREATE TRIGGER set_pessoas_updated_at
 BEFORE UPDATE ON public.pessoas
 FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
@@ -131,6 +137,7 @@ CREATE TABLE IF NOT EXISTS public.procedimentos (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
 );
 
+DROP TRIGGER IF EXISTS set_procedimentos_updated_at ON public.procedimentos;
 CREATE TRIGGER set_procedimentos_updated_at
 BEFORE UPDATE ON public.procedimentos
 FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
@@ -146,6 +153,7 @@ CREATE TABLE IF NOT EXISTS public.motivos (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
 );
 
+DROP TRIGGER IF EXISTS set_motivos_updated_at ON public.motivos;
 CREATE TRIGGER set_motivos_updated_at
 BEFORE UPDATE ON public.motivos
 FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
@@ -171,6 +179,7 @@ CREATE TABLE IF NOT EXISTS public.marcadores (
     updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
 );
 
+DROP TRIGGER IF EXISTS set_marcadores_updated_at ON public.marcadores;
 CREATE TRIGGER set_marcadores_updated_at
 BEFORE UPDATE ON public.marcadores
 FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
@@ -213,6 +222,7 @@ CREATE INDEX IF NOT EXISTS idx_students_key ON public.students(key);
 CREATE INDEX IF NOT EXISTS idx_students_nome ON public.students(nome);
 CREATE INDEX IF NOT EXISTS idx_students_cpf ON public.students(cpf);
 
+DROP TRIGGER IF EXISTS set_students_updated_at ON public.students;
 CREATE TRIGGER set_students_updated_at
 BEFORE UPDATE ON public.students
 FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
@@ -284,6 +294,7 @@ CREATE INDEX IF NOT EXISTS idx_ficais_situacao ON public.ficais(situacao);
 CREATE INDEX IF NOT EXISTS idx_ficais_status_fluxo ON public.ficais(status_fluxo);
 CREATE INDEX IF NOT EXISTS idx_ficais_updated_at ON public.ficais(updated_at DESC);
 
+DROP TRIGGER IF EXISTS set_ficais_updated_at ON public.ficais;
 CREATE TRIGGER set_ficais_updated_at
 BEFORE UPDATE ON public.ficais
 FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
@@ -448,15 +459,3 @@ INSERT INTO public.students (key, nome, social, nascimento, cpf, rg, filiacao, r
 ('ana-clara-nascimento', 'Ana Clara Nascimento', '', '2012-03-11', '', '', 'Dados cadastrados no sistema', 'Responsável cadastrado', 'Itaguaí/RJ', '(21) 99999-1111', 'Referência cadastrada'),
 ('bruno-henrique-silva', 'Bruno Henrique Silva', '', '2013-07-21', '', '', 'Dados cadastrados no sistema', 'Responsável cadastrado', 'Itaguaí/RJ', '(21) 99999-2222', 'Referência cadastrada')
 ON CONFLICT (key) DO NOTHING;
-
--- Seed: Catálogo de Marcadores Padrão
-INSERT INTO public.marcadores (id, nome, cor, ativo) VALUES
-('sei', 'Cadastro SEI', '#6b7280', true),
-('ad', 'Criação Login AD', '#111827', true),
-('proto', 'Criação Usuário Protocolo', '#1d4ed8', true),
-('sec', 'Of. Secretário', '#16a34a', true),
-('seirj', 'Orientação SEI-RJ', '#78350f', true),
-('mayara', 'Problema da Mayara', '#0284c7', true),
-('videos', 'Vídeos', '#d97706', true)
-ON CONFLICT (nome) DO NOTHING;
-
