@@ -7331,6 +7331,69 @@ function clearUserSession() {
   toast('Você saiu do sistema.');
 }
 
+
+// ==============================================================================
+// VINCULAÇÃO E AUTO-PREENCHIMENTO AUTOMÁTICO DA ESCOLA LOGADA E ENDEREÇO/TELEFONE
+// ==============================================================================
+function bindSchoolSelectAutoFill() {
+  const schoolSel = $('#escola');
+  if (!schoolSel) return;
+
+  const updateFields = () => {
+    const val = schoolSel.value;
+    const selectedText = schoolSel.selectedOptions[0]?.textContent || '';
+    
+    const schoolList = (configData && configData.escolas) ? configData.escolas : [];
+    const school = schoolList.find(e => e.id === val || e.nome === selectedText);
+    
+    if (school) {
+      if ($('#escolaEndereco')) $('#escolaEndereco').value = school.endereco || '';
+      if ($('#escolaTelefone')) $('#escolaTelefone').value = school.telefone || '';
+    } else if (typeof schoolData !== 'undefined' && schoolData[val]) {
+      if ($('#escolaEndereco')) $('#escolaEndereco').value = schoolData[val].address || '';
+      if ($('#escolaTelefone')) $('#escolaTelefone').value = schoolData[val].phone || '';
+    } else {
+      if ($('#escolaEndereco')) $('#escolaEndereco').value = '';
+      if ($('#escolaTelefone')) $('#escolaTelefone').value = '';
+    }
+    syncPrint();
+  };
+
+  schoolSel.removeEventListener('change', updateFields);
+  schoolSel.addEventListener('change', updateFields);
+}
+
+function autoPopulateLoggedSchoolInForm() {
+  const session = getActiveSession();
+  if (!session) return;
+
+  const schoolSel = $('#escola');
+  if (!schoolSel) return;
+
+  const schoolList = (configData && configData.escolas) ? configData.escolas : [];
+  let school = null;
+
+  if (session.escolaId) {
+    school = schoolList.find(e => e.id === session.escolaId);
+  }
+  if (!school && session.unidade && session.unidade !== 'SMEDU / CPD (Administrador)') {
+    school = schoolList.find(e => e.nome === session.unidade);
+  }
+  if (!school && session.email && session.email !== 'cpdinfra@edu.itaguai.rj.gov.br') {
+    school = schoolList.find(e => (e.email || '').trim().toLowerCase() === session.email.trim().toLowerCase());
+  }
+
+  if (school) {
+    const opt = [...schoolSel.options].find(o => o.value === school.id || o.textContent === school.nome);
+    if (opt) {
+      schoolSel.value = opt.value;
+    }
+    if ($('#escolaEndereco')) $('#escolaEndereco').value = school.endereco || '';
+    if ($('#escolaTelefone')) $('#escolaTelefone').value = school.telefone || '';
+    syncPrint();
+  }
+}
+
 function applyUserSession(session) {
   if (!session) {
     showLoginView();
@@ -7351,14 +7414,7 @@ function applyUserSession(session) {
   if (headerUserUnit) headerUserUnit.textContent = session.unidade || session.nivel;
   if (headerSchool) headerSchool.textContent = session.unidade || 'Unidade Escolar';
 
-  // Se for usuário de escola, selecionar automaticamente no formulário Gerar FICAI
-  if (session.escolaId && $('#escola')) {
-    const schoolSel = $('#escola');
-    if ([...schoolSel.options].some(o => o.value === session.escolaId)) {
-      schoolSel.value = session.escolaId;
-      schoolSel.dispatchEvent(new Event('change'));
-    }
-  }
+  autoPopulateLoggedSchoolInForm();
 }
 
 function showLoginView() {
@@ -7486,8 +7542,7 @@ function initAuthSystem() {
   }
 }
 
-initAuthSystem();
-initConfigCatalogs();loadCustomOptionCatalogs();restore();syncPrint();loadSavedStudents();loadSavedFicais();setWizardStep(1);
+initConfigCatalogs();loadCustomOptionCatalogs();bindSchoolSelectAutoFill();initAuthSystem();restore();autoPopulateLoggedSchoolInForm();syncPrint();loadSavedStudents();loadSavedFicais();setWizardStep(1);
 </script>
 </body>
 </html>
