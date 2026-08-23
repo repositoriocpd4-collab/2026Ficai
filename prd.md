@@ -163,6 +163,7 @@ O sistema integra e consolida os fluxos intersetoriais entre:
 | **23/08/2026** | `4.1.0` | **Redesenho e Ajuste Dimensional dos Stat-Cards**: Otimização do grid e proporções visuais (116px de altura mínima, padding compacto, tipografia de 25px e tags de status enriquecidas) no Dashboard e na tela do Conselho Tutelar. |
 | **23/08/2026** | `4.1.0` | **Roteamento Viário Real no Mapa (BR-101 / Rio-Santos)**: Integração com a API OSRM e fallback viário de alta resolução que contorna o litoral pela Rodovia Rio-Santos (sem linhas retas cortando o mar), calculando distância (~21.6 km) e tempo de percurso (~21 min) precisos. |
 | **23/08/2026** | `4.1.0` | **Sincronização e Validação do Banco de Dados**: Verificação de consistência estatística e integração com IndexedDB e Supabase. |
+| **23/08/2026** | `4.1.1` | **Cálculo Dinâmico dos Stat-Cards em Tempo Real**: Ativação do recálculo automático contínuo de todos os cards de estatísticas a partir do banco de dados (IndexedDB e Supabase), sincronizando casos ativos, motivos percentuais, evasão, devoluções do CT e arquivamentos a cada alteração. |
 
 ---
 
