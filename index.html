@@ -1764,89 +1764,6 @@
       animation: modalZoomIn .22s cubic-bezier(.16, 1, .3, 1) forwards
     }
 
-    .config-form-modal {
-      max-width: 760px;
-      width: 95vw;
-      border-radius: 16px;
-      background: #ffffff;
-      box-shadow: 0 25px 60px -10px rgba(15, 23, 42, .3), 0 0 0 1px rgba(226, 232, 240, .8);
-    }
-
-    .config-modal-subtitle {
-      font-size: 12.5px;
-      color: #64748b;
-      margin-top: 3px;
-      font-weight: 500;
-    }
-
-    .config-form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 13px 16px;
-      padding: 6px 4px;
-    }
-
-    .config-form-grid .full, .config-form-grid .span-2 {
-      grid-column: span 2;
-    }
-
-    .config-form-grid label {
-      font-size: 12px;
-      font-weight: 750;
-      color: #1e293b;
-      margin-bottom: 5px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .config-form-grid .field-section-title {
-      grid-column: span 2;
-      font-size: 11.5px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .6px;
-      color: #0284c7;
-      background: #f0f9ff;
-      border: 1px solid #e0f2fe;
-      border-left: 3.5px solid #0284c7;
-      padding: 7px 12px;
-      border-radius: 6px;
-      margin: 6px 0 2px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .config-check-field {
-      grid-column: span 2;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #f8fafc;
-      border: 1px solid #cbd5e1;
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-weight: 700;
-      color: #0f172a;
-      cursor: pointer;
-      margin-top: 4px;
-      transition: all .16s ease;
-    }
-
-    .config-check-field:hover {
-      background: #f1f5f9;
-      border-color: #94a3b8;
-    }
-
-    .config-check-field input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      margin: 0;
-      accent-color: #2563eb;
-      cursor: pointer;
-    }
-
     @keyframes modalZoomIn {
       from {
         opacity: 0;
@@ -4647,7 +4564,7 @@
           <div class="stats-grid">
             <div class="stat-card"
               data-tooltip="Fichas em andamento que demandam intervenção pedagógica ou busca ativa">
-              <div class="stat-card-head"><span class="stat-tag"><i class="fa-solid fa-bolt"></i> Em Aberto</span>
+              <div class="stat-card-head"><span class="stat-tag"><i class="fa-solid fa-bolt"></i> Ativo</span>
                 <div class="stat-icon-wrap"><i class="fa-solid fa-folder-open"></i></div>
               </div>
               <div class="stat-number" id="dashStatAtivos">24</div>
@@ -4656,23 +4573,21 @@
             </div>
             <div class="stat-card"
               data-tooltip="Principal motivo diagnosticado nos relatos escolares e visitas às famílias">
-              <div class="stat-card-head"><span class="stat-tag"><i class="fa-solid fa-chart-pie"></i> Principal
-                  Causa</span>
+              <div class="stat-card-head"><span class="stat-tag"><i class="fa-solid fa-chart-pie"></i> Principal</span>
                 <div class="stat-icon-wrap"><i class="fa-solid fa-heart-crack"></i></div>
               </div>
               <div class="stat-number" id="dashStatMotivacao">45%</div>
-              <div class="stat-label">Desmotivação</div>
+              <div class="stat-label">Falta de motivação</div>
               <div class="stat-trend"><i class="fa-solid fa-circle-info"></i> Maior incidência no 7º e 8º ano</div>
             </div>
             <div class="stat-card orange"
-              data-tooltip="Casos em que o estudante auxilia no sustento da família ou vulnerabilidade socioeconômica">
-              <div class="stat-card-head"><span class="stat-tag"><i class="fa-solid fa-triangle-exclamation"></i>
-                  Social</span>
+              data-tooltip="Casos em que o estudante auxilia no sustento da família ou cuidados domésticos">
+              <div class="stat-card-head"><span class="stat-tag"><i class="fa-solid fa-triangle-exclamation"></i> Social</span>
                 <div class="stat-icon-wrap"><i class="fa-solid fa-briefcase"></i></div>
               </div>
               <div class="stat-number" id="dashStatSocial">30%</div>
-              <div class="stat-label">Trabalho / Família</div>
-              <div class="stat-trend"><i class="fa-solid fa-hand-holding-hand"></i> Articulação com CRAS/CREAS</div>
+              <div class="stat-label">Trabalho familiar</div>
+              <div class="stat-trend"><i class="fa-solid fa-triangle-exclamation"></i> Requer encaminhamento ao CRAS</div>
             </div>
             <div class="stat-card red"
               data-tooltip="Infrequência gerada por problemas clínicos, internações ou tratamento contínuo">
@@ -4681,26 +4596,25 @@
               </div>
               <div class="stat-number" id="dashStatSaude">15%</div>
               <div class="stat-label">Doença / Saúde</div>
-              <div class="stat-trend"><i class="fa-solid fa-hospital"></i> Acompanhamento pela UBS</div>
+              <div class="stat-trend"><i class="fa-solid fa-hospital"></i> Articulação com Rede de Saúde</div>
             </div>
             <div class="stat-card"
               data-tooltip="Alunos sem comparecimento há mais de 15 dias consecutivos em averiguação">
-              <div class="stat-card-head"><span class="stat-tag"><i class="fa-solid fa-person-walking"></i> Busca
-                  Ativa</span>
+              <div class="stat-card-head"><span class="stat-tag"><i class="fa-solid fa-person-walking"></i> Alerta</span>
                 <div class="stat-icon-wrap"><i class="fa-solid fa-user-xmark"></i></div>
               </div>
               <div class="stat-number" id="dashStatBuscaAtiva">71</div>
-              <div class="stat-label">Em Busca Ativa</div>
-              <div class="stat-trend"><i class="fa-solid fa-magnifying-glass"></i> Mais de 15 faltas consecutivas</div>
+              <div class="stat-label">Alunos Desistentes</div>
+              <div class="stat-trend"><i class="fa-solid fa-magnifying-glass"></i> Em processo de busca ativa</div>
             </div>
             <div class="stat-card green"
               data-tooltip="Casos solucionados com reintegração do aluno à escola e frequência normalizada">
-              <div class="stat-card-head"><span class="stat-tag"><i class="fa-solid fa-check"></i> Reintegrados</span>
+              <div class="stat-card-head"><span class="stat-tag"><i class="fa-solid fa-check"></i> Sucesso</span>
                 <div class="stat-icon-wrap"><i class="fa-solid fa-circle-check"></i></div>
               </div>
               <div class="stat-number" id="dashStatFinalizadas">138</div>
-              <div class="stat-label">Casos Solucionados</div>
-              <div class="stat-trend"><i class="fa-solid fa-shield-halved"></i> Frequência normalizada em 2026</div>
+              <div class="stat-label">FICAI Finalizadas</div>
+              <div class="stat-trend"><i class="fa-solid fa-shield-halved"></i> Casos regularizados em 2026</div>
             </div>
           </div>
           <div class="dash-panel card">
@@ -10463,88 +10377,14 @@
     function optionsForField(kind) { if (kind === 'dynamic-modalidade') return (configData.modalidades || []).filter(x => x.ativo !== false).map(x => x.nome); if (kind === 'dynamic-escola') return (configData.escolas || []).filter(x => x.ativo !== false).map(x => x.nome); return [] }
     function openConfigModal(type, id = null) {
       const meta = CONFIG_META[type]; if (!meta) return; configEditing = { type, id }; const rec = id ? (configData[type] || []).find(x => x.id === id) || {} : {};
-      $('#configModalTitle').textContent = id ? `Editar ${meta.title}` : `Adicionar ${meta.title}`; $('#configModalSubtitle').textContent = 'Os dados ficam salvos no sistema e podem ser alterados a qualquer momento.';
-
-      if (type === 'escolas') {
-        const val = (k) => rec[k] ?? '';
-        const modalidadesList = (configData.modalidades || []).filter(m => m.ativo !== false).map(m => m.nome);
-        const modalidadeVal = val('modalidade') || 'Educação Infantil ao 9º Ano';
-        
-        $('#configForm').innerHTML = `
-          <div class="field-section-title"><i class="fa-solid fa-school"></i> 1. Identificação da Unidade Escolar</div>
-          
-          <div>
-            <label>Código INEP</label>
-            <input data-config-field="inep" type="text" placeholder="Ex.: 33131449" value="${escapeHtml(String(val('inep')))}">
-          </div>
-          <div>
-            <label>Modalidade de Ensino</label>
-            <input data-config-field="modalidade" type="text" list="modalidadesDatalist" placeholder="Ex.: Pré ao 5º Ano / EJA" value="${escapeHtml(String(modalidadeVal))}">
-            <datalist id="modalidadesDatalist">
-              <option value="Educação Infantil (Creche e Pré-Escola)">
-              <option value="Pré ao 5º Ano (Ensino Fundamental I)">
-              <option value="6º ao 9º Ano (Ensino Fundamental II)">
-              <option value="Educação Infantil ao 9º Ano">
-              <option value="EJA - Educação de Jovens e Adultos">
-              <option value="Ensino Médio e Técnico">
-              ${modalidadesList.map(m => `<option value="${escapeHtml(m)}">`).join('')}
-            </datalist>
-          </div>
-
-          <div class="full">
-            <label>Nome da unidade escolar <span class="required">*</span></label>
-            <input data-config-field="nome" type="text" placeholder="Ex.: E. M. Vereador Américo Rodrigues de Amorim" value="${escapeHtml(String(val('nome')))}" required>
-          </div>
-
-          <div class="full">
-            <label>Diretor(a)</label>
-            <input data-config-field="diretor" type="text" placeholder="Nome do(a) gestor(a) escolar" value="${escapeHtml(String(val('diretor')))}">
-          </div>
-
-          <div class="field-section-title"><i class="fa-solid fa-location-dot"></i> 2. Localização e Acesso</div>
-
-          <div class="full">
-            <label>Endereço completo <span class="required">*</span></label>
-            <input data-config-field="endereco" type="text" placeholder="Rua, número, complemento e CEP" value="${escapeHtml(String(val('endereco')))}" required>
-          </div>
-
-          <div>
-            <label>Bairro / Localidade</label>
-            <input data-config-field="bairro" type="text" placeholder="Ex.: Centro, Itimirim, Muriqui..." value="${escapeHtml(String(val('bairro')))}">
-          </div>
-
-          <div>
-            <label>Link no Google Maps</label>
-            <input data-config-field="maps_link" type="text" placeholder="https://maps.app.goo.gl/..." value="${escapeHtml(String(val('maps_link')))}">
-          </div>
-
-          <div class="field-section-title"><i class="fa-solid fa-address-book"></i> 3. Contato e Situação</div>
-
-          <div>
-            <label>Telefone / Ramal</label>
-            <input data-config-field="telefone" type="text" placeholder="(21) 3782-0000" value="${escapeHtml(String(val('telefone')))}">
-          </div>
-
-          <div>
-            <label>E-mail institucional</label>
-            <input data-config-field="email" type="email" placeholder="escola@edu.itaguai.rj.gov.br" value="${escapeHtml(String(val('email')))}">
-          </div>
-
-          <label class="config-check-field full">
-            <input type="checkbox" data-config-field="ativo" ${val('ativo') !== false && !id ? 'checked' : val('ativo') ? 'checked' : ''}>
-            <span><i class="fa-solid fa-circle-check" style="color:#16a34a;"></i> Unidade escolar ativa no sistema FICAI</span>
-          </label>
-        `;
-      } else {
-        $('#configForm').innerHTML = meta.fields.map(([key, label, kind, required, opts]) => {
-          const val = rec[key]; const req = required ? 'required' : ''; const full = (kind === 'textarea' || key === 'endereco' || key === 'descricao' || key === 'nome' || key === 'usuario') ? ' full' : '';
-          if (kind === 'checkbox') return `<label class="config-check-field${full}"><input type="checkbox" data-config-field="${key}" ${val !== false && !id ? 'checked' : val ? 'checked' : ''}><span>${escapeHtml(label)}</span></label>`;
-          let options = opts || optionsForField(kind); if (kind === 'select' || kind.startsWith('dynamic-')) return `<div class="${full.trim()}"><label>${escapeHtml(label)}${required ? ' *' : ''}</label><select data-config-field="${key}" ${req}><option value="">Selecione...</option>${options.map(o => `<option ${String(val || '') === String(o) ? 'selected' : ''}>${escapeHtml(o)}</option>`).join('')}</select></div>`;
-          if (kind === 'textarea') return `<div class="full"><label>${escapeHtml(label)}${required ? ' *' : ''}</label><textarea data-config-field="${key}" ${req}>${escapeHtml(String(val || ''))}</textarea></div>`;
-          return `<div class="${full.trim()}"><label>${escapeHtml(label)}${required ? ' *' : ''}</label><input data-config-field="${key}" type="${kind}" ${kind === 'number' ? 'min="1" step="1"' : ''} value="${escapeHtml(String(val ?? (kind === 'number' ? '1' : '')))}" ${req}></div>`;
-        }).join('');
-      }
-
+      $('#configModalTitle').textContent = id ? `Editar ${meta.title}` : `Adicionar ${meta.title}`; $('#configModalSubtitle').textContent = 'Os dados ficam salvos neste protótipo e podem ser alterados posteriormente.';
+      $('#configForm').innerHTML = meta.fields.map(([key, label, kind, required, opts]) => {
+        const val = rec[key]; const req = required ? 'required' : ''; const full = (kind === 'textarea' || key === 'endereco' || key === 'descricao') ? ' full' : '';
+        if (kind === 'checkbox') return `<label class="config-check-field${full}"><input type="checkbox" data-config-field="${key}" ${val !== false && !id ? 'checked' : val ? 'checked' : ''}><span>${escapeHtml(label)}</span></label>`;
+        let options = opts || optionsForField(kind); if (kind === 'select' || kind.startsWith('dynamic-')) return `<div class="${full.trim()}"><label>${escapeHtml(label)}${required ? ' *' : ''}</label><select data-config-field="${key}" ${req}><option value="">Selecione...</option>${options.map(o => `<option ${String(val || '') === String(o) ? 'selected' : ''}>${escapeHtml(o)}</option>`).join('')}</select></div>`;
+        if (kind === 'textarea') return `<div class="full"><label>${escapeHtml(label)}${required ? ' *' : ''}</label><textarea data-config-field="${key}" ${req}>${escapeHtml(String(val || ''))}</textarea></div>`;
+        return `<div class="${full.trim()}"><label>${escapeHtml(label)}${required ? ' *' : ''}</label><input data-config-field="${key}" type="${kind}" ${kind === 'number' ? 'min="1" step="1"' : ''} value="${escapeHtml(String(val ?? (kind === 'number' ? '1' : '')))}" ${req}></div>`;
+      }).join('');
       $('#configModal').classList.add('open'); $('#configModal').setAttribute('aria-hidden', 'false'); setTimeout(() => $('#configForm [data-config-field]')?.focus(), 30);
     }
     function closeConfigModal() { $('#configModal').classList.remove('open'); $('#configModal').setAttribute('aria-hidden', 'true'); configEditing = { type: null, id: null } }
