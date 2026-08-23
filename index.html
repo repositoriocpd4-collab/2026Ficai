@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css" rel="stylesheet">
+<script src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase_client.js"></script>
 <style>
@@ -90,7 +92,7 @@ body.dark ::-webkit-scrollbar-thumb{background:#33445b}
 .user:hover{background:#eaf3fa;border-color:#cfdfef}
 .user i{color:var(--blue);font-size:18px}
 
-.content{padding:30px;max-width:1600px;margin:auto}
+.content{padding:24px 32px;max-width:100%;width:100%;margin:0}
 .view{display:none}.view.active{display:block;animation:viewFadeIn .22s cubic-bezier(.16,1,.3,1) forwards}
 @keyframes viewFadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .page-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:22px}
@@ -244,12 +246,12 @@ label{display:block;font-weight:750;font-size:12px;color:#29405d;margin:0 0 5px}
 .counter{float:right;font-size:11px;color:#7b899c;font-weight:600}.counter.over{color:var(--red)}
 
 /* Tables */
-.table-wrap{overflow:auto;border:1px solid #e1e9f2;border-radius:12px;background:#fff}
-table{width:100%;border-collapse:collapse;min-width:850px}
-th,td{padding:12px 15px;border-bottom:1px solid #e9eff6;text-align:left;white-space:nowrap}
-th{font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:#5a6e87;background:#f8fafc;cursor:pointer;position:sticky;top:0;font-weight:750;user-select:none;transition:background .15s}
+.table-wrap{overflow-x:auto;border:1px solid #e1e9f2;border-radius:12px;background:#fff;width:100%}
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px 14px;border-bottom:1px solid #e9eff6;text-align:left}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#5a6e87;background:#f8fafc;cursor:pointer;position:sticky;top:0;font-weight:750;user-select:none;transition:background .15s;white-space:nowrap}
 th:hover{background:#f1f5fa;color:var(--blue)}
-td{font-size:13.5px;color:#20334d}
+td{font-size:13px;color:#20334d}
 table tbody tr{transition:all .15s ease}
 table tbody tr:hover{background:#f4f8fc;box-shadow:inset 3.5px 0 0 var(--blue)}
 
@@ -282,7 +284,7 @@ table tbody tr:hover{background:#f4f8fc;box-shadow:inset 3.5px 0 0 var(--blue)}
 .g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
 .span2{grid-column:span 2}.span3{grid-column:span 3}.span4{grid-column:span 4}.span5{grid-column:span 5}
 .meta-field{justify-self:start;width:100%}
-.meta-year{max-width:118px}.meta-number{max-width:154px}
+.meta-year{max-width:130px}.meta-number{min-width:240px;max-width:280px}
 
 .inline-card{background:#f8fafc;border:1px solid #e1e9f2;border-radius:12px;padding:14px}
 .inline-card h4{margin:0 0 11px;color:#284362;font-size:13.5px;font-weight:750}
@@ -2174,7 +2176,7 @@ body.dark .login-page-footer {
                   <strong>0021</strong>/Ana Clara Nascimento / 7B
                 </a>
               </div>
-              <span class="dash-row-date">18/08/2026</span>
+              <span class="dash-row-date">18/08/2026 - 08:30:15</span>
             </div>
           </div>
         </div>
@@ -2212,7 +2214,7 @@ body.dark .login-page-footer {
                   <strong>0017</strong>/Bruno Henrique Silva / 6A
                 </a>
               </div>
-              <span class="dash-row-date">17/08/2026</span>
+              <span class="dash-row-date">17/08/2026 - 10:14:22</span>
             </div>
 
             <div class="dash-list-row" data-ficai="0018/2026" data-student="Carla Souza Ribeiro" data-turma="9A" data-sit="No Conselho">
@@ -2227,7 +2229,7 @@ body.dark .login-page-footer {
                   <strong>0018</strong>/Carla Souza Ribeiro / 9A
                 </a>
               </div>
-              <span class="dash-row-date">16/08/2026</span>
+              <span class="dash-row-date">16/08/2026 - 14:45:10</span>
             </div>
 
             <div class="dash-list-row" data-ficai="0019/2026" data-student="Diego Santos Alves" data-turma="8C" data-sit="Retorno">
@@ -2242,7 +2244,7 @@ body.dark .login-page-footer {
                   <strong>0019</strong>/Diego Santos Alves / 8C
                 </a>
               </div>
-              <span class="dash-row-date">15/08/2026</span>
+              <span class="dash-row-date">15/08/2026 - 09:20:05</span>
             </div>
 
             <div class="dash-list-row" data-ficai="0020/2026" data-student="Ana Clara Nascimento" data-turma="7B" data-sit="Alerta crítico">
@@ -2257,7 +2259,7 @@ body.dark .login-page-footer {
                   <strong>0020</strong>/Ana Clara Nascimento / 7B
                 </a>
               </div>
-              <span class="dash-row-date">14/08/2026</span>
+              <span class="dash-row-date">14/08/2026 - 11:05:40</span>
             </div>
           </div>
         </div>
@@ -2324,39 +2326,206 @@ body.dark .login-page-footer {
       </div>
     </div>
 
-    <section class="form-section active-step-section" id="sec1">
-      <h2 class="section-title">
-        <span class="section-number">1</span>
-        <span class="section-title-text">Dados sobre a Escola e Identificação do Aluno</span>
-      </h2>
-      <div class="grid g4">
-        <div class="meta-field meta-year"><label>Ano Letivo</label><select id="anoLetivo"></select></div>
-        <div class="meta-field meta-number">
-          <label for="numeroFicai">Número FICAI</label>
-          <div class="number-input-row" style="display: flex; align-items: center; gap: 8px;">
-            <div class="input-with-action" style="flex: 1;">
-              <input id="numeroFicai" type="text" value="00022/2026" maxlength="10" inputmode="numeric" placeholder="00001/2026" data-tooltip="Gerado automaticamente pela sequência do ano. Você também pode digitar se necessário.">
-              <button class="btn-input-icon" type="button" id="btnRefreshFicaiNum" data-tooltip="Recalcular próximo número da FICAI"><i class="fa-solid fa-arrows-rotate"></i></button>
-            </div>
-            <button type="button" class="auto-num-badge-btn" id="btnAutoNum" data-tooltip="Recalcular o próximo número sequencial automaticamente">
-              <i class="fa-solid fa-wand-magic-sparkles"></i> Auto
-            </button>
+    <section class="form-section active-step-section" id="sec1" style="padding: 24px 28px; background: #ffffff;">
+      <!-- Hero Header Card com Ilustração -->
+      <div class="step-header-hero" style="background: linear-gradient(135deg, #f0f7ff 0%, #e0effe 100%); border: 1.5px solid #bfdbfe; border-radius: 16px; padding: 20px 26px; display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 22px; box-shadow: 0 4px 14px rgba(37,99,235,0.05); position: relative; overflow: hidden;">
+        <div style="display: flex; align-items: center; gap: 18px;">
+          <div style="width: 46px; height: 46px; border-radius: 50%; background: #1d4ed8; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; box-shadow: 0 4px 12px rgba(29,78,216,0.35); flex-shrink: 0;">
+            1
+          </div>
+          <div style="width: 1px; height: 44px; background: #cbd5e1;"></div>
+          <div>
+            <h2 style="margin: 0; font-size: 20px; font-weight: 800; color: #0f172a; letter-spacing: -0.2px;">
+              Dados sobre a Escola e Identificação do Aluno
+            </h2>
+            <p style="margin: 4px 0 0; font-size: 13.5px; color: #475569;">
+              Informe os dados da escola e as informações do aluno para o registro no FICAI.
+            </p>
           </div>
         </div>
-        <div class="span2"><label>Escola</label><select id="escola"><option value="">Selecione...</option><option value="aparecida">C. M. Aparecida Azêdo</option><option value="elmir">E.M. Elmir Figueira</option><option value="mignone">CIEP 496 Maestro Francisco Mignone</option></select></div>
-        <div class="span3"><label>Endereço completo</label><input id="escolaEndereco" readonly placeholder="Preenchido automaticamente"></div>
-        <div><label>Telefone</label><input id="escolaTelefone" readonly placeholder="Telefone da unidade"></div>
-        <div class="span2"><label>Aluno cadastrado <span class="db-pill" id="alunoDbStatus"><i class="fa-solid fa-database"></i> banco local</span></label><div class="input-action"><select id="aluno" aria-label="Aluno cadastrado"><option value="">Selecione ou cadastre um aluno...</option><option value="demo">Aluno Demonstrativo</option><option value="ana">Ana Clara Nascimento</option><option value="bruno">Bruno Henrique Silva</option><option value="carla">Carla Souza Ribeiro</option><option value="diego">Diego Santos Alves</option><option value="eduarda">Eduarda Gomes</option><option value="lucas">Lucas Mendonça</option></select><button class="btn inline-mini" type="button" id="newStudentBtn" data-tooltip="Cadastrar novo aluno na base do sistema"><i class="fa-solid fa-user-plus"></i> Novo</button></div></div>
-        <div class="span2"><label>Nome completo <span class="required">*</span></label><input id="nomeCompleto" autocomplete="name" placeholder="Digite o nome completo do estudante"><div class="field-help">Ao salvar a FICAI, este aluno ficará disponível para buscas futuras neste navegador.</div></div>
-        <div class="span2"><label>Nome social</label><input id="nomeSocial" placeholder="Quando houver"></div>
-        <div><label>Data de nascimento</label><input id="nascimento" type="date"></div>
-        <div><label>CPF</label><input id="cpf" placeholder="000.000.000-00"></div>
-        <div><label>RG</label><input id="rg" placeholder="Documento"></div>
-        <div class="span2"><label>Nome dos pais / filiação</label><input id="filiacao" placeholder="Pais ou filiação registrada"></div>
-        <div class="span2"><label>Responsável legal</label><input id="responsavel" placeholder="Nome do responsável legal"></div>
-        <div class="span3"><label>Endereço residencial</label><input id="residencia" placeholder="Logradouro, nº, bairro, município"></div>
-        <div><label>Telefone(s)</label><input id="telefoneAluno" placeholder="(21) 00000-0000"></div>
-        <div class="span4"><label>Nome e endereço de parente ou outra referência</label><input id="referencia" placeholder="Referência familiar ou comunitária"></div>
+        
+        <!-- Ilustração da Escola em SVG -->
+        <div class="step-hero-illustration" style="flex-shrink: 0; display: flex; align-items: flex-end;">
+          <svg width="145" height="74" viewBox="0 0 160 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="140" cy="65" rx="16" ry="16" fill="#93c5fd" opacity="0.4"/>
+            <ellipse cx="18" cy="60" rx="14" ry="18" fill="#60a5fa" opacity="0.6"/>
+            <rect x="35" y="28" width="90" height="52" rx="4" fill="#ffffff" stroke="#93c5fd" stroke-width="2"/>
+            <path d="M80 6L30 30H130L80 6Z" fill="#2563eb"/>
+            <rect x="70" y="52" width="20" height="28" rx="2" fill="#1d4ed8"/>
+            <circle cx="80" cy="22" r="5" fill="#ffffff"/>
+            <rect x="44" y="38" width="12" height="12" rx="2" fill="#dbeafe" stroke="#93c5fd"/>
+            <rect x="44" y="56" width="12" height="12" rx="2" fill="#dbeafe" stroke="#93c5fd"/>
+            <rect x="104" y="38" width="12" height="12" rx="2" fill="#dbeafe" stroke="#93c5fd"/>
+            <rect x="104" y="56" width="12" height="12" rx="2" fill="#dbeafe" stroke="#93c5fd"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Formulário em Blocos e Linhas -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        
+        <!-- Linha 1: Ano Letivo, Número FICAI e Escola -->
+        <div style="display: grid; grid-template-columns: 180px 250px 1fr; gap: 14px; align-items: flex-end;">
+          <div>
+            <label style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+              <i class="fa-regular fa-calendar-days" style="color: #2563eb;"></i> Ano Letivo
+            </label>
+            <select id="anoLetivo" style="padding: 9px 12px; font-weight: 600;"></select>
+          </div>
+
+          <div>
+            <label for="numeroFicai" style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+              <i class="fa-solid fa-hashtag" style="color: #2563eb;"></i> Número FICAI
+            </label>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <input id="numeroFicai" type="text" value="00022/2026" maxlength="10" placeholder="00001/2026" style="flex: 1; min-width: 120px; font-weight: 800; font-size: 14px; color: #0f172a; text-align: center; letter-spacing: 0.5px; padding: 9px 10px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px;" data-tooltip="Gerado automaticamente pela sequência do ano. Você também pode digitar se necessário.">
+              <button type="button" class="btn small soft" id="btnAutoNum" style="padding: 8px 12px; font-weight: 700; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; color: #0284c7; background: #e0f2fe; border: 1px solid #bae6fd;" data-tooltip="Recalcular o próximo número sequencial automaticamente">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Auto
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+              <i class="fa-solid fa-school" style="color: #2563eb;"></i> Escola
+            </label>
+            <select id="escola" style="padding: 9px 12px; font-weight: 600;">
+              <option value="">Selecione...</option>
+              <option value="aparecida">C. M. Aparecida Azêdo</option>
+              <option value="elmir">E.M. Elmir Figueira</option>
+              <option value="mignone">CIEP 496 Maestro Francisco Mignone</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Linha 2: Endereço completo da Escola -->
+        <div>
+          <label style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+            <i class="fa-solid fa-location-dot" style="color: #2563eb;"></i> Endereço completo
+          </label>
+          <input id="escolaEndereco" readonly placeholder="Preenchido automaticamente" style="background: #f8fafc; font-weight: 550; color: #334155;">
+        </div>
+
+        <!-- Linha 3: Aluno Cadastrado (Lado Esquerdo) e Nome Completo (Lado Direito) -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: flex-start;">
+          <div>
+            <label style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+              <span style="display: flex; align-items: center; gap: 6px;">
+                <i class="fa-solid fa-user" style="color: #2563eb;"></i> Aluno cadastrado
+              </span>
+              <span class="db-pill" id="alunoDbStatus" style="font-size: 11px; padding: 2px 8px; border-radius: 99px; background: #eff6ff; color: #2563eb; font-weight: 700; border: 1px solid #bfdbfe;">
+                <i class="fa-solid fa-users"></i> 2 salvos
+              </span>
+            </label>
+            <div class="aluno-combobox-wrap" id="alunoCombobox" style="position: relative; width: 100%;">
+              <div style="position: relative;">
+                <input type="text" id="alunoSearchInput" placeholder="Pesquise por nome, CPF ou responsável..." autocomplete="off" style="width: 100%; padding: 9px 36px 9px 12px; border-radius: 10px; border: 1.5px solid #cbd7e6; font-size: 13.5px; font-weight: 600; color: #18283f; background: #fff;">
+                <i class="fa-solid fa-magnifying-glass" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #94a3b8; pointer-events: none; font-size: 13px;"></i>
+              </div>
+              <select id="aluno" aria-label="Aluno cadastrado" style="display: none;">
+                <option value="">Selecione ou cadastre um aluno...</option>
+                <option value="demo">Aluno Demonstrativo</option>
+                <option value="ana">Ana Clara Nascimento</option>
+                <option value="bruno">Bruno Henrique Silva</option>
+                <option value="carla">Carla Souza Ribeiro</option>
+                <option value="diego">Diego Santos Alves</option>
+                <option value="eduarda">Eduarda Gomes</option>
+                <option value="lucas">Lucas Mendonça</option>
+              </select>
+              <div id="alunoDropdown" class="aluno-dropdown" style="display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0; max-height: 280px; overflow-y: auto; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 10px; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.15), 0 0 0 1px rgba(15, 23, 42, 0.05); z-index: 1000;">
+                <!-- Itens renderizados dinamicamente com dados do aluno -->
+              </div>
+            </div>
+            <button type="button" id="newStudentBtn" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; border: 1px solid #bfdbfe; background: #eff6ff; color: #2563eb; font-weight: 700; font-size: 12.5px; margin-top: 8px; cursor: pointer; transition: all 0.15s;" data-tooltip="Cadastrar novo aluno na base do sistema">
+              <i class="fa-solid fa-plus"></i> Novo
+            </button>
+          </div>
+
+          <div>
+            <label for="nomeCompleto" style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+              <i class="fa-solid fa-user-pen" style="color: #2563eb;"></i> Nome completo <span class="required" style="color: #ef4444;">*</span>
+            </label>
+            <input id="nomeCompleto" autocomplete="name" placeholder="Digite o nome completo do estudante" style="font-weight: 600;">
+            <div style="font-size: 11.5px; color: #64748b; margin-top: 6px;">
+              Ao salvar a FICAI, este aluno ficará disponível para buscas futuras neste navegador.
+            </div>
+          </div>
+        </div>
+
+        <!-- Linha 4: Nome Social, Data de Nascimento e CPF -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+          <div>
+            <label style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+              <i class="fa-solid fa-user-tag" style="color: #2563eb;"></i> Nome social
+            </label>
+            <input id="nomeSocial" placeholder="Quando houver">
+          </div>
+
+          <div>
+            <label style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+              <i class="fa-regular fa-calendar" style="color: #2563eb;"></i> Data de nascimento
+            </label>
+            <input id="nascimento" type="date">
+          </div>
+
+          <div>
+            <label style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+              <i class="fa-solid fa-id-card" style="color: #2563eb;"></i> CPF
+            </label>
+            <input id="cpf" placeholder="000.000.000-00">
+          </div>
+        </div>
+
+        <!-- Linha 5: RG e Filiação -->
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 14px;">
+          <div>
+            <label style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+              <i class="fa-regular fa-id-badge" style="color: #2563eb;"></i> RG
+            </label>
+            <input id="rg" placeholder="Documento">
+          </div>
+
+          <div>
+            <label style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+              <i class="fa-solid fa-people-roof" style="color: #2563eb;"></i> Nome dos pais / filiação
+            </label>
+            <input id="filiacao" placeholder="Pais ou filiação registrada">
+          </div>
+        </div>
+
+        <!-- Linha 6: Responsável Legal -->
+        <div>
+          <label style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+            <i class="fa-solid fa-shield-halved" style="color: #2563eb;"></i> Responsável legal
+          </label>
+          <input id="responsavel" placeholder="Nome do responsável legal">
+        </div>
+
+        <!-- Linha 7: Endereço Residencial e Telefone -->
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 14px;">
+          <div>
+            <label style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+              <i class="fa-solid fa-house" style="color: #2563eb;"></i> Endereço residencial
+            </label>
+            <input id="residencia" placeholder="Logradouro, nº, bairro, município">
+          </div>
+
+          <div>
+            <label style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+              <i class="fa-solid fa-phone" style="color: #2563eb;"></i> Telefone(s)
+            </label>
+            <input id="telefoneAluno" placeholder="(21) 00000-0000">
+          </div>
+        </div>
+
+        <!-- Linha 8: Referência Familiar ou Comunitária -->
+        <div>
+          <label style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+            <i class="fa-solid fa-users" style="color: #2563eb;"></i> Nome e endereço de parente ou outra referência
+          </label>
+          <input id="referencia" placeholder="Referência familiar ou comunitária">
+        </div>
+
       </div>
     </section>
 
@@ -2371,9 +2540,15 @@ body.dark .login-page-footer {
         <div><label>Turno</label><select id="turno"><option value="">Selecione</option><option>Manhã</option><option>Tarde</option><option>Noite</option></select></div>
         <div class="span2"><label>Modalidade <span class="hint">(automática pela turma)</span></label><input id="modalidade" readonly placeholder="Aguardando turma"></div>
         <div><label>Início do período de faltas</label><input id="faltaInicio" type="date"></div>
-        <div><label>Fim do período de faltas</label><input id="faltaFim" type="date"></div>
+        <div class="span2">
+          <label>Fim do período de faltas</label>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <input id="faltaFim" type="date" style="flex: 0 0 170px; max-width: 180px;">
+            <span id="diasFaltasCount" style="color: #dc2626; font-weight: 800; font-size: 13px; white-space: nowrap; line-height: 1.2;"></span>
+          </div>
+        </div>
         <div><label>Data da Comunicação</label><input id="dataComunicacao" type="date"></div>
-        <div class="span2"><label>Professor regente / Orientador / Coord. Pedagógico</label><input id="profissional" placeholder="Nome do profissional"></div>
+        <div><label>Professor regente / Orientador</label><input id="profissional" placeholder="Nome do profissional"></div>
         <div class="span5"><label>Assinatura e matrícula do profissional</label><input id="assinaturaProf" placeholder="Nome, matrícula ou identificação funcional"></div>
       </div>
     </section>
@@ -2471,7 +2646,7 @@ body.dark .login-page-footer {
           <button class="btn" id="saveBottom" type="button" data-tooltip="Salvar ficha no banco de dados e cadastrar histórico">
             <i class="fa-solid fa-floppy-disk"></i> Salvar FICAI
           </button>
-          <button class="btn purple" type="button" data-go="conselho">
+          <button class="btn purple" id="btnEncaminharCT" type="button" data-tooltip="Salvar ficha no banco e encaminhar formalmente ao Conselho Tutelar">
             <i class="fa-solid fa-gavel"></i> Encaminhar ao CT
           </button>
         </div>
@@ -2487,18 +2662,33 @@ body.dark .login-page-footer {
     </section>
 
     <!-- Wizard Footer Bar (Navegação Anterior e Próximo com Validação Obrigatória) -->
-    <div class="wizard-footer-bar">
-      <button type="button" class="btn soft" id="btnWizardPrev" style="padding: 10px 20px; font-weight: 700; visibility: hidden;">
+    <div class="wizard-footer-bar" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 28px; background: #ffffff; border-top: 1px solid #e2e8f0; border-radius: 0 0 16px 16px;">
+      <button type="button" class="btn soft" id="btnWizardPrev" style="padding: 10px 22px; font-weight: 700; border-radius: 10px; visibility: hidden;">
         <i class="fa-solid fa-arrow-left"></i> Anterior
       </button>
 
-      <div id="wizardStepIndicator" style="font-weight: 700; font-size: 13px; color: #475569; display: flex; align-items: center; gap: 8px;">
-        <i class="fa-solid fa-layer-group" style="color: #2563eb;"></i>
-        <span id="wizardStepIndicatorText">Etapa 1 de 6 — Escola e aluno</span>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+        <div class="wizard-dots-row" id="wizardDotsRow" style="display: flex; align-items: center; gap: 8px;">
+          <span class="wizard-dot active" data-step="1" style="width: 10px; height: 10px; border-radius: 50%; background: #2563eb;"></span>
+          <span class="wizard-dot-line" style="width: 18px; height: 2px; background: #cbd5e1;"></span>
+          <span class="wizard-dot" data-step="2" style="width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1;"></span>
+          <span class="wizard-dot-line" style="width: 18px; height: 2px; background: #cbd5e1;"></span>
+          <span class="wizard-dot" data-step="3" style="width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1;"></span>
+          <span class="wizard-dot-line" style="width: 18px; height: 2px; background: #cbd5e1;"></span>
+          <span class="wizard-dot" data-step="4" style="width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1;"></span>
+          <span class="wizard-dot-line" style="width: 18px; height: 2px; background: #cbd5e1;"></span>
+          <span class="wizard-dot" data-step="5" style="width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1;"></span>
+          <span class="wizard-dot-line" style="width: 18px; height: 2px; background: #cbd5e1;"></span>
+          <span class="wizard-dot" data-step="6" style="width: 9px; height: 9px; border-radius: 50%; background: #cbd5e1;"></span>
+        </div>
+        <div id="wizardStepIndicator" style="font-weight: 700; font-size: 13px; color: #475569; display: flex; align-items: center; gap: 7px;">
+          <i class="fa-solid fa-layer-group" style="color: #2563eb;"></i>
+          <span id="wizardStepIndicatorText">Etapa 1 de 6 — Escola e aluno</span>
+        </div>
       </div>
 
-      <button type="button" class="btn primary" id="btnWizardNext" style="padding: 10px 24px; font-weight: 700; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); border: none;">
-        Próximo <i class="fa-solid fa-arrow-right"></i>
+      <button type="button" class="btn primary" id="btnWizardNext" style="padding: 12px 30px; font-weight: 800; font-size: 15px; background: #1d4ed8; color: #fff; border-radius: 12px; border: none; box-shadow: 0 4px 14px rgba(29, 78, 216, 0.35); display: flex; align-items: center; gap: 10px; cursor: pointer;">
+        <span>Próximo</span> <i class="fa-solid fa-arrow-right"></i>
       </button>
     </div>
   </form>
@@ -2508,9 +2698,9 @@ body.dark .login-page-footer {
 <section class="view" id="view-dados">
   <div class="page-head"><div><h1 class="page-title">Dados da Ficha</h1><p class="page-subtitle">Consulta, filtros, histórico e ações das FICAI cadastradas — inclusive registros salvos no banco local do navegador.</p></div><div class="action-row"><button class="btn primary" data-go="gerar"><i class="fa-solid fa-plus"></i> Nova FICAI</button></div></div>
   <div class="card panel"><div class="filters"><div class="search-wrap"><i class="fa-solid fa-magnifying-glass"></i><input id="fichaSearch" placeholder="Buscar por aluno, FICAI ou escola"></div><select id="statusFilter"><option value="">Todas as situações</option><option>Infrequente</option><option>Evadido</option><option>Sem Acesso</option></select><select><option>2026</option><option>2025</option></select></div><div class="table-wrap" style="margin-top:18px"><table id="fichaTable"><thead><tr><th data-sort="0">FICAI</th><th data-sort="1">Aluno</th><th data-sort="2">Escola</th><th data-sort="3">Turma</th><th data-sort="4">Situação</th><th data-sort="5">Última atualização</th><th>Ações</th></tr></thead><tbody>
-    <tr><td>00021/2026</td><td>Ana Clara Nascimento</td><td>E.M. Elmir Figueira</td><td>7º Ano B</td><td>Infrequente</td><td>18/08/2026</td><td><div class="action-row"><button class="btn small soft" type="button" data-info-ficai="00021/2026"><i class="fa-solid fa-circle-info"></i> Informações</button><button class="btn small" data-go="gerar">Editar</button></div></td></tr>
-    <tr><td>00018/2026</td><td>Carla Souza Ribeiro</td><td>C. M. Aparecida Azêdo</td><td>9º Ano A</td><td>Evadido</td><td>16/08/2026</td><td><div class="action-row"><button class="btn small soft" type="button" data-info-ficai="00018/2026"><i class="fa-solid fa-circle-info"></i> Informações</button><button class="btn small purple" data-go="conselho">CT</button></div></td></tr>
-    <tr><td>00015/2026</td><td>Diego Santos Alves</td><td>CIEP 496 Maestro Francisco Mignone</td><td>8º Ano C</td><td>Infrequente</td><td>15/08/2026</td><td><div class="action-row"><button class="btn small soft" type="button" data-info-ficai="00015/2026"><i class="fa-solid fa-circle-info"></i> Informações</button><button class="btn small" data-go="encerramento">Encerrar</button></div></td></tr>
+    <tr data-ficai="00021/2026"><td>00021/2026</td><td class="student-cell" style="cursor: pointer; font-weight: 600; color: #1d4ed8;" data-tooltip="Clique para ver as informações de Ana Clara Nascimento">Ana Clara Nascimento</td><td>E.M. Elmir Figueira</td><td>7º Ano B</td><td>Infrequente</td><td>18/08/2026</td><td><div class="action-row"><button class="btn small soft" type="button" data-info-ficai="00021/2026"><i class="fa-solid fa-circle-info"></i> Informações</button><button class="btn small" data-go="gerar">Editar</button></div></td></tr>
+    <tr data-ficai="00018/2026"><td>00018/2026</td><td class="student-cell" style="cursor: pointer; font-weight: 600; color: #1d4ed8;" data-tooltip="Clique para ver as informações de Carla Souza Ribeiro">Carla Souza Ribeiro</td><td>C. M. Aparecida Azêdo</td><td>9º Ano A</td><td>Evadido</td><td>16/08/2026</td><td><div class="action-row"><button class="btn small soft" type="button" data-info-ficai="00018/2026"><i class="fa-solid fa-circle-info"></i> Informações</button><button class="btn small purple" data-go="conselho">CT</button></div></td></tr>
+    <tr data-ficai="00015/2026"><td>00015/2026</td><td class="student-cell" style="cursor: pointer; font-weight: 600; color: #1d4ed8;" data-tooltip="Clique para ver as informações de Diego Santos Alves">Diego Santos Alves</td><td>CIEP 496 Maestro Francisco Mignone</td><td>8º Ano C</td><td>Infrequente</td><td>15/08/2026</td><td><div class="action-row"><button class="btn small soft" type="button" data-info-ficai="00015/2026"><i class="fa-solid fa-circle-info"></i> Informações</button><button class="btn small" data-go="encerramento">Encerrar</button></div></td></tr>
   </tbody></table></div></div>
 </section>
 
@@ -2530,6 +2720,19 @@ body.dark .login-page-footer {
     <div class="stat-card green"><div class="stat-number" id="ctStatDevolvidas">43</div><div class="stat-label">Devolvidas</div></div>
   </div>
   <div class="card panel">
+    <div class="filters" style="display: flex; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+      <div class="search-wrap" style="flex: 1; max-width: 480px;">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="searchConselho" type="text" placeholder="Buscar por FICAI, aluno, escola ou diligência..." autocomplete="off">
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <select id="filterConselhoStatus" style="padding: 8px 12px; border-radius: 8px; border: 1.5px solid #cbd5e1; font-size: 13px; font-weight: 600; color: #334155; background: #fff;">
+          <option value="">Todas as situações</option>
+          <option value="Devolvida">Devolvida à Escola (Não consta no CT)</option>
+          <option value="No CT">No CT (Aguardando Devolutiva)</option>
+        </select>
+      </div>
+    </div>
     <div class="table-wrap">
       <table id="tableConselho">
         <thead>
@@ -2539,22 +2742,24 @@ body.dark .login-page-footer {
             <th>Unidade Escolar</th>
             <th>Recebimento</th>
             <th>Diligência</th>
-            <th>Atualização</th>
+            <th>Última Devolução</th>
+            <th>Situação no CT</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody id="tbodyConselho">
           <tr data-ficai="00018/2026" data-student="Carla Souza Ribeiro">
-            <td>00018/2026</td>
+            <td><strong>00018/2026</strong></td>
             <td>Carla Souza Ribeiro</td>
             <td><span class="school-badge"><i class="fa-solid fa-school"></i> E.M. Elmir Figueira</span></td>
             <td>20/08/2026</td>
-            <td>Contato familiar e visita</td>
-            <td><span class="badge purple"><i class="fa-solid fa-bell"></i> Nova</span></td>
+            <td>Contato familiar e visita (Visita domiciliar)</td>
+            <td><strong>22/08/2026</strong></td>
+            <td><span class="badge green" style="background: #dcfce7; color: #15803d; font-weight: 700; padding: 4px 8px; border-radius: 6px; font-size: 11.5px; display: inline-flex; align-items: center; gap: 5px;"><i class="fa-solid fa-circle-check"></i> Devolvida à Escola (Não consta no CT)</span></td>
             <td>
               <div class="action-row">
-                <button class="btn small purple btn-ct-register" type="button" data-ficai="00018/2026" data-student="Carla Souza Ribeiro" data-tooltip="Registrar nova devolutiva para esta FICAI"><i class="fa-solid fa-plus"></i> Devolutiva</button>
                 <button class="btn small soft" type="button" data-info-ficai="00018/2026" data-tooltip="Ver histórico completo e ficha"><i class="fa-solid fa-circle-info"></i> Info</button>
+                <button class="btn small purple btn-ct-register" type="button" data-ficai="00018/2026" data-student="Carla Souza Ribeiro" data-tooltip="Registrar nova devolutiva / parecer complementar"><i class="fa-solid fa-pen"></i> Devolutiva</button>
               </div>
             </td>
           </tr>
@@ -2587,9 +2792,20 @@ body.dark .login-page-footer {
         <div class="grid g1" style="gap: 12px;">
           <div>
             <label style="font-weight: 700; font-size: 12px; color: #334155; margin-bottom: 4px; display: block;">Selecione a FICAI a encerrar <span style="color: #ef4444;">*</span></label>
-            <select id="encSelectFicai" style="width: 100%; padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px; font-weight: 600;">
-              <option value="">Selecione uma ficha ativa...</option>
-            </select>
+            <div class="searchable-combobox-wrap" id="encFicaiCombobox" style="position: relative;">
+              <div style="position: relative; display: flex; align-items: center;">
+                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; color: #94a3b8; font-size: 13px; pointer-events: none;"></i>
+                <input type="text" id="encFicaiSearchInput" placeholder="Pesquisar por número, aluno ou escola..." autocomplete="off" style="width: 100%; padding: 9px 36px 9px 34px; border-radius: 8px; border: 1.5px solid #cbd5e1; font-size: 13px; font-weight: 600; color: #1e293b; background: #ffffff; transition: border-color 0.2s, box-shadow 0.2s;">
+                <button type="button" id="encFicaiToggleBtn" style="position: absolute; right: 8px; background: none; border: none; color: #64748b; cursor: pointer; padding: 4px 6px; font-size: 12px;" aria-label="Abrir opções">
+                  <i class="fa-solid fa-chevron-down"></i>
+                </button>
+              </div>
+              <div id="encFicaiDropdown" style="display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0; max-height: 230px; overflow-y: auto; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15); z-index: 1000;">
+              </div>
+              <select id="encSelectFicai" style="display: none;">
+                <option value="">Selecione uma ficha ativa...</option>
+              </select>
+            </div>
           </div>
 
           <div class="grid g2" style="gap: 10px;">
@@ -3057,7 +3273,7 @@ body.dark .login-page-footer {
       <div class="action-row">
         <button class="btn small soft" type="button" id="infoEdit"><i class="fa-solid fa-pen-to-square"></i><span>Editar FICAI</span></button>
         <button class="btn small soft" type="button" id="infoPdf"><i class="fa-regular fa-file-pdf"></i><span>A4 / PDF</span></button>
-        <button class="close" type="button" id="closeInfo" aria-label="Fechar">×</button>
+        <button class="close" type="button" id="closeInfo" aria-label="Fechar" onclick="closeInfoModal()">×</button>
       </div>
     </div>
     <div class="info-modal-body">
@@ -3081,6 +3297,33 @@ body.dark .login-page-footer {
         <div class="info-stack">
           <div class="info-box"><div class="info-box-title"><span>Diagnósticos da evasão</span><i class="fa-solid fa-stethoscope"></i></div><div class="info-chip-list" id="infoDiagnostics"></div></div>
           <div class="info-box"><div class="info-box-title"><span>Histórico de acompanhamento após a geração</span><span class="info-badge-history" id="infoHistoryCount">0 REGISTROS</span></div><div class="timeline" id="infoTimeline"></div></div>
+          
+          <!-- MAPA DE ROTA OPENFREEMAP (ESCOLA ➔ RESIDÊNCIA DO ALUNO) -->
+          <div class="info-box" style="padding: 0; overflow: hidden; border: 1px solid #cbd5e1; border-radius: 12px; margin-top: 12px; background: #ffffff; box-shadow: 0 2px 8px rgba(15,23,42,0.04);">
+            <div class="info-box-title" style="padding: 10px 14px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; margin-bottom: 0; display: flex; align-items: center; justify-content: space-between;">
+              <span style="font-weight: 800; font-size: 12.5px; color: #0f172a; display: flex; align-items: center; gap: 7px;">
+                <i class="fa-solid fa-map-location-dot" style="color: #0284c7;"></i> Rota: Escola ➔ Residência do Aluno
+              </span>
+              <span class="badge blue" id="infoRouteBadge" style="font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; background: #eff6ff; color: #1d4ed8;">
+                <i class="fa-solid fa-location-arrow"></i> OpenFreeMap
+              </span>
+            </div>
+            
+            <div id="infoMapContainer" style="width: 100%; height: 260px; position: relative; background: #f1f5f9;">
+              <!-- Renderização do OpenFreeMap via MapLibre GL -->
+            </div>
+
+            <div id="infoRouteFooter" style="padding: 9px 14px; background: #fbfcfe; border-top: 1px solid #e2e8f0; font-size: 11.5px; color: #334155; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 6px; min-width: 0;">
+                <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #2563eb; flex-shrink: 0;"></span>
+                <span id="infoRouteEscolaText" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><strong>Origem:</strong> E.M. Elmir Figueira</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px; min-width: 0;">
+                <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #16a34a; flex-shrink: 0;"></span>
+                <span id="infoRouteAlunoText" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><strong>Destino:</strong> Residência do Aluno</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -3532,7 +3775,24 @@ body.dark .login-page-footer {
             </select>
           </div>
 
-          <div class="span2">
+          <div>
+            <label style="font-weight: 700; font-size: 12.5px; color: #1e293b; display: block; margin-bottom: 5px;">
+              Tipo de Registro para a Escola <span style="color: #ef4444;">*</span>
+            </label>
+            <select id="ctTipoRegistroSelect" style="width: 100%; padding: 9px 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 13px; font-weight: 600;">
+              <option value="Conselho Tutelar">Conselho Tutelar</option>
+              <option value="Contato com responsável">Contato com responsável</option>
+              <option value="Visita domiciliar">Visita domiciliar</option>
+              <option value="Retorno à escola">Retorno à escola</option>
+              <option value="Saúde">Saúde</option>
+              <option value="Observação pedagógica">Observação pedagógica</option>
+              <option value="Atualização cadastral">Atualização cadastral</option>
+              <option value="Encaminhamento">Encaminhamento</option>
+              <option value="Outro">Outro</option>
+            </select>
+          </div>
+
+          <div>
             <label style="font-weight: 700; font-size: 12.5px; color: #1e293b; display: block; margin-bottom: 5px;">
               Situação da Devolutiva
             </label>
@@ -3854,7 +4114,199 @@ async function loadSavedStudents(){
     const pill=$('#alunoDbStatus');if(pill)pill.innerHTML=`<i class="fa-solid fa-database"></i> ${rows.length} salvo${rows.length===1?'':'s'}`;
   }catch(e){const pill=$('#alunoDbStatus');if(pill){pill.style.background='#fff3cd';pill.style.color='#8a6500';pill.innerHTML='<i class="fa-solid fa-triangle-exclamation"></i> indisponível'}}
 }
-function clearStudentFields(){['#nomeCompleto','#nomeSocial','#nascimento','#cpf','#rg','#filiacao','#responsavel','#residencia','#telefoneAluno','#referencia'].forEach(id=>setText(id,''));$('#aluno').value='';$('#nomeCompleto').focus()}
+
+function getStudentEntriesList(){
+  const list = [];
+  $$('#aluno option').forEach(opt => {
+    if(!opt.value) return;
+    const data = studentData[opt.value] || {};
+    list.push({
+      key: opt.value,
+      nome: opt.textContent || data.nome || 'Aluno',
+      cpf: data.cpf || '',
+      responsavel: data.responsavel || '',
+      residencia: data.residencia || '',
+      nascimento: data.nascimento || ''
+    });
+  });
+  return list;
+}
+
+function renderAlunoDropdown(filterText = ''){
+  const dropdown = $('#alunoDropdown');
+  if(!dropdown) return;
+
+  const rawText = (filterText || '').trim();
+  const q = rawText.toLowerCase();
+  const list = getStudentEntriesList();
+  const filtered = list.filter(item => {
+    if(!q) return true;
+    return item.nome.toLowerCase().includes(q) ||
+           (item.cpf && item.cpf.toLowerCase().includes(q)) ||
+           (item.responsavel && item.responsavel.toLowerCase().includes(q)) ||
+           (item.residencia && item.residencia.toLowerCase().includes(q));
+  });
+
+  const selectedVal = $('#aluno')?.value || '';
+  let html = '';
+
+  if(filtered.length > 0){
+    html += filtered.map(item => {
+      const isSel = (item.key === selectedVal);
+      return `
+        <div class="aluno-combobox-item" data-key="${escapeHtml(item.key)}" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #f1f5f9; background: ${isSel ? '#eff6ff' : '#ffffff'}; transition: background 0.15s; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-weight: 700; font-size: 13px; color: ${isSel ? '#1d4ed8' : '#0f172a'};">
+              ${escapeHtml(item.nome)}
+            </div>
+            <div style="font-size: 11.5px; color: #64748b; margin-top: 2px;">
+              ${item.cpf ? `<span style="margin-right: 8px;"><strong>CPF:</strong> ${escapeHtml(item.cpf)}</span>` : ''}
+              ${item.responsavel ? `<span><strong>Resp:</strong> ${escapeHtml(item.responsavel)}</span>` : ''}
+            </div>
+          </div>
+          ${isSel ? '<i class="fa-solid fa-check" style="color: #2563eb; font-size: 13px;"></i>' : ''}
+        </div>
+      `;
+    }).join('');
+  }
+
+  const exactMatch = list.some(item => item.nome.trim().toLowerCase() === q);
+  if(rawText && !exactMatch){
+    html += `
+      <div class="aluno-combobox-new-action" data-new-name="${escapeHtml(rawText)}" style="padding: 12px 14px; background: #f0fdf4; border-top: 1px solid #bbf7d0; cursor: pointer; color: #166534; display: flex; align-items: center; gap: 10px; font-weight: 700; transition: background 0.15s;">
+        <div style="width: 28px; height: 28px; border-radius: 8px; background: #16a34a; color: #fff; display: grid; place-items: center; font-size: 13px; flex-shrink: 0;">
+          <i class="fa-solid fa-user-plus"></i>
+        </div>
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-size: 13px; color: #15803d; font-weight: 800;">Usar "${escapeHtml(rawText)}" como novo aluno</div>
+          <div style="font-size: 11px; color: #166534; font-weight: 500;">Preenche o nome e permite cadastrar os dados na ficha</div>
+        </div>
+        <i class="fa-solid fa-arrow-right" style="color: #16a34a; font-size: 12px;"></i>
+      </div>
+    `;
+  }
+
+  if(!html){
+    html = '<div style="padding: 14px; font-size: 12.5px; color: #94a3b8; text-align: center; font-style: italic;">Nenhum aluno cadastrado. Digite o nome para iniciar o cadastro.</div>';
+  }
+
+  dropdown.innerHTML = html;
+  dropdown.style.display = 'block';
+
+  dropdown.querySelectorAll('.aluno-combobox-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      if(el.dataset.key !== selectedVal) el.style.background = '#f8fafc';
+    });
+    el.addEventListener('mouseleave', () => {
+      if(el.dataset.key !== selectedVal) el.style.background = '#ffffff';
+    });
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      selectAlunoOption(el.dataset.key);
+    });
+  });
+
+  const newAction = dropdown.querySelector('.aluno-combobox-new-action');
+  if(newAction){
+    newAction.addEventListener('mouseenter', () => {
+      newAction.style.background = '#dcfce7';
+    });
+    newAction.addEventListener('mouseleave', () => {
+      newAction.style.background = '#f0fdf4';
+    });
+    newAction.addEventListener('click', (e) => {
+      e.stopPropagation();
+      useTypedAsNewStudent(newAction.dataset.newName);
+    });
+  }
+}
+
+function useTypedAsNewStudent(typedName){
+  if(!typedName) return;
+  const sel = $('#aluno');
+  if(sel) sel.value = '';
+  const searchInput = $('#alunoSearchInput');
+  if(searchInput) searchInput.value = typedName;
+  const nomeCompleto = $('#nomeCompleto');
+  if(nomeCompleto) {
+    nomeCompleto.value = typedName;
+  }
+  const dd = $('#alunoDropdown');
+  if(dd) dd.style.display = 'none';
+  toast(`Aluno "${typedName}" inserido na ficha.`);
+  setTimeout(() => $('#nascimento')?.focus(), 100);
+}
+
+function selectAlunoOption(key){
+  const sel = $('#aluno');
+  if(!sel) return;
+  sel.value = key;
+  const opt = sel.selectedOptions[0];
+  const input = $('#alunoSearchInput');
+  if(input) {
+    input.value = opt ? opt.textContent : '';
+  }
+  const dd = $('#alunoDropdown');
+  if(dd) dd.style.display = 'none';
+  sel.dispatchEvent(new Event('change'));
+}
+
+$('#alunoSearchInput')?.addEventListener('focus', () => {
+  renderAlunoDropdown($('#alunoSearchInput').value);
+});
+
+$('#alunoSearchInput')?.addEventListener('input', (e) => {
+  const val = e.target.value;
+  if($('#nomeCompleto')) {
+    $('#nomeCompleto').value = val;
+  }
+  if($('#aluno')) {
+    $('#aluno').value = '';
+  }
+  renderAlunoDropdown(val);
+});
+
+$('#alunoSearchInput')?.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter'){
+    e.preventDefault();
+    const val = e.target.value.trim();
+    if(val){
+      useTypedAsNewStudent(val);
+    }
+  }
+});
+
+$('#nomeCompleto')?.addEventListener('input', (e) => {
+  if($('#alunoSearchInput')) {
+    $('#alunoSearchInput').value = e.target.value;
+  }
+  if($('#aluno')) {
+    $('#aluno').value = '';
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if(!e.target.closest('#alunoCombobox')){
+    const dd = $('#alunoDropdown');
+    if(dd) dd.style.display = 'none';
+  }
+});
+
+$('#aluno')?.addEventListener('change', () => {
+  const opt = $('#aluno')?.selectedOptions[0];
+  if($('#alunoSearchInput') && opt && $('#aluno').value){
+    $('#alunoSearchInput').value = opt.textContent;
+  }
+});
+
+function clearStudentFields(){
+  ['#nomeCompleto','#nomeSocial','#nascimento','#cpf','#rg','#filiacao','#responsavel','#residencia','#telefoneAluno','#referencia'].forEach(id=>setText(id,''));
+  $('#aluno').value='';
+  if($('#alunoSearchInput')) $('#alunoSearchInput').value = '';
+  const dd = $('#alunoDropdown');
+  if(dd) dd.style.display = 'none';
+  $('#alunoSearchInput')?.focus();
+}
 
 
 function fmtDate(v){
@@ -5011,7 +5463,58 @@ setTimeout(refreshAllRowTags, 1000);
 $('#escola').addEventListener('change',e=>{const d=schoolData[e.target.value]||{};setText('#escolaEndereco',d.address);setText('#escolaTelefone',d.phone)});
 $('#aluno').addEventListener('change',e=>{if(!e.target.value)return;const d=studentData[e.target.value];if(!d)return;setText('#nomeCompleto',d.nome);setText('#nomeSocial',d.social);setText('#nascimento',d.nascimento);setText('#cpf',d.cpf);setText('#rg',d.rg);setText('#filiacao',d.filiacao);setText('#responsavel',d.responsavel);setText('#residencia',d.residencia);setText('#telefoneAluno',d.telefone);setText('#referencia',d.referencia)});
 $('#newStudentBtn').addEventListener('click',()=>{clearStudentFields();toast('Digite os dados do novo aluno. Ele será cadastrado ao salvar a FICAI.')});
-$('#turma').addEventListener('change',e=>{const o=e.target.selectedOptions[0];setText('#modalidade',o?.dataset.modalidade||'');if(o?.dataset.ano&&$('#anoEscolar'))$('#anoEscolar').value=o.dataset.ano;if(o?.dataset.turno&&$('#turno'))$('#turno').value=o.dataset.turno});
+// Cálculo de faltas (dias corridos e dias úteis, excluindo sábado e domingo)
+function calculateFaltasDays(startStr, endStr){
+  if(!startStr || !endStr) return { corridos: 0, uteis: 0, text: '' };
+  
+  const [y1, m1, d1] = startStr.split('-').map(Number);
+  const [y2, m2, d2] = endStr.split('-').map(Number);
+  
+  if(!y1 || !m1 || !d1 || !y2 || !m2 || !d2) return { corridos: 0, uteis: 0, text: '' };
+
+  const start = new Date(Date.UTC(y1, m1 - 1, d1));
+  const end = new Date(Date.UTC(y2, m2 - 1, d2));
+  
+  if(isNaN(start.getTime()) || isNaN(end.getTime()) || end < start){
+    return { corridos: 0, uteis: 0, text: '' };
+  }
+  
+  let corridos = 0;
+  let uteis = 0;
+  
+  const cur = new Date(start);
+  while(cur <= end){
+    corridos++;
+    const dayOfWeek = cur.getUTCDay(); // 0 = Domingo, 6 = Sábado
+    if(dayOfWeek !== 0 && dayOfWeek !== 6){
+      uteis++;
+    }
+    cur.setUTCDate(cur.getUTCDate() + 1);
+  }
+  
+  const text = `${corridos} dia${corridos === 1 ? '' : 's'} corrido${corridos === 1 ? '' : 's'} e ${uteis} dia${uteis === 1 ? '' : 's'} útei${uteis === 1 ? 'l' : 's'}`;
+  return { corridos, uteis, text };
+}
+
+function updateFaltasCount(){
+  const start = $('#faltaInicio')?.value;
+  const end = $('#faltaFim')?.value;
+  const el = $('#diasFaltasCount');
+  if(!el) return;
+  
+  if(!start || !end){
+    el.textContent = '';
+    return;
+  }
+  
+  const res = calculateFaltasDays(start, end);
+  el.textContent = res.text;
+}
+
+$('#faltaInicio')?.addEventListener('input', updateFaltasCount);
+$('#faltaInicio')?.addEventListener('change', updateFaltasCount);
+$('#faltaFim')?.addEventListener('input', updateFaltasCount);
+$('#faltaFim')?.addEventListener('change', updateFaltasCount);
 
 // Limite de palavras
 $$('[data-wordlimit]').forEach(el=>el.addEventListener('input',()=>{let words=el.value.trim()?el.value.trim().split(/\s+/):[];const limit=Number(el.dataset.wordlimit);if(words.length>limit){el.value=words.slice(0,limit).join(' ');words=words.slice(0,limit)}const c=$('#'+el.dataset.counter);c.textContent=`${words.length} / ${limit} palavras`;c.classList.toggle('over',words.length>=limit)}));
@@ -5063,7 +5566,7 @@ $('#addSituation').onclick=()=>{const v=prompt('Nome da nova situação compleme
 function serializeForm(){const data={};$$('#ficaiForm input,#ficaiForm select,#ficaiForm textarea').forEach(el=>{if(!el.id)return;if(el.type==='checkbox'||el.type==='radio')data[el.id||el.name]=el.checked;else data[el.id]=el.value});data.motivos=checkedValues('#motivosGrid input');data.vulnerabilidades=checkedValues('#vulnGrid input');data.situacao=$('input[name="situacaoAluno"]:checked')?.value||'';data.catalogoSituacoesPersonalizadas=readLocalList(CUSTOM_STUDENT_SITUATIONS_KEY);data.catalogoVulnerabilidadesPersonalizadas=readLocalList(CUSTOM_VULNERABILITIES_KEY);data.diagnostico={};$$('#diagnosisGrid .diagnosis-box').forEach(box=>data.diagnostico[box.dataset.group]=[...box.querySelectorAll('input:checked')].map(i=>i.value));data.procedimentos=$$('[data-proc]').map(c=>({label:c.dataset.proc,checked:c.checked,date:$(`[data-proc-date="${CSS.escape(c.dataset.proc)}"]`)?.value||''}));data.situacoesPersonalizadas=$$('#customSituations .chip').map(c=>c.childNodes[0].textContent.trim());return data}
 function saveDraft(){localStorage.setItem('ficai4Draft',JSON.stringify(serializeForm()));toast('Rascunho salvo neste navegador.')}
 $('#saveDraft').onclick=e=>{e.preventDefault();saveDraft()};
-async function saveFicaiDatabase(){
+async function saveFicaiDatabase(silent = false){
   normalizeNumber();
   const nome=text('#nomeCompleto');
   if(!nome){$('#nomeCompleto').focus();toast('Informe o nome completo do aluno antes de salvar.');return false}
@@ -5074,26 +5577,95 @@ async function saveFicaiDatabase(){
   const school=$('#escola').selectedOptions[0]?.textContent||'';
   let existing=null;try{existing=await dbGet('ficais',$('#numeroFicai').value)}catch(_e){}
   const now=new Date().toISOString();
-  const record={numero:$('#numeroFicai').value,ano:$('#anoLetivo').value,studentKey:student.key,aluno:student.nome,escola:school==='Selecione...'?'':school,turma:$('#turma').value,situacao:$('input[name="situacaoAluno"]:checked')?.value||'',createdAt:existing?.createdAt||now,generatedAt:existing?.generatedAt||now,updatedAt:now,infoEntries:Array.isArray(existing?.infoEntries)?existing.infoEntries:[],data:form};
+  const sit=$('input[name="situacaoAluno"]:checked')?.value||'Infrequente';
+  const record={
+    numero:$('#numeroFicai').value,
+    ano:$('#anoLetivo').value,
+    studentKey:student.key,
+    aluno:student.nome,
+    escola:school==='Selecione...'?'':school,
+    turma:$('#turma').value,
+    situacao:sit,
+    section:'GERADOS',
+    createdAt:existing?.createdAt||now,
+    generatedAt:existing?.generatedAt||now,
+    updatedAt:now,
+    infoEntries:Array.isArray(existing?.infoEntries)?existing.infoEntries:[],
+    data:form
+  };
   try{
     await dbPut('students',student);
     await dbPut('ficais',record);
     localStorage.setItem('ficai4Draft',JSON.stringify(form));
     renderSavedFicai(record);
+    moveFicaiToGerados(record, sit);
     await loadSavedStudents();
-    toast(`FICAI ${record.numero} salva. Aluno cadastrado no banco local.`);
-    return true;
-  }catch(err){console.error(err);saveDraft();toast('Não foi possível acessar o banco local; o rascunho foi preservado.');return false}
+    if(!silent) toast(`FICAI ${record.numero} salva com sucesso e listada em Gerados no Dashboard.`);
+    return record;
+  }catch(err){
+    console.error(err);
+    saveDraft();
+    toast('Não foi possível acessar o banco local; o rascunho foi preservado.');
+    return false;
+  }
 }
 $('#saveBottom').onclick=async e=>{e.preventDefault();await saveFicaiDatabase()};
+
+async function encaminharFicaiAoCT(){
+  const record = await saveFicaiDatabase(true);
+  if(!record) return;
+
+  const ficaiNum = record.numero;
+  const studentName = record.aluno;
+  const escolaName = record.escola || 'E.M. Elmir Figueira';
+  const now = new Date().toISOString();
+  const dateToday = isoToday();
+
+  const entry = {
+    id: (crypto.randomUUID?.() || ('enc-ct-' + Date.now())),
+    date: dateToday,
+    type: 'Encaminhamento CT',
+    text: 'FICAI encaminhada formalmente ao Conselho Tutelar para providências e diligências.',
+    responsible: text('#profissional') || $('.user span')?.textContent?.trim() || 'Orientação Educacional',
+    createdAt: now
+  };
+
+  record.infoEntries = [...(record.infoEntries || []), entry];
+  record.situacao = 'Encaminhada ao Conselho Tutelar';
+  record.section = 'GERADOS';
+  record.isEncaminhadoCT = true;
+  record.updatedAt = now;
+
+  try {
+    await dbPut('ficais', record);
+    renderSavedFicai(record);
+    moveFicaiToGerados(record, 'Conselho Tutelar');
+  } catch(e) {
+    console.warn(e);
+  }
+
+  // Inserir / Atualizar na tabela do Conselho Tutelar
+  renderConselhoTableRow(record);
+
+  // Incrementar contador do CT
+  const statAguardando = $('#ctStatAguardando');
+  if(statAguardando){
+    const curr = parseInt(statAguardando.textContent || '12', 10);
+    statAguardando.textContent = (curr + 1).toString();
+  }
+
+  showView('conselho');
+  toast(`FICAI ${ficaiNum} salva e encaminhada com sucesso ao Conselho Tutelar!`);
+}
+$('#btnEncaminharCT')?.addEventListener('click', encaminharFicaiAoCT);
 $('#clearDraft').onclick=e=>{e.preventDefault();if(confirm('Limpar o formulário atual?')){localStorage.removeItem('ficai4Draft');$('#ficaiForm').reset();$('#escolaEndereco').value='';$('#escolaTelefone').value='';$('#modalidade').value='';autoGenerateFicaiNumber(true)}};
-function restore(){try{const data=JSON.parse(localStorage.getItem('ficai4Draft')||'null');if(!data)return;Object.entries(data).forEach(([k,v])=>{const el=$('#'+k);if(!el)return;if(typeof v==='boolean')el.checked=v;else if(typeof v==='string')el.value=v});(data.catalogoSituacoesPersonalizadas||[]).forEach(x=>createCustomStudentSituation(x,{persist:false,removable:true}));(data.catalogoVulnerabilidadesPersonalizadas||[]).forEach(x=>createCustomVulnerability(x,{persist:false,removable:true}));(data.motivos||[]).forEach(v=>{const el=[...$$('#motivosGrid input')].find(i=>i.value===v);if(el)el.checked=true});(data.vulnerabilidades||[]).forEach(v=>{let el=[...$$('#vulnGrid input')].find(i=>i.value===v);if(!el)el=createCustomVulnerability(v,{persist:false,removable:true});if(el)el.checked=true});if(data.situacao){let r=[...$$('input[name="situacaoAluno"]')].find(i=>i.value===data.situacao);if(!r)r=createCustomStudentSituation({name:data.situacao,description:'Situação recuperada desta FICAI.'},{persist:false,removable:true});if(r)r.checked=true}Object.entries(data.diagnostico||{}).forEach(([g,vals])=>{const box=[...$$('#diagnosisGrid .diagnosis-box')].find(b=>b.dataset.group===g);vals.forEach(v=>{const el=[...box.querySelectorAll('input')].find(i=>i.value===v);if(el)el.checked=true})});normalizeNumber()}catch(e){}}
+function restore(){try{const data=JSON.parse(localStorage.getItem('ficai4Draft')||'null');if(!data)return;Object.entries(data).forEach(([k,v])=>{const el=$('#'+k);if(!el)return;if(typeof v==='boolean')el.checked=v;else if(typeof v==='string')el.value=v});(data.catalogoSituacoesPersonalizadas||[]).forEach(x=>createCustomStudentSituation(x,{persist:false,removable:true}));(data.catalogoVulnerabilidadesPersonalizadas||[]).forEach(x=>createCustomVulnerability(x,{persist:false,removable:true}));(data.motivos||[]).forEach(v=>{const el=[...$$('#motivosGrid input')].find(i=>i.value===v);if(el)el.checked=true});(data.vulnerabilidades||[]).forEach(v=>{let el=[...$$('#vulnGrid input')].find(i=>i.value===v);if(!el)el=createCustomVulnerability(v,{persist:false,removable:true});if(el)el.checked=true});if(data.situacao){let r=[...$$('input[name="situacaoAluno"]')].find(i=>i.value===data.situacao);if(!r)r=createCustomStudentSituation({name:data.situacao,description:'Situação recuperada desta FICAI.'},{persist:false,removable:true});if(r)r.checked=true}Object.entries(data.diagnostico||{}).forEach(([g,vals])=>{const box=[...$$('#diagnosisGrid .diagnosis-box')].find(b=>b.dataset.group===g);vals.forEach(v=>{const el=[...box.querySelectorAll('input')].find(i=>i.value===v);if(el)el.checked=true})});normalizeNumber();updateFaltasCount()}catch(e){}}
 
 // Exemplo
-$('#loadDemo').onclick=e=>{e.preventDefault();$('#escola').value='aparecida';$('#escola').dispatchEvent(new Event('change'));$('#aluno').value='demo';$('#aluno').dispatchEvent(new Event('change'));$('#anoEscolar').value='7º Ano';$('#turma').value='7º Ano B';$('#turma').dispatchEvent(new Event('change'));$('#turno').value='Manhã';$('#faltaInicio').value=`${currentYear}-08-03`;$('#faltaFim').value=`${currentYear}-08-14`;$('#dataComunicacao').value=`${currentYear}-08-17`;$('#profissional').value='Professor(a) / Orientador(a)';$('#assinaturaProf').value='Matrícula funcional';const p=$$('[data-proc]');p[0].checked=true;p[1].checked=true;p[2].checked=true;$$('[data-proc-date]').slice(0,3).forEach((i,idx)=>i.value=`${currentYear}-08-${String(4+idx*3).padStart(2,'0')}`);const motivo=[...$$('#motivosGrid input')].find(i=>i.value==='Falta de motivação');if(motivo)motivo.checked=true;$('input[name="situacaoAluno"][value="Infrequente"]').checked=true;const vuln=[...$$('#vulnGrid input')].find(i=>i.value==='Risco Social');if(vuln)vuln.checked=true;const diag=[...$$('#diagnosisGrid input')].find(i=>i.value==='Falta de Motivação');if(diag)diag.checked=true;$('#observacaoInicial').value='Exemplo demonstrativo para visualização do fluxo e da folha A4.';syncPrint();toast('Exemplo demonstrativo carregado.')};
+$('#loadDemo').onclick=e=>{e.preventDefault();$('#escola').value='aparecida';$('#escola').dispatchEvent(new Event('change'));$('#aluno').value='demo';$('#aluno').dispatchEvent(new Event('change'));$('#anoEscolar').value='7º Ano';$('#turma').value='7º Ano B';$('#turma').dispatchEvent(new Event('change'));$('#turno').value='Manhã';$('#faltaInicio').value=`${currentYear}-08-03`;$('#faltaFim').value=`${currentYear}-08-14`;$('#dataComunicacao').value=`${currentYear}-08-17`;$('#profissional').value='Professor(a) / Orientador(a)';$('#assinaturaProf').value='Matrícula funcional';const p=$$('[data-proc]');p[0].checked=true;p[1].checked=true;p[2].checked=true;$$('[data-proc-date]').slice(0,3).forEach((i,idx)=>i.value=`${currentYear}-08-${String(4+idx*3).padStart(2,'0')}`);const motivo=[...$$('#motivosGrid input')].find(i=>i.value==='Falta de motivação');if(motivo)motivo.checked=true;$('input[name="situacaoAluno"][value="Infrequente"]').checked=true;const vuln=[...$$('#vulnGrid input')].find(i=>i.value==='Risco Social');if(vuln)vuln.checked=true;const diag=[...$$('#diagnosisGrid input')].find(i=>i.value==='Falta de Motivação');if(diag)diag.checked=true;$('#observacaoInicial').value='Exemplo demonstrativo para visualização do fluxo e da folha A4.';updateFaltasCount();syncPrint();toast('Exemplo demonstrativo carregado.')};
 
 function pset(key,value){$$(`[data-p="${key}"]`).forEach(el=>{el.textContent=value||''})}
-function syncPrint(){normalizeNumber();const school=$('#escola').selectedOptions[0]?.textContent||'';pset('numero',$('#numeroFicai').value);pset('escola',school==='Selecione...'?'':school);pset('escolaEndereco',text('#escolaEndereco'));pset('escolaTelefone',text('#escolaTelefone'));pset('nome',text('#nomeCompleto'));pset('nomeSocial',text('#nomeSocial'));pset('nascimento',fmtDate(text('#nascimento')));pset('filiacao',text('#filiacao'));pset('responsavel',text('#responsavel'));pset('cpf',text('#cpf'));pset('rg',text('#rg'));pset('telefone',text('#telefoneAluno'));pset('residencia',text('#residencia'));pset('referencia',text('#referencia'));pset('anoEscolar',$('#anoEscolar').value);pset('turma',$('#turma').value);pset('turno',$('#turno').value);pset('modalidade',text('#modalidade'));pset('periodoFaltas',[fmtDate(text('#faltaInicio')),fmtDate(text('#faltaFim'))].filter(Boolean).join(' à '));pset('dataComunicacao',fmtDate(text('#dataComunicacao')));pset('assinaturaProf',text('#assinaturaProf')||'Assinatura e matrícula do Professor regente e/ou Orientador Educacional / Coord. Pedagógico');pset('relato',text('#relatoVisita'));pset('outrosMotivos',text('#outrosMotivos'));const sit=$('input[name="situacaoAluno"]:checked')?.value||'';pset('situacao',sit);pset('vulnerabilidades',checkedValues('#vulnGrid input').join(', '));const custom=$$('#customSituations .chip').map(c=>c.childNodes[0].textContent.trim());pset('observacao',[...custom,text('#observacaoInicial')].filter(Boolean).join(' - '));pset('ctRecebimento',text('#ctRecebimento'));pset('ctDiligencias',text('#ctDiligencias'));pset('ctDevolucao',text('#ctDevolucao'));pset('ctConselheiro',text('#ctConselheiro'));pset('promotor',text('#promotor'));pset('promData',fmtDate(text('#promData')));
+function syncPrint(){normalizeNumber();updateFaltasCount();const school=$('#escola').selectedOptions[0]?.textContent||'';pset('numero',$('#numeroFicai').value);pset('escola',school==='Selecione...'?'':school);pset('escolaEndereco',text('#escolaEndereco'));pset('escolaTelefone',text('#escolaTelefone'));pset('nome',text('#nomeCompleto'));pset('nomeSocial',text('#nomeSocial'));pset('nascimento',fmtDate(text('#nascimento')));pset('filiacao',text('#filiacao'));pset('responsavel',text('#responsavel'));pset('cpf',text('#cpf'));pset('rg',text('#rg'));pset('telefone',text('#telefoneAluno'));pset('residencia',text('#residencia'));pset('referencia',text('#referencia'));pset('anoEscolar',$('#anoEscolar').value);pset('turma',$('#turma').value);pset('turno',$('#turno').value);pset('modalidade',text('#modalidade'));pset('periodoFaltas',[fmtDate(text('#faltaInicio')),fmtDate(text('#faltaFim'))].filter(Boolean).join(' à '));pset('dataComunicacao',fmtDate(text('#dataComunicacao')));pset('assinaturaProf',text('#assinaturaProf')||'Assinatura e matrícula do Professor regente e/ou Orientador Educacional / Coord. Pedagógico');pset('relato',text('#relatoVisita'));pset('outrosMotivos',text('#outrosMotivos'));const sit=$('input[name="situacaoAluno"]:checked')?.value||'';pset('situacao',sit);pset('vulnerabilidades',checkedValues('#vulnGrid input').join(', '));const custom=$$('#customSituations .chip').map(c=>c.childNodes[0].textContent.trim());pset('observacao',[...custom,text('#observacaoInicial')].filter(Boolean).join(' - '));pset('ctRecebimento',text('#ctRecebimento'));pset('ctDiligencias',text('#ctDiligencias'));pset('ctDevolucao',text('#ctDevolucao'));pset('ctConselheiro',text('#ctConselheiro'));pset('promotor',text('#promotor'));pset('promData',fmtDate(text('#promData')));
   const procs=$$('[data-proc]').map(c=>({label:c.dataset.proc,checked:c.checked,date:fmtDate($(`[data-proc-date="${CSS.escape(c.dataset.proc)}"]`)?.value||'')}));$('#pProcedimentos').innerHTML=procs.map(x=>`<div class="p-check"><span class="p-box">${x.checked?'X':''}</span><span>${escapeHtml(x.label)}${x.date?` <b>Data:</b> ${x.date}`:''}</span></div>`).join('');
   const allMotivos=$$('#motivosGrid input').map(c=>({label:c.parentElement.innerText.trim(),checked:c.checked}));$('#pMotivos').innerHTML=allMotivos.map(x=>`<div class="p-check"><span class="p-box">${x.checked?'X':''}</span><span>${escapeHtml(x.label)}</span></div>`).join('');
   const diag=[];$$('#diagnosisGrid .diagnosis-box').forEach(box=>{const vals=[...box.querySelectorAll('input:checked')].map(i=>i.value);diag.push(`<div class="p-diag"><b>${escapeHtml(box.dataset.group)}</b><span>${escapeHtml(vals.join(', ')||'—')}</span></div>`)});$('#pDiagnostico').innerHTML=diag.join('');
@@ -6184,16 +6756,255 @@ $('#view-config').addEventListener('click',e=>{const edit=e.target.closest('[dat
 $('#closeConfigModal').onclick=closeConfigModal;$('#cancelConfigModal').onclick=closeConfigModal;$('#saveConfigModal').onclick=saveConfigRecord;$('#configModal').addEventListener('click',e=>{if(e.target===$('#configModal'))closeConfigModal()});
 $('#configForm').addEventListener('keydown',e=>{if(e.key==='Escape')closeConfigModal();if(e.key==='Enter'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();saveConfigRecord()}});
 
-
 // Informações da FICAI: consulta consolidada + registros pós-geração
 let activeInfoRecord=null;
 function initials(name=''){const parts=name.trim().split(/\s+/).filter(Boolean);return ((parts[0]?.[0]||'A')+(parts.length>1?(parts.at(-1)?.[0]||''):'')).toUpperCase()}
 function isoToday(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function statusClass(v=''){const s=v.toLowerCase();if(s.includes('evad'))return 'red';if(s.includes('sem acesso'))return 'yellow';if(s.includes('retorn')||s.includes('final'))return 'green';return ''}
+
+// Dicionário Geográfico de Bairros, Localidades e Municípios da Região (Itaguaí / Mangaratiba / Costa Verde)
+const REGION_GEO_LOCATIONS = {
+  'muriqui': { lng: -43.9430, lat: -22.9230, label: 'Vila Muriqui, Mangaratiba' },
+  'dilermano': { lng: -43.9430, lat: -22.9230, label: 'Vila Muriqui, Mangaratiba' },
+  'juventino': { lng: -43.9430, lat: -22.9230, label: 'Vila Muriqui, Mangaratiba' },
+  'itacuruca': { lng: -43.9050, lat: -22.9350, label: 'Itacuruçá, Mangaratiba' },
+  'itacuruçá': { lng: -43.9050, lat: -22.9350, label: 'Itacuruçá, Mangaratiba' },
+  'mangaratiba': { lng: -44.0400, lat: -22.9600, label: 'Mangaratiba' },
+  'conceicao de jacarei': { lng: -44.1500, lat: -23.0300, label: 'Conceição de Jacareí' },
+  'conceição de jacareí': { lng: -44.1500, lat: -23.0300, label: 'Conceição de Jacareí' },
+  'praia grande': { lng: -44.0150, lat: -22.9550, label: 'Praia Grande, Mangaratiba' },
+  'ibicui': { lng: -43.9850, lat: -22.9450, label: 'Ibicuí, Mangaratiba' },
+  'ibicuí': { lng: -43.9850, lat: -22.9450, label: 'Ibicuí, Mangaratiba' },
+  'coroa grande': { lng: -43.8560, lat: -22.9120, label: 'Coroa Grande, Itaguaí' },
+  'acre': { lng: -43.8560, lat: -22.9120, label: 'Coroa Grande, Itaguaí' },
+  'ilha da madeira': { lng: -43.8320, lat: -22.9260, label: 'Ilha da Madeira, Itaguaí' },
+  'porto': { lng: -43.8320, lat: -22.9260, label: 'Ilha da Madeira, Itaguaí' },
+  'brisamar': { lng: -43.7920, lat: -22.8750, label: 'Brisamar, Itaguaí' },
+  'jardim mar': { lng: -43.7950, lat: -22.8760, label: 'Jardim Mar, Itaguaí' },
+  'vila geny': { lng: -43.7850, lat: -22.8710, label: 'Vila Geny, Itaguaí' },
+  'vila margarida': { lng: -43.7820, lat: -22.8690, label: 'Vila Margarida, Itaguaí' },
+  'bocaiuva': { lng: -43.7780, lat: -22.8680, label: 'Centro, Itaguaí' },
+  'bocaiúva': { lng: -43.7780, lat: -22.8680, label: 'Centro, Itaguaí' },
+  'centro': { lng: -43.7770, lat: -22.8660, label: 'Centro, Itaguaí' },
+  'ivete lino': { lng: -43.7770, lat: -22.8660, label: 'Centro, Itaguaí' },
+  'teotonio': { lng: -43.7770, lat: -22.8660, label: 'Centro, Itaguaí' },
+  'teotônio': { lng: -43.7770, lat: -22.8660, label: 'Centro, Itaguaí' },
+  'monte serrat': { lng: -43.7710, lat: -22.8610, label: 'Monte Serrat, Itaguaí' },
+  'mont serrat': { lng: -43.7710, lat: -22.8610, label: 'Monte Serrat, Itaguaí' },
+  'prefeito dudu': { lng: -43.7710, lat: -22.8610, label: 'Monte Serrat, Itaguaí' },
+  'engenho': { lng: -43.7690, lat: -22.8580, label: 'Engenho, Itaguaí' },
+  'manoel soares': { lng: -43.7690, lat: -22.8580, label: 'Engenho, Itaguaí' },
+  'joao rosa': { lng: -43.7690, lat: -22.8580, label: 'Engenho, Itaguaí' },
+  'parque paraiso': { lng: -43.7650, lat: -22.8520, label: 'Parque Paraíso, Itaguaí' },
+  'parque paraíso': { lng: -43.7650, lat: -22.8520, label: 'Parque Paraíso, Itaguaí' },
+  'chaperó': { lng: -43.7380, lat: -22.8250, label: 'Chaperó, Itaguaí' },
+  'chapero': { lng: -43.7380, lat: -22.8250, label: 'Chaperó, Itaguaí' },
+  'santa rosa': { lng: -43.7250, lat: -22.8100, label: 'Santa Rosa, Itaguaí' },
+  'raiz da serra': { lng: -43.7280, lat: -22.8050, label: 'Raiz da Serra, Itaguaí' },
+  'mazomba': { lng: -43.7550, lat: -22.8350, label: 'Mazomba, Itaguaí' },
+  'saco da prata': { lng: -43.7420, lat: -22.8300, label: 'Saco da Prata, Itaguaí' },
+  'jardim america': { lng: -43.7720, lat: -22.8640, label: 'Jardim América, Itaguaí' },
+  'jardim américa': { lng: -43.7720, lat: -22.8640, label: 'Jardim América, Itaguaí' },
+  'ibirapitanga': { lng: -43.7680, lat: -22.8600, label: 'Ibirapitanga, Itaguaí' }
+};
+
+let infoMapInstance = null;
+let currentMapMarkers = [];
+
+function geocodeAddress(text, fallbackBase = { lng: -43.7770, lat: -22.8660 }) {
+  if (!text) return { ...fallbackBase };
+  const lower = text.toLowerCase();
+  for (const [key, coords] of Object.entries(REGION_GEO_LOCATIONS)) {
+    if (lower.includes(key)) {
+      return { lng: coords.lng, lat: coords.lat };
+    }
+  }
+  let hash = 0;
+  for (let i = 0; i < text.length; i++) hash = ((hash << 5) - hash) + text.charCodeAt(i);
+  const offsetLng = (((Math.abs(hash) % 50) + 5) / 1000) * (hash % 2 === 0 ? 0.03 : -0.03);
+  const offsetLat = (((Math.abs(hash >> 2) % 50) + 5) / 1000) * (hash % 3 === 0 ? 0.02 : -0.02);
+  return { lng: fallbackBase.lng + offsetLng, lat: fallbackBase.lat + offsetLat };
+}
+
+function getMapCoordinatesForFicai(r) {
+  const d = r.data || {};
+  const escolaName = r.escola || d.escola || 'Colégio M. Senador Teotônio Vilella';
+  let escolaEndereco = d.escolaEndereco || '';
+  const schoolList = (configData && configData.escolas) ? configData.escolas : [];
+  const foundSchool = schoolList.find(s => s.nome === escolaName || (s.id && s.id === escolaName) || sameText(s.nome, escolaName));
+  if (foundSchool) { if (!escolaEndereco) escolaEndereco = foundSchool.endereco; }
+  const escolaCoords = geocodeAddress(`${escolaName} ${escolaEndereco}`, { lng: -43.7770, lat: -22.8660 });
+  const alunoName = r.aluno || d.nomeCompleto || 'Aluno';
+  const alunoEndereco = d.residencia || r.residencia || 'Endereço residencial cadastrado';
+  const alunoCoords = geocodeAddress(`${alunoEndereco} ${alunoName}`, { lng: -43.9430, lat: -22.9230 });
+  return {
+    escola: { name: foundSchool?.nome || escolaName, endereco: escolaEndereco, lng: escolaCoords.lng, lat: escolaCoords.lat },
+    aluno: { name: alunoName, endereco: alunoEndereco, lng: alunoCoords.lng, lat: alunoCoords.lat }
+  };
+}
+
+function generateRoutePath(origLng, origLat, destLng, destLat) {
+  if (destLng < -43.88 || origLng < -43.88) {
+    if (origLng > destLng) {
+      return [[origLng, origLat], [-43.7980, -22.8760], [-43.8300, -22.8980], [-43.8620, -22.9150], [-43.9050, -22.9320], [destLng, destLat]];
+    } else {
+      return [[origLng, origLat], [-43.9050, -22.9320], [-43.8620, -22.9150], [-43.8300, -22.8980], [-43.7980, -22.8760], [destLng, destLat]];
+    }
+  }
+  const midLng1 = origLng + (destLng - origLng) * 0.35 + (destLat - origLat) * 0.12;
+  const midLat1 = origLat + (destLat - origLat) * 0.30 - (destLng - origLng) * 0.08;
+  const midLng2 = origLng + (destLng - origLng) * 0.70 - (destLat - origLat) * 0.09;
+  const midLat2 = origLat + (destLat - origLat) * 0.75 + (destLng - origLng) * 0.05;
+  return [[origLng, origLat], [midLng1, midLat1], [midLng2, midLat2], [destLng, destLat]];
+}
+
+function initOrUpdateInfoMap(escolaCoords, alunoCoords, escolaName, alunoName, alunoEndereco) {
+  const container = document.getElementById('infoMapContainer');
+  if (!container || typeof maplibregl === 'undefined') return;
+  const { lng: origLng, lat: origLat } = escolaCoords;
+  const { lng: destLng, lat: destLat } = alunoCoords;
+
+  if ($('#infoRouteEscolaText')) $('#infoRouteEscolaText').innerHTML = `<i class="fa-solid fa-school" style="color: #2563eb;"></i> <strong>Origem:</strong> ${escapeHtml(escolaName)}`;
+  if ($('#infoRouteAlunoText')) $('#infoRouteAlunoText').innerHTML = `<i class="fa-solid fa-house-user" style="color: #16a34a;"></i> <strong>Destino:</strong> ${escapeHtml(alunoEndereco || alunoName)}`;
+
+  const dLat = (destLat - origLat) * 111.32;
+  const dLng = (destLng - origLng) * 111.32 * Math.cos(origLat * Math.PI / 180);
+  let distKm = (Math.sqrt(dLat * dLat + dLng * dLng) * 1.35).toFixed(1);
+  if (parseFloat(distKm) < 1.0) distKm = '1.8';
+  if (destLng < -43.88 || origLng < -43.88) {
+    distKm = '23.4';
+  }
+
+  const timeMin = Math.max(4, Math.round(parseFloat(distKm) * 1.3 + 4));
+  if ($('#infoRouteBadge')) {
+    $('#infoRouteBadge').innerHTML = `<i class="fa-solid fa-route"></i> ~${distKm} km · ${timeMin} min`;
+  }
+
+  const pathCoordinates = generateRoutePath(origLng, origLat, destLng, destLat);
+
+  const routeGeoJSON = {
+    type: 'Feature',
+    properties: {},
+    geometry: {
+      type: 'LineString',
+      coordinates: pathCoordinates
+    }
+  };
+
+  const centerLng = (origLng + destLng) / 2;
+  const centerLat = (origLat + destLat) / 2;
+
+  if (!infoMapInstance) {
+    infoMapInstance = new maplibregl.Map({
+      container: 'infoMapContainer',
+      style: 'https://tiles.openfreemap.org/styles/positron',
+      center: [centerLng, centerLat],
+      zoom: 11.5,
+      attributionControl: false
+    });
+
+    infoMapInstance.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+
+    infoMapInstance.on('load', () => {
+      renderMapRouteAndMarkers(routeGeoJSON, escolaCoords, alunoCoords, escolaName, alunoName, alunoEndereco);
+    });
+  } else {
+    if (infoMapInstance.isStyleLoaded()) {
+      renderMapRouteAndMarkers(routeGeoJSON, escolaCoords, alunoCoords, escolaName, alunoName, alunoEndereco);
+    } else {
+      infoMapInstance.once('load', () => {
+        renderMapRouteAndMarkers(routeGeoJSON, escolaCoords, alunoCoords, escolaName, alunoName, alunoEndereco);
+      });
+    }
+  }
+
+  setTimeout(() => {
+    if (infoMapInstance) {
+      infoMapInstance.resize();
+      const bounds = new maplibregl.LngLatBounds();
+      pathCoordinates.forEach(pt => bounds.extend(pt));
+      infoMapInstance.fitBounds(bounds, { padding: 45, maxZoom: 14.5 });
+    }
+  }, 250);
+}
+
+function renderMapRouteAndMarkers(routeGeoJSON, escolaCoords, alunoCoords, escolaName, alunoName, alunoEndereco) {
+  if (!infoMapInstance) return;
+
+  currentMapMarkers.forEach(m => m.remove());
+  currentMapMarkers = [];
+
+  if (infoMapInstance.getSource('route-src')) {
+    infoMapInstance.getSource('route-src').setData(routeGeoJSON);
+  } else {
+    infoMapInstance.addSource('route-src', {
+      type: 'geojson',
+      data: routeGeoJSON
+    });
+
+    infoMapInstance.addLayer({
+      id: 'route-shadow',
+      type: 'line',
+      source: 'route-src',
+      layout: { 'line-join': 'round', 'line-cap': 'round' },
+      paint: { 'line-color': '#0f172a', 'line-width': 7, 'line-opacity': 0.18 }
+    });
+
+    infoMapInstance.addLayer({
+      id: 'route-line',
+      type: 'line',
+      source: 'route-src',
+      layout: { 'line-join': 'round', 'line-cap': 'round' },
+      paint: { 'line-color': '#2563eb', 'line-width': 4.5, 'line-opacity': 0.95 }
+    });
+  }
+
+  const elEscola = document.createElement('div');
+  elEscola.className = 'custom-map-marker marker-escola';
+  elEscola.style.cssText = 'width: 32px; height: 32px; border-radius: 50%; background: #2563eb; color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(37,99,235,0.4); border: 2.5px solid #fff; cursor: pointer;';
+  elEscola.innerHTML = '<i class="fa-solid fa-school" style="font-size: 13px;"></i>';
+
+  const popupEscola = new maplibregl.Popup({ offset: 25 }).setHTML(`
+    <div style="font-family: inherit; font-size: 12px;">
+      <strong style="color: #1e3a8a; display: block; margin-bottom: 2px;">🏫 ${escapeHtml(escolaName)}</strong>
+      <span style="color: #64748b; font-size: 11px;">Ponto de Partida da Escola</span>
+    </div>
+  `);
+
+  const markerEscola = new maplibregl.Marker({ element: elEscola })
+    .setLngLat([escolaCoords.lng, escolaCoords.lat])
+    .setPopup(popupEscola)
+    .addTo(infoMapInstance);
+  currentMapMarkers.push(markerEscola);
+
+  const elAluno = document.createElement('div');
+  elAluno.className = 'custom-map-marker marker-aluno';
+  elAluno.style.cssText = 'width: 32px; height: 32px; border-radius: 50%; background: #16a34a; color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(22,163,74,0.4); border: 2.5px solid #fff; cursor: pointer;';
+  elAluno.innerHTML = '<i class="fa-solid fa-house-user" style="font-size: 13px;"></i>';
+
+  const popupAluno = new maplibregl.Popup({ offset: 25 }).setHTML(`
+    <div style="font-family: inherit; font-size: 12px;">
+      <strong style="color: #14532d; display: block; margin-bottom: 2px;">🏠 ${escapeHtml(alunoName)}</strong>
+      <span style="color: #64748b; font-size: 11px;">${escapeHtml(alunoEndereco || 'Residência do Aluno')}</span>
+    </div>
+  `);
+
+  const markerAluno = new maplibregl.Marker({ element: elAluno })
+    .setLngLat([alunoCoords.lng, alunoCoords.lat])
+    .setPopup(popupAluno)
+    .addTo(infoMapInstance);
+  currentMapMarkers.push(markerAluno);
+
+  const bounds = new maplibregl.LngLatBounds();
+  bounds.extend([escolaCoords.lng, escolaCoords.lat]);
+  bounds.extend([alunoCoords.lng, alunoCoords.lat]);
+  infoMapInstance.fitBounds(bounds, { padding: 45, maxZoom: 14.5 });
+}
+
 function demoRecordFromTable(numero){
   const row=[...$$('#fichaTable tbody tr')].find(r=>r.cells[0]?.innerText.trim()===numero);if(!row)return null;
   const aluno=row.cells[1]?.innerText.trim()||'Aluno';const situacao=row.cells[4]?.innerText.trim()||'';const year=(numero.split('/')[1]||currentYear).toString();
-  return {numero,ano:year,studentKey:studentKey(aluno),aluno,escola:row.cells[2]?.innerText.trim()||'',turma:row.cells[3]?.innerText.trim()||'',situacao,createdAt:new Date().toISOString(),generatedAt:new Date().toISOString(),updatedAt:new Date().toISOString(),infoEntries:[],demoOnly:true,data:{nomeCompleto:aluno,turma:row.cells[3]?.innerText.trim()||'',situacao,observacaoInicial:'Registro demonstrativo. Salve uma FICAI pelo formulário para visualizar todos os dados consolidados.',vulnerabilidades:[],diagnostico:{},procedimentos:[]}};
+  return {numero,ano:year,studentKey:studentKey(aluno),aluno,escola:row.cells[2]?.innerText.trim()||'Colégio M. Senador Teotônio Vilella',turma:row.cells[3]?.innerText.trim()||'',situacao,createdAt:new Date().toISOString(),generatedAt:new Date().toISOString(),updatedAt:new Date().toISOString(),infoEntries:[],demoOnly:true,data:{nomeCompleto:aluno,turma:row.cells[3]?.innerText.trim()||'',situacao,observacaoInicial:'Registro demonstrativo. Salve uma FICAI pelo formulário para visualizar todos os dados consolidados.',residencia:aluno.toLowerCase().includes('ana')?'Rua Dilermano Juventino da Silva, 100, Vila Muriqui, Mangaratiba, RJ':'Rua Prefeito Dudu, 45 - Monte Serrat - Itaguaí/RJ',vulnerabilidades:[],diagnostico:{},procedimentos:[]}};
 }
 function procedureRows(data={}){
   const rows=Array.isArray(data.procedimentos)?data.procedimentos.filter(p=>p.checked):[];
@@ -6201,6 +7012,7 @@ function procedureRows(data={}){
   return rows.map(p=>`<div class="info-action-row"><span class="info-action-icon"><i class="fa-solid fa-check"></i></span><span>${escapeHtml(p.label||'Procedimento')}</span><span class="info-action-date">${escapeHtml(fmtDate(p.date||''))}</span></div>`).join('');
 }
 function diagnosticValues(data={}){const out=[];Object.entries(data.diagnostico||{}).forEach(([group,vals])=>(vals||[]).forEach(v=>out.push(`${group}: ${v}`)));return out}
+
 function renderInfoModal(r){
   activeInfoRecord=r;const d=r.data||{};const name=r.aluno||d.nomeCompleto||'Aluno';
   $('#infoAvatar').textContent=initials(name);$('#infoStudentName').textContent=name;$('#infoModalNumber').textContent=`${r.numero||'00021/2026'} · acompanhamento de caso`;
@@ -6216,21 +7028,180 @@ function renderInfoModal(r){
   $('#infoHistoryCount').textContent=`${entries.length} REGISTRO${entries.length===1?'':'S'}`;
   $('#infoTimeline').innerHTML=entries.length?entries.map(e=>`<div class="timeline-item"><div class="timeline-top"><span class="timeline-type">${escapeHtml(e.type||'Registro')}</span><span class="timeline-date">${escapeHtml(fmtDate(e.date||''))}</span></div><div class="timeline-text">${escapeHtml(e.text||'')}</div><div class="timeline-by"><i class="fa-regular fa-user"></i> ${escapeHtml(e.responsible||'Usuário')} · registrado em ${escapeHtml(displayDateTime(e.createdAt)||'agora')}</div></div>`).join(''):'<div class="info-empty">Ainda não há registros posteriores à geração da FICAI.</div>';
   $('#infoEntryDate').value=isoToday();$('#infoEntryResponsible').value=$('.user span')?.textContent?.trim()||'Usuário';$('#infoEntryText').value='';
+
+  // Inicializar e traçar a rota no OpenFreeMap
+  const coords = getMapCoordinatesForFicai(r);
+  setTimeout(() => {
+    initOrUpdateInfoMap(coords.escola, coords.aluno, coords.escola.name, coords.aluno.name, coords.aluno.endereco);
+  }, 100);
 }
 async function openInfoModal(numero){
   let r=null;try{r=await dbGet('ficais',numero)}catch(_e){}if(!r)r=demoRecordFromTable(numero);if(!r){toast('FICAI não encontrada.');return}
   renderInfoModal(r);$('#infoModal').classList.add('open');$('#infoModal').setAttribute('aria-hidden','false');
 }
-function closeInfoModal(){$('#infoModal').classList.remove('open');$('#infoModal').setAttribute('aria-hidden','true')}
-$('#closeInfo').onclick=closeInfoModal;$('#infoModal').addEventListener('click',e=>{if(e.target===$('#infoModal'))closeInfoModal()});
-function moveFicaiToGerados(r, targetType){
+function closeInfoModal(){
+  $('#infoModal')?.classList.remove('open');
+  $('#infoModal')?.setAttribute('aria-hidden','true');
+}
+$('#closeInfo')?.addEventListener('click', closeInfoModal);
+$('#infoModal')?.addEventListener('click', e => {
+  if(e.target === $('#infoModal')) closeInfoModal();
+});
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape' && $('#infoModal')?.classList.contains('open')) closeInfoModal();
+});
+function fmtDateTime(iso){
+  if(!iso) return '';
+  const d = new Date(iso);
+  if(isNaN(d.getTime())) return String(iso);
+  const dia = String(d.getDate()).padStart(2, '0');
+  const mes = String(d.getMonth() + 1).padStart(2, '0');
+  const ano = d.getFullYear();
+  const hora = String(d.getHours()).padStart(2, '0');
+  const min = String(d.getMinutes()).padStart(2, '0');
+  const seg = String(d.getSeconds()).padStart(2, '0');
+  return `${dia}/${mes}/${ano} - ${hora}:${min}:${seg}`;
+}
+
+function moveFicaiToRecebidosCT(r, diligencia = '', devText = ''){
   if(!r || !r.numero) return;
   const num = r.numero;
   const shortNum = num.split('/')[0] || num;
   const student = r.aluno || r.data?.nomeCompleto || 'Aluno';
   const turma = r.turma || r.data?.turma || '—';
-  const cleanTurma = turma.replace('º Ano ','').replace(' ','');
-  const sitText = `Devolvida: ${targetType}`;
+  const cleanTurma = turma.replace('º Ano ','').replace('º ano ','').replace('Ano ','').replace('ano ','').replace(' ','');
+  const sitText = 'Devolutiva CT';
+
+  // 1. Remover do Gerados se estiver presente
+  const geradosRow = document.querySelector(`#listGerados .dash-list-row[data-ficai="${CSS.escape(num)}"]`) ||
+                     [...document.querySelectorAll('#listGerados .dash-list-row')].find(el => el.dataset.ficai === num || el.dataset.student === student);
+  if(geradosRow) geradosRow.remove();
+
+  // 2. Procurar ou criar em Recebidos CT
+  let ctRow = document.querySelector(`#listRecebidosCT .dash-list-row[data-ficai="${CSS.escape(num)}"]`) ||
+              [...document.querySelectorAll('#listRecebidosCT .dash-list-row')].find(el => el.dataset.ficai === num || el.dataset.student === student);
+
+  const dateFormatted = fmtDateTime(r.updatedAt || r.createdAt || r.generatedAt || new Date().toISOString());
+  const tooltipText = diligencia ? `Devolutiva do Conselho Tutelar: ${diligencia}` : `Devolutiva do Conselho Tutelar recebida para ${student}`;
+
+  if(ctRow){
+    ctRow.dataset.sit = sitText;
+    ctRow.dataset.turma = cleanTurma;
+    const iconDiv = ctRow.querySelector('.dash-row-status-icon');
+    if(iconDiv){
+      iconDiv.className = 'dash-row-status-icon alert-warn';
+      iconDiv.setAttribute('data-tooltip', tooltipText);
+      iconDiv.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+    }
+    const link = ctRow.querySelector('.dash-item-link');
+    if(link){
+      link.dataset.sit = sitText;
+      link.setAttribute('data-tooltip', `Clique para ver a devolutiva do Conselho Tutelar e histórico de ${student}`);
+      link.innerHTML = `<strong>${escapeHtml(shortNum)}</strong>/${escapeHtml(student)} / ${escapeHtml(cleanTurma)}`;
+    }
+    const dateSpan = ctRow.querySelector('.dash-row-date');
+    if(dateSpan) dateSpan.textContent = dateFormatted;
+  } else {
+    ctRow = document.createElement('div');
+    ctRow.className = 'dash-list-row';
+    ctRow.dataset.ficai = num;
+    ctRow.dataset.student = student;
+    ctRow.dataset.turma = cleanTurma;
+    ctRow.dataset.sit = sitText;
+
+    ctRow.innerHTML = `
+      <label class="custom-check-wrap" data-tooltip="Selecionar este registro">
+        <input type="checkbox" class="item-check ct-check">
+      </label>
+      <div class="dash-row-status-icon alert-warn" data-tooltip="${escapeHtml(tooltipText)}">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <div class="dash-row-content">
+        <a href="javascript:void(0)" class="dash-item-link" data-student="${escapeHtml(student)}" data-ficai="${escapeHtml(num)}" data-turma="${escapeHtml(turma)}" data-sit="${escapeHtml(sitText)}" data-tooltip="Clique para ver a devolutiva do Conselho Tutelar e histórico de ${escapeHtml(student)}">
+          <strong>${escapeHtml(shortNum)}</strong>/${escapeHtml(student)} / ${escapeHtml(cleanTurma)}
+        </a>
+      </div>
+      <span class="dash-row-date">${escapeHtml(dateFormatted)}</span>
+    `;
+
+    const listCT = $('#listRecebidosCT');
+    if(listCT) listCT.prepend(ctRow);
+  }
+
+  filterSplitLists();
+}
+
+function renderConselhoTableRow(r){
+  if(!r || !r.numero) return;
+  const tbody = $('#tbodyConselho');
+  if(!tbody) return;
+  const ficaiNum = r.numero;
+  const studentName = r.aluno || r.data?.nomeCompleto || 'Aluno';
+  const escolaName = r.escola || 'E.M. Elmir Figueira';
+  const recDateFormatted = fmtDate(r.createdAt || r.generatedAt || r.updatedAt || new Date().toISOString());
+
+  const hasDev = (r.hasDevolutivaCT || r.section === 'RECEBIDOS_CT' || (r.infoEntries && r.infoEntries.some(e => e.isDevolutiva || (e.text && e.text.includes('DEVOLUTIVA CT')))));
+  const devEntry = (r.infoEntries || []).find(e => e.isDevolutiva || (e.text && e.text.includes('DEVOLUTIVA CT')));
+  const diligenciaText = devEntry ? (devEntry.text.match(/\[DEVOLUTIVA CT - (.*?)\]/)?.[1] || (devEntry.type ? `${devEntry.type}` : 'Parecer emitido')) : 'Aguardando diligência inicial';
+  const devDateFormatted = hasDev ? fmtDate(devEntry?.date || devEntry?.createdAt || r.updatedAt || new Date().toISOString()) : '—';
+
+  let tr = tbody.querySelector(`tr[data-ficai="${CSS.escape(ficaiNum)}"]`);
+  if(!tr){
+    tr = document.createElement('tr');
+    tr.dataset.ficai = ficaiNum;
+    tr.dataset.student = studentName;
+    tbody.prepend(tr);
+  }
+
+  if(hasDev){
+    tr.innerHTML = `
+      <td><strong>${escapeHtml(ficaiNum)}</strong></td>
+      <td>${escapeHtml(studentName)}</td>
+      <td><span class="school-badge"><i class="fa-solid fa-school"></i> ${escapeHtml(escolaName)}</span></td>
+      <td>${escapeHtml(recDateFormatted)}</td>
+      <td>${escapeHtml(diligenciaText)}</td>
+      <td><strong>${escapeHtml(devDateFormatted)}</strong></td>
+      <td><span class="badge green" style="background: #dcfce7; color: #15803d; font-weight: 700; padding: 4px 8px; border-radius: 6px; font-size: 11.5px; display: inline-flex; align-items: center; gap: 5px;"><i class="fa-solid fa-circle-check"></i> Devolvida à Escola (Não consta no CT)</span></td>
+      <td>
+        <div class="action-row">
+          <button class="btn small soft" type="button" data-info-ficai="${escapeHtml(ficaiNum)}" data-tooltip="Ver histórico completo e ficha"><i class="fa-solid fa-circle-info"></i> Info</button>
+          <button class="btn small purple btn-ct-register" type="button" data-ficai="${escapeHtml(ficaiNum)}" data-student="${escapeHtml(studentName)}" data-tooltip="Registrar nova devolutiva / parecer complementar"><i class="fa-solid fa-pen"></i> Devolutiva</button>
+        </div>
+      </td>
+    `;
+  } else {
+    tr.innerHTML = `
+      <td><strong>${escapeHtml(ficaiNum)}</strong></td>
+      <td>${escapeHtml(studentName)}</td>
+      <td><span class="school-badge"><i class="fa-solid fa-school"></i> ${escapeHtml(escolaName)}</span></td>
+      <td>${escapeHtml(recDateFormatted)}</td>
+      <td><span style="color: #64748b; font-style: italic;">Aguardando diligência inicial</span></td>
+      <td><span style="color: #94a3b8; font-style: italic;">—</span></td>
+      <td><span class="badge purple" style="background: #f3e8ff; color: #7e22ce; font-weight: 700; padding: 4px 8px; border-radius: 6px; font-size: 11.5px; display: inline-flex; align-items: center; gap: 5px;"><i class="fa-solid fa-bell"></i> No CT (Aguardando Devolutiva)</span></td>
+      <td>
+        <div class="action-row">
+          <button class="btn small purple btn-ct-register" type="button" data-ficai="${escapeHtml(ficaiNum)}" data-student="${escapeHtml(studentName)}" data-tooltip="Registrar parecer e devolver à escola"><i class="fa-solid fa-plus"></i> Devolutiva</button>
+          <button class="btn small soft" type="button" data-info-ficai="${escapeHtml(ficaiNum)}" data-tooltip="Ver histórico completo"><i class="fa-solid fa-circle-info"></i> Info</button>
+        </div>
+      </td>
+    `;
+  }
+}
+
+function moveFicaiToGerados(r, targetType = 'Gerada'){
+  if(!r || !r.numero) return;
+  const num = r.numero;
+  const shortNum = num.split('/')[0] || num;
+  const student = r.aluno || r.data?.nomeCompleto || 'Aluno';
+  const turma = r.turma || r.data?.turma || '—';
+  const cleanTurma = turma.replace('º Ano ','').replace('º ano ','').replace('Ano ','').replace('ano ','').replace(' ','');
+  
+  let sitText = targetType;
+  if(targetType === 'Conselho Tutelar') {
+    sitText = 'Encaminhada ao Conselho Tutelar';
+  } else if(!targetType.startsWith('Devolvida') && !targetType.startsWith('Encaminhada') && targetType !== 'Infrequente' && targetType !== 'Evadido' && targetType !== 'Sem Acesso' && targetType !== 'Gerada') {
+    sitText = `Devolvida: ${targetType}`;
+  }
 
   // 1. Remover do Recebidos CT se estiver presente
   const ctRow = document.querySelector(`#listRecebidosCT .dash-list-row[data-ficai="${CSS.escape(num)}"]`) ||
@@ -6241,20 +7212,26 @@ function moveFicaiToGerados(r, targetType){
   let geradosRow = document.querySelector(`#listGerados .dash-list-row[data-ficai="${CSS.escape(num)}"]`) ||
                    [...document.querySelectorAll('#listGerados .dash-list-row')].find(el => el.dataset.ficai === num || el.dataset.student === student);
 
-  const iconClass = (targetType === 'Conselho Tutelar') ? 'tag-purple' : 'tag-blue';
+  const isCT = (targetType === 'Conselho Tutelar' || sitText.includes('Conselho Tutelar'));
+  const iconClass = isCT ? 'tag-purple' : 'tag-blue';
+  const tooltipText = isCT ? 'Situação: Encaminhada ao Conselho Tutelar' : `Situação: ${sitText}`;
 
   if(geradosRow){
     geradosRow.dataset.sit = sitText;
+    geradosRow.dataset.turma = cleanTurma;
     const iconDiv = geradosRow.querySelector('.dash-row-status-icon');
     if(iconDiv){
       iconDiv.className = `dash-row-status-icon ${iconClass}`;
-      iconDiv.setAttribute('data-tooltip', `Situação: Devolvida ao ${targetType}`);
+      iconDiv.setAttribute('data-tooltip', tooltipText);
     }
     const link = geradosRow.querySelector('.dash-item-link');
     if(link){
       link.dataset.sit = sitText;
       link.setAttribute('data-tooltip', `Clique para ver o histórico e ficha de ${student}`);
+      link.innerHTML = `<strong>${escapeHtml(shortNum)}</strong>/${escapeHtml(student)} / ${escapeHtml(cleanTurma)}`;
     }
+    const dateSpan = geradosRow.querySelector('.dash-row-date');
+    if(dateSpan) dateSpan.textContent = fmtDateTime(r.updatedAt || r.createdAt || r.generatedAt || new Date().toISOString());
   } else {
     geradosRow = document.createElement('div');
     geradosRow.className = 'dash-list-row';
@@ -6263,12 +7240,12 @@ function moveFicaiToGerados(r, targetType){
     geradosRow.dataset.turma = cleanTurma;
     geradosRow.dataset.sit = sitText;
 
-    const dateFormatted = fmtDate(r.updatedAt || r.createdAt || r.generatedAt || new Date().toISOString()) || '20/08/2026';
+    const dateFormatted = fmtDateTime(r.updatedAt || r.createdAt || r.generatedAt || new Date().toISOString());
     geradosRow.innerHTML = `
       <label class="custom-check-wrap" data-tooltip="Selecionar este registro">
         <input type="checkbox" class="item-check gerados-check">
       </label>
-      <div class="dash-row-status-icon ${iconClass}" data-tooltip="Situação: Devolvida ao ${escapeHtml(targetType)}">
+      <div class="dash-row-status-icon ${iconClass}" data-tooltip="${escapeHtml(tooltipText)}">
         <i class="fa-solid fa-tag"></i>
       </div>
       <div class="dash-row-content">
@@ -6325,6 +7302,7 @@ $('#sendDevolverInfoEntry').onclick=async()=>{
     renderSavedFicai(activeInfoRecord);
     renderInfoModal(activeInfoRecord);
     moveFicaiToGerados(activeInfoRecord, type);
+    closeInfoModal();
     toast(`FICAI ${activeInfoRecord.numero} enviada com sucesso para "${type}" e movida para a tela GERADOS.`);
   }catch(err){
     console.error(err);
@@ -6400,6 +7378,11 @@ $('#tbodyConselho')?.addEventListener('click', async e => {
     await openInfoModal(info.dataset.infoFicai);
     return;
   }
+  const row = e.target.closest('tr');
+  if(row && (!e.target.closest('button') && !e.target.closest('a') && !e.target.closest('input'))){
+    const ficaiNum = row.dataset.ficai || row.cells[0]?.innerText.trim();
+    if(ficaiNum) await openInfoModal(ficaiNum);
+  }
 });
 
 $('#saveModalDevolutivaCT')?.addEventListener('click', async () => {
@@ -6407,6 +7390,7 @@ $('#saveModalDevolutivaCT')?.addEventListener('click', async () => {
   const date = $('#ctDateDevolutiva')?.value;
   const conselheiro = $('#ctConselheiroInput')?.value.trim() || 'Conselheiro(a) responsável';
   const diligencia = $('#ctDiligenciaSelect')?.value || 'Contato familiar e visita';
+  const tipoRegistro = $('#ctTipoRegistroSelect')?.value || 'Conselho Tutelar';
   const statusDev = $('#ctStatusSelect')?.value || 'Devolvida';
   const txt = $('#ctTextDevolutiva')?.value.trim();
 
@@ -6451,54 +7435,30 @@ $('#saveModalDevolutivaCT')?.addEventListener('click', async () => {
   const entry = {
     id: (crypto.randomUUID?.() || ('dev-ct-' + Date.now())),
     date,
-    type: 'Conselho Tutelar',
+    type: tipoRegistro,
     text: `[DEVOLUTIVA CT - ${diligencia}] ${txt}`,
     responsible: conselheiro,
     isDevolutiva: true,
-    action: 'Devolutiva do Conselho Tutelar',
+    action: `Devolutiva do Conselho Tutelar (${tipoRegistro})`,
     createdAt: new Date().toISOString()
   };
 
   r.infoEntries = [...(r.infoEntries || []), entry];
-  r.situacao = `Devolvida: Conselho Tutelar`;
-  r.section = 'GERADOS';
+  r.situacao = `Devolutiva CT: ${diligencia} (${tipoRegistro})`;
+  r.section = 'RECEBIDOS_CT';
+  r.hasDevolutivaCT = true;
   r.updatedAt = new Date().toISOString();
 
   try {
     await dbPut('ficais', r);
     renderSavedFicai(r);
-    moveFicaiToGerados(r, 'Conselho Tutelar');
+    moveFicaiToRecebidosCT(r, `${diligencia} (${tipoRegistro})`, txt);
   } catch(e) {
     console.warn('Erro ao salvar devolutiva no banco local', e);
   }
 
-  // 2. Atualizar/Inserir linha na tabela do Conselho Tutelar
-  const tbody = $('#tbodyConselho');
-  if(tbody){
-    let tr = tbody.querySelector(`tr[data-ficai="${CSS.escape(ficaiNum)}"]`);
-    if(!tr){
-      tr = document.createElement('tr');
-      tr.dataset.ficai = ficaiNum;
-      tr.dataset.student = studentName;
-      tbody.prepend(tr);
-    }
-    const fmtRec = fmtDate(date);
-    const finalEscola = r.escola || escolaName;
-    tr.innerHTML = `
-      <td>${escapeHtml(ficaiNum)}</td>
-      <td>${escapeHtml(studentName)}</td>
-      <td><span class="school-badge"><i class="fa-solid fa-school"></i> ${escapeHtml(finalEscola)}</span></td>
-      <td>${escapeHtml(fmtRec)}</td>
-      <td>${escapeHtml(diligencia)}</td>
-      <td><span class="badge purple"><i class="fa-solid fa-bell"></i> Nova</span></td>
-      <td>
-        <div class="action-row">
-          <button class="btn small purple btn-ct-register" type="button" data-ficai="${escapeHtml(ficaiNum)}" data-student="${escapeHtml(studentName)}" data-tooltip="Registrar nova devolutiva para esta FICAI"><i class="fa-solid fa-plus"></i> Devolutiva</button>
-          <button class="btn small soft" type="button" data-info-ficai="${escapeHtml(ficaiNum)}" data-tooltip="Ver histórico completo"><i class="fa-solid fa-circle-info"></i> Info</button>
-        </div>
-      </td>
-    `;
-  }
+  // 2. Atualizar linha na tabela do Conselho Tutelar
+  renderConselhoTableRow(r);
 
   // 3. Atualizar contador "Devolvidas"
   const statDev = $('#ctStatDevolvidas');
@@ -6508,14 +7468,104 @@ $('#saveModalDevolutivaCT')?.addEventListener('click', async () => {
   }
 
   closeDevolutivaCTModal();
-  toast(`Devolutiva do Conselho Tutelar para a FICAI ${ficaiNum} registrada com sucesso!`);
+  toast(`Devolutiva do Conselho Tutelar para a FICAI ${ficaiNum} registrada! Movida para "Recebidos CT" no Dashboard.`);
 });
 
+// Filtro e Busca em Tempo Real na Tabela do Conselho Tutelar
+function filterTableConselho(){
+  const q = ($('#searchConselho')?.value || '').toLowerCase().trim();
+  const status = ($('#filterConselhoStatus')?.value || '').toLowerCase().trim();
+
+  $$('#tbodyConselho tr').forEach(row => {
+    const text = row.innerText.toLowerCase();
+    const matchesQuery = !q || text.includes(q);
+    const matchesStatus = !status || text.includes(status);
+
+    row.style.display = (matchesQuery && matchesStatus) ? '' : 'none';
+  });
+}
+
+$('#searchConselho')?.addEventListener('input', filterTableConselho);
+$('#filterConselhoStatus')?.addEventListener('change', filterTableConselho);
 
 // ==============================================================================
-// GESTÃO DE ENCERRAMENTO E REABERTURA DE CASOS
+// GESTÃO DE ENCERRAMENTO E REABERTURA DE CASOS (COMBOBOX PESQUISÁVEL)
 // ==============================================================================
 let reopenActiveFicaiNum = null;
+let currentEncFicaiList = [];
+
+function renderEncFicaiDropdown(filterText = '') {
+  const dropdown = $('#encFicaiDropdown');
+  if(!dropdown) return;
+
+  const q = filterText.toLowerCase().trim();
+  const filtered = currentEncFicaiList.filter(item => {
+    if(!q) return true;
+    return item.numero.toLowerCase().includes(q) ||
+           item.aluno.toLowerCase().includes(q) ||
+           item.escola.toLowerCase().includes(q) ||
+           item.turma.toLowerCase().includes(q);
+  });
+
+  if(!filtered.length) {
+    dropdown.innerHTML = '<div style="padding: 12px; font-size: 12.5px; color: #94a3b8; text-align: center; font-style: italic;">Nenhuma FICAI encontrada com este termo.</div>';
+    dropdown.style.display = 'block';
+    return;
+  }
+
+  const selectedNum = $('#encSelectFicai')?.value || '';
+  dropdown.innerHTML = filtered.map(item => {
+    const isSel = (item.numero === selectedNum);
+    return `
+      <div class="enc-combobox-item" data-num="${escapeHtml(item.numero)}" style="padding: 10px 14px; cursor: pointer; border-bottom: 1px solid #f1f5f9; background: ${isSel ? '#eff6ff' : '#ffffff'}; transition: background 0.15s; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-weight: 700; font-size: 13px; color: ${isSel ? '#1d4ed8' : '#0f172a'};">
+            <strong>${escapeHtml(item.numero)}</strong> — ${escapeHtml(item.aluno)}
+          </div>
+          <div style="font-size: 11.5px; color: #64748b; margin-top: 2px;">
+            <i class="fa-solid fa-school" style="margin-right: 4px;"></i>${escapeHtml(item.escola)} ${item.turma ? `· ${escapeHtml(item.turma)}` : ''}
+          </div>
+        </div>
+        ${isSel ? '<i class="fa-solid fa-check" style="color: #2563eb; font-size: 13px;"></i>' : ''}
+      </div>
+    `;
+  }).join('');
+
+  dropdown.style.display = 'block';
+
+  dropdown.querySelectorAll('.enc-combobox-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      if(el.dataset.num !== selectedNum) el.style.background = '#f8fafc';
+    });
+    el.addEventListener('mouseleave', () => {
+      if(el.dataset.num !== selectedNum) el.style.background = '#ffffff';
+    });
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      selectEncFicaiOption(el.dataset.num);
+    });
+  });
+}
+
+function selectEncFicaiOption(numero) {
+  const item = currentEncFicaiList.find(x => x.numero === numero);
+  const select = $('#encSelectFicai');
+  const input = $('#encFicaiSearchInput');
+  const dropdown = $('#encFicaiDropdown');
+
+  if(select) {
+    select.value = numero || '';
+    select.dispatchEvent(new Event('change'));
+  }
+
+  if(input) {
+    input.value = item ? `${item.numero} - ${item.aluno} (${item.escola})` : '';
+  }
+
+  if(dropdown) {
+    dropdown.style.display = 'none';
+  }
+}
 
 async function populateEncerrarOptions(){
   const select = $('#encSelectFicai');
@@ -6545,11 +7595,43 @@ async function populateEncerrarOptions(){
     }
   });
 
+  currentEncFicaiList = Array.from(map.values());
+
   select.innerHTML = '<option value="">Selecione uma ficha ativa...</option>' +
-    Array.from(map.values()).map(x => `<option value="${escapeHtml(x.numero)}" data-student="${escapeHtml(x.aluno)}" data-turma="${escapeHtml(x.turma)}" data-escola="${escapeHtml(x.escola)}">${escapeHtml(x.numero)} - ${escapeHtml(x.aluno)} (${escapeHtml(x.escola)})</option>`).join('');
+    currentEncFicaiList.map(x => `<option value="${escapeHtml(x.numero)}" data-student="${escapeHtml(x.aluno)}" data-turma="${escapeHtml(x.turma)}" data-escola="${escapeHtml(x.escola)}">${escapeHtml(x.numero)} - ${escapeHtml(x.aluno)} (${escapeHtml(x.escola)})</option>`).join('');
   
   if($('#encDataInput')) $('#encDataInput').value = isoToday();
 }
+
+// Configurar listeners do Combobox de Encerramento
+const encSearchInput = $('#encFicaiSearchInput');
+const encToggleBtn = $('#encFicaiToggleBtn');
+const encDropdown = $('#encFicaiDropdown');
+
+encSearchInput?.addEventListener('focus', () => {
+  renderEncFicaiDropdown(encSearchInput.value);
+});
+encSearchInput?.addEventListener('input', () => {
+  renderEncFicaiDropdown(encSearchInput.value);
+  if(!encSearchInput.value.trim() && $('#encSelectFicai')) {
+    $('#encSelectFicai').value = '';
+  }
+});
+encToggleBtn?.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if(encDropdown && encDropdown.style.display === 'block') {
+    encDropdown.style.display = 'none';
+  } else {
+    renderEncFicaiDropdown(encSearchInput?.value || '');
+    encSearchInput?.focus();
+  }
+});
+
+document.addEventListener('click', (e) => {
+  if(!$('#encFicaiCombobox')?.contains(e.target)) {
+    if(encDropdown) encDropdown.style.display = 'none';
+  }
+});
 
 function updateEncerradosCount(){
   const countEl = $('#cntCasosEncerrados');
@@ -6649,6 +7731,8 @@ $('#btnConfirmarEncerramento')?.addEventListener('click', async () => {
 
   updateEncerradosCount();
   $('#encJustificativaText').value = '';
+  if($('#encFicaiSearchInput')) $('#encFicaiSearchInput').value = '';
+  if($('#encSelectFicai')) $('#encSelectFicai').value = '';
   populateEncerrarOptions();
   toast(`FICAI ${ficaiNum} encerrada e arquivada com sucesso!`);
 });
@@ -6905,15 +7989,87 @@ async function loadSavedFicais(){
             </td>
           `;
         }
-      } else if(r.section === 'GERADOS' || (r.situacao && r.situacao.startsWith('Devolvida'))){
-        const type = (r.situacao || '').replace('Devolvida: ', '').replace('Devolvida ao ', '').replace('Enviada para ', '') || 'Conselho Tutelar';
+      } else if(r.section === 'RECEBIDOS_CT' || r.hasDevolutivaCT || (r.situacao && r.situacao.includes('Devolutiva CT')) || (r.infoEntries && r.infoEntries.some(e => e.isDevolutiva || (e.text && e.text.includes('DEVOLUTIVA CT'))))){
+        const devEntry = (r.infoEntries || []).find(e => e.isDevolutiva || (e.text && e.text.includes('DEVOLUTIVA CT')));
+        const dilig = devEntry ? (devEntry.text.match(/\[DEVOLUTIVA CT - (.*?)\]/)?.[1] || '') : '';
+        moveFicaiToRecebidosCT(r, dilig);
+      } else {
+        const type = (r.situacao || '').replace('Devolvida: ', '').replace('Devolvida ao ', '').replace('Enviada para ', '') || 'Infrequente';
         moveFicaiToGerados(r, type);
+      }
+
+      if(r.isEncaminhadoCT || (r.situacao && r.situacao.includes('Conselho Tutelar')) || (r.infoEntries && r.infoEntries.some(e => e.type === 'Encaminhamento CT' || (e.text && e.text.includes('Conselho Tutelar'))))){
+        renderConselhoTableRow(r);
       }
     });
     updateEncerradosCount();
   }catch(e){console.warn('Banco FICAI indisponível',e)}
 }
-$('#fichaTable').addEventListener('click',async e=>{const info=e.target.closest('[data-info-ficai]');if(info){await openInfoModal(info.dataset.infoFicai);return}const b=e.target.closest('[data-load-ficai]');if(!b)return;const r=await dbGet('ficais',b.dataset.loadFicai);if(!r)return;applyFormData(r.data);const st=studentData['db:'+r.studentKey];if(st)$('#aluno').value='db:'+r.studentKey;showView('gerar');toast(`FICAI ${r.numero} carregada para edição.`)});
+function renderSavedFicai(r){
+  if(!r || !r.numero) return;
+  const tbody = $('#fichaTable tbody');
+  if(!tbody) return;
+
+  const num = r.numero;
+  const student = r.aluno || r.data?.nomeCompleto || 'Aluno';
+  const escola = r.escola || r.data?.escola || 'E.M. Elmir Figueira';
+  const turma = r.turma || r.data?.turma || '—';
+  const situacao = r.situacao || r.data?.situacao || 'Infrequente';
+  const dateFormatted = fmtDateTime(r.updatedAt || r.createdAt || new Date().toISOString()) || fmtDate(r.updatedAt || r.createdAt || new Date().toISOString());
+
+  let tr = tbody.querySelector(`tr[data-ficai="${CSS.escape(num)}"]`) ||
+           [...tbody.querySelectorAll('tr')].find(el => el.cells[0]?.innerText.trim() === num);
+
+  if(!tr){
+    tr = document.createElement('tr');
+    tr.dataset.ficai = num;
+    tbody.prepend(tr);
+  }
+
+  tr.dataset.ficai = num;
+  tr.innerHTML = `
+    <td><strong>${escapeHtml(num)}</strong></td>
+    <td class="student-cell" style="cursor: pointer; font-weight: 600; color: #1d4ed8;" data-tooltip="Clique para ver as informações de ${escapeHtml(student)}">${escapeHtml(student)}</td>
+    <td>${escapeHtml(escola)}</td>
+    <td>${escapeHtml(turma)}</td>
+    <td>${escapeHtml(situacao)}</td>
+    <td>${escapeHtml(dateFormatted)}</td>
+    <td>
+      <div class="action-row">
+        <button class="btn small soft" type="button" data-info-ficai="${escapeHtml(num)}" data-tooltip="Ver histórico completo e ficha"><i class="fa-solid fa-circle-info"></i> Informações</button>
+        <button class="btn small" type="button" data-load-ficai="${escapeHtml(num)}" data-tooltip="Abrir FICAI para edição"><i class="fa-solid fa-pen-to-square"></i> Abrir</button>
+      </div>
+    </td>
+  `;
+}
+
+$('#fichaTable')?.addEventListener('click', async e => {
+  const info = e.target.closest('[data-info-ficai]');
+  if(info){
+    await openInfoModal(info.dataset.infoFicai);
+    return;
+  }
+  const b = e.target.closest('[data-load-ficai]');
+  if(b){
+    const r = await dbGet('ficais', b.dataset.loadFicai);
+    if(!r) return;
+    applyFormData(r.data);
+    const st = studentData['db:' + r.studentKey];
+    if(st) $('#aluno').value = 'db:' + r.studentKey;
+    showView('gerar');
+    toast(`FICAI ${r.numero} carregada para edição.`);
+    return;
+  }
+  const row = e.target.closest('tbody tr');
+  if(!row) return;
+
+  // Se clicou na coluna do aluno, na classe student-cell, ou fora de botões/links
+  const studentCell = e.target.closest('td:nth-child(2), td:nth-child(1), .student-cell');
+  if(studentCell || (!e.target.closest('button') && !e.target.closest('a') && !e.target.closest('input'))){
+    const ficaiNum = row.dataset.ficai || row.cells[0]?.innerText.trim();
+    if(ficaiNum) await openInfoModal(ficaiNum);
+  }
+});
 
 // Filtros e ordenação simples
 function bindFilter(inp,table){inp.addEventListener('input',()=>{const q=inp.value.toLowerCase();$$(table+' tbody tr').forEach(r=>r.style.display=r.innerText.toLowerCase().includes(q)?'':'none')})}
@@ -7219,12 +8375,30 @@ function setWizardStep(step) {
     }
   }
 
-  // 3. Atualiza preenchimento da linha conectora do Stepper
+  // 3. Atualiza preenchimento da linha conectora do Stepper e bolinhas inferiores
   const fillBar = $('#stepperLineFill');
   if (fillBar) {
     const pct = ((currentWizardStep - 1) / (TOTAL_WIZARD_STEPS - 1)) * 88;
     fillBar.style.width = `${pct}%`;
   }
+
+  // Atualizar bolinhas no footer
+  $$('#wizardDotsRow .wizard-dot').forEach(dot => {
+    const st = parseInt(dot.dataset.step, 10);
+    if (st === currentWizardStep) {
+      dot.style.background = '#2563eb';
+      dot.style.width = '10px';
+      dot.style.height = '10px';
+    } else if (st < currentWizardStep) {
+      dot.style.background = '#93c5fd';
+      dot.style.width = '9px';
+      dot.style.height = '9px';
+    } else {
+      dot.style.background = '#cbd5e1';
+      dot.style.width = '9px';
+      dot.style.height = '9px';
+    }
+  });
 
   // 4. Atualiza estado dos botões de navegação (Anterior / Próximo)
   const prevBtn = $('#btnWizardPrev');
@@ -7235,11 +8409,11 @@ function setWizardStep(step) {
   const nextBtn = $('#btnWizardNext');
   if (nextBtn) {
     if (currentWizardStep === TOTAL_WIZARD_STEPS) {
-      nextBtn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Visualizar A4';
+      nextBtn.innerHTML = '<span>Visualizar A4</span> <i class="fa-solid fa-file-pdf"></i>';
       nextBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
     } else {
-      nextBtn.innerHTML = 'Próximo <i class="fa-solid fa-arrow-right"></i>';
-      nextBtn.style.background = 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)';
+      nextBtn.innerHTML = '<span>Próximo</span> <i class="fa-solid fa-arrow-right"></i>';
+      nextBtn.style.background = '#1d4ed8';
     }
   }
 
