@@ -127,6 +127,13 @@ updated: 2026-08-24
     - Quando o banco de dados está vazio (0 registros), todos os cartões de estatísticas (*Casos Ativos*, *Falta de motivação*, *Trabalho familiar*, *Doença / Saúde*, *Alunos Desistentes*, *FICAI Finalizadas*, *Aguardando Recebimento*, *Em Diligência*, *Prazo de Retorno*, *Devolvidas à Escola*) exibem estritamente **`0`** ou **`0%`**, eliminando quaisquer resquícios de porcentagens mock estáticas.
     - **Commit `ae88fa7` enviado e implantado no GitHub (branch `DevFicai`):** `fix: recálculo dinâmico e zeramento total dos stat-cards quando o banco estiver vazio`.
 
+24. **Histórico Documental FICAI (Estilo SEI Simplificado com Anexos):**
+    - Implementado o novo padrão de histórico documental no modal de informações da FICAI (`#infoModal`).
+    - Substituído o antigo bloco estático de composição por um menu dropdown moderno **`+ Adicionar`** (`Adicionar informação` e `Anexar documento`) com formulário *inline* dinâmico.
+    - Suporte a múltiplos anexos com *drag-and-drop* e seleção de arquivos (`.pdf`, `.doc`, `.docx`, `.xls`, `.xlsx`, `.png`, `.jpg`), validação de até 5 MB por arquivo e conversão/armazenamento local em Base64 dentro do registro no IndexedDB.
+    - Renderização da linha do tempo enriquecida com cards visuais de anexo com opções de pré-visualização direta no navegador e download, mantendo histórico permanente e auditável sem sobreescrita de dados.
+    - Integração fluida com devoluções e encaminhamentos (`sendDevolverInfoEntry`), login e permissões.
+
 ---
 
 ### 🟡 O Que Está em Desenvolvimento ou Requer Validação Fina

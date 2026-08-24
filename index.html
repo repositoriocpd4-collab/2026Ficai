@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -5840,7 +5840,7 @@
             <a href="#" id="forgotPasswordLink" class="forgot-link">Esqueceu a senha?</a>
           </div>
 
-          <button type="submit" id="btnLoginSubmit" class="btn-login-submit">
+          <button type="submit" id="btnLoginSubmit" class="btn-login-submit" onclick="handleLoginSubmit();">
             Entrar
           </button>
         </form>
@@ -14189,7 +14189,7 @@
       const previewTypes = ['pdf','png','jpg','jpeg'];
       if (previewTypes.includes((a.ext||'').toLowerCase())) {
         const win = window.open();
-        win.document.write('<html><body style=\\'margin:0\\'><iframe src=\\''+a.data+'\\' style=\\'width:100%;height:100vh;border:none\\'></iframe></body></html>');
+        win.document.write('<html><body style="margin:0"><iframe src="' + a.data + '" style="width:100%;height:100vh;border:none"></iframe></body></html>');
       } else { window.histDownloadFile(a); }
     };
 
@@ -14228,11 +14228,11 @@
         const ext = getFileExtH(f.name);
         const szTxt = f.size<1048576?(f.size/1024).toFixed(0)+' KB':(f.size/1048576).toFixed(1)+' MB';
         const nm = f.name.length>40?f.name.slice(0,37)+'...':f.name;
-        return '<div class=\\'hist-file-card\\'>'
-          + '<span class=\\'fc-icon\\'>'+fc(ext)+'</span>'
-          + '<span class=\\'fc-name\\' title=\\''+escapeHtml(f.name)+'\\'>'+escapeHtml(nm)+'</span>'
-          + '<span class=\\'fc-meta\\'>'+ext.toUpperCase()+' &bull; '+szTxt+'</span>'
-          + '<button class=\\'fc-del\\' onclick=\\'histRemoveFile('+i+')\\'>&times;</button>'
+        return '<div class="hist-file-card">'
+          + '<span class="fc-icon">'+fc(ext)+'</span>'
+          + '<span class="fc-name" title="'+escapeHtml(f.name)+'">'+escapeHtml(nm)+'</span>'
+          + '<span class="fc-meta">'+ext.toUpperCase()+' &bull; '+szTxt+'</span>'
+          + '<button class="fc-del" onclick="histRemoveFile('+i+')">&times;</button>'
           + '</div>';
       }).join('');
     }
@@ -14253,38 +14253,38 @@
 
     function buildHistFormHTML(kind) {
       const isDoc = kind === 'document';
-      const title = isDoc ? '<i class=\\'fa-solid fa-paperclip\\'></i> Anexar documento' : '<i class=\\'fa-solid fa-pen-to-square\\'></i> Adicionar informa&ccedil;&atilde;o';
+      const title = isDoc ? '<i class="fa-solid fa-paperclip"></i> Anexar documento' : '<i class="fa-solid fa-pen-to-square"></i> Adicionar informa&ccedil;&atilde;o';
       const typeOptionsInfo = ['Acompanhamento','Contato com responsavel','Contato com aluno','Visita domiciliar','Encaminhamento','Retorno do Conselho Tutelar','Retorno da escola','Providencia adotada','Comunicacao','Observacao','Outro'];
       const typeOptionsDoc  = ['Oficio','Relatorio','Declaracao','Comunicacao','Encaminhamento','Resposta','Termo','Documento escolar','Documento do Conselho Tutelar','Comprovante','Planilha','Outro'];
-      const typeOpts = (isDoc ? typeOptionsDoc : typeOptionsInfo).map(function(o){return '<option value=\\''+o+'\\'>'+o+'</option>';}).join('');
+      const typeOpts = (isDoc ? typeOptionsDoc : typeOptionsInfo).map(function(o){return '<option value="'+o+'">'+o+'</option>';}).join('');
       const today = isoToday();
       const user  = (document.querySelector('.user span')||{}).textContent || (typeof getActiveSession==='function'&&getActiveSession()?getActiveSession().nome:'') || 'Usuario';
       const textLabel = isDoc ? 'Descri&ccedil;&atilde;o / t&iacute;tulo do documento' : 'Descri&ccedil;&atilde;o';
       const textPlaceholder = isDoc ? 'Ex: Of&iacute;cio de encaminhamento ao Conselho Tutelar...' : 'Descreva objetivamente a informa&ccedil;&atilde;o, provid&ecirc;ncia ou fato relevante...';
-      const fileLabel = isDoc ? 'Arquivo(s) <span style=\\'color:#ef4444\\'>*</span>' : 'Anexo (opcional)';
-      const sendBtn  = isDoc ? '' : '<button class=\\'hist-btn-send\\' type=\\'button\\' id=\\'hfBtnSend\\'><i class=\\'fa-solid fa-paper-plane\\'></i> Enviar</button>';
-      return '<div class=\\'hist-inline-form\\'>'
-        + '<div class=\\'hist-form-title\\'>'+title+'</div>'
-        + '<div class=\\'hist-form-grid\\'>'
-        + '<div><label>Data do fato</label><input type=\\'date\\' id=\\'hfDate\\' value=\\''+today+'\\'></div>'
-        + '<div><label>Tipo de registro</label><select id=\\'hfType\\'>'+typeOpts+'</select></div>'
-        + '<div><label>Respons&aacute;vel</label><input type=\\'text\\' id=\\'hfResponsible\\' value=\\''+escapeHtml(user.trim())+'\\'></div>'
+      const fileLabel = isDoc ? 'Arquivo(s) <span style="color:#ef4444">*</span>' : 'Anexo (opcional)';
+      const sendBtn  = isDoc ? '' : '<button class="hist-btn-send" type="button" id="hfBtnSend"><i class="fa-solid fa-paper-plane"></i> Enviar</button>';
+      return '<div class="hist-inline-form">'
+        + '<div class="hist-form-title">'+title+'</div>'
+        + '<div class="hist-form-grid">'
+        + '<div><label>Data do fato</label><input type="date" id="hfDate" value="'+today+'"></div>'
+        + '<div><label>Tipo de registro</label><select id="hfType">'+typeOpts+'</select></div>'
+        + '<div><label>Respons&aacute;vel</label><input type="text" id="hfResponsible" value="'+escapeHtml(user.trim())+'"></div>'
         + '</div>'
-        + '<label style=\\'font-size:11px;font-weight:750;color:#475569;display:block;margin-bottom:3px;\\'>'+textLabel+'</label>'
-        + '<textarea class=\\'hist-form-textarea\\' id=\\'hfText\\' placeholder=\\''+textPlaceholder+'\\'></textarea>'
-        + '<label style=\\'font-size:11px;font-weight:750;color:#475569;display:block;margin-bottom:3px;\\'>'+fileLabel+'</label>'
-        + '<div class=\\'hist-dropzone\\' id=\\'histDropzone\\'>'
-        + '<i class=\\'fa-solid fa-paperclip\\'></i>'
+        + '<label style="font-size:11px;font-weight:750;color:#475569;display:block;margin-bottom:3px;">'+textLabel+'</label>'
+        + '<textarea class="hist-form-textarea" id="hfText" placeholder="'+textPlaceholder+'"></textarea>'
+        + '<label style="font-size:11px;font-weight:750;color:#475569;display:block;margin-bottom:3px;">'+fileLabel+'</label>'
+        + '<div class="hist-dropzone" id="histDropzone">'
+        + '<i class="fa-solid fa-paperclip"></i>'
         + 'Arraste arquivos aqui ou <strong>clique para selecionar</strong>'
         + '<small>PDF, DOC, DOCX, XLS, XLSX, PNG, JPG &mdash; m&aacute;x 5 MB por arquivo</small>'
         + '</div>'
-        + '<input type=\\'file\\' id=\\'histFileInput\\' multiple accept=\\'.pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg\\' style=\\'display:none;\\'>'
-        + '<div class=\\'hist-file-list\\' id=\\'histFileList\\'></div>'
-        + '<div class=\\'hist-form-footer\\'>'
-        + '<span class=\\'hist-audit-note\\'><i class=\\'fa-solid fa-lock\\'></i>Acrescenta ao hist&oacute;rico sem substituir registros anteriores.</span>'
-        + '<button class=\\'hist-btn-cancel\\' type=\\'button\\' id=\\'hfBtnCancel\\'>Cancelar</button>'
+        + '<input type="file" id="histFileInput" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg" style="display:none;">'
+        + '<div class="hist-file-list" id="histFileList"></div>'
+        + '<div class="hist-form-footer">'
+        + '<span class="hist-audit-note"><i class="fa-solid fa-lock"></i>Acrescenta ao hist&oacute;rico sem substituir registros anteriores.</span>'
+        + '<button class="hist-btn-cancel" type="button" id="hfBtnCancel">Cancelar</button>'
         + sendBtn
-        + '<button class=\\'hist-btn-save\\' type=\\'button\\' id=\\'hfBtnSave\\'><i class=\\'fa-solid fa-plus\\'></i> Salvar no hist&oacute;rico</button>'
+        + '<button class="hist-btn-save" type="button" id="hfBtnSave"><i class="fa-solid fa-plus"></i> Salvar no hist&oacute;rico</button>'
         + '</div>'
         + '</div>';
     }
@@ -15833,7 +15833,6 @@
         }
       }
     }
-    }
 
     function applyUserSession(session) {
       if (!session) {
@@ -15882,25 +15881,14 @@
       let authenticated = false;
       let sessionData = null;
 
-      // 1. Tentar Autenticação via Supabase Auth API
-      try {
-        const sb = getSupabase();
-        if (sb && sb.auth) {
-          const { data, error } = await sb.auth.signInWithPassword({ email, password });
-          if (!error && data?.user) {
-            authenticated = true;
-          }
-        }
-      } catch (_e) { }
-
-      // 2. Verificar Administrador CPD (cpdinfra@edu.itaguai.rj.gov.br / T3c4n3x0)
+      // 1. Verificar Administrador CPD (cpdinfra@edu.itaguai.rj.gov.br / T3c4n3x0)
       const isAdmin = (email === 'cpdinfra@edu.itaguai.rj.gov.br' && password === 'T3c4n3x0');
 
-      // 3. Verificar Usuário do Conselho Tutelar de Itaguaí
+      // 2. Verificar Usuário do Conselho Tutelar de Itaguaí
       const isCTLogin = (email === 'joe.amado@edu.itaguai.rj.gov.br' && password === 'Ficai-Itaguai') ||
                         (email === 'conselhotutelar@itaguai.rj.gov.br' && (password === 'ConselhoTutelar@' || password === 'CT@2026' || password === 'FicaiSmedu'));
 
-      // 4. Verificar Usuários de Escolas (e-mail institucional / FicaiSmedu)
+      // 3. Verificar Usuários de Escolas (e-mail institucional / FicaiSmedu)
       const schoolList = (configData && configData.escolas) ? configData.escolas : [];
       const matchedSchool = schoolList.find(e => (e.email || '').trim().toLowerCase() === email || (e.email || '').toLowerCase().includes(email));
       const isSchoolLogin = ((matchedSchool || email.endsWith('@edu.itaguai.rj.gov.br')) && (password === 'FicaiSmedu' || password === 'Ficai22026' || password === 'Ficai2026@'));
@@ -15937,14 +15925,27 @@
           escolaId: schoolId,
           loggedInAt: new Date().toISOString()
         };
-      } else if (authenticated) {
-        sessionData = {
-          email,
-          nome: email.split('@')[0],
-          unidade: 'Usuário Autenticado',
-          nivel: 'Operacional',
-          loggedInAt: new Date().toISOString()
-        };
+      } else {
+        // 4. Tentar Autenticação via Supabase Auth API (apenas se não for credencial hardcoded)
+        try {
+          const sb = getSupabase();
+          if (sb && sb.auth) {
+            const { data, error } = await Promise.race([
+              sb.auth.signInWithPassword({ email, password }),
+              new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 5000))
+            ]);
+            if (!error && data?.user) {
+              authenticated = true;
+              sessionData = {
+                email,
+                nome: data.user.email?.split('@')[0] || email,
+                unidade: 'Usuário Autenticado',
+                nivel: 'Operacional',
+                loggedInAt: new Date().toISOString()
+              };
+            }
+          }
+        } catch (_e) { }
       }
 
       if (authenticated && sessionData) {
@@ -15970,10 +15971,20 @@
       }
     }
 
+    window.handleLoginSubmit = handleLoginSubmit;
+
     function initAuthSystem() {
       const loginForm = $('#loginForm');
       if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          handleLoginSubmit();
+        });
+      }
+
+      const btnLogin = $('#btnLoginSubmit');
+      if (btnLogin) {
+        btnLogin.addEventListener('click', (e) => {
           e.preventDefault();
           handleLoginSubmit();
         });
