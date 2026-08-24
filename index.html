@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -15492,35 +15492,49 @@
         }
       }
     }
-
     function updateSidebarPermissions(session) {
       const isAdmin = !!(session && (session.isSystemAdmin || session.nivel === 'Administrador' || session.email === 'cpdinfra@edu.itaguai.rj.gov.br'));
+      const isCT = !!(session && session.nivel === 'ConselhoTutelar');
 
-      // Módulos visíveis para Não-Administrador (Escola / Usuário Comum):
-      // 'Dashboard', 'Gerar FICAI', 'Dados da Ficha', 'RAE', 'Encerramento de Casos', 'Cancelamento de FICAI', 'Sobre o Sistema'
-      const nonAdminAllowedViews = ['dashboard', 'gerar', 'dados', 'rae', 'encerramento', 'cancelamento', 'sobre'];
+      // Módulos visíveis por perfil:
+      // Admin  → tudo
+      // CT     → Conselho Tutelar, Encerramento de Casos, Sobre o Sistema
+      // Escola → Dashboard, Gerar FICAI, Dados da Ficha, RAE, Encerramento, Cancelamento, Sobre
+      const ctAllowedViews     = ['conselho', 'encerramento', 'sobre'];
+      const schoolAllowedViews = ['dashboard', 'gerar', 'dados', 'rae', 'encerramento', 'cancelamento', 'sobre'];
 
       document.querySelectorAll('#sidebar .nav-item').forEach(item => {
         const view = item.dataset.view;
-        if (isAdmin || nonAdminAllowedViews.includes(view)) {
-          item.style.display = 'flex';
-        } else {
-          item.style.display = 'none';
-        }
+        let visible = false;
+        if (isAdmin)     visible = true;
+        else if (isCT)   visible = ctAllowedViews.includes(view);
+        else             visible = schoolAllowedViews.includes(view);
+        item.style.display = visible ? 'flex' : 'none';
       });
 
-      // Ocultar cabeçalhos de seção e divisores quando a seção Cadastros for restrita
+      // Ocultar / exibir cabeçalhos de seção e divisores
       document.querySelectorAll('#sidebar .menu-section-title, #sidebar .menu-divider').forEach(el => {
-        if (el.textContent.trim() === 'Cadastros') {
-          el.style.display = isAdmin ? 'block' : 'none';
-        }
+        const txt = el.textContent.trim();
+        if (txt === 'Cadastros') el.style.display = isAdmin ? 'block' : 'none';
+        if (txt === 'Gestão')    el.style.display = (isCT && !isAdmin) ? 'none' : 'block';
       });
 
-      // Exibir ou ocultar o botão de gerar PDF do manual (exclusivo para Administrador)
+      // Botão PDF do manual (exclusivo para Administrador)
       const pdfBtnWrap = document.getElementById('manualAdminActions');
-      if (pdfBtnWrap) {
-        pdfBtnWrap.style.display = isAdmin ? 'flex' : 'none';
+      if (pdfBtnWrap) pdfBtnWrap.style.display = isAdmin ? 'flex' : 'none';
+
+      // Ocultar sino de notificações para o CT
+      const notifWrap = document.querySelector('.notification-wrap');
+      if (notifWrap) notifWrap.style.display = isCT ? 'none' : '';
+
+      // CT: redirecionar automaticamente para Conselho Tutelar
+      if (isCT) {
+        const activeView = document.querySelector('.view.active');
+        if (activeView && !['view-conselho', 'view-encerramento', 'view-sobre'].includes(activeView.id)) {
+          if (typeof showView === 'function') showView('conselho');
+        }
       }
+    }
     }
 
     function applyUserSession(session) {
@@ -15584,7 +15598,11 @@
       // 2. Verificar Administrador CPD (cpdinfra@edu.itaguai.rj.gov.br / T3c4n3x0)
       const isAdmin = (email === 'cpdinfra@edu.itaguai.rj.gov.br' && password === 'T3c4n3x0');
 
-      // 3. Verificar Usuários de Escolas (e-mail institucional / Ficai2026@)
+      // 3. Verificar Usuário do Conselho Tutelar de Itaguaí
+      const isCTLogin = (email === 'joe.amado@edu.itaguai.rj.gov.br' && password === 'Ficai-Itaguai') ||
+                        (email === 'conselhotutelar@itaguai.rj.gov.br' && (password === 'ConselhoTutelar@' || password === 'CT@2026' || password === 'FicaiSmedu'));
+
+      // 4. Verificar Usuários de Escolas (e-mail institucional / FicaiSmedu)
       const schoolList = (configData && configData.escolas) ? configData.escolas : [];
       const matchedSchool = schoolList.find(e => (e.email || '').trim().toLowerCase() === email || (e.email || '').toLowerCase().includes(email));
       const isSchoolLogin = ((matchedSchool || email.endsWith('@edu.itaguai.rj.gov.br')) && (password === 'FicaiSmedu' || password === 'Ficai22026' || password === 'Ficai2026@'));
@@ -15597,6 +15615,16 @@
           unidade: 'SMEDU / CPD (Administrador)',
           nivel: 'Administrador',
           isSystemAdmin: true,
+          loggedInAt: new Date().toISOString()
+        };
+      } else if (isCTLogin) {
+        authenticated = true;
+        sessionData = {
+          email,
+          nome: 'Joe Amado — Conselho Tutelar',
+          unidade: 'Conselho Tutelar de Itaguaí',
+          nivel: 'ConselhoTutelar',
+          endereco: 'Rua Armélia Louzada, 567 — Centro, Itaguaí - RJ — CEP 23815-180',
           loggedInAt: new Date().toISOString()
         };
       } else if (isSchoolLogin) {
