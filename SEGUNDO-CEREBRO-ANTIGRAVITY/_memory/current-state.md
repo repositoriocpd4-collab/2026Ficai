@@ -122,6 +122,11 @@ updated: 2026-08-24
     - Criada a função de inicialização síncrona `loadSavedFicais()`, prevenindo exceções não tratadas de referência e garantindo que qualquer FICAI encaminhada ao Conselho Tutelar (ex: `00022/Ana Clara Nascimento`) seja lida do IndexedDB e exibida instantaneamente na tabela do Conselho Tutelar (`#tbodyConselho`).
     - **Commits `cc11910` enviados e implantados na branch `DevFicai`:** `fix: renderizar dinamicamente FICAIs no Conselho Tutelar e inicializacao reativa das tabelas`.
 
+23. **Recálculo Dinâmico Automático e Zeramento dos Stat-Cards:**
+    - Criada a função `updateAllDynamicStats()` que lê as FICAIs salvas no `IndexedDB` e recalcula em tempo real todas as porcentagens e contadores do Dashboard e do Conselho Tutelar.
+    - Quando o banco de dados está vazio (0 registros), todos os cartões de estatísticas (*Casos Ativos*, *Falta de motivação*, *Trabalho familiar*, *Doença / Saúde*, *Alunos Desistentes*, *FICAI Finalizadas*, *Aguardando Recebimento*, *Em Diligência*, *Prazo de Retorno*, *Devolvidas à Escola*) exibem estritamente **`0`** ou **`0%`**, eliminando quaisquer resquícios de porcentagens mock estáticas.
+    - **Commit `ae88fa7` enviado e implantado no GitHub (branch `DevFicai`):** `fix: recálculo dinâmico e zeramento total dos stat-cards quando o banco estiver vazio`.
+
 ---
 
 ### 🟡 O Que Está em Desenvolvimento ou Requer Validação Fina
