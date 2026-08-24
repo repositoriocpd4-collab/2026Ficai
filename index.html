@@ -6286,20 +6286,109 @@
                   </div>
                 </div>
 
-                <!-- Ilustração da Escola em SVG -->
+                <!-- Ilustração da Escola em SVG Premium -->
                 <div class="step-hero-illustration" style="flex-shrink: 0; display: flex; align-items: flex-end;">
-                  <svg width="145" height="74" viewBox="0 0 160 85" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <ellipse cx="140" cy="65" rx="16" ry="16" fill="#93c5fd" opacity="0.4" />
-                    <ellipse cx="18" cy="60" rx="14" ry="18" fill="#60a5fa" opacity="0.6" />
-                    <rect x="35" y="28" width="90" height="52" rx="4" fill="#ffffff" stroke="#93c5fd"
-                      stroke-width="2" />
-                    <path d="M80 6L30 30H130L80 6Z" fill="#2563eb" />
-                    <rect x="70" y="52" width="20" height="28" rx="2" fill="#1d4ed8" />
-                    <circle cx="80" cy="22" r="5" fill="#ffffff" />
-                    <rect x="44" y="38" width="12" height="12" rx="2" fill="#dbeafe" stroke="#93c5fd" />
-                    <rect x="44" y="56" width="12" height="12" rx="2" fill="#dbeafe" stroke="#93c5fd" />
-                    <rect x="104" y="38" width="12" height="12" rx="2" fill="#dbeafe" stroke="#93c5fd" />
-                    <rect x="104" y="56" width="12" height="12" rx="2" fill="#dbeafe" stroke="#93c5fd" />
+                  <svg width="170" height="85" viewBox="0 0 170 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="schRoofGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#3b82f6" />
+                        <stop offset="100%" stop-color="#1d4ed8" />
+                      </linearGradient>
+                      <linearGradient id="schWallGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" />
+                        <stop offset="100%" stop-color="#f8fafc" />
+                      </linearGradient>
+                      <linearGradient id="schTowerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#2563eb" />
+                        <stop offset="100%" stop-color="#1e40af" />
+                      </linearGradient>
+                      <linearGradient id="schTreeGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#34d399" />
+                        <stop offset="100%" stop-color="#059669" />
+                      </linearGradient>
+                      <linearGradient id="schTreeGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#60a5fa" />
+                        <stop offset="100%" stop-color="#2563eb" />
+                      </linearGradient>
+                      <filter id="schSoftShadow" x="-10%" y="-10%" width="120%" height="125%" filterUnits="userSpaceOnUse">
+                        <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#1e293b" flood-opacity="0.08" />
+                      </filter>
+                    </defs>
+
+                    <!-- Árvores de Fundo Decorativas -->
+                    <circle cx="18" cy="58" r="14" fill="url(#schTreeGrad1)" opacity="0.85" />
+                    <circle cx="28" cy="62" r="10" fill="#10b981" opacity="0.6" />
+                    <circle cx="152" cy="56" r="15" fill="url(#schTreeGrad2)" opacity="0.3" />
+                    <circle cx="144" cy="62" r="11" fill="url(#schTreeGrad1)" opacity="0.85" />
+
+                    <!-- Base / Chão -->
+                    <rect x="6" y="78" width="158" height="4" rx="2" fill="#cbd5e1" />
+
+                    <!-- Grupo Principal da Escola com Sombra Suave -->
+                    <g filter="url(#schSoftShadow)">
+                      <!-- Alas Laterais da Escola -->
+                      <rect x="24" y="38" width="122" height="40" rx="3" fill="url(#schWallGrad)" stroke="#cbd5e1" stroke-width="1.5" />
+                      
+                      <!-- Linha de Telhado das Alas -->
+                      <rect x="22" y="35" width="126" height="4" rx="1.5" fill="#3b82f6" />
+
+                      <!-- Janelas das Salas de Aula (Ala Esquerda) -->
+                      <rect x="30" y="44" width="13" height="13" rx="2" fill="#e0f2fe" stroke="#93c5fd" stroke-width="1" />
+                      <line x1="36.5" y1="44" x2="36.5" y2="57" stroke="#93c5fd" stroke-width="0.8" />
+                      <line x1="30" y1="50.5" x2="43" y2="50.5" stroke="#93c5fd" stroke-width="0.8" />
+
+                      <rect x="47" y="44" width="13" height="13" rx="2" fill="#e0f2fe" stroke="#93c5fd" stroke-width="1" />
+                      <line x1="53.5" y1="44" x2="53.5" y2="57" stroke="#93c5fd" stroke-width="0.8" />
+                      <line x1="47" y1="50.5" x2="60" y2="50.5" stroke="#93c5fd" stroke-width="0.8" />
+
+                      <!-- Janelas das Salas de Aula (Ala Direita) -->
+                      <rect x="110" y="44" width="13" height="13" rx="2" fill="#e0f2fe" stroke="#93c5fd" stroke-width="1" />
+                      <line x1="116.5" y1="44" x2="116.5" y2="57" stroke="#93c5fd" stroke-width="0.8" />
+                      <line x1="110" y1="50.5" x2="123" y2="50.5" stroke="#93c5fd" stroke-width="0.8" />
+
+                      <rect x="127" y="44" width="13" height="13" rx="2" fill="#e0f2fe" stroke="#93c5fd" stroke-width="1" />
+                      <line x1="133.5" y1="44" x2="133.5" y2="57" stroke="#93c5fd" stroke-width="0.8" />
+                      <line x1="127" y1="50.5" x2="140" y2="50.5" stroke="#93c5fd" stroke-width="0.8" />
+
+                      <!-- Corpo Central / Pavilhão Principal -->
+                      <rect x="64" y="24" width="42" height="54" rx="2" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2" />
+
+                      <!-- Frontão Triangular Clássico / Telhado Central -->
+                      <path d="M85 9L59 25H111L85 9Z" fill="url(#schRoofGrad)" />
+                      
+                      <!-- Torre de Relógio / Sino Central -->
+                      <rect x="79" y="1" width="12" height="10" rx="1.5" fill="url(#schTowerGrad)" />
+                      <polygon points="85,-2 78,2 92,2" fill="#1e3a8a" />
+                      
+                      <!-- Relógio Escolar no Frontão -->
+                      <circle cx="85" cy="19" r="4.5" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" />
+                      <!-- Ponteiros do Relógio (Hora das Aulas: 8:00) -->
+                      <line x1="85" y1="19" x2="85" y2="16.2" stroke="#1d4ed8" stroke-width="1" stroke-linecap="round" />
+                      <line x1="85" y1="19" x2="87.5" y2="19" stroke="#1d4ed8" stroke-width="0.9" stroke-linecap="round" />
+
+                      <!-- Colunas Clássicas de Entrada da Escola -->
+                      <rect x="68" y="34" width="4" height="34" rx="1" fill="#e2e8f0" />
+                      <rect x="98" y="34" width="4" height="34" rx="1" fill="#e2e8f0" />
+
+                      <!-- Janela Superior Central -->
+                      <rect x="79" y="31" width="12" height="14" rx="6" fill="#e0f2fe" stroke="#3b82f6" stroke-width="1" />
+                      <line x1="85" y1="31" x2="85" y2="45" stroke="#3b82f6" stroke-width="0.8" />
+
+                      <!-- Porta Dupla Principal em Arco -->
+                      <path d="M76 78V58C76 54.5 79.5 52 85 52C90.5 52 94 54.5 94 58V78H76Z" fill="#1d4ed8" />
+                      <line x1="85" y1="53" x2="85" y2="78" stroke="#3b82f6" stroke-width="1" />
+                      <!-- Maçanetas Douradas -->
+                      <circle cx="82.5" cy="67" r="1" fill="#fef08a" />
+                      <circle cx="87.5" cy="67" r="1" fill="#fef08a" />
+
+                      <!-- Degraus / Escadaria de Entrada -->
+                      <rect x="71" y="75" width="28" height="3" rx="1" fill="#cbd5e1" />
+                      <rect x="67" y="78" width="36" height="3" rx="1" fill="#94a3b8" />
+                    </g>
+
+                    <!-- Mastro com Bandeira da Escola -->
+                    <line x1="149" y1="20" x2="149" y2="60" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" />
+                    <path d="M149 22L162 26.5L149 31V22Z" fill="#2563eb" />
                   </svg>
                 </div>
               </div>
