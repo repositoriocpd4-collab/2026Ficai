@@ -8031,6 +8031,22 @@
           @media(max-width:1100px){.manual-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.manual-grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
           @media(max-width:900px){.manual-layout{grid-template-columns:1fr}.manual-toc{position:relative;top:auto;display:flex;overflow-x:auto;max-height:none}.manual-toc-title{display:none}.manual-toc a{white-space:nowrap}.manual-repo,.manual-grid,.manual-grid.three{grid-template-columns:1fr}}
           @media(max-width:620px){.manual-hero{padding:22px 18px}.manual-hero h1{font-size:24px}.manual-search-hint{display:none}.manual-section{padding:16px}.manual-flow{grid-template-columns:1fr}}
+
+          /* ===== SUCCESS MODAL ANIMATIONS ===== */
+          @keyframes successPop {
+            0%   { transform: scale(0) rotate(-20deg); opacity: 0; }
+            60%  { transform: scale(1.15) rotate(4deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+          }
+          @keyframes successFadeIn {
+            from { opacity: 0; transform: translateY(18px) scale(.96); }
+            to   { opacity: 1; transform: translateY(0)    scale(1);   }
+          }
+          #successModal.open #successModalCard {
+            animation: successFadeIn .35s cubic-bezier(.22,1,.36,1) both;
+          }
+          #successModalOpenInfo:hover { background: rgba(56,189,248,0.25) !important; }
+          #successModalClose:hover    { background: rgba(255,255,255,0.12) !important; }
         </style>
 
         <section class="view" id="view-sobre">
@@ -9313,6 +9329,39 @@
       <div class="modal-foot">
         <button class="btn small soft" type="button" id="cancelConfigModal">Cancelar</button>
         <button class="btn primary" type="button" id="saveConfigModal"><i class="fa-solid fa-floppy-disk"></i> Salvar cadastro</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE SUCESSO (SALVAR / ENCAMINHAR / IMPRIMIR) -->
+  <div class="modal" id="successModal" aria-hidden="true" style="z-index:9999">
+    <div class="modal-card" id="successModalCard" style="max-width:480px;width:94%;border-radius:20px;padding:0;overflow:hidden;background:transparent;box-shadow:none;">
+      <div id="successModalInner" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 60%,#0c4a6e 100%);border-radius:20px;padding:0;box-shadow:0 24px 64px rgba(8,23,46,0.55),0 0 0 1px rgba(255,255,255,0.06);overflow:hidden;position:relative;">
+        <!-- Decorative top glow bar -->
+        <div style="height:4px;background:linear-gradient(90deg,#38bdf8,#818cf8,#34d399);"></div>
+        <!-- Background sparkle circles -->
+        <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,0.13) 0%,transparent 70%);pointer-events:none;"></div>
+        <div style="position:absolute;bottom:-30px;left:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(52,211,153,0.10) 0%,transparent 70%);pointer-events:none;"></div>
+        <!-- Content -->
+        <div style="padding:36px 36px 28px;text-align:center;position:relative;">
+          <!-- Animated check icon -->
+          <div id="successModalIcon" style="width:72px;height:72px;margin:0 auto 20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;animation:successPop .4s cubic-bezier(.34,1.56,.64,1) both;">
+          </div>
+          <div id="successModalTitle" style="font-size:20px;font-weight:800;color:#f1f5f9;letter-spacing:-.3px;margin-bottom:6px;"></div>
+          <div id="successModalSubtitle" style="font-size:13px;color:#94a3b8;margin-bottom:4px;line-height:1.5;"></div>
+          <div id="successModalFicaiNum" style="display:inline-block;margin-top:12px;padding:5px 18px;background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.25);border-radius:999px;font-size:12px;font-weight:700;color:#38bdf8;letter-spacing:.5px;"></div>
+        </div>
+        <!-- Action row -->
+        <div style="display:flex;gap:10px;padding:0 28px 26px;justify-content:center;flex-wrap:wrap;">
+          <button id="successModalOpenInfo" type="button" style="flex:1;min-width:120px;padding:10px 18px;background:rgba(56,189,248,0.15);border:1px solid rgba(56,189,248,0.3);border-radius:10px;color:#38bdf8;font-size:13px;font-weight:700;cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:7px;">
+            <i class="fa-solid fa-circle-info"></i> Ver informações
+          </button>
+          <button id="successModalClose" type="button" style="flex:1;min-width:120px;padding:10px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#cbd5e1;font-size:13px;font-weight:700;cursor:pointer;transition:all .18s;">
+            Fechar
+          </button>
+        </div>
+        <!-- Subtle bottom border line -->
+        <div style="height:2px;background:linear-gradient(90deg,transparent,rgba(129,140,248,0.3),transparent);"></div>
       </div>
     </div>
   </div>
@@ -12157,7 +12206,7 @@
         moveFicaiToGerados(record, sit);
         await loadSavedStudents();
         await updateAllDynamicStats();
-        if (!silent) toast(`FICAI ${record.numero} salva com sucesso e listada em Gerados no Dashboard.`);
+        if (!silent) showSuccessModal('save', record);
 
         // Registrar nos Logs do Sistema
         logSystemEvent({
@@ -12239,9 +12288,89 @@
 
       await updateAllDynamicStats();
 
-      showView('conselho');
-      toast(`FICAI ${ficaiNum} salva e encaminhada com sucesso ao Conselho Tutelar!`);
+      showSuccessModal('forward', record);
     }
+    // ============================================================
+    // MODAL DE SUCESSO — Salvar / Encaminhar / Imprimir
+    // ============================================================
+    let _successModalRecord = null;
+    function showSuccessModal(action, record) {
+      _successModalRecord = record || null;
+      const icon  = document.getElementById('successModalIcon');
+      const title = document.getElementById('successModalTitle');
+      const sub   = document.getElementById('successModalSubtitle');
+      const badge = document.getElementById('successModalFicaiNum');
+      if (!icon) return;
+
+      const num    = record?.numero || '';
+      const aluno  = record?.aluno  || record?.data?.nomeCompleto || '';
+      const escola = record?.escola || '';
+
+      const configs = {
+        save: {
+          bg:    'linear-gradient(135deg,#10b981,#059669)',
+          emoji: '✅',
+          title: 'FICAI Salva com Sucesso!',
+          sub:   aluno ? `<strong style="color:#f1f5f9">${aluno}</strong><br><span style="color:#94a3b8">${escola}</span>` : 'Registro salvo no banco local do navegador.',
+        },
+        forward: {
+          bg:    'linear-gradient(135deg,#8b5cf6,#7c3aed)',
+          emoji: '⚖️',
+          title: 'Encaminhada ao Conselho Tutelar!',
+          sub:   aluno ? `<strong style="color:#f1f5f9">${aluno}</strong><br><span style="color:#94a3b8">Aguardando providências do CT</span>` : 'FICAI encaminhada com sucesso.',
+        },
+        print: {
+          bg:    'linear-gradient(135deg,#0369a1,#0284c7)',
+          emoji: '🖨️',
+          title: 'Impressão / PDF Iniciada!',
+          sub:   'O documento foi enviado para impressão ou salvo como PDF.',
+        },
+      };
+      const cfg = configs[action] || configs.save;
+
+      icon.style.background  = cfg.bg;
+      icon.style.boxShadow   = `0 0 0 8px rgba(255,255,255,0.06), 0 12px 28px rgba(0,0,0,0.30)`;
+      icon.innerHTML         = `<span style="filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));line-height:1">${cfg.emoji}</span>`;
+      icon.style.animation   = 'none';
+      void icon.offsetWidth; // force reflow to restart animation
+      icon.style.animation   = 'successPop .45s cubic-bezier(.34,1.56,.64,1) both';
+
+      title.textContent = cfg.title;
+      sub.innerHTML     = cfg.sub;
+      badge.style.display = num ? 'inline-block' : 'none';
+      badge.textContent = num ? `FICAI ${num}` : '';
+
+      const openInfoBtn = document.getElementById('successModalOpenInfo');
+      if (openInfoBtn) openInfoBtn.style.display = (action === 'print') ? 'none' : 'flex';
+
+      const modal = document.getElementById('successModal');
+      if (modal) {
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        // Auto-close após 6 segundos
+        clearTimeout(window._successModalTimer);
+        window._successModalTimer = setTimeout(() => closeSuccessModal(), 6000);
+      }
+    }
+    function closeSuccessModal() {
+      clearTimeout(window._successModalTimer);
+      const modal = document.getElementById('successModal');
+      if (modal) { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); }
+    }
+    window.showSuccessModal  = showSuccessModal;
+    window.closeSuccessModal = closeSuccessModal;
+
+    document.getElementById('successModalClose')?.addEventListener('click', closeSuccessModal);
+    document.getElementById('successModal')?.addEventListener('click', e => {
+      if (e.target === document.getElementById('successModal')) closeSuccessModal();
+    });
+    document.getElementById('successModalOpenInfo')?.addEventListener('click', () => {
+      closeSuccessModal();
+      if (_successModalRecord) {
+        setTimeout(() => openInfoModal(_successModalRecord.numero), 80);
+      }
+    });
+
     function updateModalidadeFromTurma() {
       const turmaSel = $('#turma');
       const modalidadeInput = $('#modalidade');
@@ -12386,7 +12515,18 @@
       if (clone2) $('#previewHost').appendChild(clone2);
       $('#previewModal').classList.add('open');
     }
-    $('#topPreview').onclick = e => { e.preventDefault(); openPreview() }; $('#previewBtn').onclick = e => { e.preventDefault(); openPreview() }; $('#closePreview').onclick = () => $('#previewModal').classList.remove('open'); $('#previewModal').addEventListener('click', e => { if (e.target === $('#previewModal')) $('#previewModal').classList.remove('open') }); function doPrint() { syncPrint(); window.print() } $('#printBtn').onclick = e => { e.preventDefault(); doPrint() }; $('#modalPrint').onclick = doPrint;
+    $('#topPreview').onclick = e => { e.preventDefault(); openPreview() }; $('#previewBtn').onclick = e => { e.preventDefault(); openPreview() }; $('#closePreview').onclick = () => $('#previewModal').classList.remove('open'); $('#previewModal').addEventListener('click', e => { if (e.target === $('#previewModal')) $('#previewModal').classList.remove('open') });
+    function doPrint() {
+      syncPrint();
+      window.print();
+      // Fechar o preview e mostrar o modal de sucesso
+      setTimeout(() => {
+        $('#previewModal')?.classList.remove('open');
+        showSuccessModal('print', null);
+      }, 300);
+    }
+    $('#printBtn').onclick = e => { e.preventDefault(); doPrint() };
+    $('#modalPrint').onclick = doPrint;
 
     // Configurações e Cadastros — CRUD persistente no navegador
     const CONFIG_STORAGE_KEY = 'ficai4ConfigDataV3';
