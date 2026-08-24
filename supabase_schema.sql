@@ -610,3 +610,34 @@ BEGIN
     END IF;
   END LOOP;
 END $$;
+
+-- ==============================================================================
+-- TABELA: CANCELAMENTOS DE FICAIS (REGISTRO AUDITÁVEL PERMANENTE)
+-- ==============================================================================
+CREATE TABLE IF NOT EXISTS public.cancelamentos_ficais (
+    id TEXT PRIMARY KEY DEFAULT ('canc-' || gen_random_uuid()),
+    ficai_numero TEXT NOT NULL,
+    aluno_nome TEXT NOT NULL,
+    escola_nome TEXT,
+    turma TEXT,
+    motivo TEXT NOT NULL,
+    justificativa TEXT NOT NULL,
+    responsavel TEXT NOT NULL,
+    data_cancelamento TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now()),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now()),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT timezone('utc'::text, now())
+);
+
+DROP TRIGGER IF EXISTS set_cancelamentos_ficais_updated_at ON public.cancelamentos_ficais;
+CREATE TRIGGER set_cancelamentos_ficais_updated_at
+BEFORE UPDATE ON public.cancelamentos_ficais
+FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+
+-- Políticas RLS de Segurança
+ALTER TABLE public.cancelamentos_ficais ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Permitir leitura pública de cancelamentos" ON public.cancelamentos_ficais;
+CREATE POLICY "Permitir leitura pública de cancelamentos" ON public.cancelamentos_ficais FOR SELECT USING (true);
+DROP POLICY IF EXISTS "Permitir inserção de cancelamentos" ON public.cancelamentos_ficais;
+CREATE POLICY "Permitir inserção de cancelamentos" ON public.cancelamentos_ficais FOR INSERT WITH CHECK (true);
+DROP POLICY IF EXISTS "Permitir atualização de cancelamentos" ON public.cancelamentos_ficais;
+CREATE POLICY "Permitir atualização de cancelamentos" ON public.cancelamentos_ficais FOR UPDATE USING (true);

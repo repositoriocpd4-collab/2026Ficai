@@ -179,6 +179,35 @@ const EscolaService = {
   }
 };
 
+// Serviços para Registro Permanente de Cancelamentos
+const CancelamentoService = {
+  async getAll() {
+    const sb = getSupabase();
+    if (!sb) return [];
+    const { data, error } = await sb.from('cancelamentos_ficais').select('*').order('data_cancelamento', { ascending: false });
+    if (error) throw error;
+    return data;
+  },
+
+  async insert(record) {
+    const sb = getSupabase();
+    if (!sb) return null;
+    const payload = {
+      ficai_numero: record.ficai_numero || record.ficai,
+      aluno_nome: record.aluno_nome || record.aluno || record.student,
+      escola_nome: record.escola_nome || record.escola,
+      turma: record.turma,
+      motivo: record.motivo,
+      justificativa: record.justificativa,
+      responsavel: record.responsavel,
+      data_cancelamento: record.data_cancelamento || new Date().toISOString()
+    };
+    const { data, error } = await sb.from('cancelamentos_ficais').insert(payload).select();
+    if (error) throw error;
+    return data?.[0];
+  }
+};
+
 // Exporta para escopo global se em navegador
 if (typeof window !== 'undefined') {
   window.SupabaseConfig = { SUPABASE_URL, SUPABASE_ANON_KEY };
@@ -187,4 +216,5 @@ if (typeof window !== 'undefined') {
   window.FicaiService = FicaiService;
   window.MarcadorService = MarcadorService;
   window.EscolaService = EscolaService;
+  window.CancelamentoService = CancelamentoService;
 }
