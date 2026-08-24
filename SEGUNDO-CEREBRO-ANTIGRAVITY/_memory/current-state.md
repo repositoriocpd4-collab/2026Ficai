@@ -112,9 +112,15 @@ updated: 2026-08-24
 
 21. **Correção do Preenchimento Automático da Modalidade no Formulário (`Gerar FICAI`):**
     - Criada a função reativa `updateModalidadeFromTurma()` que escuta a seleção do campo **Turma**.
-    - Ao selecionar qualquer turma (ex: `6º Ano A`, `7º Ano B`, `NCEJA VI A`, `Pré II A`), o sistema automaticamente lê a modalidade vinculada cadastrada no menu *Configurações & Cadastros* (ou dataset) e preenche instantaneamente o campo **Modalidade** (ex: *Ensino Fundamental*, *EJA*, *Educação Infantil*).
+    - Ao selecionar qualquer turma (ex: `6º Ano A`, `7º Ano B`, `NCEJA VI A`, `Pré II A`), o sistema automaticamente lê a modalidade vinculada cadastrada no menu *Configurações & Cadastros* (or dataset) e preenche instantaneamente o campo **Modalidade** (ex: *Ensino Fundamental*, *EJA*, *Educação Infantil*).
     - Também auto-seleciona o **Ano Escolar** e **Turno** caso ainda não estejam preenchidos.
     - **Commit `24b89e8` enviado ao GitHub:** `fix: auto-preencher campo Modalidade ao selecionar a Turma na criacao de FICAI`.
+
+22. **Sincronização Dinâmica e Resolução de Renderização da Tabela do Conselho Tutelar (`#view-conselho`):**
+    - Removidas as linhas estáticas demonstrativas mock (`00018/Carla Souza Ribeiro`, `00015/Eduarda Gomes`, `00012/Lucas Mendonça`) das tabelas do Conselho Tutelar, Encerramento de Casos e RAE.
+    - Definidas e exportadas as funções de renderização reativa: `renderSavedFicai()`, `moveFicaiToGerados()`, `moveFicaiToRecebidosCT()`, `renderConselhoTableRow()` e `syncConselhoTableFromDatabase()`.
+    - Criada a função de inicialização síncrona `loadSavedFicais()`, prevenindo exceções não tratadas de referência e garantindo que qualquer FICAI encaminhada ao Conselho Tutelar (ex: `00022/Ana Clara Nascimento`) seja lida do IndexedDB e exibida instantaneamente na tabela do Conselho Tutelar (`#tbodyConselho`).
+    - **Commits `cc11910` enviados e implantados na branch `DevFicai`:** `fix: renderizar dinamicamente FICAIs no Conselho Tutelar e inicializacao reativa das tabelas`.
 
 ---
 

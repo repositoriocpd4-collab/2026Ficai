@@ -6926,7 +6926,7 @@
               <div class="stat-card-head"><span class="stat-tag"><i class="fa-solid fa-clock"></i> Pendente</span>
                 <div class="stat-icon-wrap"><i class="fa-solid fa-inbox"></i></div>
               </div>
-              <div class="stat-number" id="ctStatAguardando">12</div>
+              <div class="stat-number" id="ctStatAguardando">0</div>
               <div class="stat-label">Aguardando Recebimento</div>
               <div class="stat-trend"><i class="fa-solid fa-arrow-down-long"></i> Triagem inicial no CT</div>
             </div>
@@ -6936,7 +6936,7 @@
                   curso</span>
                 <div class="stat-icon-wrap"><i class="fa-solid fa-person-walking-arrow-right"></i></div>
               </div>
-              <div class="stat-number" id="ctStatDiligencia">17</div>
+              <div class="stat-number" id="ctStatDiligencia">0</div>
               <div class="stat-label">Em Diligência</div>
               <div class="stat-trend"><i class="fa-solid fa-house-user"></i> Visitas e averiguações ativas</div>
             </div>
@@ -6945,7 +6945,7 @@
                   Prazo</span>
                 <div class="stat-icon-wrap"><i class="fa-solid fa-hourglass-half"></i></div>
               </div>
-              <div class="stat-number" id="ctStatPrazo">6</div>
+              <div class="stat-number" id="ctStatPrazo">0</div>
               <div class="stat-label">Prazo de Retorno</div>
               <div class="stat-trend"><i class="fa-solid fa-calendar-xmark"></i> Vencimento próximo da resposta</div>
             </div>
@@ -6955,7 +6955,7 @@
                   Concluídas</span>
                 <div class="stat-icon-wrap"><i class="fa-solid fa-share-from-square"></i></div>
               </div>
-              <div class="stat-number" id="ctStatDevolvidas">43</div>
+              <div class="stat-number" id="ctStatDevolvidas">0</div>
               <div class="stat-label">Devolvidas à Escola</div>
               <div class="stat-trend"><i class="fa-solid fa-file-circle-check"></i> Parecer formal emitido</div>
             </div>
@@ -11938,9 +11938,98 @@
         });
 
         await syncConselhoTableFromDatabase();
+        await updateAllDynamicStats();
       } catch (err) {
         console.warn('Erro ao carregar FICAIs salvas:', err);
       }
+    }
+
+    async function updateAllDynamicStats() {
+      let list = [];
+      try {
+        list = await dbGetAll('ficais');
+      } catch (_e) { }
+
+      const total = Array.isArray(list) ? list.length : 0;
+
+      if (total === 0) {
+        if ($('#dashStatAtivos')) $('#dashStatAtivos').textContent = '0';
+        if ($('#dashStatMotivacao')) $('#dashStatMotivacao').textContent = '0%';
+        if ($('#dashStatSocial')) $('#dashStatSocial').textContent = '0%';
+        if ($('#dashStatSaude')) $('#dashStatSaude').textContent = '0%';
+        if ($('#dashStatBuscaAtiva')) $('#dashStatBuscaAtiva').textContent = '0';
+        if ($('#dashStatFinalizadas')) $('#dashStatFinalizadas').textContent = '0';
+
+        if ($('#ctStatAguardando')) $('#ctStatAguardando').textContent = '0';
+        if ($('#ctStatDiligencia')) $('#ctStatDiligencia').textContent = '0';
+        if ($('#ctStatPrazo')) $('#ctStatPrazo').textContent = '0';
+        if ($('#ctStatDevolvidas')) $('#ctStatDevolvidas').textContent = '0';
+        if ($('#cntCasosEncerrados')) $('#cntCasosEncerrados').textContent = '0 casos arquivados';
+        return;
+      }
+
+      let ativos = 0;
+      let motivacaoCount = 0;
+      let socialCount = 0;
+      let saudeCount = 0;
+      let buscaAtiva = 0;
+      let finalizadas = 0;
+
+      let ctAguardando = 0;
+      let ctDiligencia = 0;
+      let ctPrazo = 0;
+      let ctDevolvidas = 0;
+      let encerrados = 0;
+
+      list.forEach(r => {
+        if (!r) return;
+        const sit = String(r.situacao || '').toLowerCase();
+        const motivosStr = JSON.stringify(r.data?.motivos || []).toLowerCase();
+
+        if (sit.includes('finalizada') || sit.includes('encerrad') || sit.includes('regularizado')) {
+          finalizadas++;
+          if (sit.includes('encerrad')) encerrados++;
+        } else if (sit.includes('cancelada')) {
+          // Canceladas nao contam nos casos ativos
+        } else {
+          ativos++;
+        }
+
+        if (sit.includes('desistente') || sit.includes('alerta') || sit.includes('busca ativa')) {
+          buscaAtiva++;
+        }
+
+        if (motivosStr.includes('motivação') || motivosStr.includes('motivacao') || sit.includes('motivação')) motivacaoCount++;
+        if (motivosStr.includes('trabalho') || motivosStr.includes('social') || sit.includes('social')) socialCount++;
+        if (motivosStr.includes('saúde') || motivosStr.includes('saude') || motivosStr.includes('doença')) saudeCount++;
+
+        if (r.isEncaminhadoCT || sit.includes('conselho')) {
+          if (sit.includes('devolvida') || sit.includes('retornado')) {
+            ctDevolvidas++;
+          } else if (sit.includes('diligência') || sit.includes('diligencia')) {
+            ctDiligencia++;
+          } else {
+            ctAguardando++;
+          }
+        }
+      });
+
+      const pctMotivacao = Math.round((motivacaoCount / total) * 100);
+      const pctSocial = Math.round((socialCount / total) * 100);
+      const pctSaude = Math.round((saudeCount / total) * 100);
+
+      if ($('#dashStatAtivos')) $('#dashStatAtivos').textContent = ativos;
+      if ($('#dashStatMotivacao')) $('#dashStatMotivacao').textContent = `${pctMotivacao}%`;
+      if ($('#dashStatSocial')) $('#dashStatSocial').textContent = `${pctSocial}%`;
+      if ($('#dashStatSaude')) $('#dashStatSaude').textContent = `${pctSaude}%`;
+      if ($('#dashStatBuscaAtiva')) $('#dashStatBuscaAtiva').textContent = buscaAtiva;
+      if ($('#dashStatFinalizadas')) $('#dashStatFinalizadas').textContent = finalizadas;
+
+      if ($('#ctStatAguardando')) $('#ctStatAguardando').textContent = ctAguardando;
+      if ($('#ctStatDiligencia')) $('#ctStatDiligencia').textContent = ctDiligencia;
+      if ($('#ctStatPrazo')) $('#ctStatPrazo').textContent = ctPrazo;
+      if ($('#ctStatDevolvidas')) $('#ctStatDevolvidas').textContent = ctDevolvidas;
+      if ($('#cntCasosEncerrados')) $('#cntCasosEncerrados').textContent = `${encerrados} caso${encerrados === 1 ? '' : 's'} arquivado${encerrados === 1 ? '' : 's'}`;
     }
 
     // Persistência local
@@ -15737,7 +15826,7 @@
     initActionButtonsBindings();
     initSystemLogsListeners();
     initNotificationCenter();
-    initAuthSystem(); restore(); autoPopulateLoggedSchoolInForm(); syncPrint(); loadSavedStudents(); loadSavedFicais(); syncConselhoTableFromDatabase(); setWizardStep(1);
+    initAuthSystem(); restore(); autoPopulateLoggedSchoolInForm(); syncPrint(); loadSavedStudents(); loadSavedFicais(); syncConselhoTableFromDatabase(); updateAllDynamicStats(); setWizardStep(1);
   </script>
 </body>
 
