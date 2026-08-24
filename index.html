@@ -11841,12 +11841,76 @@
       showView('conselho');
       toast(`FICAI ${ficaiNum} salva e encaminhada com sucesso ao Conselho Tutelar!`);
     }
-    $('#btnEncaminharCT')?.addEventListener('click', encaminharFicaiAoCT);
-    $('#clearDraft').onclick = e => { e.preventDefault(); if (confirm('Limpar o formulário atual?')) { localStorage.removeItem('ficai4Draft'); $('#ficaiForm').reset(); $('#escolaEndereco').value = ''; $('#escolaTelefone').value = ''; $('#modalidade').value = ''; autoGenerateFicaiNumber(true); if (typeof autoPopulateLoggedSchoolInForm === 'function') autoPopulateLoggedSchoolInForm(); } };
-    function restore() { try { const data = JSON.parse(localStorage.getItem('ficai4Draft') || 'null'); if (!data) return; Object.entries(data).forEach(([k, v]) => { const el = $('#' + k); if (!el) return; if (typeof v === 'boolean') el.checked = v; else if (typeof v === 'string') el.value = v }); (data.catalogoSituacoesPersonalizadas || []).forEach(x => createCustomStudentSituation(x, { persist: false, removable: true })); (data.catalogoVulnerabilidadesPersonalizadas || []).forEach(x => createCustomVulnerability(x, { persist: false, removable: true })); (data.motivos || []).forEach(v => { const el = [...$$('#motivosGrid input')].find(i => i.value === v); if (el) el.checked = true }); (data.vulnerabilidades || []).forEach(v => { let el = [...$$('#vulnGrid input')].find(i => i.value === v); if (!el) el = createCustomVulnerability(v, { persist: false, removable: true }); if (el) el.checked = true }); if (data.situacao) { let r = [...$$('input[name="situacaoAluno"]')].find(i => i.value === data.situacao); if (!r) r = createCustomStudentSituation({ name: data.situacao, description: 'Situação recuperada desta FICAI.' }, { persist: false, removable: true }); if (r) r.checked = true } Object.entries(data.diagnostico || {}).forEach(([g, vals]) => { const box = [...$$('#diagnosisGrid .diagnosis-box')].find(b => b.dataset.group === g); vals.forEach(v => { const el = [...box.querySelectorAll('input')].find(i => i.value === v); if (el) el.checked = true }) }); normalizeNumber(); updateFaltasCount() } catch (e) { } }
+    function updateModalidadeFromTurma() {
+      const turmaSel = $('#turma');
+      const modalidadeInput = $('#modalidade');
+      const anoSel = $('#anoEscolar');
+      const turnoSel = $('#turno');
+
+      if (!turmaSel || !modalidadeInput) return;
+
+      const val = turmaSel.value;
+      if (!val) {
+        modalidadeInput.value = '';
+        modalidadeInput.placeholder = 'Aguardando turma';
+        return;
+      }
+
+      const opt = turmaSel.selectedOptions[0];
+      let modalidade = opt?.dataset?.modalidade || '';
+      let turno = opt?.dataset?.turno || '';
+      let ano = opt?.dataset?.ano || '';
+
+      // Se nao encontrou no dataset do option, busca na lista de turmas ativas do configData
+      if ((!modalidade || !turno || !ano) && typeof configData !== 'undefined' && configData.turmas) {
+        const found = configData.turmas.find(x => sameText(x.turma, val));
+        if (found) {
+          if (!modalidade) modalidade = found.modalidade || '';
+          if (!turno) turno = found.turno || '';
+          if (!ano) ano = found.ano || '';
+        }
+      }
+
+      // Fallback inteligente pelo nome da turma
+      if (!modalidade) {
+        const u = val.toUpperCase();
+        if (u.includes('PRÉ') || u.includes('PRE') || u.includes('CRECHE') || u.includes('BERÇÁRIO') || u.includes('INFANTIL')) {
+          modalidade = 'Educação Infantil';
+        } else if (u.includes('EJA') || u.includes('NCEJA') || u.includes('PEJA')) {
+          modalidade = 'EJA - Educação de Jovens e Adultos';
+        } else if (u.includes('ANO') || u.includes('SÉRIE') || u.includes('SERIE') || u.includes('FUNDAMENTAL')) {
+          modalidade = 'Ensino Fundamental';
+        } else {
+          modalidade = 'Ensino Fundamental';
+        }
+      }
+
+      modalidadeInput.value = modalidade;
+      modalidadeInput.placeholder = 'Preenchido automaticamente';
+
+      // Auto preenche o Turno se nao estiver selecionado
+      if (turnoSel && !turnoSel.value && turno) {
+        const optMatch = [...turnoSel.options].find(o => sameText(o.value, turno));
+        if (optMatch) turnoSel.value = optMatch.value;
+      }
+
+      // Auto preenche o Ano Escolar se nao estiver selecionado
+      if (anoSel && !anoSel.value && ano) {
+        const optMatch = [...anoSel.options].find(o => sameText(o.value, ano));
+        if (optMatch) anoSel.value = optMatch.value;
+      }
+
+      if (typeof syncPrint === 'function') syncPrint();
+    }
+
+    $('#turma')?.addEventListener('change', updateModalidadeFromTurma);
+    $('#turma')?.addEventListener('input', updateModalidadeFromTurma);
+
+    $('#clearDraft').onclick = e => { e.preventDefault(); if (confirm('Limpar o formulário atual?')) { localStorage.removeItem('ficai4Draft'); $('#ficaiForm').reset(); $('#escolaEndereco').value = ''; $('#escolaTelefone').value = ''; $('#modalidade').value = ''; $('#modalidade').placeholder = 'Aguardando turma'; autoGenerateFicaiNumber(true); if (typeof autoPopulateLoggedSchoolInForm === 'function') autoPopulateLoggedSchoolInForm(); } };
+    function restore() { try { const data = JSON.parse(localStorage.getItem('ficai4Draft') || 'null'); if (!data) return; Object.entries(data).forEach(([k, v]) => { const el = $('#' + k); if (!el) return; if (typeof v === 'boolean') el.checked = v; else if (typeof v === 'string') el.value = v }); (data.catalogoSituacoesPersonalizadas || []).forEach(x => createCustomStudentSituation(x, { persist: false, removable: true })); (data.catalogoVulnerabilidadesPersonalizadas || []).forEach(x => createCustomVulnerability(x, { persist: false, removable: true })); (data.motivos || []).forEach(v => { const el = [...$$('#motivosGrid input')].find(i => i.value === v); if (el) el.checked = true }); (data.vulnerabilidades || []).forEach(v => { let el = [...$$('#vulnGrid input')].find(i => i.value === v); if (!el) el = createCustomVulnerability(v, { persist: false, removable: true }); if (el) el.checked = true }); if (data.situacao) { let r = [...$$('input[name="situacaoAluno"]')].find(i => i.value === data.situacao); if (!r) r = createCustomStudentSituation({ name: data.situacao, description: 'Situação recuperada desta FICAI.' }, { persist: false, removable: true }); if (r) r.checked = true } Object.entries(data.diagnostico || {}).forEach(([g, vals]) => { const box = [...$$('#diagnosisGrid .diagnosis-box')].find(b => b.dataset.group === g); vals.forEach(v => { const el = [...box.querySelectorAll('input')].find(i => i.value === v); if (el) el.checked = true }) }); normalizeNumber(); updateFaltasCount(); updateModalidadeFromTurma() } catch (e) { } }
 
     // Exemplo
-    $('#loadDemo').onclick = e => { e.preventDefault(); $('#escola').value = 'aparecida'; $('#escola').dispatchEvent(new Event('change')); $('#aluno').value = 'demo'; $('#aluno').dispatchEvent(new Event('change')); $('#anoEscolar').value = '7º Ano'; $('#turma').value = '7º Ano B'; $('#turma').dispatchEvent(new Event('change')); $('#turno').value = 'Manhã'; $('#faltaInicio').value = `${currentYear}-08-03`; $('#faltaFim').value = `${currentYear}-08-14`; $('#dataComunicacao').value = `${currentYear}-08-17`; $('#profissional').value = 'Professor(a) / Orientador(a)'; $('#assinaturaProf').value = 'Matrícula funcional'; const p = $$('[data-proc]'); p[0].checked = true; p[1].checked = true; p[2].checked = true; $$('[data-proc-date]').slice(0, 3).forEach((i, idx) => i.value = `${currentYear}-08-${String(4 + idx * 3).padStart(2, '0')}`); const motivo = [...$$('#motivosGrid input')].find(i => i.value === 'Falta de motivação'); if (motivo) motivo.checked = true; $('input[name="situacaoAluno"][value="Infrequente"]').checked = true; const vuln = [...$$('#vulnGrid input')].find(i => i.value === 'Risco Social'); if (vuln) vuln.checked = true; const diag = [...$$('#diagnosisGrid input')].find(i => i.value === 'Falta de Motivação'); if (diag) diag.checked = true; $('#observacaoInicial').value = 'Exemplo demonstrativo para visualização do fluxo e da folha A4.'; updateFaltasCount(); syncPrint(); toast('Exemplo demonstrativo carregado.') };
+    $('#loadDemo').onclick = e => { e.preventDefault(); $('#escola').value = 'aparecida'; $('#escola').dispatchEvent(new Event('change')); $('#aluno').value = 'demo'; $('#aluno').dispatchEvent(new Event('change')); $('#anoEscolar').value = '7º Ano'; $('#turma').value = '7º Ano B'; $('#turma').dispatchEvent(new Event('change')); updateModalidadeFromTurma(); $('#turno').value = 'Manhã'; $('#faltaInicio').value = `${currentYear}-08-03`; $('#faltaFim').value = `${currentYear}-08-14`; $('#dataComunicacao').value = `${currentYear}-08-17`; $('#profissional').value = 'Professor(a) / Orientador(a)'; $('#assinaturaProf').value = 'Matrícula funcional'; const p = $$('[data-proc]'); p[0].checked = true; p[1].checked = true; p[2].checked = true; $$('[data-proc-date]').slice(0, 3).forEach((i, idx) => i.value = `${currentYear}-08-${String(4 + idx * 3).padStart(2, '0')}`); const motivo = [...$$('#motivosGrid input')].find(i => i.value === 'Falta de motivação'); if (motivo) motivo.checked = true; $('input[name="situacaoAluno"][value="Infrequente"]').checked = true; const vuln = [...$$('#vulnGrid input')].find(i => i.value === 'Risco Social'); if (vuln) vuln.checked = true; const diag = [...$$('#diagnosisGrid input')].find(i => i.value === 'Falta de Motivação'); if (diag) diag.checked = true; $('#observacaoInicial').value = 'Exemplo demonstrativo para visualização do fluxo e da folha A4.'; updateFaltasCount(); syncPrint(); toast('Exemplo demonstrativo carregado.') };
 
     function pset(key, value) { $$(`[data-p="${key}"]`).forEach(el => { el.textContent = value || '' }) }
     function syncPrint() {
@@ -13050,7 +13114,7 @@
       const reasonHost = $('#motivosGrid'); if (reasonHost) { const selected = new Set(checkedValues('#motivosGrid input')); reasonHost.innerHTML = (configData.motivos || []).filter(x => x.ativo !== false && sameText(x.grupo, 'Motivos da ausência')).map(x => `<label class="check"><input type="checkbox" value="${escapeHtml(x.nome)}" ${selected.has(x.nome) ? 'checked' : ''}><span>${escapeHtml(x.nome)}</span></label>`).join('') }
       // Diagnóstico por grupo
       const diagHost = $('#diagnosisGrid'); if (diagHost) { const selected = {}; $$('#diagnosisGrid .diagnosis-box').forEach(box => selected[box.dataset.group] = new Set([...box.querySelectorAll('input:checked')].map(i => i.value))); const groups = {}; (configData.motivos || []).filter(x => x.ativo !== false && !sameText(x.grupo, 'Motivos da ausência')).forEach(x => (groups[x.grupo] || (groups[x.grupo] = [])).push(x.nome)); diagHost.innerHTML = Object.entries(groups).map(([g, vals]) => `<div class="diagnosis-box" data-group="${escapeHtml(g)}"><h4>${escapeHtml(g)}</h4>${vals.map(v => `<label class="check"><input type="checkbox" value="${escapeHtml(v)}" ${selected[g]?.has(v) ? 'checked' : ''}><span>${escapeHtml(v)}</span></label>`).join('')}</div>`).join('') }
-      schoolSelect?.dispatchEvent(new Event('change')); turmaSel?.dispatchEvent(new Event('change'));
+      schoolSelect?.dispatchEvent(new Event('change')); turmaSel?.dispatchEvent(new Event('change')); if (typeof updateModalidadeFromTurma === 'function') updateModalidadeFromTurma();
     }
     function initConfigCatalogs() { configData = readConfigData(); saveConfigData(); renderAllConfigs(); syncConfigToFicai() }
     $$('.config-tab').forEach(b => b.onclick = () => { $$('.config-tab').forEach(x => x.classList.remove('active')); b.classList.add('active'); $$('.config-pane').forEach(p => p.classList.remove('active')); $('#tab-' + b.dataset.tab).classList.add('active') });
