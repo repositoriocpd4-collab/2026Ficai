@@ -1,13 +1,13 @@
 ---
 tags: [knowledge, business, pricing]
-status: active
-created: [DATA DE HOJE]
-updated: [DATA DE HOJE]
+status: archived
+created: 2026-08-24
+updated: 2026-08-24
 ---
 
-# Estratégia de Preços
+# Precificação — Módulo Comercial (DESATIVADO)
 
-> **Módulo negócios** - Opcional. Defina como você precifica seus serviços. O `/proposal-generator` usa este arquivo para calibrar propostas.
+> **Módulo Desativado:** Este vault está configurado exclusivamente para o desenvolvimento e arquitetura do sistema público **FICAI 4.0** (SMEDU / Itaguaí). Modelos comerciais de prospecção/vendas foram arquivados.
 
 ---
 

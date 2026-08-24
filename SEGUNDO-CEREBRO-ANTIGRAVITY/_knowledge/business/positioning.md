@@ -1,17 +1,13 @@
 ---
 tags: [knowledge, business, positioning]
-status: active
-created: [DATA DE HOJE]
-updated: [DATA DE HOJE]
+status: archived
+created: 2026-08-24
+updated: 2026-08-24
 ---
 
-# Posicionamento
+# Posicionamento — Módulo Comercial (DESATIVADO)
 
-> **Módulo negócios** - Este arquivo é opcional. Se você não usa o segundo cérebro para negócios, pode ignorar ou deletar a pasta `_knowledge/business/` inteira.
-
-Defina como seu negócio/serviço se posiciona no mercado. O `/prospect-research` e o `/proposal-generator` usam este arquivo para gerar mensagens alinhadas.
-
----
+> **Módulo Desativado:** Este vault está configurado exclusivamente para o desenvolvimento e arquitetura do sistema público **FICAI 4.0** (SMEDU / Itaguaí). Modelos comerciais de prospecção/vendas foram arquivados.
 
 ## O Que Eu Faço
 

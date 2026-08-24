@@ -1,0 +1,265 @@
+<!-- ============================================================
+     FICAI 4.0 — SOBRE O SISTEMA / MANUAL COMPLETO
+     Cole o CSS dentro do <style> principal do projeto.
+     Substitua a seção atual id="view-sobre" pelo HTML abaixo.
+     Cole o JavaScript antes de </body> ou no JS principal.
+     Requer Font Awesome já carregado no sistema.
+============================================================ -->
+
+<style>
+    #view-sobre { --manual-navy:#0f2747; --manual-blue:#075b9d; --manual-soft:#f5f9fd; --manual-line:#dbe7f2; }
+    .manual-hero{position:relative;overflow:hidden;border-radius:18px;padding:28px 30px;background:linear-gradient(135deg,#073b69 0%,#0877c9 62%,#39a0e8 100%);color:#fff;box-shadow:0 18px 36px rgba(8,91,157,.18);margin-bottom:18px}
+    .manual-hero::after{content:'';position:absolute;right:-90px;top:-110px;width:310px;height:310px;border-radius:50%;background:rgba(255,255,255,.10)}
+    .manual-hero::before{content:'';position:absolute;right:145px;bottom:-115px;width:240px;height:240px;border-radius:50%;border:34px solid rgba(255,255,255,.07)}
+    .manual-hero>*{position:relative;z-index:1}.manual-hero-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;flex-wrap:wrap}
+    .manual-kicker{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);font-size:10.5px;font-weight:800;letter-spacing:.7px;text-transform:uppercase}
+    .manual-hero h1{margin:10px 0 5px;font-size:30px;line-height:1.1;font-weight:850;letter-spacing:-.4px;color:#fff}.manual-hero p{max-width:900px;margin:0;color:rgba(255,255,255,.9);font-size:13.5px;line-height:1.65}
+    .manual-version{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}.manual-version span{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.12);font-size:10.5px;font-weight:750;border:1px solid rgba(255,255,255,.18)}
+    .manual-search-card{background:#fff;border:1px solid var(--manual-line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:10px;margin-bottom:16px}.manual-search-card i{color:#0877c9}.manual-search-card input{border:0!important;box-shadow:none!important;background:transparent!important;padding:6px 4px!important}.manual-search-hint{font-size:10.5px;color:#8292a8;white-space:nowrap}
+    .manual-layout{display:grid;grid-template-columns:235px minmax(0,1fr);gap:18px;align-items:start}.manual-toc{position:sticky;top:128px;background:#fff;border:1px solid var(--manual-line);border-radius:14px;padding:10px;box-shadow:var(--shadow-sm);max-height:calc(100vh - 150px);overflow:auto}
+    .manual-toc-title{padding:8px 10px 10px;font-size:10px;font-weight:850;color:#8191a6;text-transform:uppercase;letter-spacing:.9px}.manual-toc a{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:9px;color:#465a73;font-size:11.5px;font-weight:700;transition:.15s}.manual-toc a i{width:17px;text-align:center;color:#0877c9}.manual-toc a:hover{background:#edf5fd;color:#075b9d;transform:translateX(2px)}
+    .manual-content{min-width:0}.manual-section{scroll-margin-top:128px;background:#fff;border:1px solid var(--manual-line);border-radius:16px;padding:22px;margin-bottom:15px;box-shadow:var(--shadow-sm)}.manual-section[hidden]{display:none!important}
+    .manual-section-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}.manual-section-icon{width:38px;height:38px;flex:0 0 38px;border-radius:11px;display:grid;place-items:center;background:#edf5fd;color:#0877c9;font-size:15px}.manual-section-title{margin:0!important;font-size:17px!important;color:#122946!important;font-weight:850!important}.manual-section-sub{margin:3px 0 0;color:#6b7d94;font-size:11.5px;line-height:1.5}
+    .manual-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.manual-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.manual-card{border:1px solid #e1eaf3;border-radius:12px;padding:13px 14px;background:#fbfdff}.manual-card h4{margin:0 0 6px;font-size:12.5px;color:#173b62;display:flex;align-items:center;gap:7px}.manual-card h4 i{color:#0877c9}.manual-card p{margin:0;color:#5f7188;font-size:11.5px;line-height:1.55}.manual-card ul{margin:7px 0 0;padding-left:18px;color:#53667e;font-size:11.3px;line-height:1.6}
+    .manual-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;counter-reset:manualstep}.manual-step{position:relative;border:1px solid #dce8f2;border-radius:12px;padding:13px 12px 12px 42px;background:#fbfdff;min-height:92px}.manual-step::before{counter-increment:manualstep;content:counter(manualstep);position:absolute;left:11px;top:12px;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;background:#0877c9;color:#fff;font-size:10.5px;font-weight:850}.manual-step strong{display:block;color:#183b60;font-size:11.5px;margin-bottom:4px}.manual-step span{display:block;color:#63768d;font-size:10.8px;line-height:1.5}
+    .manual-callout{display:flex;gap:10px;padding:12px 13px;border-radius:11px;background:#eff8ff;border:1px solid #cce7fb;color:#31516f;font-size:11.5px;line-height:1.55}.manual-callout i{color:#0284c7;margin-top:2px}.manual-callout.warning{background:#fffaf0;border-color:#fde7b2}.manual-callout.warning i{color:#d97706}.manual-callout.danger{background:#fff4f4;border-color:#fecaca}.manual-callout.danger i{color:#dc2626}.manual-callout.success{background:#f2fcf5;border-color:#c8eed2}.manual-callout.success i{color:#16a34a}
+    .manual-table{width:100%;border:1px solid #e2eaf3;border-radius:11px;overflow:hidden}.manual-table table{width:100%}.manual-table th{position:static;background:#f6f9fc;font-size:9.8px}.manual-table td{font-size:11.2px;vertical-align:top;line-height:1.5}.manual-table tr:hover{box-shadow:none!important}.manual-status{display:inline-flex;align-items:center;gap:5px;padding:3px 7px;border-radius:999px;font-size:9.5px;font-weight:850;white-space:nowrap}.manual-status.ok{background:#ecfdf3;color:#15803d}.manual-status.partial{background:#fff7ed;color:#c2410c}.manual-status.plan{background:#f5f3ff;color:#6d28d9}.manual-status.local{background:#eff6ff;color:#1d4ed8}
+    .manual-repo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.manual-repo-card{border:1px solid #dce7f1;border-radius:13px;padding:15px;background:linear-gradient(180deg,#fff,#f9fbfd)}.manual-repo-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}.manual-repo-logo{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#10243d;color:#fff}.manual-repo-card.supabase .manual-repo-logo{background:#16a34a}.manual-repo-card strong{font-size:12.5px;color:#1b3554}.manual-repo-card small{display:block;color:#7b8ca1;font-size:10px;margin-top:1px}.manual-code{display:block;margin-top:8px;padding:8px 10px;background:#f2f6fa;border:1px solid #e0e8f0;border-radius:8px;color:#41556e;font:10.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all}
+    .manual-roadmap{display:grid;gap:9px}.manual-road-item{display:flex;gap:11px;padding:13px;border:1px solid #e3e9f1;border-radius:12px;background:#fff}.manual-road-num{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 30px;background:#f5f3ff;color:#7c3aed;font-weight:850;font-size:11px}.manual-road-item strong{display:block;color:#253c59;font-size:11.8px;margin-bottom:3px}.manual-road-item span{display:block;color:#6d7d91;font-size:10.8px;line-height:1.45}
+    .manual-faq details{border:1px solid #e1e9f2;border-radius:10px;margin-top:7px;background:#fbfdff}.manual-faq summary{cursor:pointer;padding:11px 13px;font-size:11.5px;font-weight:800;color:#294767;list-style:none}.manual-faq summary::-webkit-details-marker{display:none}.manual-faq summary::after{content:'+';float:right;color:#0877c9;font-size:16px}.manual-faq details[open] summary::after{content:'−'}.manual-faq details p{margin:0;padding:0 13px 12px;color:#62748a;font-size:11.2px;line-height:1.55}
+    .manual-empty-search{display:none;text-align:center;padding:34px;border:1px dashed #cbd8e5;border-radius:14px;background:#fbfdff;color:#73859b}.manual-empty-search.show{display:block}
+    @media(max-width:1100px){.manual-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.manual-grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:900px){.manual-layout{grid-template-columns:1fr}.manual-toc{position:relative;top:auto;display:flex;overflow-x:auto;max-height:none}.manual-toc-title{display:none}.manual-toc a{white-space:nowrap}.manual-repo,.manual-grid,.manual-grid.three{grid-template-columns:1fr}}
+    @media(max-width:620px){.manual-hero{padding:22px 18px}.manual-hero h1{font-size:24px}.manual-search-hint{display:none}.manual-section{padding:16px}.manual-flow{grid-template-columns:1fr}}
+</style>
+
+        <section class="view" id="view-sobre">
+          <div class="manual-hero">
+            <div class="manual-hero-top">
+              <div>
+                <span class="manual-kicker"><i class="fa-solid fa-book-open"></i> Manual oficial do sistema</span>
+                <h1>FICAI 4.0</h1>
+                <p>Plataforma de gestão da Ficha de Comunicação do Aluno Infrequente, desenvolvida pelo C.P.D. / SMEDU para apoiar identificação, registro, busca ativa, encaminhamentos, devolutivas, diagnóstico da evasão, auditoria e encerramento seguro dos casos.</p>
+                <div class="manual-version">
+                  <span><i class="fa-solid fa-building"></i> SMEDU / CPD</span>
+                  <span><i class="fa-solid fa-shield-halved"></i> Proteção e permanência escolar</span>
+                  <span><i class="fa-solid fa-code-branch"></i> Versão 4.0</span>
+                  <span><i class="fa-regular fa-calendar"></i> Manual revisado em 24/08/2026</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="manual-search-card">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="manualSearch" type="search" autocomplete="off" placeholder="Pesquisar neste manual: cancelamento, Conselho Tutelar, PDF, mapa, Supabase...">
+            <span class="manual-search-hint">Pesquisa instantânea</span>
+          </div>
+
+          <div class="manual-layout">
+            <nav class="manual-toc" aria-label="Índice do manual">
+              <div class="manual-toc-title">Neste manual</div>
+              <a href="#manual-visao"><i class="fa-solid fa-circle-info"></i> Visão geral</a>
+              <a href="#manual-fluxo"><i class="fa-solid fa-route"></i> Fluxo completo</a>
+              <a href="#manual-dashboard"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
+              <a href="#manual-gerar"><i class="fa-solid fa-user-pen"></i> Gerar FICAI</a>
+              <a href="#manual-acompanhar"><i class="fa-solid fa-clock-rotate-left"></i> Dados e histórico</a>
+              <a href="#manual-rede"><i class="fa-solid fa-building-columns"></i> RAE e Conselho</a>
+              <a href="#manual-finalizacao"><i class="fa-solid fa-box-archive"></i> Encerrar x Cancelar</a>
+              <a href="#manual-config"><i class="fa-solid fa-gear"></i> Configurações</a>
+              <a href="#manual-auditoria"><i class="fa-solid fa-file-shield"></i> Notificações e logs</a>
+              <a href="#manual-documentos"><i class="fa-solid fa-file-pdf"></i> PDF e mapa</a>
+              <a href="#manual-arquitetura"><i class="fa-solid fa-code"></i> Arquitetura</a>
+              <a href="#manual-seguranca"><i class="fa-solid fa-lock"></i> Segurança e dados</a>
+              <a href="#manual-roadmap"><i class="fa-solid fa-flag-checkered"></i> Roadmap</a>
+              <a href="#manual-faq"><i class="fa-solid fa-circle-question"></i> Dúvidas frequentes</a>
+            </nav>
+
+            <div class="manual-content" id="manualContent">
+              <section class="manual-section manual-filter-item" id="manual-visao">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-circle-info"></i></div><div><h2 class="manual-section-title">1. Visão geral do FICAI 4.0</h2><p class="manual-section-sub">O que o sistema faz, quem participa e qual problema ele resolve.</p></div></div>
+                <div class="manual-grid three">
+                  <div class="manual-card"><h4><i class="fa-solid fa-school"></i> Unidade Escolar</h4><p>Registra o aluno, período de faltas, procedimentos já realizados, motivos da ausência, vulnerabilidades, diagnóstico e acompanhamento do caso.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-building-columns"></i> RAE</h4><p>Organiza o fluxo bidirecional de registros, encaminhamentos e devolutivas da rede, mantendo o histórico do caso acessível.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-gavel"></i> Conselho Tutelar</h4><p>Recebe FICAIs encaminhadas, registra diligências, pareceres, devolutivas e providências, com retorno ao fluxo da escola.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-chart-line"></i> Gestão</h4><p>Consolida casos ativos, causas recorrentes, busca ativa, finalizações e situação do acompanhamento para apoiar tomada de decisão.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-clock-rotate-left"></i> Linha do tempo</h4><p>Preserva registros posteriores à geração da FICAI, sem substituir informações anteriores, criando histórico contínuo e auditável.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-file-pdf"></i> Documento oficial</h4><p>Gera espelho A4 em orientação retrato, com pré-visualização e opção de impressão ou salvamento em PDF.</p></div>
+                </div>
+                <div class="manual-callout" style="margin-top:10px"><i class="fa-solid fa-lightbulb"></i><div><strong>Princípio central:</strong> a FICAI não termina quando o PDF é gerado. O registro eletrônico continua recebendo informações, encaminhamentos, devolutivas e decisões até o encerramento formal do caso.</div></div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-fluxo">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-route"></i></div><div><h2 class="manual-section-title">2. Fluxo completo de trabalho</h2><p class="manual-section-sub">Caminho recomendado desde a identificação da infrequência até a conclusão.</p></div></div>
+                <div class="manual-flow">
+                  <div class="manual-step"><strong>Acessar o sistema</strong><span>Entrar com credencial institucional. A unidade do usuário é exibida no cabeçalho e pode preencher a escola automaticamente.</span></div>
+                  <div class="manual-step"><strong>Abrir a FICAI</strong><span>Em “Gerar FICAI”, cadastrar ou selecionar o aluno e preencher as seis etapas do formulário.</span></div>
+                  <div class="manual-step"><strong>Registrar ações da escola</strong><span>Informar comunicações, contatos, visitas, retornos e demais procedimentos com suas respectivas datas.</span></div>
+                  <div class="manual-step"><strong>Diagnosticar o caso</strong><span>Marcar motivos da ausência, situação do aluno, vulnerabilidades e fatores multifatoriais da evasão.</span></div>
+                  <div class="manual-step"><strong>Salvar e emitir</strong><span>Salvar a FICAI, revisar o espelho A4 e imprimir/salvar PDF quando necessário.</span></div>
+                  <div class="manual-step"><strong>Encaminhar</strong><span>Quando cabível, encaminhar ao Conselho Tutelar e acompanhar a ficha nos módulos RAE/Conselho.</span></div>
+                  <div class="manual-step"><strong>Acompanhar devolutivas</strong><span>Registrar fatos novos na linha do tempo, receber pareceres, atualizar providências e monitorar notificações.</span></div>
+                  <div class="manual-step"><strong>Concluir corretamente</strong><span>Encerrar quando o acompanhamento foi concluído; cancelar somente em hipóteses excepcionais de invalidação do registro.</span></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-dashboard">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-table-cells-large"></i></div><div><h2 class="manual-section-title">3. Dashboard FICAI</h2><p class="manual-section-sub">Painel operacional para localizar casos, acompanhar indicadores e executar ações rápidas.</p></div></div>
+                <div class="manual-grid">
+                  <div class="manual-card"><h4><i class="fa-solid fa-chart-pie"></i> Indicadores</h4><ul><li>Casos ativos em acompanhamento.</li><li>Percentuais de causas como falta de motivação, trabalho/fatores sociais e saúde.</li><li>Alunos em busca ativa.</li><li>FICAIs finalizadas/regularizadas.</li></ul></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-filter"></i> Pesquisa e filtros</h4><ul><li>Busca por aluno, documento ou responsável.</li><li>Filtro por turma e situação.</li><li>Filtro temporal: 7, 15, 30, 90 dias ou ano letivo.</li><li>Contadores atualizados conforme os registros carregados.</li></ul></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-table-list"></i> Listas separadas</h4><p><strong>Recebidos do CT</strong> reúne devolutivas/retornos do Conselho Tutelar. <strong>Gerados</strong> reúne FICAIs criadas ou devolvidas pela escola/rede.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-bolt"></i> Ações rápidas</h4><ul><li>Encaminhar FICAI.</li><li>Atribuir responsável/servidor.</li><li>Cancelar FICAI.</li><li>Registrar acompanhamento/devolutiva.</li><li>Visualizar espelho A4/PDF.</li><li>Adicionar ou remover marcadores.</li></ul></div>
+                </div>
+                <div class="manual-callout warning" style="margin-top:10px"><i class="fa-solid fa-hand-pointer"></i><div>Para ações rápidas no Dashboard, selecione a FICAI desejada na lista. Clicar no número/aluno abre o prontuário com histórico completo.</div></div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-gerar">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-user-pen"></i></div><div><h2 class="manual-section-title">4. Gerar FICAI — preenchimento em 6 etapas</h2><p class="manual-section-sub">O assistente de preenchimento valida as informações essenciais antes de avançar.</p></div></div>
+                <div class="manual-grid three">
+                  <div class="manual-card"><h4>1. Escola e aluno</h4><p>Ano letivo, número automático da FICAI, escola, endereço, aluno cadastrado/novo, nome, nome social, nascimento, CPF, RG, filiação, responsável, residência, telefones e referência.</p></div>
+                  <div class="manual-card"><h4>2. Situação escolar</h4><p>Ano escolar, turma, turno, modalidade automática, início/fim das faltas, data da comunicação e identificação do profissional responsável.</p></div>
+                  <div class="manual-card"><h4>3. Procedimentos</h4><p>Registra comunicação ao responsável, contato telefônico, retorno/não retorno, telegrama, visita domiciliar, comparecimento do responsável e relato de visita.</p></div>
+                  <div class="manual-card"><h4>4. Motivos e situação</h4><p>Motivos da ausência, situação do aluno (ex.: Infrequente, Evadido, Sem Acesso), vulnerabilidades, situações personalizadas e observação inicial.</p></div>
+                  <div class="manual-card"><h4>5. Diagnóstico da evasão</h4><p>Diagnóstico multifatorial nos grupos Estrutural, Social/Familiar, Saúde, Educacional, Segurança/Violência, Econômica e Outros.</p></div>
+                  <div class="manual-card"><h4>6. Revisão e emissão</h4><p>Salvar FICAI, encaminhar ao Conselho Tutelar, pré-visualizar A4 e imprimir/salvar PDF. Relatos extensos permanecem integralmente no registro eletrônico.</p></div>
+                </div>
+                <div class="manual-callout success" style="margin-top:10px"><i class="fa-solid fa-circle-check"></i><div><strong>Validações do assistente:</strong> escola e nome do aluno são exigidos na etapa 1; ano escolar e turma na etapa 2; uma situação do aluno na etapa 4; e ao menos um fator diagnóstico na etapa 5.</div></div>
+                <div class="manual-callout" style="margin-top:8px"><i class="fa-solid fa-floppy-disk"></i><div><strong>Rascunho:</strong> “Salvar rascunho” preserva o formulário para continuidade posterior. “Limpar” remove o rascunho atual e reinicia o preenchimento.</div></div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-acompanhar">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-clock-rotate-left"></i></div><div><h2 class="manual-section-title">5. Dados da Ficha, prontuário e histórico</h2><p class="manual-section-sub">Consulta consolidada e registro contínuo após a geração.</p></div></div>
+                <div class="manual-grid">
+                  <div class="manual-card"><h4><i class="fa-solid fa-file-lines"></i> Dados da Ficha</h4><p>Lista FICAIs por número, aluno, escola, turma, situação e última atualização, com filtros por situação/ano e ações para informações, edição, Conselho Tutelar ou encerramento.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-address-card"></i> Prontuário</h4><p>Mostra situação, vulnerabilidades, observação inicial, procedimentos, diagnósticos, período de faltas, última atualização e linha do tempo do acompanhamento.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-plus"></i> Nova informação importante</h4><p>Permite registrar data, tipo, responsável e descrição de fatos novos. Cada novo registro é acrescentado ao histórico e não substitui os anteriores.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-paper-plane"></i> Enviar / devolver</h4><p>O registro pode ser associado a encaminhamento ou devolutiva, atualizando a situação operacional e movimentando a FICAI entre os fluxos correspondentes.</p></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-rede">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-building-columns"></i></div><div><h2 class="manual-section-title">6. RAE e Conselho Tutelar</h2><p class="manual-section-sub">Fluxo de encaminhamentos, diligências e devolutivas interinstitucionais.</p></div></div>
+                <div class="manual-grid">
+                  <div class="manual-card"><h4><i class="fa-solid fa-building-columns"></i> RAE</h4><ul><li>Exibe FICAI, aluno, unidade, data de encaminhamento, destino, retorno e status.</li><li>Destaca novas devolutivas até a leitura.</li><li>Funciona como visão de tráfego bidirecional dos registros da rede.</li></ul></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-gavel"></i> Painel do Conselho Tutelar</h4><ul><li>Indicadores de aguardando recebimento, diligências, prazos e devolvidas.</li><li>Filtro por situação.</li><li>Acesso ao prontuário completo.</li><li>Registro de devolutiva/parecer complementar.</li></ul></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-clipboard-check"></i> Devolutiva do CT</h4><p>Registra data, conselheiro responsável, diligência/providência, tipo de registro, situação da devolutiva e parecer descritivo.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-eye"></i> Confirmação de leitura</h4><p>A visualização do prontuário pelo Conselho Tutelar pode ser registrada na linha do tempo, reforçando rastreabilidade do acesso ao caso.</p></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-finalizacao">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-box-archive"></i></div><div><h2 class="manual-section-title">7. Encerramento x Cancelamento — quando usar cada um</h2><p class="manual-section-sub">São operações diferentes e não devem ser tratadas como sinônimos.</p></div></div>
+                <div class="manual-table"><table><thead><tr><th>Operação</th><th>Quando utilizar</th><th>Efeito</th><th>Rastreabilidade</th></tr></thead><tbody>
+                  <tr><td><strong>Encerrar / Arquivar</strong></td><td>Quando o acompanhamento foi concluído: retorno às atividades, transferência, conclusão de etapa, mudança não localizada, óbito ou outro motivo institucional.</td><td>Retira a FICAI do fluxo ativo, preserva o prontuário e permite reabertura posterior.</td><td>Motivo, data e justificativa formal ficam registrados.</td></tr>
+                  <tr><td><strong>Reabrir</strong></td><td>Quando houver reincidência de infrequência, nova demanda da rede ou necessidade de retomar o acompanhamento.</td><td>Reativa o caso e devolve a FICAI ao acompanhamento ativo.</td><td>Exige data, responsável e justificativa.</td></tr>
+                  <tr><td><strong>Cancelar</strong></td><td>Somente para situações excepcionais como duplicidade, erro de preenchimento, regularização imediata documentada ou outra justificativa administrativa válida.</td><td>Registra a FICAI como cancelada; não representa “caso resolvido”.</td><td>Gera registro permanente no histórico auditável de cancelamentos.</td></tr>
+                </tbody></table></div>
+                <div class="manual-callout danger" style="margin-top:10px"><i class="fa-solid fa-triangle-exclamation"></i><div><strong>Atenção:</strong> se o aluno retornou ou o acompanhamento terminou normalmente, utilize <strong>Encerramento</strong>. Use <strong>Cancelamento</strong> quando o próprio registro precisa ser invalidado administrativamente.</div></div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-config">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-gear"></i></div><div><h2 class="manual-section-title">8. Configurações, cadastros e permissões</h2><p class="manual-section-sub">Catálogos que alimentam os formulários e estruturam o uso do sistema.</p></div></div>
+                <div class="manual-grid three">
+                  <div class="manual-card"><h4>Usuários e RBAC</h4><p>Nível, cargo, função, unidade e status. O cadastro de permissões por perfil já existe no protótipo; a aplicação integral de RBAC no backend está no roadmap.</p></div>
+                  <div class="manual-card"><h4>Escolas</h4><p>Unidades, endereço, telefone, e-mail e status. Escolas ativas alimentam automaticamente o campo Escola da geração da FICAI.</p></div>
+                  <div class="manual-card"><h4>Turmas e Turnos</h4><p>Relaciona ano escolar, turma, turno, modalidade e escola. Turmas ativas alimentam os campos do formulário.</p></div>
+                  <div class="manual-card"><h4>Modalidades</h4><p>Cadastro das modalidades/etapas de ensino utilizadas pelas turmas, com preenchimento automático conforme a turma selecionada.</p></div>
+                  <div class="manual-card"><h4>Gestores e CT</h4><p>Cadastro de diretores, orientadores, coordenação e conselheiros com matrícula, unidade/órgão, telefone, período e status.</p></div>
+                  <div class="manual-card"><h4>Tabelas auxiliares</h4><p>Procedimentos da escola, motivos da ausência e diagnósticos podem ser cadastrados, ordenados, ativados e utilizados dinamicamente na FICAI.</p></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-auditoria">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-file-shield"></i></div><div><h2 class="manual-section-title">9. Notificações, marcadores e Logs do Sistema</h2><p class="manual-section-sub">Recursos de organização, alerta e rastreabilidade operacional.</p></div></div>
+                <div class="manual-grid">
+                  <div class="manual-card"><h4><i class="fa-solid fa-bell"></i> Centro de notificações</h4><p>O sino no cabeçalho mostra notificações lidas/não lidas, permite marcar todas como lidas e direciona ao histórico de logs. Devolutivas e alertas de busca ativa podem ser destacados.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-tags"></i> Marcadores</h4><p>FICAIs podem receber marcadores visuais personalizados para facilitar classificação e priorização. O sistema oferece criação, seleção e remoção de marcadores.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-file-shield"></i> Logs</h4><p>Registra eventos relevantes como login/logout, criação/atualização de FICAI, encaminhamentos, devolutivas, cancelamentos e sincronizações.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-download"></i> Pesquisa e exportação</h4><p>Os logs podem ser filtrados por nível, texto e data, limpos visualmente e exportados em CSV para conferência ou auditoria.</p></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-documentos">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-file-pdf"></i></div><div><h2 class="manual-section-title">10. Espelho A4, PDF e mapa de rota</h2><p class="manual-section-sub">Recursos de emissão e apoio territorial ao acompanhamento.</p></div></div>
+                <div class="manual-grid">
+                  <div class="manual-card"><h4><i class="fa-solid fa-print"></i> Emissão A4</h4><p>A ficha foi preparada para impressão em <strong>A4, orientação retrato, uma página</strong>. A pré-visualização permite conferir o documento antes de imprimir ou salvar em PDF.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-file-lines"></i> Relatos extensos</h4><p>Informações longas permanecem no registro eletrônico e podem aparecer resumidas no documento impresso, preservando o histórico completo no sistema.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-map-location-dot"></i> Mapa escola → residência</h4><p>O prontuário pode exibir o trajeto entre a escola e o endereço residencial utilizando MapLibre/OpenFreeMap e cálculo de rota viária.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-route"></i> Contingência de rota</h4><p>O sistema consulta o roteador OSRM. Se o serviço estiver indisponível, utiliza um traçado de contingência para manter a visualização operacional.</p></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-arquitetura">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-code"></i></div><div><h2 class="manual-section-title">11. Arquitetura, tecnologias e repositórios</h2><p class="manual-section-sub">Visão técnica resumida para CPD, manutenção e evolução do projeto.</p></div></div>
+                <div class="manual-table" style="margin-bottom:10px"><table><thead><tr><th>Componente</th><th>Uso atual</th><th>Situação</th></tr></thead><tbody>
+                  <tr><td><strong>HTML / CSS / JavaScript</strong></td><td>Interface, regras do protótipo, formulários, dashboards, modais e impressão.</td><td><span class="manual-status ok">Implementado</span></td></tr>
+                  <tr><td><strong>IndexedDB</strong></td><td>Banco local do navegador para alunos e FICAIs (<code>FICAI4LocalDB</code>).</td><td><span class="manual-status local">Local</span></td></tr>
+                  <tr><td><strong>localStorage</strong></td><td>Sessão, rascunhos, históricos auxiliares, configurações, marcadores e logs locais.</td><td><span class="manual-status local">Local</span></td></tr>
+                  <tr><td><strong>Supabase</strong></td><td>Cliente cloud, autenticação e sincronizações/serviços disponíveis quando configurados.</td><td><span class="manual-status partial">Integração parcial</span></td></tr>
+                  <tr><td><strong>MapLibre + OpenFreeMap</strong></td><td>Renderização do mapa no prontuário.</td><td><span class="manual-status ok">Implementado</span></td></tr>
+                  <tr><td><strong>OSRM</strong></td><td>Cálculo de rota viária escola → residência.</td><td><span class="manual-status ok">Implementado</span></td></tr>
+                  <tr><td><strong>Font Awesome / Alexandria</strong></td><td>Iconografia e tipografia da interface.</td><td><span class="manual-status ok">Implementado</span></td></tr>
+                </tbody></table></div>
+                <div class="manual-repo">
+                  <div class="manual-repo-card"><div class="manual-repo-head"><div class="manual-repo-logo"><i class="fa-brands fa-github"></i></div><div><strong>GitHub — código-fonte</strong><small>Repositório oficial do FICAI 4.0</small></div></div><p style="margin:0;color:#60748a;font-size:11px;line-height:1.5">O HTML atual não declara a URL do repositório. Cadastre aqui o endereço oficial do GitHub quando o repositório estiver definido/conectado.</p><span class="manual-code">URL do GitHub: não configurada neste arquivo</span></div>
+                  <div class="manual-repo-card supabase"><div class="manual-repo-head"><div class="manual-repo-logo"><i class="fa-solid fa-database"></i></div><div><strong>Supabase — backend/cloud</strong><small>Projeto identificado no sistema</small></div></div><p style="margin:0;color:#60748a;font-size:11px;line-height:1.5">Utilizado como camada cloud e de autenticação quando os serviços estão disponíveis. Chaves e credenciais não devem ser exibidas neste manual.</p><span class="manual-code">https://ojvxsrvmmkjxfgyczypm.supabase.co</span></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-seguranca">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-lock"></i></div><div><h2 class="manual-section-title">12. Segurança, dados e responsabilidades</h2><p class="manual-section-sub">Cuidados essenciais ao operar dados educacionais e informações de crianças/adolescentes.</p></div></div>
+                <div class="manual-grid">
+                  <div class="manual-card"><h4><i class="fa-solid fa-user-shield"></i> Acesso</h4><p>Utilize contas institucionais individuais sempre que possível. Não compartilhe senhas. O RBAC completo deverá garantir acesso por perfil e módulo no backend.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-database"></i> Persistência local</h4><p>Parte relevante do protótipo permanece no navegador. Limpeza de dados do navegador, troca de computador ou perfil pode afetar dados que ainda não estejam centralizados na nuvem.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-eye-slash"></i> Segredos</h4><p>Senhas, chaves privadas, <em>service role keys</em> e outros segredos nunca devem ficar expostos no HTML, GitHub público, manual ou logs de usuário.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-scale-balanced"></i> Rastreabilidade</h4><p>Alterações relevantes devem preservar autoria, data/hora, justificativa e histórico. Cancelamentos e reaberturas exigem atenção especial por impacto administrativo.</p></div>
+                </div>
+                <div class="manual-callout danger" style="margin-top:10px"><i class="fa-solid fa-shield-halved"></i><div><strong>Recomendação técnica para produção:</strong> centralizar autenticação/autorização no backend, ativar políticas RLS no Supabase, remover credenciais fixas do front-end e garantir backup/versionamento dos dados.</div></div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-roadmap">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-flag-checkered"></i></div><div><h2 class="manual-section-title">13. Roadmap de evolução</h2><p class="manual-section-sub">Próximas capacidades previstas para elevar segurança, integração e automação.</p></div></div>
+                <div class="manual-roadmap">
+                  <div class="manual-road-item"><div class="manual-road-num">01</div><div><strong>RBAC completo</strong><span>Aplicar controle de acesso por perfil, unidade, função e módulo no backend, com permissões efetivas de visualizar, cadastrar, editar e excluir.</span></div></div>
+                  <div class="manual-road-item"><div class="manual-road-num">02</div><div><strong>Integração por API com o Diário de Classe Digital</strong><span>Receber dados de frequência/ausências e reduzir digitação duplicada, permitindo abertura e atualização do fluxo FICAI a partir de dados oficiais.</span></div></div>
+                  <div class="manual-road-item"><div class="manual-road-num">03</div><div><strong>Notificações proativas por webhooks</strong><span>Disparar alertas e devolutivas para WhatsApp e e-mail conforme eventos do fluxo, prazos e mudanças de situação.</span></div></div>
+                  <div class="manual-road-item"><div class="manual-road-num">04</div><div><strong>Centralização e sincronização cloud</strong><span>Reduzir dependência do armazenamento local, consolidar históricos e garantir disponibilidade entre dispositivos com trilha de auditoria.</span></div></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item manual-faq" id="manual-faq">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-circle-question"></i></div><div><h2 class="manual-section-title">14. Dúvidas frequentes</h2><p class="manual-section-sub">Respostas rápidas para situações comuns de uso.</p></div></div>
+                <details><summary>Depois de gerar a FICAI ainda posso acrescentar informações?</summary><p>Sim. Abra “Informações” da FICAI e utilize “Adicionar informação importante”. O novo fato entra na linha do tempo sem apagar os registros anteriores.</p></details>
+                <details><summary>Quando devo encaminhar ao Conselho Tutelar?</summary><p>Quando o fluxo institucional determinar a necessidade de providências externas. O botão “Encaminhar ao CT” salva a ficha, registra o evento e posiciona o caso no acompanhamento do Conselho.</p></details>
+                <details><summary>Qual a diferença entre Encerrar e Cancelar?</summary><p>Encerrar significa concluir/arquivar um acompanhamento válido e permite reabertura. Cancelar invalida administrativamente uma FICAI por motivo excepcional e gera registro auditável permanente.</p></details>
+                <details><summary>Por que uma FICAI aparece em “Recebidos do CT”?</summary><p>Porque há devolutiva/retorno do Conselho Tutelar registrada. Isso indica que a escola/rede recebeu nova informação do CT para continuidade do fluxo.</p></details>
+                <details><summary>O mapa mostra uma rota real?</summary><p>O sistema tenta calcular rota viária usando OSRM sobre o mapa MapLibre/OpenFreeMap. Se o serviço estiver indisponível, utiliza um traçado de contingência para manter a visualização.</p></details>
+                <details><summary>Onde os dados ficam armazenados?</summary><p>O protótipo usa uma arquitetura híbrida: IndexedDB e localStorage no navegador, além de integrações Supabase quando disponíveis. Por isso, nem todo dado deve ser considerado centralizado em nuvem nesta versão.</p></details>
+                <details><summary>Como localizar uma FICAI rapidamente?</summary><p>Use a pesquisa e os filtros do Dashboard ou a tela “Dados da Ficha”. No Dashboard, também é possível filtrar por turma, situação e período.</p></details>
+                <details><summary>Posso salvar ou imprimir a FICAI em PDF?</summary><p>Sim. Na etapa 6 use “Pré-visualizar A4” para conferir e “Imprimir / Salvar PDF” para emitir o documento.</p></details>
+              </section>
+              <div class="manual-empty-search" id="manualEmptySearch"><i class="fa-solid fa-magnifying-glass" style="font-size:24px;margin-bottom:8px;display:block"></i>Nenhuma seção do manual corresponde à pesquisa.</div>
+            </div>
+          </div>
+        </section>
+
+<script>
+    // Pesquisa instantânea do Manual em "Sobre o Sistema"
+    (() => {
+      const search = document.getElementById('manualSearch');
+      const empty = document.getElementById('manualEmptySearch');
+      if (!search) return;
+      const normalize = (v = '') => v.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+      search.addEventListener('input', () => {
+        const q = normalize(search.value);
+        let visible = 0;
+        document.querySelectorAll('#manualContent .manual-filter-item').forEach(section => {
+          const match = !q || normalize(section.textContent).includes(q);
+          section.hidden = !match;
+          if (match) visible++;
+        });
+        if (empty) empty.classList.toggle('show', visible === 0);
+      });
+    })();
+</script>

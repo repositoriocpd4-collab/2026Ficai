@@ -6450,19 +6450,25 @@
                 <!-- Linha 3: Aluno Cadastrado (Lado Esquerdo) e Nome Completo (Lado Direito) -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: flex-start;">
                   <div>
-                    <label
-                      style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                      <span style="display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-user" style="color: #2563eb;"></i> Aluno cadastrado
-                      </span>
-                      <span class="db-pill" id="alunoDbStatus"
-                        style="font-size: 11px; padding: 2px 8px; border-radius: 99px; background: #eff6ff; color: #2563eb; font-weight: 700; border: 1px solid #bfdbfe;">
-                        <i class="fa-solid fa-users"></i> 2 salvos
-                      </span>
-                    </label>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <label style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin: 0;">
+                          <i class="fa-solid fa-user" style="color: #2563eb;"></i> Aluno cadastrado
+                        </label>
+                        <span class="db-pill" id="alunoDbStatus"
+                          style="font-size: 11px; padding: 2px 10px; border-radius: 99px; background: #eff6ff; color: #2563eb; font-weight: 700; border: 1px solid #bfdbfe;">
+                          0 salvos
+                        </span>
+                      </div>
+                      <button type="button" id="newStudentBtn"
+                        style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 8px; border: 1.5px solid #2563eb; background: #ffffff; color: #2563eb; font-weight: 700; font-size: 12px; cursor: pointer; transition: all 0.15s;"
+                        data-tooltip="Cadastrar novo aluno na base do sistema">
+                        <i class="fa-solid fa-plus"></i> Novo
+                      </button>
+                    </div>
                     <div class="aluno-combobox-wrap" id="alunoCombobox" style="position: relative; width: 100%;">
                       <div style="position: relative;">
-                        <input type="text" id="alunoSearchInput" placeholder="Pesquise por nome, CPF ou responsável..."
+                        <input type="text" id="alunoSearchInput" placeholder="Eduarda Gomes"
                           autocomplete="off"
                           style="width: 100%; padding: 9px 36px 9px 12px; border-radius: 10px; border: 1.5px solid #cbd7e6; font-size: 13.5px; font-weight: 600; color: #18283f; background: #fff;">
                         <i class="fa-solid fa-magnifying-glass"
@@ -6483,11 +6489,6 @@
                         <!-- Itens renderizados dinamicamente com dados do aluno -->
                       </div>
                     </div>
-                    <button type="button" id="newStudentBtn"
-                      style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; border: 1px solid #bfdbfe; background: #eff6ff; color: #2563eb; font-weight: 700; font-size: 12.5px; margin-top: 8px; cursor: pointer; transition: all 0.15s;"
-                      data-tooltip="Cadastrar novo aluno na base do sistema">
-                      <i class="fa-solid fa-plus"></i> Novo
-                    </button>
                   </div>
 
                   <div>
@@ -6496,7 +6497,7 @@
                       <i class="fa-solid fa-user-pen" style="color: #2563eb;"></i> Nome completo <span class="required"
                         style="color: #ef4444;">*</span>
                     </label>
-                    <input id="nomeCompleto" autocomplete="name" placeholder="Digite o nome completo do estudante"
+                    <input id="nomeCompleto" autocomplete="name" placeholder="Eduarda Gomes"
                       style="font-weight: 600;">
                     <div style="font-size: 11.5px; color: #64748b; margin-top: 6px;">
                       Ao salvar a FICAI, este aluno ficará disponível para buscas futuras neste navegador.
@@ -6504,8 +6505,8 @@
                   </div>
                 </div>
 
-                <!-- Linha 4: Nome Social, Data de Nascimento e CPF -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+                <!-- Linha 4: Nome Social, Data de Nascimento, CPF e RG -->
+                <div style="display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 14px;">
                   <div>
                     <label
                       style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
@@ -6519,7 +6520,7 @@
                       style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
                       <i class="fa-regular fa-calendar" style="color: #2563eb;"></i> Data de nascimento
                     </label>
-                    <input id="nascimento" type="date">
+                    <input id="nascimento" type="date" value="2011-09-18">
                   </div>
 
                   <div>
@@ -6527,46 +6528,53 @@
                       style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
                       <i class="fa-solid fa-id-card" style="color: #2563eb;"></i> CPF
                     </label>
-                    <input id="cpf" placeholder="000.000.000-00">
+                    <input id="cpf" placeholder="123.456.789-01">
                   </div>
-                </div>
 
-                <!-- Linha 5: RG e Filiação -->
-                <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 14px;">
                   <div>
                     <label
                       style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
                       <i class="fa-regular fa-id-badge" style="color: #2563eb;"></i> RG
                     </label>
-                    <input id="rg" placeholder="Documento">
+                    <input id="rg" placeholder="23.456.789-0">
                   </div>
+                </div>
 
+                <!-- Linha 5: Nome dos pais / filiação e Responsável Legal -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
                   <div>
                     <label
                       style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
                       <i class="fa-solid fa-people-roof" style="color: #2563eb;"></i> Nome dos pais / filiação
                     </label>
-                    <input id="filiacao" placeholder="Pais ou filiação registrada">
+                    <input id="filiacao" placeholder="Mariana Gomes / Roberto Gomes">
+                  </div>
+
+                  <div>
+                    <label
+                      style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                      <i class="fa-solid fa-shield-halved" style="color: #2563eb;"></i> Responsável legal
+                    </label>
+                    <input id="responsavel" placeholder="Mariana Gomes">
                   </div>
                 </div>
 
-                <!-- Linha 6: Responsável Legal -->
-                <div>
-                  <label
-                    style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-                    <i class="fa-solid fa-shield-halved" style="color: #2563eb;"></i> Responsável legal
-                  </label>
-                  <input id="responsavel" placeholder="Nome do responsável legal">
+                <!-- Cabeçalho de Seção: INFORMAÇÕES RESIDENCIAIS: -->
+                <div style="margin-top: 12px;">
+                  <h3 style="margin: 0; font-size: 13.5px; font-weight: 800; color: #0f172a; letter-spacing: 0.5px; text-transform: uppercase;">
+                    INFORMAÇÕES RESIDENCIAIS:
+                  </h3>
+                  <hr style="border: none; border-top: 1.5px solid #cbd5e1; margin: 6px 0 14px 0;">
                 </div>
 
-                <!-- Linha 7: Endereço Residencial e Telefone -->
-                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 14px;">
+                <!-- Linha 6: Endereço Residencial e Telefone -->
+                <div style="display: grid; grid-template-columns: 2.2fr 1fr; gap: 14px;">
                   <div>
                     <label
                       style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
                       <i class="fa-solid fa-house" style="color: #2563eb;"></i> Endereço residencial
                     </label>
-                    <input id="residencia" placeholder="Logradouro, nº, bairro, município">
+                    <input id="residencia" placeholder="Rua General Bocaiúva, 340 - Centro, Itaguaí - RJ, 23810-000">
                   </div>
 
                   <div>
@@ -6574,18 +6582,17 @@
                       style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
                       <i class="fa-solid fa-phone" style="color: #2563eb;"></i> Telefone(s)
                     </label>
-                    <input id="telefoneAluno" placeholder="(21) 00000-0000">
+                    <input id="telefoneAluno" placeholder="(21) 98877-6655">
                   </div>
                 </div>
 
-                <!-- Linha 8: Referência Familiar ou Comunitária -->
+                <!-- Linha 7: Referência Familiar ou Comunitária -->
                 <div>
                   <label
                     style="font-weight: 750; font-size: 12.5px; color: #1e293b; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-                    <i class="fa-solid fa-users" style="color: #2563eb;"></i> Nome e endereço de parente ou outra
-                    referência
+                    <i class="fa-solid fa-users" style="color: #2563eb;"></i> Nome e endereço de parente ou outra referência
                   </label>
-                  <input id="referencia" placeholder="Referência familiar ou comunitária">
+                  <input id="referencia" placeholder="Tia paterna">
                 </div>
 
               </div>
@@ -7729,7 +7736,7 @@
               <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
                   <h3 style="font-size: 14px; font-weight: 800; color: #0f172a; margin: 0;">FICAIs encontradas</h3>
-                  <span style="font-size: 11.5px; font-weight: 600; color: #64748b;" id="cancTotalCount">3 registros</span>
+                  <span style="font-size: 11.5px; font-weight: 600; color: #64748b;" id="cancTotalCount">4 registros</span>
                 </div>
 
                 <div class="search-wrap" style="margin-bottom: 14px;">
@@ -7738,39 +7745,50 @@
                 </div>
 
                 <div id="cancScreenCardsList" style="display: flex; flex-direction: column; gap: 10px;">
-                  <!-- Card Item 1: 0021 -->
-                  <div class="canc-screen-row" data-ficai="0021" data-student="Ana Clara Nascimento" data-turma="7B" data-escola="E.M. Elmir Figueira" data-status="Ativa" data-date="18/08/2026"
+                  <!-- Card Item 1 (Selecionado): 0017 -->
+                  <div class="canc-screen-row active" data-ficai="0017" data-student="Bruno Henrique Silva" data-turma="6A" data-escola="E.M. Elmir Figueira" data-status="Ativa" data-date="17/08/2026"
+                    style="border: 1.5px solid #2563eb; border-radius: 12px; padding: 12px; cursor: pointer; transition: all 0.2s ease; background: #eff6ff;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                      <strong style="color: #1d4ed8; font-size: 13.5px;">0017</strong>
+                      <div style="display: flex; align-items: center; gap: 6px;">
+                        <span class="chip" style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 10.5px; padding: 2px 8px;">Ativa</span>
+                        <div class="selected-check-icon" style="width: 18px; height: 18px; border-radius: 50%; background: #2563eb; color: #fff; display: grid; place-items: center; font-size: 10px;"><i class="fa-solid fa-check"></i></div>
+                      </div>
+                    </div>
+                    <div style="font-size: 13px; font-weight: 700; color: #0f172a;">Bruno Henrique Silva</div>
+                    <div style="font-size: 11.5px; color: #64748b; margin-top: 2px;">Turma 6A · E.M. Elmir Figueira</div>
+                  </div>
+
+                  <!-- Card Item 2: 0018 -->
+                  <div class="canc-screen-row" data-ficai="0018" data-student="Carla Souza Ribeiro" data-turma="9A" data-escola="E.M. Elmir Figueira" data-status="Ativa" data-date="16/08/2026"
                     style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; cursor: pointer; transition: all 0.2s ease; background: #ffffff;">
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                      <strong style="color: #1d4ed8; font-size: 13.5px;">0021</strong>
+                      <strong style="color: #1d4ed8; font-size: 13.5px;">0018</strong>
+                      <span class="chip" style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 10.5px; padding: 2px 8px;">Ativa</span>
+                    </div>
+                    <div style="font-size: 13px; font-weight: 700; color: #0f172a;">Carla Souza Ribeiro</div>
+                    <div style="font-size: 11.5px; color: #64748b; margin-top: 2px;">Turma 9A · E.M. Elmir Figueira</div>
+                  </div>
+
+                  <!-- Card Item 3: 0019 -->
+                  <div class="canc-screen-row" data-ficai="0019" data-student="Diego Santos Alves" data-turma="8C" data-escola="E.M. Elmir Figueira" data-status="Ativa" data-date="15/08/2026"
+                    style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; cursor: pointer; transition: all 0.2s ease; background: #ffffff;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                      <strong style="color: #1d4ed8; font-size: 13.5px;">0019</strong>
+                      <span class="chip" style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 10.5px; padding: 2px 8px;">Ativa</span>
+                    </div>
+                    <div style="font-size: 13px; font-weight: 700; color: #0f172a;">Diego Santos Alves</div>
+                    <div style="font-size: 11.5px; color: #64748b; margin-top: 2px;">Turma 8C · E.M. Elmir Figueira</div>
+                  </div>
+
+                  <!-- Card Item 4: 0020 -->
+                  <div class="canc-screen-row" data-ficai="0020" data-student="Ana Clara Nascimento" data-turma="7B" data-escola="E.M. Elmir Figueira" data-status="Ativa" data-date="14/08/2026"
+                    style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; cursor: pointer; transition: all 0.2s ease; background: #ffffff;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                      <strong style="color: #1d4ed8; font-size: 13.5px;">0020</strong>
                       <span class="chip" style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 10.5px; padding: 2px 8px;">Ativa</span>
                     </div>
                     <div style="font-size: 13px; font-weight: 700; color: #0f172a;">Ana Clara Nascimento</div>
-                    <div style="font-size: 11.5px; color: #64748b; margin-top: 2px;">Turma 7B · E.M. Elmir Figueira</div>
-                  </div>
-
-                  <!-- Card Item 2: 0022 -->
-                  <div class="canc-screen-row" data-ficai="0022" data-student="João Pedro Lima" data-turma="8A" data-escola="E.M. Elmir Figueira" data-status="Em análise" data-date="19/08/2026"
-                    style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; cursor: pointer; transition: all 0.2s ease; background: #ffffff;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                      <strong style="color: #1d4ed8; font-size: 13.5px;">0022</strong>
-                      <span class="chip" style="background: #fef3c7; color: #b45309; font-weight: 700; font-size: 10.5px; padding: 2px 8px;">Em análise</span>
-                    </div>
-                    <div style="font-size: 13px; font-weight: 700; color: #0f172a;">João Pedro Lima</div>
-                    <div style="font-size: 11.5px; color: #64748b; margin-top: 2px;">Turma 8A · E.M. Elmir Figueira</div>
-                  </div>
-
-                  <!-- Card Item 3 (Selecionado): 0015 -->
-                  <div class="canc-screen-row active" data-ficai="0015" data-student="Eduarda Gomes" data-turma="7B" data-escola="E.M. Elmir Figueira" data-status="Ativa" data-date="20/08/2026"
-                    style="border: 1.5px solid #2563eb; border-radius: 12px; padding: 12px; cursor: pointer; transition: all 0.2s ease; background: #eff6ff;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
-                      <strong style="color: #1d4ed8; font-size: 13.5px;">0015</strong>
-                      <div style="display: flex; align-items: center; gap: 6px;">
-                        <span class="chip" style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 10.5px; padding: 2px 8px;">Ativa</span>
-                        <div style="width: 18px; height: 18px; border-radius: 50%; background: #2563eb; color: #fff; display: grid; place-items: center; font-size: 10px;"><i class="fa-solid fa-check"></i></div>
-                      </div>
-                    </div>
-                    <div style="font-size: 13px; font-weight: 700; color: #0f172a;">Eduarda Gomes</div>
                     <div style="font-size: 11.5px; color: #64748b; margin-top: 2px;">Turma 7B · E.M. Elmir Figueira</div>
                   </div>
                 </div>
@@ -7891,11 +7909,20 @@
                   </div>
                 </div>
 
-                <!-- Sub-Coluna Direita: Campos de Entrada -->
-                <div style="display: flex; flex-direction: column; gap: 14px;">
+                <!-- Sub-Coluna Direita: Card de Alta Relevância de Preenchimento -->
+                <div class="canc-fields-card" style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 14px; padding: 18px; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05); display: flex; flex-direction: column; gap: 16px;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 2px;">
+                    <div style="font-size: 13px; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px;">
+                      <i class="fa-solid fa-file-circle-xmark" style="color: #ef4444; font-size: 16px;"></i> Justificativa de Cancelamento Auditável
+                    </div>
+                    <span style="background: #eff6ff; color: #2563eb; font-size: 10.5px; font-weight: 800; padding: 3px 9px; border-radius: 6px; text-transform: uppercase;">Etapa 2 de 3</span>
+                  </div>
+
                   <div>
-                    <label style="font-weight: 700; font-size: 12px; color: #1e293b; display: block; margin-bottom: 5px;">Motivo de cancelamento <span style="color: #ef4444;">*</span></label>
-                    <select id="cancScreenMotivo" class="dash-select" style="height: 38px; font-size: 12.5px;">
+                    <label class="canc-field-label" style="font-weight: 700; font-size: 12.5px; color: #0f172a; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                      <i class="fa-solid fa-list-check" style="color: #2563eb;"></i> Motivo de cancelamento <span style="color: #ef4444;">*</span>
+                    </label>
+                    <select id="cancScreenMotivo" class="dash-select" style="height: 40px; font-size: 13px; border-radius: 9px; border: 1.5px solid #cbd5e1; padding: 0 12px; width: 100%;">
                       <option value="">Selecione o motivo</option>
                       <option value="Duplicidade de cadastro">Duplicidade de cadastro</option>
                       <option value="Erro no preenchimento de dados">Erro no preenchimento de dados</option>
@@ -7907,38 +7934,56 @@
                   </div>
 
                   <div>
-                    <label style="font-weight: 700; font-size: 12px; color: #1e293b; display: block; margin-bottom: 5px;">Justificativa detalhada <span style="color: #ef4444;">*</span></label>
-                    <textarea id="cancScreenJustificativa" rows="3" class="dash-input" placeholder="Descreva detalhadamente o motivo do cancelamento..." style="height: 75px; padding: 8px 12px; font-size: 12.5px; resize: none;"></textarea>
-                    <div style="text-align: right; font-size: 10.5px; color: #94a3b8; margin-top: 2px;" id="cancScreenJustCharCount">0/500</div>
-                  </div>
-
-                  <div style="display: grid; grid-template-columns: 1fr 130px; gap: 10px;">
-                    <div>
-                      <label style="font-weight: 700; font-size: 12px; color: #1e293b; display: block; margin-bottom: 5px;">Responsável pelo cancelamento <span style="color: #ef4444;">*</span></label>
-                      <input type="text" id="cancScreenResponsavel" value="Maria Oliveira" class="dash-input" style="height: 38px; font-size: 12.5px;">
-                    </div>
-                    <div>
-                      <label style="font-weight: 700; font-size: 12px; color: #1e293b; display: block; margin-bottom: 5px;">Data <span style="color: #ef4444;">*</span></label>
-                      <input type="date" id="cancScreenData" class="dash-input" style="height: 38px; font-size: 12px; padding: 0 6px;">
+                    <label class="canc-field-label" style="font-weight: 700; font-size: 12.5px; color: #0f172a; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                      <i class="fa-solid fa-pen-to-square" style="color: #2563eb;"></i> Justificativa detalhada <span style="color: #ef4444;">*</span>
+                    </label>
+                    <textarea id="cancScreenJustificativa" rows="3" class="dash-input" placeholder="Descreva detalhadamente o motivo do cancelamento para registro auditável..." style="height: 80px; padding: 10px 12px; font-size: 12.5px; resize: none; border-radius: 9px; border: 1.5px solid #cbd5e1; width: 100%;"></textarea>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                      <span style="font-size: 11px; color: #64748b;"><i class="fa-solid fa-shield-halved" style="color: #3b82f6;"></i> Registrado no histórico auditável do sistema</span>
+                      <div style="font-size: 11px; font-weight: 700; color: #94a3b8;" id="cancScreenJustCharCount">0/500</div>
                     </div>
                   </div>
 
-                  <label style="display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: #334155; cursor: pointer; background: #f8fafc; padding: 8px 10px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <input type="checkbox" id="cancScreenCheckConfirm">
-                    <span style="font-weight: 600;">Confirmo que revisei as informações antes de cancelar.</span>
+                  <div style="display: grid; grid-template-columns: 1fr 140px; gap: 12px;">
+                    <div>
+                      <label class="canc-field-label" style="font-weight: 700; font-size: 12.5px; color: #0f172a; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                        <i class="fa-solid fa-user-shield" style="color: #2563eb;"></i> Responsável <span style="color: #ef4444;">*</span>
+                      </label>
+                      <input type="text" id="cancScreenResponsavel" value="Maria Oliveira" class="dash-input" style="height: 38px; font-size: 12.5px; border-radius: 9px; border: 1.5px solid #cbd5e1; padding: 0 10px;">
+                    </div>
+                    <div>
+                      <label class="canc-field-label" style="font-weight: 700; font-size: 12.5px; color: #0f172a; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                        <i class="fa-regular fa-calendar-days" style="color: #2563eb;"></i> Data <span style="color: #ef4444;">*</span>
+                      </label>
+                      <input type="date" id="cancScreenData" class="dash-input" style="height: 38px; font-size: 12px; padding: 0 8px; border-radius: 9px; border: 1.5px solid #cbd5e1;">
+                    </div>
+                  </div>
+
+                  <!-- Card Interativo de Confirmação -->
+                  <label id="cancConfirmBoxWrap" class="canc-confirm-box" style="display: flex; align-items: center; gap: 12px; font-size: 12px; color: #1e293b; cursor: pointer; background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%); padding: 12px 14px; border-radius: 12px; border: 1.5px solid #bfdbfe; transition: all 0.25s ease;">
+                    <input type="checkbox" id="cancScreenCheckConfirm" style="width: 18px; height: 18px; accent-color: #2563eb; cursor: pointer;">
+                    <span style="font-weight: 700; line-height: 1.35; color: #1e3a8a;">Confirmo que revisei as informações antes de prosseguir com o cancelamento.</span>
                   </label>
                 </div>
               </form>
 
-              <!-- Barra de Ações Inferior -->
-              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 16px; margin-top: 4px;">
-                <button type="button" id="btnCancScreenVoltar" class="btn soft" style="padding: 8px 16px; font-weight: 600; font-size: 13px;" onclick="showView('dashboard')">
-                  Cancelar ação
-                </button>
+              <!-- Orientação Próximo Passo + Barra de Ações Inferior -->
+              <div style="display: flex; flex-direction: column; gap: 12px; border-top: 1px solid #e2e8f0; padding-top: 16px; margin-top: 4px;">
+                <div class="canc-next-guidance" style="background: #f0f9ff; border-left: 4px solid #0284c7; padding: 11px 15px; border-radius: 0 10px 10px 0; font-size: 12px; color: #0369a1; display: flex; align-items: center; gap: 10px;">
+                  <i class="fa-solid fa-circle-nodes" style="font-size: 16px; color: #0284c7;"></i>
+                  <span><b>Próximo Passo (3 de 3):</b> Ao clicar em <b>Avançar para revisão</b>, uma janela com o resumo completo e a confirmação com o selo de auditoria será exibida.</span>
+                </div>
 
-                <button type="button" id="btnScreenTriggerConfirmModal" class="btn primary" style="background: #2563eb; padding: 9px 20px; font-weight: 800; border-radius: 9px; font-size: 13px; display: flex; align-items: center; gap: 8px; border: none; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);">
-                  Avançar para revisão <i class="fa-solid fa-arrow-right"></i>
-                </button>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                  <button type="button" id="btnCancScreenVoltar" class="btn soft" style="padding: 10px 18px; font-weight: 700; font-size: 13px; border-radius: 10px;" onclick="showView('dashboard')">
+                    <i class="fa-solid fa-xmark"></i> Cancelar ação
+                  </button>
+
+                  <button type="button" id="btnScreenTriggerConfirmModal" class="btn-canc-advance" style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: #ffffff; padding: 11px 24px; font-weight: 850; border-radius: 11px; font-size: 13.5px; display: inline-flex; align-items: center; gap: 9px; border: none; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35); cursor: pointer; transition: all 0.25s ease;">
+                    <span>Avançar para revisão</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -8086,15 +8131,329 @@
           </div>
         </section>
 
+        <style>
+          #view-sobre { --manual-navy:#0f2747; --manual-blue:#075b9d; --manual-soft:#f5f9fd; --manual-line:#dbe7f2; }
+          .manual-hero{position:relative;overflow:hidden;border-radius:18px;padding:28px 30px;background:linear-gradient(135deg,#073b69 0%,#0877c9 62%,#39a0e8 100%);color:#fff;box-shadow:0 18px 36px rgba(8,91,157,.18);margin-bottom:18px}
+          .manual-hero::after{content:'';position:absolute;right:-90px;top:-110px;width:310px;height:310px;border-radius:50%;background:rgba(255,255,255,.10)}
+          .manual-hero::before{content:'';position:absolute;right:145px;bottom:-115px;width:240px;height:240px;border-radius:50%;border:34px solid rgba(255,255,255,.07)}
+          .manual-hero>*{position:relative;z-index:1}.manual-hero-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;flex-wrap:wrap}
+          .manual-kicker{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);font-size:10.5px;font-weight:800;letter-spacing:.7px;text-transform:uppercase}
+          .manual-hero h1{margin:10px 0 5px;font-size:30px;line-height:1.1;font-weight:850;letter-spacing:-.4px;color:#fff}.manual-hero p{max-width:900px;margin:0;color:rgba(255,255,255,.9);font-size:13.5px;line-height:1.65}
+          .manual-version{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}.manual-version span{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.12);font-size:10.5px;font-weight:750;border:1px solid rgba(255,255,255,.18)}
+          .manual-search-card{background:#fff;border:1px solid var(--manual-line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:10px;margin-bottom:16px}.manual-search-card i{color:#0877c9}.manual-search-card input{border:0!important;box-shadow:none!important;background:transparent!important;padding:6px 4px!important}.manual-search-hint{font-size:10.5px;color:#8292a8;white-space:nowrap}
+          .manual-layout{display:grid;grid-template-columns:235px minmax(0,1fr);gap:18px;align-items:start}.manual-toc{position:sticky;top:128px;background:#fff;border:1px solid var(--manual-line);border-radius:14px;padding:10px;box-shadow:var(--shadow-sm);max-height:calc(100vh - 150px);overflow:auto}
+          .manual-toc-title{padding:8px 10px 10px;font-size:10px;font-weight:850;color:#8191a6;text-transform:uppercase;letter-spacing:.9px}.manual-toc a{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:9px;color:#465a73;font-size:11.5px;font-weight:700;transition:.15s}.manual-toc a i{width:17px;text-align:center;color:#0877c9}.manual-toc a:hover{background:#edf5fd;color:#075b9d;transform:translateX(2px)}
+          .manual-content{min-width:0}.manual-section{scroll-margin-top:128px;background:#fff;border:1px solid var(--manual-line);border-radius:16px;padding:22px;margin-bottom:15px;box-shadow:var(--shadow-sm)}.manual-section[hidden]{display:none!important}
+          .manual-section-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}.manual-section-icon{width:38px;height:38px;flex:0 0 38px;border-radius:11px;display:grid;place-items:center;background:#edf5fd;color:#0877c9;font-size:15px}.manual-section-title{margin:0!important;font-size:17px!important;color:#122946!important;font-weight:850!important}.manual-section-sub{margin:3px 0 0;color:#6b7d94;font-size:11.5px;line-height:1.5}
+          .manual-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.manual-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.manual-card{border:1px solid #e1eaf3;border-radius:12px;padding:13px 14px;background:#fbfdff}.manual-card h4{margin:0 0 6px;font-size:12.5px;color:#173b62;display:flex;align-items:center;gap:7px}.manual-card h4 i{color:#0877c9}.manual-card p{margin:0;color:#5f7188;font-size:11.5px;line-height:1.55}.manual-card ul{margin:7px 0 0;padding-left:18px;color:#53667e;font-size:11.3px;line-height:1.6}
+          .manual-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;counter-reset:manualstep}.manual-step{position:relative;border:1px solid #dce8f2;border-radius:12px;padding:13px 12px 12px 42px;background:#fbfdff;min-height:92px}.manual-step::before{counter-increment:manualstep;content:counter(manualstep);position:absolute;left:11px;top:12px;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;background:#0877c9;color:#fff;font-size:10.5px;font-weight:850}.manual-step strong{display:block;color:#183b60;font-size:11.5px;margin-bottom:4px}.manual-step span{display:block;color:#63768d;font-size:10.8px;line-height:1.5}
+          .manual-callout{display:flex;gap:10px;padding:12px 13px;border-radius:11px;background:#eff8ff;border:1px solid #cce7fb;color:#31516f;font-size:11.5px;line-height:1.55}.manual-callout i{color:#0284c7;margin-top:2px}.manual-callout.warning{background:#fffaf0;border-color:#fde7b2}.manual-callout.warning i{color:#d97706}.manual-callout.danger{background:#fff4f4;border-color:#fecaca}.manual-callout.danger i{color:#dc2626}.manual-callout.success{background:#f2fcf5;border-color:#c8eed2}.manual-callout.success i{color:#16a34a}
+          .manual-table{width:100%;border:1px solid #e2eaf3;border-radius:11px;overflow:hidden}.manual-table table{width:100%}.manual-table th{position:static;background:#f6f9fc;font-size:9.8px}.manual-table td{font-size:11.2px;vertical-align:top;line-height:1.5}.manual-table tr:hover{box-shadow:none!important}.manual-status{display:inline-flex;align-items:center;gap:5px;padding:3px 7px;border-radius:999px;font-size:9.5px;font-weight:850;white-space:nowrap}.manual-status.ok{background:#ecfdf3;color:#15803d}.manual-status.partial{background:#fff7ed;color:#c2410c}.manual-status.plan{background:#f5f3ff;color:#6d28d9}.manual-status.local{background:#eff6ff;color:#1d4ed8}
+          .manual-repo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.manual-repo-card{border:1px solid #dce7f1;border-radius:13px;padding:15px;background:linear-gradient(180deg,#fff,#f9fbfd)}.manual-repo-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}.manual-repo-logo{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#10243d;color:#fff}.manual-repo-card.supabase .manual-repo-logo{background:#16a34a}.manual-repo-card strong{font-size:12.5px;color:#1b3554}.manual-repo-card small{display:block;color:#7b8ca1;font-size:10px;margin-top:1px}.manual-code{display:block;margin-top:8px;padding:8px 10px;background:#f2f6fa;border:1px solid #e0e8f0;border-radius:8px;color:#41556e;font:10.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all}
+          .manual-roadmap{display:grid;gap:9px}.manual-road-item{display:flex;gap:11px;padding:13px;border:1px solid #e3e9f1;border-radius:12px;background:#fff}.manual-road-num{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 30px;background:#f5f3ff;color:#7c3aed;font-weight:850;font-size:11px}.manual-road-item strong{display:block;color:#253c59;font-size:11.8px;margin-bottom:3px}.manual-road-item span{display:block;color:#6d7d91;font-size:10.8px;line-height:1.45}
+          .manual-faq details{border:1px solid #e1e9f2;border-radius:10px;margin-top:7px;background:#fbfdff}.manual-faq summary{cursor:pointer;padding:11px 13px;font-size:11.5px;font-weight:800;color:#294767;list-style:none}.manual-faq summary::-webkit-details-marker{display:none}.manual-faq summary::after{content:'+';float:right;color:#0877c9;font-size:16px}.manual-faq details[open] summary::after{content:'−'}.manual-faq details p{margin:0;padding:0 13px 12px;color:#62748a;font-size:11.2px;line-height:1.55}
+          .manual-empty-search{display:none;text-align:center;padding:34px;border:1px dashed #cbd8e5;border-radius:14px;background:#fbfdff;color:#73859b}.manual-empty-search.show{display:block}
+          .btn-export-manual-pdf{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:12px;background:linear-gradient(135deg,#059669 0%,#10b981 100%);color:#ffffff;font-size:12.5px;font-weight:850;border:1px solid rgba(255,255,255,.35);box-shadow:0 8px 22px rgba(16,185,129,.35);cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);text-decoration:none;white-space:nowrap}
+          .btn-export-manual-pdf:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 12px 28px rgba(16,185,129,.5);background:linear-gradient(135deg,#047857 0%,#059669 100%)}
+          .btn-export-manual-pdf:active{transform:translateY(0) scale(.98)}
+          .btn-export-manual-pdf i{font-size:16px}
+          .btn-export-manual-pdf .admin-only-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:6px;background:rgba(0,0,0,.22);font-size:9.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+
+          @media print {
+            body.printing-manual-pdf .app-shell > aside,
+            body.printing-manual-pdf .app-shell > .main > header,
+            body.printing-manual-pdf .manual-search-card,
+            body.printing-manual-pdf .manual-toc,
+            body.printing-manual-pdf .btn-export-manual-pdf,
+            body.printing-manual-pdf .manual-search-hint { display: none !important; }
+            body.printing-manual-pdf { background: #ffffff !important; color: #0f172a !important; }
+            body.printing-manual-pdf .app-shell,
+            body.printing-manual-pdf .main,
+            body.printing-manual-pdf #view-sobre { display: block !important; grid-template-columns: none !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }
+            body.printing-manual-pdf .manual-layout { display: block !important; }
+            body.printing-manual-pdf .manual-hero { box-shadow: none !important; border: 2px solid #075b9d !important; background: linear-gradient(135deg, #073b69 0%, #0877c9 100%) !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; page-break-after: avoid; margin-bottom: 25px !important; }
+            body.printing-manual-pdf .manual-section { box-shadow: none !important; border: 1px solid #cbd5e1 !important; page-break-inside: avoid; margin-bottom: 22px !important; background: #ffffff !important; }
+            body.printing-manual-pdf .manual-card,
+            body.printing-manual-pdf .manual-step,
+            body.printing-manual-pdf .manual-callout,
+            body.printing-manual-pdf .manual-table { page-break-inside: avoid; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            body.printing-manual-pdf .manual-faq details { border: 1px solid #cbd5e1 !important; page-break-inside: avoid; margin-bottom: 10px !important; }
+            body.printing-manual-pdf .manual-faq details p { display: block !important; padding-top: 8px !important; }
+          }
+          @media(max-width:1100px){.manual-flow{grid-template-columns:repeat(2,minmax(0,1fr))}.manual-grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+          @media(max-width:900px){.manual-layout{grid-template-columns:1fr}.manual-toc{position:relative;top:auto;display:flex;overflow-x:auto;max-height:none}.manual-toc-title{display:none}.manual-toc a{white-space:nowrap}.manual-repo,.manual-grid,.manual-grid.three{grid-template-columns:1fr}}
+          @media(max-width:620px){.manual-hero{padding:22px 18px}.manual-hero h1{font-size:24px}.manual-search-hint{display:none}.manual-section{padding:16px}.manual-flow{grid-template-columns:1fr}}
+        </style>
+
         <section class="view" id="view-sobre">
-          <div class="card panel">
-            <h1 class="page-title">FICAI 4.0</h1>
-            <p>Desenvolvido pelo C.P.D. / SMEDU para transformar o processo educacional e de proteção, integrando
-              escola, RAE, Conselho Tutelar, diagnóstico da evasão e encerramento seguro.</p>
-            <div class="notice" style="margin-top:18px"><strong>Roadmap:</strong> RBAC completo, integração por API com
-              o Diário de Classe Digital e notificações proativas por webhooks para WhatsApp e e-mail.</div>
+          <div class="manual-hero">
+            <div class="manual-hero-top">
+              <div>
+                <span class="manual-kicker"><i class="fa-solid fa-book-open"></i> Manual oficial do sistema</span>
+                <h1>FICAI 4.0</h1>
+                <p>Plataforma de gestão da Ficha de Comunicação do Aluno Infrequente, desenvolvida pelo C.P.D. / SMEDU para apoiar identificação, registro, busca ativa, encaminhamentos, devolutivas, diagnóstico da evasão, auditoria e encerramento seguro dos casos.</p>
+                <div class="manual-version">
+                  <span><i class="fa-solid fa-building"></i> SMEDU / CPD</span>
+                  <span><i class="fa-solid fa-shield-halved"></i> Proteção e permanência escolar</span>
+                  <span><i class="fa-solid fa-code-branch"></i> Versão 4.0</span>
+                  <span><i class="fa-regular fa-calendar"></i> Manual revisado em 24/08/2026</span>
+                </div>
+              </div>
+
+              <div class="manual-hero-actions" id="manualAdminActions" style="display: flex; align-items: center; gap: 10px; margin-top: 5px;">
+                <button type="button" class="btn-export-manual-pdf" id="btnExportManualPDF" title="Gerar e baixar o Manual do Sistema em formato PDF impresso de alta qualidade">
+                  <i class="fa-solid fa-file-pdf"></i>
+                  <span>Gerar PDF do Manual</span>
+                  <span class="admin-only-badge"><i class="fa-solid fa-shield-halved"></i> Admin</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="manual-search-card">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="manualSearch" type="search" autocomplete="off" placeholder="Pesquisar neste manual: cancelamento, Conselho Tutelar, PDF, mapa, Supabase...">
+            <span class="manual-search-hint">Pesquisa instantânea</span>
+          </div>
+
+          <div class="manual-layout">
+            <nav class="manual-toc" aria-label="Índice do manual">
+              <div class="manual-toc-title">Neste manual</div>
+              <a href="#manual-visao"><i class="fa-solid fa-circle-info"></i> Visão geral</a>
+              <a href="#manual-fluxo"><i class="fa-solid fa-route"></i> Fluxo completo</a>
+              <a href="#manual-dashboard"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
+              <a href="#manual-gerar"><i class="fa-solid fa-user-pen"></i> Gerar FICAI</a>
+              <a href="#manual-acompanhar"><i class="fa-solid fa-clock-rotate-left"></i> Dados e histórico</a>
+              <a href="#manual-rede"><i class="fa-solid fa-building-columns"></i> RAE e Conselho</a>
+              <a href="#manual-finalizacao"><i class="fa-solid fa-box-archive"></i> Encerrar x Cancelar</a>
+              <a href="#manual-config"><i class="fa-solid fa-gear"></i> Configurações</a>
+              <a href="#manual-auditoria"><i class="fa-solid fa-file-shield"></i> Notificações e logs</a>
+              <a href="#manual-documentos"><i class="fa-solid fa-file-pdf"></i> PDF e mapa</a>
+              <a href="#manual-arquitetura"><i class="fa-solid fa-code"></i> Arquitetura</a>
+              <a href="#manual-seguranca"><i class="fa-solid fa-lock"></i> Segurança e dados</a>
+              <a href="#manual-roadmap"><i class="fa-solid fa-flag-checkered"></i> Roadmap</a>
+              <a href="#manual-faq"><i class="fa-solid fa-circle-question"></i> Dúvidas frequentes</a>
+            </nav>
+
+            <div class="manual-content" id="manualContent">
+              <section class="manual-section manual-filter-item" id="manual-visao">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-circle-info"></i></div><div><h2 class="manual-section-title">1. Visão geral do FICAI 4.0</h2><p class="manual-section-sub">O que o sistema faz, quem participa e qual problema ele resolve.</p></div></div>
+                <div class="manual-grid three">
+                  <div class="manual-card"><h4><i class="fa-solid fa-school"></i> Unidade Escolar</h4><p>Registra o aluno, período de faltas, procedimentos já realizados, motivos da ausência, vulnerabilidades, diagnóstico e acompanhamento do caso.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-building-columns"></i> RAE</h4><p>Organiza o fluxo bidirecional de registros, encaminhamentos e devolutivas da rede, mantendo o histórico do caso acessível.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-gavel"></i> Conselho Tutelar</h4><p>Recebe FICAIs encaminhadas, registra diligências, pareceres, devolutivas e providências, com retorno ao fluxo da escola.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-chart-line"></i> Gestão</h4><p>Consolida casos ativos, causas recorrentes, busca ativa, finalizações e situação do acompanhamento para apoiar tomada de decisão.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-clock-rotate-left"></i> Linha do tempo</h4><p>Preserva registros posteriores à geração da FICAI, sem substituir informações anteriores, criando histórico contínuo e auditável.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-file-pdf"></i> Documento oficial</h4><p>Gera espelho A4 em orientação retrato, com pré-visualização e opção de impressão ou salvamento em PDF.</p></div>
+                </div>
+                <div class="manual-callout" style="margin-top:10px"><i class="fa-solid fa-lightbulb"></i><div><strong>Princípio central:</strong> a FICAI não termina quando o PDF é gerado. O registro eletrônico continua recebendo informações, encaminhamentos, devolutivas e decisões até o encerramento formal do caso.</div></div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-fluxo">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-route"></i></div><div><h2 class="manual-section-title">2. Fluxo completo de trabalho</h2><p class="manual-section-sub">Caminho recomendado desde a identificação da infrequência até a conclusão.</p></div></div>
+                <div class="manual-flow">
+                  <div class="manual-step"><strong>Acessar o sistema</strong><span>Entrar com credencial institucional. A unidade do usuário é exibida no cabeçalho e pode preencher a escola automaticamente.</span></div>
+                  <div class="manual-step"><strong>Abrir a FICAI</strong><span>Em “Gerar FICAI”, cadastrar ou selecionar o aluno e preencher as seis etapas do formulário.</span></div>
+                  <div class="manual-step"><strong>Registrar ações da escola</strong><span>Informar comunicações, contatos, visitas, retornos e demais procedimentos com suas respectivas datas.</span></div>
+                  <div class="manual-step"><strong>Diagnosticar o caso</strong><span>Marcar motivos da ausência, situação do aluno, vulnerabilidades e fatores multifatoriais da evasão.</span></div>
+                  <div class="manual-step"><strong>Salvar e emitir</strong><span>Salvar a FICAI, revisar o espelho A4 e imprimir/salvar PDF quando necessário.</span></div>
+                  <div class="manual-step"><strong>Encaminhar</strong><span>Quando cabível, encaminhar ao Conselho Tutelar e acompanhar a ficha nos módulos RAE/Conselho.</span></div>
+                  <div class="manual-step"><strong>Acompanhar devolutivas</strong><span>Registrar fatos novos na linha do tempo, receber pareceres, atualizar providências e monitorar notificações.</span></div>
+                  <div class="manual-step"><strong>Concluir corretamente</strong><span>Encerrar quando o acompanhamento foi concluído; cancelar somente em hipóteses excepcionais de invalidação do registro.</span></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-dashboard">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-table-cells-large"></i></div><div><h2 class="manual-section-title">3. Dashboard FICAI</h2><p class="manual-section-sub">Painel operacional para localizar casos, acompanhar indicadores e executar ações rápidas.</p></div></div>
+                <div class="manual-grid">
+                  <div class="manual-card"><h4><i class="fa-solid fa-chart-pie"></i> Indicadores</h4><ul><li>Casos ativos em acompanhamento.</li><li>Percentuais de causas como falta de motivação, trabalho/fatores sociais e saúde.</li><li>Alunos em busca ativa.</li><li>FICAIs finalizadas/regularizadas.</li></ul></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-filter"></i> Pesquisa e filtros</h4><ul><li>Busca por aluno, documento ou responsável.</li><li>Filtro por turma e situação.</li><li>Filtro temporal: 7, 15, 30, 90 dias ou ano letivo.</li><li>Contadores atualizados conforme os registros carregados.</li></ul></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-table-list"></i> Listas separadas</h4><p><strong>Recebidos do CT</strong> reúne devolutivas/retornos do Conselho Tutelar. <strong>Gerados</strong> reúne FICAIs criadas ou devolvidas pela escola/rede.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-bolt"></i> Ações rápidas</h4><ul><li>Encaminhar FICAI.</li><li>Atribuir responsável/servidor.</li><li>Cancelar FICAI.</li><li>Registrar acompanhamento/devolutiva.</li><li>Visualizar espelho A4/PDF.</li><li>Adicionar ou remover marcadores.</li></ul></div>
+                </div>
+                <div class="manual-callout warning" style="margin-top:10px"><i class="fa-solid fa-hand-pointer"></i><div>Para ações rápidas no Dashboard, selecione a FICAI desejada na lista. Clicar no número/aluno abre o prontuário com histórico completo.</div></div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-gerar">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-user-pen"></i></div><div><h2 class="manual-section-title">4. Gerar FICAI — preenchimento em 6 etapas</h2><p class="manual-section-sub">O assistente de preenchimento valida as informações essenciais antes de avançar.</p></div></div>
+                <div class="manual-grid three">
+                  <div class="manual-card"><h4>1. Escola e aluno</h4><p>Ano letivo, número automático da FICAI, escola, endereço, aluno cadastrado/novo, nome, nome social, nascimento, CPF, RG, filiação, responsável, residência, telefones e referência.</p></div>
+                  <div class="manual-card"><h4>2. Situação escolar</h4><p>Ano escolar, turma, turno, modalidade automática, início/fim das faltas, data da comunicação e identificação do profissional responsável.</p></div>
+                  <div class="manual-card"><h4>3. Procedimentos</h4><p>Registra comunicação ao responsável, contato telefônico, retorno/não retorno, telegrama, visita domiciliar, comparecimento do responsável e relato de visita.</p></div>
+                  <div class="manual-card"><h4>4. Motivos e situação</h4><p>Motivos da ausência, situação do aluno (ex.: Infrequente, Evadido, Sem Acesso), vulnerabilidades, situações personalizadas e observação inicial.</p></div>
+                  <div class="manual-card"><h4>5. Diagnóstico da evasão</h4><p>Diagnóstico multifatorial nos grupos Estrutural, Social/Familiar, Saúde, Educacional, Segurança/Violência, Econômica e Outros.</p></div>
+                  <div class="manual-card"><h4>6. Revisão e emissão</h4><p>Salvar FICAI, encaminhar ao Conselho Tutelar, pré-visualizar A4 e imprimir/salvar PDF. Relatos extensos permanecem integralmente no registro eletrônico.</p></div>
+                </div>
+                <div class="manual-callout success" style="margin-top:10px"><i class="fa-solid fa-circle-check"></i><div><strong>Validações do assistente:</strong> escola e nome do aluno são exigidos na etapa 1; ano escolar e turma na etapa 2; uma situação do aluno na etapa 4; e ao menos um fator diagnóstico na etapa 5.</div></div>
+                <div class="manual-callout" style="margin-top:8px"><i class="fa-solid fa-floppy-disk"></i><div><strong>Rascunho:</strong> “Salvar rascunho” preserva o formulário para continuidade posterior. “Limpar” remove o rascunho atual e reinicia o preenchimento.</div></div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-acompanhar">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-clock-rotate-left"></i></div><div><h2 class="manual-section-title">5. Dados da Ficha, prontuário e histórico</h2><p class="manual-section-sub">Consulta consolidada e registro contínuo após a geração.</p></div></div>
+                <div class="manual-grid">
+                  <div class="manual-card"><h4><i class="fa-solid fa-file-lines"></i> Dados da Ficha</h4><p>Lista FICAIs por número, aluno, escola, turma, situação e última atualização, com filtros por situação/ano e ações para informações, edição, Conselho Tutelar ou encerramento.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-address-card"></i> Prontuário</h4><p>Mostra situação, vulnerabilidades, observação inicial, procedimentos, diagnósticos, período de faltas, última atualização e linha do tempo do acompanhamento.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-plus"></i> Nova informação importante</h4><p>Permite registrar data, tipo, responsável e descrição de fatos novos. Cada novo registro é acrescentado ao histórico e não substitui os anteriores.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-paper-plane"></i> Enviar / devolver</h4><p>O registro pode ser associado a encaminhamento ou devolutiva, atualizando a situação operacional e movimentando a FICAI entre os fluxos correspondentes.</p></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-rede">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-building-columns"></i></div><div><h2 class="manual-section-title">6. RAE e Conselho Tutelar</h2><p class="manual-section-sub">Fluxo de encaminhamentos, diligências e devolutivas interinstitucionais.</p></div></div>
+                <div class="manual-grid">
+                  <div class="manual-card"><h4><i class="fa-solid fa-building-columns"></i> RAE</h4><ul><li>Exibe FICAI, aluno, unidade, data de encaminhamento, destino, retorno e status.</li><li>Destaca novas devolutivas até a leitura.</li><li>Funciona como visão de tráfego bidirecional dos registros da rede.</li></ul></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-gavel"></i> Painel do Conselho Tutelar</h4><ul><li>Indicadores de aguardando recebimento, diligências, prazos e devolvidas.</li><li>Filtro por situação.</li><li>Acesso ao prontuário completo.</li><li>Registro de devolutiva/parecer complementar.</li></ul></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-clipboard-check"></i> Devolutiva do CT</h4><p>Registra data, conselheiro responsável, diligência/providência, tipo de registro, situação da devolutiva e parecer descritivo.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-eye"></i> Confirmação de leitura</h4><p>A visualização do prontuário pelo Conselho Tutelar pode ser registrada na linha do tempo, reforçando rastreabilidade do acesso ao caso.</p></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-finalizacao">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-box-archive"></i></div><div><h2 class="manual-section-title">7. Encerramento x Cancelamento — quando usar cada um</h2><p class="manual-section-sub">São operações diferentes e não devem ser tratadas como sinônimos.</p></div></div>
+                <div class="manual-table"><table><thead><tr><th>Operação</th><th>Quando utilizar</th><th>Efeito</th><th>Rastreabilidade</th></tr></thead><tbody>
+                  <tr><td><strong>Encerrar / Arquivar</strong></td><td>Quando o acompanhamento foi concluído: retorno às atividades, transferência, conclusão de etapa, mudança não localizada, óbito ou outro motivo institucional.</td><td>Retira a FICAI do fluxo ativo, preserva o prontuário e permite reabertura posterior.</td><td>Motivo, data e justificativa formal ficam registrados.</td></tr>
+                  <tr><td><strong>Reabrir</strong></td><td>Quando houver reincidência de infrequência, nova demanda da rede ou necessidade de retomar o acompanhamento.</td><td>Reativa o caso e devolve a FICAI ao acompanhamento ativo.</td><td>Exige data, responsável e justificativa.</td></tr>
+                  <tr><td><strong>Cancelar</strong></td><td>Somente para situações excepcionais como duplicidade, erro de preenchimento, regularização imediata documentada ou outra justificativa administrativa válida.</td><td>Registra a FICAI como cancelada; não representa “caso resolvido”.</td><td>Gera registro permanente no histórico auditável de cancelamentos.</td></tr>
+                </tbody></table></div>
+                <div class="manual-callout danger" style="margin-top:10px"><i class="fa-solid fa-triangle-exclamation"></i><div><strong>Atenção:</strong> se o aluno retornou ou o acompanhamento terminou normalmente, utilize <strong>Encerramento</strong>. Use <strong>Cancelamento</strong> quando o próprio registro precisa ser invalidado administrativamente.</div></div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-config">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-gear"></i></div><div><h2 class="manual-section-title">8. Configurações, cadastros e permissões</h2><p class="manual-section-sub">Catálogos que alimentam os formulários e estruturam o uso do sistema.</p></div></div>
+                <div class="manual-grid three">
+                  <div class="manual-card"><h4>Usuários e RBAC</h4><p>Nível, cargo, função, unidade e status. O cadastro de permissões por perfil já existe no protótipo; a aplicação integral de RBAC no backend está no roadmap.</p></div>
+                  <div class="manual-card"><h4>Escolas</h4><p>Unidades, endereço, telefone, e-mail e status. Escolas ativas alimentam automaticamente o campo Escola da geração da FICAI.</p></div>
+                  <div class="manual-card"><h4>Turmas e Turnos</h4><p>Relaciona ano escolar, turma, turno, modalidade e escola. Turmas ativas alimentam os campos do formulário.</p></div>
+                  <div class="manual-card"><h4>Modalidades</h4><p>Cadastro das modalidades/etapas de ensino utilizadas pelas turmas, com preenchimento automático conforme a turma selecionada.</p></div>
+                  <div class="manual-card"><h4>Gestores e CT</h4><p>Cadastro de diretores, orientadores, coordenação e conselheiros com matrícula, unidade/órgão, telefone, período e status.</p></div>
+                  <div class="manual-card"><h4>Tabelas auxiliares</h4><p>Procedimentos da escola, motivos da ausência e diagnósticos podem ser cadastrados, ordenados, ativados e utilizados dinamicamente na FICAI.</p></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-auditoria">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-file-shield"></i></div><div><h2 class="manual-section-title">9. Notificações, marcadores e Logs do Sistema</h2><p class="manual-section-sub">Recursos de organização, alerta e rastreabilidade operacional.</p></div></div>
+                <div class="manual-grid">
+                  <div class="manual-card"><h4><i class="fa-solid fa-bell"></i> Centro de notificações</h4><p>O sino no cabeçalho mostra notificações lidas/não lidas, permite marcar todas como lidas e direciona ao histórico de logs. Devolutivas e alertas de busca ativa podem ser destacados.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-tags"></i> Marcadores</h4><p>FICAIs podem receber marcadores visuais personalizados para facilitar classificação e priorização. O sistema oferece criação, seleção e remoção de marcadores.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-file-shield"></i> Logs</h4><p>Registra eventos relevantes como login/logout, criação/atualização de FICAI, encaminhamentos, devolutivas, cancelamentos e sincronizações.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-download"></i> Pesquisa e exportação</h4><p>Os logs podem ser filtrados por nível, texto e data, limpos visualmente e exportados em CSV para conferência ou auditoria.</p></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-documentos">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-file-pdf"></i></div><div><h2 class="manual-section-title">10. Espelho A4, PDF e mapa de rota</h2><p class="manual-section-sub">Recursos de emissão e apoio territorial ao acompanhamento.</p></div></div>
+                <div class="manual-grid">
+                  <div class="manual-card"><h4><i class="fa-solid fa-print"></i> Emissão A4</h4><p>A ficha foi preparada para impressão em <strong>A4, orientação retrato, uma página</strong>. A pré-visualização permite conferir o documento antes de imprimir ou salvar em PDF.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-file-lines"></i> Relatos extensos</h4><p>Informações longas permanecem no registro eletrônico e podem aparecer resumidas no documento impresso, preservando o histórico completo no sistema.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-map-location-dot"></i> Mapa escola → residência</h4><p>O prontuário pode exibir o trajeto entre a escola e o endereço residencial utilizando MapLibre/OpenFreeMap e cálculo de rota viária.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-route"></i> Contingência de rota</h4><p>O sistema consulta o roteador OSRM. Se o serviço estiver indisponível, utiliza um traçado de contingência para manter a visualização operacional.</p></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-arquitetura">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-code"></i></div><div><h2 class="manual-section-title">11. Arquitetura, tecnologias e repositórios</h2><p class="manual-section-sub">Visão técnica resumida para CPD, manutenção e evolução do projeto.</p></div></div>
+                <div class="manual-table" style="margin-bottom:10px"><table><thead><tr><th>Componente</th><th>Uso atual</th><th>Situação</th></tr></thead><tbody>
+                  <tr><td><strong>HTML / CSS / JavaScript</strong></td><td>Interface, regras do protótipo, formulários, dashboards, modais e impressão.</td><td><span class="manual-status ok">Implementado</span></td></tr>
+                  <tr><td><strong>IndexedDB</strong></td><td>Banco local do navegador para alunos e FICAIs (<code>FICAI4LocalDB</code>).</td><td><span class="manual-status local">Local</span></td></tr>
+                  <tr><td><strong>localStorage</strong></td><td>Sessão, rascunhos, históricos auxiliares, configurações, marcadores e logs locais.</td><td><span class="manual-status local">Local</span></td></tr>
+                  <tr><td><strong>Supabase</strong></td><td>Cliente cloud, autenticação e sincronizações/serviços disponíveis quando configurados.</td><td><span class="manual-status partial">Integração parcial</span></td></tr>
+                  <tr><td><strong>MapLibre + OpenFreeMap</strong></td><td>Renderização do mapa no prontuário.</td><td><span class="manual-status ok">Implementado</span></td></tr>
+                  <tr><td><strong>OSRM</strong></td><td>Cálculo de rota viária escola → residência.</td><td><span class="manual-status ok">Implementado</span></td></tr>
+                  <tr><td><strong>Font Awesome / Alexandria</strong></td><td>Iconografia e tipografia da interface.</td><td><span class="manual-status ok">Implementado</span></td></tr>
+                </tbody></table></div>
+                <div class="manual-repo">
+                  <div class="manual-repo-card"><div class="manual-repo-head"><div class="manual-repo-logo"><i class="fa-brands fa-github"></i></div><div><strong>GitHub — código-fonte</strong><small>Repositório oficial do FICAI 4.0</small></div></div><p style="margin:0;color:#60748a;font-size:11px;line-height:1.5">O HTML atual não declara a URL do repositório. Cadastre aqui o endereço oficial do GitHub quando o repositório estiver definido/conectado.</p><span class="manual-code">URL do GitHub: não configurada neste arquivo</span></div>
+                  <div class="manual-repo-card supabase"><div class="manual-repo-head"><div class="manual-repo-logo"><i class="fa-solid fa-database"></i></div><div><strong>Supabase — backend/cloud</strong><small>Projeto identificado no sistema</small></div></div><p style="margin:0;color:#60748a;font-size:11px;line-height:1.5">Utilizado como camada cloud e de autenticação quando os serviços estão disponíveis. Chaves e credenciais não devem ser exibidas neste manual.</p><span class="manual-code">Status: Conectado à nuvem Supabase (Credenciais protegidas)</span></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-seguranca">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-lock"></i></div><div><h2 class="manual-section-title">12. Segurança, dados e responsabilidades</h2><p class="manual-section-sub">Cuidados essenciais ao operar dados educacionais e informações de crianças/adolescentes.</p></div></div>
+                <div class="manual-grid">
+                  <div class="manual-card"><h4><i class="fa-solid fa-user-shield"></i> Acesso</h4><p>Utilize contas institucionais individuais sempre que possível. Não compartilhe senhas. O RBAC completo deverá garantir acesso por perfil e módulo no backend.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-database"></i> Persistência local</h4><p>Parte relevante do protótipo permanece no navegador. Limpeza de dados do navegador, troca de computador ou perfil pode afetar dados que ainda não estejam centralizados na nuvem.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-eye-slash"></i> Segredos</h4><p>Senhas, chaves privadas, <em>service role keys</em> e outros segredos nunca devem ficar expostos no HTML, GitHub público, manual ou logs de usuário.</p></div>
+                  <div class="manual-card"><h4><i class="fa-solid fa-scale-balanced"></i> Rastreabilidade</h4><p>Alterações relevantes devem preservar autoria, data/hora, justificativa e histórico. Cancelamentos e reaberturas exigem atenção especial por impacto administrativo.</p></div>
+                </div>
+                <div class="manual-callout danger" style="margin-top:10px"><i class="fa-solid fa-shield-halved"></i><div><strong>Recomendação técnica para produção:</strong> centralizar autenticação/autorização no backend, ativar políticas RLS no Supabase, remover credenciais fixas do front-end e garantir backup/versionamento dos dados.</div></div>
+              </section>
+
+              <section class="manual-section manual-filter-item" id="manual-roadmap">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-flag-checkered"></i></div><div><h2 class="manual-section-title">13. Roadmap de evolução</h2><p class="manual-section-sub">Próximas capacidades previstas para elevar segurança, integração e automação.</p></div></div>
+                <div class="manual-roadmap">
+                  <div class="manual-road-item"><div class="manual-road-num">01</div><div><strong>RBAC completo</strong><span>Aplicar controle de acesso por perfil, unidade, função e módulo no backend, com permissões efetivas de visualizar, cadastrar, editar e excluir.</span></div></div>
+                  <div class="manual-road-item"><div class="manual-road-num">02</div><div><strong>Integração por API com o Diário de Classe Digital</strong><span>Receber dados de frequência/ausências e reduzir digitação duplicada, permitindo abertura e atualização do fluxo FICAI a partir de dados oficiais.</span></div></div>
+                  <div class="manual-road-item"><div class="manual-road-num">03</div><div><strong>Notificações proativas por webhooks</strong><span>Disparar alertas e devolutivas para WhatsApp e e-mail conforme eventos do fluxo, prazos e mudanças de situação.</span></div></div>
+                  <div class="manual-road-item"><div class="manual-road-num">04</div><div><strong>Centralização e sincronização cloud</strong><span>Reduzir dependência do armazenamento local, consolidar históricos e garantir disponibilidade entre dispositivos com trilha de auditoria.</span></div></div>
+                </div>
+              </section>
+
+              <section class="manual-section manual-filter-item manual-faq" id="manual-faq">
+                <div class="manual-section-head"><div class="manual-section-icon"><i class="fa-solid fa-circle-question"></i></div><div><h2 class="manual-section-title">14. Dúvidas frequentes</h2><p class="manual-section-sub">Respostas rápidas para situações comuns de uso.</p></div></div>
+                <details><summary>Depois de gerar a FICAI ainda posso acrescentar informações?</summary><p>Sim. Abra “Informações” da FICAI e utilize “Adicionar informação importante”. O novo fato entra na linha do tempo sem apagar os registros anteriores.</p></details>
+                <details><summary>Quando devo encaminhar ao Conselho Tutelar?</summary><p>Quando o fluxo institucional determinar a necessidade de providências externas. O botão “Encaminhar ao CT” salva a ficha, registra o evento e posiciona o caso no acompanhamento do Conselho.</p></details>
+                <details><summary>Qual a diferença entre Encerrar e Cancelar?</summary><p>Encerrar significa concluir/arquivar um acompanhamento válido e permite reabertura. Cancelar invalida administrativamente uma FICAI por motivo excepcional e gera registro auditável permanente.</p></details>
+                <details><summary>Por que uma FICAI aparece em “Recebidos do CT”?</summary><p>Porque há devolutiva/retorno do Conselho Tutelar registrada. Isso indica que a escola/rede recebeu nova informação do CT para continuidade do fluxo.</p></details>
+                <details><summary>O mapa mostra uma rota real?</summary><p>O sistema tenta calcular rota viária usando OSRM sobre o mapa MapLibre/OpenFreeMap. Se o serviço estiver indisponível, utiliza um traçado de contingência para manter a visualização.</p></details>
+                <details><summary>Onde os dados ficam armazenados?</summary><p>O protótipo usa uma arquitetura híbrida: IndexedDB e localStorage no navegador, além de integrações Supabase quando disponíveis. Por isso, nem todo dado deve ser considerado centralizado em nuvem nesta versão.</p></details>
+                <details><summary>Como localizar uma FICAI rapidamente?</summary><p>Use a pesquisa e os filtros do Dashboard ou a tela “Dados da Ficha”. No Dashboard, também é possível filtrar por turma, situação e período.</p></details>
+                <details><summary>Posso salvar ou imprimir a FICAI em PDF?</summary><p>Sim. Na etapa 6 use “Pré-visualizar A4” para conferir e “Imprimir / Salvar PDF” para emitir o documento.</p></details>
+              </section>
+              <div class="manual-empty-search" id="manualEmptySearch"><i class="fa-solid fa-magnifying-glass" style="font-size:24px;margin-bottom:8px;display:block"></i>Nenhuma seção do manual corresponde à pesquisa.</div>
+            </div>
           </div>
         </section>
+
+        <script>
+          // Pesquisa instantânea do Manual e Exportação em PDF para Administrador
+          (() => {
+            const search = document.getElementById('manualSearch');
+            const empty = document.getElementById('manualEmptySearch');
+            if (search) {
+              const normalize = (v = '') => v.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+              search.addEventListener('input', () => {
+                const q = normalize(search.value);
+                let visible = 0;
+                document.querySelectorAll('#manualContent .manual-filter-item').forEach(section => {
+                  const match = !q || normalize(section.textContent).includes(q);
+                  section.hidden = !match;
+                  if (match) visible++;
+                });
+                if (empty) empty.classList.toggle('show', visible === 0);
+              });
+            }
+
+            // Exportação de PDF do Manual Oficial para Administradores
+            const btnExportPDF = document.getElementById('btnExportManualPDF');
+            if (btnExportPDF) {
+              btnExportPDF.addEventListener('click', () => {
+                // 1. Limpar termo de busca ativo para exibir todas as 14 seções
+                if (search && search.value) {
+                  search.value = '';
+                  search.dispatchEvent(new Event('input'));
+                }
+
+                // 2. Expandir todas as dúvidas frequentes (details) no PDF
+                const details = document.querySelectorAll('#manualContent details');
+                details.forEach(d => d.open = true);
+
+                // 3. Ativar modo de impressão PDF do manual
+                document.body.classList.add('printing-manual-pdf');
+
+                if (typeof toast === 'function') {
+                  toast('Gerando PDF estilizado do Manual do Sistema...');
+                }
+
+                setTimeout(() => {
+                  window.print();
+                  setTimeout(() => {
+                    document.body.classList.remove('printing-manual-pdf');
+                  }, 1000);
+                }, 300);
+              });
+            }
+          })();
+        </script>
       </main>
     </div>
   </div>
@@ -8719,6 +9078,64 @@
         <button type="button" id="btnPopConfirmar" class="btn primary"
           style="background: #dc2626; padding: 10px; font-weight: 700; border-radius: 8px; border: none; color: #fff; font-size: 13px;">
           Sim, cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL SOFISTICADO DE SUCESSO DO CANCELAMENTO -->
+  <div class="modal" id="modalCancelamentoSucesso" aria-hidden="true" style="z-index: 10060;">
+    <div class="modal-card" style="max-width: 480px; border-radius: 20px; padding: 28px 24px; text-align: center; background: #ffffff; box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.25), 0 0 0 1px rgba(16, 185, 129, 0.1); position: relative; animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+      <button class="close" type="button" id="closeModalCancSuccess" style="position: absolute; right: 18px; top: 18px; font-size: 20px; color: #94a3b8; border: none; background: transparent; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; transition: background 0.2s;">×</button>
+
+      <!-- Ícone Animado de Sucesso -->
+      <div style="width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); color: #16a34a; border: 6px solid #f0fdf4; display: grid; place-items: center; font-size: 32px; margin: 0 auto 18px; box-shadow: 0 10px 20px rgba(22, 163, 74, 0.15);">
+        <i class="fa-solid fa-check"></i>
+      </div>
+
+      <span class="chip" style="background: #fef2f2; color: #dc2626; border: 1px solid #fca5a5; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 99px; display: inline-block; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">
+        <i class="fa-solid fa-circle-check" style="margin-right: 4px; color: #dc2626;"></i> Status Atualizado
+      </span>
+
+      <h3 style="font-size: 20px; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 6px;">
+        Cancelamento Efetuado!
+      </h3>
+
+      <p style="font-size: 13.5px; color: #475569; margin-bottom: 18px; line-height: 1.5;">
+        A ficha escolar foi oficialmente cancelada e os dados de auditoria foram salvos com rastreabilidade total no sistema.
+      </p>
+
+      <!-- Card de Detalhes do Cancelamento -->
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 14px 16px; text-align: left; margin-bottom: 20px; font-size: 12.5px;">
+        <div style="display: flex; justify-content: space-between; padding-bottom: 8px; border-bottom: 1px dashed #cbd5e1; margin-bottom: 8px;">
+          <span style="color: #64748b; font-weight: 600;">N.º da FICAI:</span>
+          <strong id="succFicaiNum" style="color: #1d4ed8; font-weight: 800;">0018/2026</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding-bottom: 8px; border-bottom: 1px dashed #cbd5e1; margin-bottom: 8px;">
+          <span style="color: #64748b; font-weight: 600;">Aluno:</span>
+          <strong id="succAlunoNome" style="color: #0f172a; font-weight: 700;">Carla Souza Ribeiro</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding-bottom: 8px; border-bottom: 1px dashed #cbd5e1; margin-bottom: 8px;">
+          <span style="color: #64748b; font-weight: 600;">Motivo:</span>
+          <span id="succMotivo" style="color: #dc2626; font-weight: 700;">Duplicidade de cadastro</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding-bottom: 8px; border-bottom: 1px dashed #cbd5e1; margin-bottom: 8px;">
+          <span style="color: #64748b; font-weight: 600;">Responsável:</span>
+          <span id="succResponsavel" style="color: #334155; font-weight: 600;">Maria Oliveira</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: #64748b; font-weight: 600;">Data / Hora:</span>
+          <span id="succDataHora" style="color: #64748b; font-weight: 600;">24/08/2026 - 10:52</span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <button type="button" id="btnSuccClose" class="btn primary" style="background: #10b981; border: none; padding: 11px; font-weight: 700; border-radius: 10px; color: #ffffff; font-size: 13px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); cursor: pointer;">
+          <i class="fa-solid fa-check" style="margin-right: 6px;"></i> Concluir
+        </button>
+
+        <button type="button" id="btnSuccViewHistory" class="btn soft" style="padding: 11px; font-weight: 700; border-radius: 10px; font-size: 13px; background: #f1f5f9; color: #1e293b; border: 1px solid #cbd5e1; cursor: pointer;">
+          <i class="fa-solid fa-shield-halved" style="margin-right: 6px; color: #dc2626;"></i> Ver no Histórico
         </button>
       </div>
     </div>
@@ -9521,7 +9938,25 @@
     function setText(id, val) { const el = $(id); if (el) el.value = val || '' }
 
     // Navegação
-    function showView(name) { $$('.view').forEach(v => v.classList.remove('active')); $('#view-' + name)?.classList.add('active'); $$('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.view === name)); window.scrollTo({ top: 0, behavior: 'smooth' }); if (innerWidth < 980) $('#sidebar').classList.remove('open'); if (name === 'encerramento') populateEncerrarOptions(); if (name === 'logs') renderSystemLogs(); }
+    function showView(name) {
+      const session = typeof getActiveSession === 'function' ? getActiveSession() : null;
+      const isAdmin = !!(session && (session.isSystemAdmin || session.nivel === 'Administrador' || session.email === 'cpdinfra@edu.itaguai.rj.gov.br'));
+      const adminOnlyViews = ['conselho', 'config', 'logs'];
+
+      if (!isAdmin && adminOnlyViews.includes(name)) {
+        toast('Acesso restrito a Administradores do sistema.');
+        name = 'dashboard';
+      }
+
+      $$('.view').forEach(v => v.classList.remove('active'));
+      $('#view-' + name)?.classList.add('active');
+      $$('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.view === name));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (innerWidth < 980) $('#sidebar').classList.remove('open');
+      if (name === 'encerramento') populateEncerrarOptions();
+      if (name === 'logs') renderSystemLogs();
+      if (name === 'cancelamento' && typeof syncCancScreenCardsFromGerados === 'function') syncCancScreenCardsFromGerados();
+    }
     $$('.nav-item').forEach(n => n.addEventListener('click', () => showView(n.dataset.view))); $$('[data-go]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); showView(b.dataset.go) }));
     const appShell = $('.app-shell'), sidebar = $('#sidebar'), hamb = $('#hamb');
     function applySidebarState(collapsed) {
@@ -9640,14 +10075,16 @@
       const checked = document.querySelector('.dash-list-row input[type="checkbox"]:checked');
       if (checked) {
         const row = checked.closest('.dash-list-row');
+        const isGerado = checked.classList.contains('gerados-check') || !!row?.closest('#listGerados');
         return {
           ficai: row.dataset.ficai || '0015/2026',
           student: row.dataset.student || 'Eduarda Gomes',
           turma: row.dataset.turma || '',
-          sit: row.dataset.sit || ''
+          sit: row.dataset.sit || '',
+          isGerado: isGerado
         };
       }
-      return { ficai: '0015/2026', student: 'Eduarda Gomes', turma: '', sit: '' };
+      return null;
     }
 
     // Modal de Encaminhamento Rápido de FICAI
@@ -9837,7 +10274,7 @@
     }
 
     // Lógica da Tela Dedicada de Cancelamento (#view-cancelamento)
-    let currentCancScreenTarget = { ficai: '0021', student: 'Ana Clara Nascimento', turma: '7B', escola: 'E.M. Elmir Figueira', status: 'Ativa', date: '18/08/2026' };
+    let currentCancScreenTarget = { ficai: '0017', student: 'Bruno Henrique Silva', turma: '6A', escola: 'E.M. Elmir Figueira', status: 'Ativa', date: '17/08/2026' };
 
     function updateCancScreenDetails(data) {
       currentCancScreenTarget = data;
@@ -10066,6 +10503,23 @@
       if ($('#cancScreenJustCharCount')) $('#cancScreenJustCharCount').textContent = `${e.target.value.length}/500`;
     });
 
+    $('#cancScreenCheckConfirm')?.addEventListener('change', e => {
+      const box = $('#cancConfirmBoxWrap');
+      if (box) {
+        if (e.target.checked) {
+          box.style.background = 'linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%)';
+          box.style.borderColor = '#10b981';
+          box.style.color = '#065f46';
+          box.style.boxShadow = '0 4px 14px rgba(16, 185, 129, 0.15)';
+        } else {
+          box.style.background = 'linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%)';
+          box.style.borderColor = '#bfdbfe';
+          box.style.color = '#1e293b';
+          box.style.boxShadow = 'none';
+        }
+      }
+    });
+
     // Trigger do Pop-up de Confirmação Final na Tela Dedicada
     $('#btnScreenTriggerConfirmModal')?.addEventListener('click', () => {
       const motivo = $('#cancScreenMotivo')?.value;
@@ -10161,14 +10615,23 @@
     $('#closeSubModalConfirm')?.addEventListener('click', () => $('#subModalConfirmCancelamento')?.classList.remove('open'));
     $('#btnPopVoltar')?.addEventListener('click', () => $('#subModalConfirmCancelamento')?.classList.remove('open'));
 
-    $('#btnPopConfirmar')?.addEventListener('click', () => {
+    $('#btnPopConfirmar')?.addEventListener('click', async () => {
       const motivo = $('#cancScreenMotivo')?.value || $('#cancMotivo')?.value || 'Solicitação de cancelamento';
       const just = $('#cancScreenJustificativa')?.value || $('#cancJustificativa')?.value || 'Cancelamento registrado.';
       const resp = $('#cancScreenResponsavel')?.value || $('#cancResponsavel')?.value || 'Maria Oliveira';
-      const target = (currentCancTarget && currentCancTarget.ficai) ? currentCancTarget : currentCancScreenTarget;
+      const target = (currentCancScreenTarget && currentCancScreenTarget.ficai) ? currentCancScreenTarget : currentCancTarget;
 
-      // Registrar histórico
-      let existing = getStoredFicaiEntries(target.ficai);
+      if (!target || !target.ficai) {
+        toast('Selecione uma FICAI válida para cancelar.');
+        $('#subModalConfirmCancelamento')?.classList.remove('open');
+        return;
+      }
+
+      const cleanTargetNum = String(target.ficai).split('/')[0].padStart(4, '0');
+      const formattedNum = cleanTargetNum.includes('/') ? cleanTargetNum : `${cleanTargetNum}/2026`;
+
+      // 1. Registrar histórico no localStorage
+      let existing = getStoredFicaiEntries(formattedNum);
       existing.push({
         date: new Date().toISOString().split('T')[0],
         type: `Cancelamento de FICAI - ${motivo}`,
@@ -10176,26 +10639,72 @@
         responsible: resp,
         createdAt: new Date().toISOString()
       });
-      saveStoredFicaiEntries(target.ficai, existing);
+      saveStoredFicaiEntries(formattedNum, existing);
 
-      // Atualizar status na tabela da tela dedicada
-      const cleanTargetNum = String(target.ficai).split('/')[0].padStart(4, '0');
+      // 2. Registrar no Supabase (se disponível)
+      try {
+        if (typeof CancelamentoService !== 'undefined' && CancelamentoService.insert) {
+          await CancelamentoService.insert({
+            ficai_numero: formattedNum,
+            aluno_nome: target.student,
+            escola_nome: target.escola || 'E.M. Elmir Figueira',
+            turma: target.turma || '-',
+            motivo: motivo,
+            justificativa: just,
+            responsavel: resp,
+            data_cancelamento: new Date().toISOString()
+          });
+        }
+      } catch (err) {
+        console.warn('Supabase sync warning:', err);
+      }
+
+      // 3. Adicionar registro no "Histórico Auditável de FICAIs Canceladas" (rodapé da tela)
+      const tbody = document.getElementById('cancCanceledTableBody');
+      if (tbody) {
+        const tr = document.createElement('tr');
+        tr.style.cssText = 'border-bottom: 1px solid #f1f5f9; background: #fff5f5; animation: fadeIn 0.3s ease;';
+        tr.innerHTML = `
+          <td style="padding: 10px 12px; font-weight: 800; color: #dc2626;">${escapeHtml(formattedNum)}</td>
+          <td style="padding: 10px 12px; font-weight: 700; color: #1e293b;">${escapeHtml(target.student)}</td>
+          <td style="padding: 10px 12px; color: #64748b;">${escapeHtml(motivo)}</td>
+          <td style="padding: 10px 12px; color: #64748b;">${new Date().toLocaleDateString('pt-BR')} - ${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</td>
+          <td style="padding: 10px 12px; color: #64748b;">${escapeHtml(resp)}</td>
+          <td style="padding: 10px 12px; text-align: center;">
+            <button type="button" class="btn small soft btn-view-canceled-ficai" data-ficai="${escapeHtml(formattedNum)}" style="padding: 4px 10px; font-size: 11px; font-weight: 700;">
+              <i class="fa-solid fa-eye"></i> Visualizar prontuário
+            </button>
+          </td>
+        `;
+        tbody.prepend(tr);
+
+        const countSpan = document.getElementById('cancCanceledCount');
+        if (countSpan) {
+          const totalRows = tbody.querySelectorAll('tr').length;
+          countSpan.textContent = `${totalRows} registro${totalRows === 1 ? '' : 's'}`;
+        }
+      }
+
+      // 4. Atualizar status na card da tela dedicada (.canc-screen-row é uma <div>!)
       const activeScreenRow = document.querySelector(`.canc-screen-row[data-ficai="${cleanTargetNum}"]`);
       if (activeScreenRow) {
         activeScreenRow.dataset.status = 'Cancelada';
-        const statusTd = activeScreenRow.cells[4];
-        if (statusTd) statusTd.innerHTML = '<span class="chip" style="background: #fef2f2; color: #dc2626; font-weight: 700; font-size: 11px;">Cancelada</span>';
+        const chip = activeScreenRow.querySelector('.chip');
+        if (chip) {
+          chip.style.background = '#fef2f2';
+          chip.style.color = '#dc2626';
+          chip.textContent = 'Cancelada';
+        }
       }
 
-      // Atualizar status na tabela do modal
+      // 5. Atualizar status na tabela do modal (se aberta em tr)
       const activeModalRow = document.querySelector(`.canc-row[data-ficai="${cleanTargetNum}"]`);
-      if (activeModalRow) {
+      if (activeModalRow && activeModalRow.cells && activeModalRow.cells[4]) {
         activeModalRow.dataset.status = 'Cancelada';
-        const statusTd = activeModalRow.cells[4];
-        if (statusTd) statusTd.innerHTML = '<span class="chip" style="background: #fef2f2; color: #dc2626; font-weight: 700; font-size: 11px;">Cancelada</span>';
+        activeModalRow.cells[4].innerHTML = '<span class="chip" style="background: #fef2f2; color: #dc2626; font-weight: 700; font-size: 11px;">Cancelada</span>';
       }
 
-      // Atualizar linha correspondente no Dashboard (Gerados / Recebidos CT)
+      // 6. Atualizar linha correspondente no Dashboard (#listGerados)
       document.querySelectorAll('.dash-list-row').forEach(row => {
         const rNum = (row.dataset.ficai || '').split('/')[0].padStart(4, '0');
         if (rNum === cleanTargetNum || row.dataset.student === target.student) {
@@ -10224,9 +10733,21 @@
       if (typeof updateCancDetails === 'function') updateCancDetails(target);
       syncPrint();
 
+      // Fechar modal de confirmação e modal secundário
       $('#subModalConfirmCancelamento')?.classList.remove('open');
       closeCancelamentoModal();
-      toast(`FICAI n.º ${target.ficai} de ${target.student} cancelada com sucesso.`);
+
+      // Preencher e exibir o Modal Sofisticado de Sucesso do Cancelamento
+      const nowStr = `${new Date().toLocaleDateString('pt-BR')} - ${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
+      if ($('#succFicaiNum')) $('#succFicaiNum').textContent = formattedNum;
+      if ($('#succAlunoNome')) $('#succAlunoNome').textContent = target.student;
+      if ($('#succMotivo')) $('#succMotivo').textContent = motivo;
+      if ($('#succResponsavel')) $('#succResponsavel').textContent = resp;
+      if ($('#succDataHora')) $('#succDataHora').textContent = nowStr;
+
+      $('#modalCancelamentoSucesso')?.classList.add('open');
+
+      toast(`FICAI n.º ${formattedNum} de ${target.student} cancelada com sucesso.`);
 
       // Registrar nos Logs do Sistema
       logSystemEvent({
@@ -10247,13 +10768,92 @@
       });
     });
 
+    // Manipuladores do Modal Sofisticado de Sucesso de Cancelamento
+    $('#closeModalCancSuccess')?.addEventListener('click', () => $('#modalCancelamentoSucesso')?.classList.remove('open'));
+    $('#btnSuccClose')?.addEventListener('click', () => $('#modalCancelamentoSucesso')?.classList.remove('open'));
+    $('#btnSuccViewHistory')?.addEventListener('click', () => {
+      $('#modalCancelamentoSucesso')?.classList.remove('open');
+      if ($('#view-cancelamento')?.classList.contains('active')) {
+        document.getElementById('canceledHistoryCard')?.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        showView('cancelamento');
+        setTimeout(() => document.getElementById('canceledHistoryCard')?.scrollIntoView({ behavior: 'smooth' }), 200);
+      }
+    });
+
     $('#btnActionEncerrar')?.addEventListener('click', () => {
       const sel = getSelectedFicaiRow();
-      openCancelamentoModal(sel.ficai);
+      if (!sel) {
+        toast('Selecione uma FICAI na lista de Gerados para cancelar.');
+        return;
+      }
+      if (!sel.isGerado) {
+        toast('Apenas FICAIs geradas pela escola podem ser canceladas. Registros do Conselho Tutelar não podem ser cancelados.');
+        return;
+      }
+
+      // Navegar para a tela dedicada de cancelamento (#view-cancelamento)
+      showView('cancelamento');
+
+      // Atualizar destaque visual no menu lateral
+      $$('.nav-item').forEach(n => {
+        if (n.dataset.view === 'cancelamento') n.classList.add('active');
+        else n.classList.remove('active');
+      });
+
+      const rawNum = sel.ficai || '0015/2026';
+      const cleanNum = String(rawNum).split('/')[0].padStart(4, '0');
+
+      // Buscar se a FICAI já está presente nos cards do lado esquerdo (#cancScreenCardsList)
+      let screenRow = document.querySelector(`#cancScreenCardsList .canc-screen-row[data-ficai="${cleanNum}"]`) ||
+                       document.querySelector(`#cancScreenCardsList .canc-screen-row[data-ficai="${rawNum}"]`);
+
+      if (!screenRow && $('#cancScreenCardsList')) {
+        screenRow = document.createElement('div');
+        screenRow.className = 'canc-screen-row active';
+        screenRow.dataset.ficai = cleanNum;
+        screenRow.dataset.student = sel.student;
+        screenRow.dataset.turma = sel.turma || '7B';
+        screenRow.dataset.escola = 'E.M. Elmir Figueira';
+        screenRow.dataset.status = 'Ativa';
+        screenRow.dataset.date = new Date().toLocaleDateString('pt-BR');
+        screenRow.style.cssText = 'padding: 12px 14px; border: 1.5px solid #2563eb; border-radius: 12px; background: #eff6ff; cursor: pointer; transition: all 0.15s; margin-bottom: 8px; position: relative;';
+        screenRow.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <strong style="font-size: 14px; color: #1d4ed8;">${cleanNum}</strong>
+            <div style="display: flex; align-items: center; gap: 4px;">
+              <span class="chip" style="background: #dcfce7; color: #15803d; font-weight: 700; font-size: 11px;">Ativa</span>
+            </div>
+          </div>
+          <div style="font-weight: 700; font-size: 13px; color: #0f172a; margin-bottom: 2px;">${escapeHtml(sel.student)}</div>
+          <div style="font-size: 11.5px; color: #64748b;">Turma ${escapeHtml(sel.turma || '—')} • E.M. Elmir Figueira</div>
+        `;
+        screenRow.addEventListener('click', () => selectCancScreenRow(screenRow));
+        $('#cancScreenCardsList').prepend(screenRow);
+      }
+
+      if (screenRow) {
+        selectCancScreenRow(screenRow);
+      } else {
+        updateCancScreenDetails({
+          ficai: cleanNum,
+          student: sel.student,
+          turma: sel.turma || '7B',
+          escola: 'E.M. Elmir Figueira',
+          status: 'Ativa',
+          date: new Date().toLocaleDateString('pt-BR')
+        });
+      }
+
+      toast(`Abrindo cancelamento para FICAI ${cleanNum} (${sel.student}).`);
     });
 
     $('#btnActionHistorico')?.addEventListener('click', () => {
       const sel = getSelectedFicaiRow();
+      if (!sel) {
+        toast('Selecione uma FICAI na lista para visualizar o histórico.');
+        return;
+      }
       openInfoModal(sel.ficai);
     });
 
@@ -11454,7 +12054,7 @@
       toast(`FICAI ${ficaiNum} salva e encaminhada com sucesso ao Conselho Tutelar!`);
     }
     $('#btnEncaminharCT')?.addEventListener('click', encaminharFicaiAoCT);
-    $('#clearDraft').onclick = e => { e.preventDefault(); if (confirm('Limpar o formulário atual?')) { localStorage.removeItem('ficai4Draft'); $('#ficaiForm').reset(); $('#escolaEndereco').value = ''; $('#escolaTelefone').value = ''; $('#modalidade').value = ''; autoGenerateFicaiNumber(true) } };
+    $('#clearDraft').onclick = e => { e.preventDefault(); if (confirm('Limpar o formulário atual?')) { localStorage.removeItem('ficai4Draft'); $('#ficaiForm').reset(); $('#escolaEndereco').value = ''; $('#escolaTelefone').value = ''; $('#modalidade').value = ''; autoGenerateFicaiNumber(true); if (typeof autoPopulateLoggedSchoolInForm === 'function') autoPopulateLoggedSchoolInForm(); } };
     function restore() { try { const data = JSON.parse(localStorage.getItem('ficai4Draft') || 'null'); if (!data) return; Object.entries(data).forEach(([k, v]) => { const el = $('#' + k); if (!el) return; if (typeof v === 'boolean') el.checked = v; else if (typeof v === 'string') el.value = v }); (data.catalogoSituacoesPersonalizadas || []).forEach(x => createCustomStudentSituation(x, { persist: false, removable: true })); (data.catalogoVulnerabilidadesPersonalizadas || []).forEach(x => createCustomVulnerability(x, { persist: false, removable: true })); (data.motivos || []).forEach(v => { const el = [...$$('#motivosGrid input')].find(i => i.value === v); if (el) el.checked = true }); (data.vulnerabilidades || []).forEach(v => { let el = [...$$('#vulnGrid input')].find(i => i.value === v); if (!el) el = createCustomVulnerability(v, { persist: false, removable: true }); if (el) el.checked = true }); if (data.situacao) { let r = [...$$('input[name="situacaoAluno"]')].find(i => i.value === data.situacao); if (!r) r = createCustomStudentSituation({ name: data.situacao, description: 'Situação recuperada desta FICAI.' }, { persist: false, removable: true }); if (r) r.checked = true } Object.entries(data.diagnostico || {}).forEach(([g, vals]) => { const box = [...$$('#diagnosisGrid .diagnosis-box')].find(b => b.dataset.group === g); vals.forEach(v => { const el = [...box.querySelectorAll('input')].find(i => i.value === v); if (el) el.checked = true }) }); normalizeNumber(); updateFaltasCount() } catch (e) { } }
 
     // Exemplo
@@ -14665,11 +15265,13 @@
     }
 
     function autoPopulateLoggedSchoolInForm() {
-      const session = getActiveSession();
+      const session = typeof getActiveSession === 'function' ? getActiveSession() : null;
       if (!session) return;
 
       const schoolSel = $('#escola');
       if (!schoolSel) return;
+
+      const isAdmin = !!(session.isSystemAdmin || session.nivel === 'Administrador' || session.email === 'cpdinfra@edu.itaguai.rj.gov.br');
 
       const schoolList = (configData && configData.escolas) ? configData.escolas : [];
       let school = null;
@@ -14691,7 +15293,66 @@
         }
         if ($('#escolaEndereco')) $('#escolaEndereco').value = school.endereco || '';
         if ($('#escolaTelefone')) $('#escolaTelefone').value = school.telefone || '';
+
+        // Se NÃO for Administrador, travar o select de escola para o nome da escola logada
+        if (!isAdmin) {
+          schoolSel.disabled = true;
+          schoolSel.style.backgroundColor = '#f8fafc';
+          schoolSel.style.cursor = 'not-allowed';
+          schoolSel.style.borderColor = '#cbd5e1';
+          schoolSel.style.opacity = '0.95';
+          schoolSel.title = `Escola fixa vinculada ao seu usuário: ${school.nome}`;
+        } else {
+          schoolSel.disabled = false;
+          schoolSel.style.backgroundColor = '';
+          schoolSel.style.cursor = '';
+          schoolSel.style.borderColor = '';
+          schoolSel.style.opacity = '';
+          schoolSel.title = 'Selecione a escola para emitir a FICAI';
+        }
+
         syncPrint();
+      } else {
+        if (!isAdmin && session.unidade && session.unidade !== 'SMEDU / CPD (Administrador)') {
+          schoolSel.disabled = true;
+          schoolSel.style.backgroundColor = '#f8fafc';
+          schoolSel.style.cursor = 'not-allowed';
+          schoolSel.title = `Escola fixa vinculada ao seu usuário: ${session.unidade}`;
+        } else if (isAdmin) {
+          schoolSel.disabled = false;
+          schoolSel.style.backgroundColor = '';
+          schoolSel.style.cursor = '';
+        }
+      }
+    }
+
+    function updateSidebarPermissions(session) {
+      const isAdmin = !!(session && (session.isSystemAdmin || session.nivel === 'Administrador' || session.email === 'cpdinfra@edu.itaguai.rj.gov.br'));
+
+      // Módulos visíveis para Não-Administrador (Escola / Usuário Comum):
+      // 'Dashboard', 'Gerar FICAI', 'Dados da Ficha', 'RAE', 'Encerramento de Casos', 'Cancelamento de FICAI', 'Sobre o Sistema'
+      const nonAdminAllowedViews = ['dashboard', 'gerar', 'dados', 'rae', 'encerramento', 'cancelamento', 'sobre'];
+
+      document.querySelectorAll('#sidebar .nav-item').forEach(item => {
+        const view = item.dataset.view;
+        if (isAdmin || nonAdminAllowedViews.includes(view)) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      // Ocultar cabeçalhos de seção e divisores quando a seção Cadastros for restrita
+      document.querySelectorAll('#sidebar .menu-section-title, #sidebar .menu-divider').forEach(el => {
+        if (el.textContent.trim() === 'Cadastros') {
+          el.style.display = isAdmin ? 'block' : 'none';
+        }
+      });
+
+      // Exibir ou ocultar o botão de gerar PDF do manual (exclusivo para Administrador)
+      const pdfBtnWrap = document.getElementById('manualAdminActions');
+      if (pdfBtnWrap) {
+        pdfBtnWrap.style.display = isAdmin ? 'flex' : 'none';
       }
     }
 
@@ -14715,6 +15376,7 @@
       if (headerUserUnit) headerUserUnit.textContent = session.unidade || session.nivel;
       if (headerSchool) headerSchool.textContent = session.unidade || 'Unidade Escolar';
 
+      updateSidebarPermissions(session);
       autoPopulateLoggedSchoolInForm();
     }
 
@@ -14758,7 +15420,7 @@
       // 3. Verificar Usuários de Escolas (e-mail institucional / Ficai2026@)
       const schoolList = (configData && configData.escolas) ? configData.escolas : [];
       const matchedSchool = schoolList.find(e => (e.email || '').trim().toLowerCase() === email || (e.email || '').toLowerCase().includes(email));
-      const isSchoolLogin = ((matchedSchool || email.endsWith('@edu.itaguai.rj.gov.br')) && (password === 'Ficai22026' || (password === 'Ficai22026' || password === 'Ficai2026@')));
+      const isSchoolLogin = ((matchedSchool || email.endsWith('@edu.itaguai.rj.gov.br')) && (password === 'FicaiSmedu' || password === 'Ficai22026' || password === 'Ficai2026@'));
 
       if (isAdmin) {
         authenticated = true;
