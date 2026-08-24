@@ -405,6 +405,275 @@
       }
     }
 
+    /* Centro de Notificações Dropdown Popover UX */
+    .notification-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .notification-badge-count {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: #ffffff;
+      font-size: 10.5px;
+      font-weight: 800;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(239, 68, 68, 0.4);
+      animation: badgePulse 2s infinite;
+    }
+
+    .notification-badge-count.hidden {
+      display: none;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    .notif-dropdown {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      width: 380px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14), 0 4px 12px rgba(0, 0, 0, 0.05);
+      z-index: 1050;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      animation: notifFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .notif-dropdown.show {
+      display: flex;
+    }
+
+    @keyframes notifFadeIn {
+      from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .notif-header {
+      padding: 14px 18px;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.06) 0%, rgba(255, 255, 255, 1) 100%);
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .notif-header-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-mark-read {
+      background: transparent;
+      border: none;
+      color: #7c3aed;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background 0.15s ease;
+    }
+
+    .btn-mark-read:hover {
+      background: rgba(124, 58, 237, 0.08);
+      text-decoration: underline;
+    }
+
+    .notif-body {
+      max-height: 360px;
+      overflow-y: auto;
+    }
+
+    .notif-item {
+      padding: 14px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .notif-item:last-child {
+      border-bottom: none;
+    }
+
+    /* ESTILO VISUAL INCONFUNDÍVEL DE NOTIFICAÇÃO NÃO LIDA (NOVA) */
+    .notif-item.unread {
+      background: rgba(124, 58, 237, 0.05);
+      border-left: 4px solid #7c3aed;
+    }
+
+    .notif-item.unread:hover {
+      background: rgba(124, 58, 237, 0.09);
+    }
+
+    /* ESTILO VISUAL DE NOTIFICAÇÃO LIDA */
+    .notif-item.read {
+      background: #ffffff;
+      border-left: 4px solid transparent;
+      opacity: 0.82;
+    }
+
+    .notif-item.read:hover {
+      background: #f8fafc;
+      opacity: 1;
+    }
+
+    .notif-icon-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .notif-item.unread .notif-icon-badge {
+      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+      color: #ffffff;
+      box-shadow: 0 3px 8px rgba(124, 58, 237, 0.25);
+    }
+
+    .notif-item.read .notif-icon-badge {
+      background: #f1f5f9;
+      color: #64748b;
+    }
+
+    .notif-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .notif-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .notif-item-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+
+    .notif-item.read .notif-item-title {
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .notif-tag-new {
+      font-size: 9.5px;
+      font-weight: 800;
+      background: #7c3aed;
+      color: #ffffff;
+      padding: 2px 7px;
+      border-radius: 10px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .notif-desc {
+      font-size: 12px;
+      color: #475569;
+      line-height: 1.35;
+    }
+
+    .notif-time {
+      font-size: 11px;
+      color: #94a3b8;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .notif-dot-unread {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #7c3aed;
+      display: inline-block;
+    }
+
+    .notif-footer {
+      padding: 10px;
+      background: #f8fafc;
+      border-top: 1px solid #f1f5f9;
+      text-align: center;
+    }
+
+    .notif-footer-btn {
+      font-size: 12px;
+      font-weight: 700;
+      color: #0284c7;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    body.dark-mode .notif-dropdown {
+      background: #0f172a;
+      border-color: #1e293b;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    body.dark-mode .notif-header {
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.12) 0%, #0f172a 100%);
+      border-bottom-color: #1e293b;
+    }
+
+    body.dark-mode .notif-header-title {
+      color: #f8fafc;
+    }
+
+    body.dark-mode .notif-item.unread {
+      background: rgba(167, 139, 250, 0.12);
+      border-left-color: #a78bfa;
+    }
+
+    body.dark-mode .notif-item.read {
+      background: #0f172a;
+    }
+
+    body.dark-mode .notif-item-title {
+      color: #f1f5f9;
+    }
+
+    body.dark-mode .notif-desc {
+      color: #cbd5e1;
+    }
+
     .bottom-row {
       height: 58px;
       display: flex;
@@ -5193,11 +5462,70 @@
           <div class="gov-area"><img class="gov-logo"
               src="data:image/png;base64,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"><span
               class="state">Estado do Rio de Janeiro</span></div>
-          <div class="header-links"><button id="darkToggle"
-              class="header-icon-btn" data-tooltip="Alternar tema Claro / Escuro (Alt+D)"><i
-                class="fa-solid fa-moon"></i></button><button class="header-icon-btn notification-btn"
-              data-tooltip="3 devolutivas recentes do Conselho Tutelar"><i class="fa-solid fa-bell"></i><span
-                class="pulse-badge"></span></button></div>
+          <div class="header-links">
+            <button id="darkToggle" class="header-icon-btn" data-tooltip="Alternar tema Claro / Escuro (Alt+D)"><i
+                class="fa-solid fa-moon"></i></button>
+            <div class="notification-wrap">
+              <button class="header-icon-btn notification-btn" id="btnNotificationBell" type="button"
+                data-tooltip="Central de Notificações & Devolutivas CT">
+                <i class="fa-solid fa-bell"></i>
+                <span class="notification-badge-count" id="notifBadgeCount">3</span>
+              </button>
+
+              <div class="notif-dropdown" id="notificationDropdown">
+                <div class="notif-header">
+                  <span class="notif-header-title"><i class="fa-solid fa-bell" style="color:#7c3aed;"></i> Notificações CT</span>
+                  <button type="button" class="btn-mark-read" id="btnMarkAllNotifsRead">Marcar todas como lidas</button>
+                </div>
+                <div class="notif-body" id="notifListContainer">
+                  <div class="notif-item unread" data-student="Ana Clara Nascimento" data-ficai="0021/2026" data-turma="7º Ano B" data-sit="Alerta crítico">
+                    <div class="notif-icon-badge">
+                      <i class="fa-solid fa-envelope-open-text"></i>
+                    </div>
+                    <div class="notif-content">
+                      <div class="notif-title-row">
+                        <span class="notif-item-title">Devolutiva do Conselho Tutelar</span>
+                        <span class="notif-tag-new">NOVA</span>
+                      </div>
+                      <div class="notif-desc">Ana Clara Nascimento (0021/2026): Visita domiciliar realizada pela equipe do CT. Família notificada.</div>
+                      <div class="notif-time"><span class="notif-dot-unread"></span> Há 45 min</div>
+                    </div>
+                  </div>
+
+                  <div class="notif-item unread" data-student="Carla Souza Ribeiro" data-ficai="0018/2026" data-turma="9º Ano A" data-sit="No Conselho">
+                    <div class="notif-icon-badge">
+                      <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="notif-content">
+                      <div class="notif-title-row">
+                        <span class="notif-item-title">Aviso de Diligência CT</span>
+                        <span class="notif-tag-new">NOVA</span>
+                      </div>
+                      <div class="notif-desc">Carla Souza Ribeiro (0018/2026): Encaminhamento formal registrado e notificado ao Conselho.</div>
+                      <div class="notif-time"><span class="notif-dot-unread"></span> Há 2 horas</div>
+                    </div>
+                  </div>
+
+                  <div class="notif-item unread" data-student="Bruno Henrique Silva" data-ficai="0017/2026" data-turma="6º Ano A" data-sit="Aviso de faltas">
+                    <div class="notif-icon-badge">
+                      <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <div class="notif-content">
+                      <div class="notif-title-row">
+                        <span class="notif-item-title">Busca Ativa em Andamento</span>
+                        <span class="notif-tag-new">NOVA</span>
+                      </div>
+                      <div class="notif-desc">Bruno Henrique Silva (0017/2026): Contato prévio com a família agendado para verificação.</div>
+                      <div class="notif-time"><span class="notif-dot-unread"></span> Há 4 horas</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="notif-footer">
+                  <button type="button" class="notif-footer-btn" id="btnViewAllLogsLink">Ver histórico em Logs do Sistema →</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="bottom-row">
           <button class="hamb" id="hamb" type="button" data-tooltip="Recolher ou expandir menu lateral"
@@ -13904,8 +14232,88 @@
       });
     }
 
+    function initNotificationCenter() {
+      const bellBtn = $('#btnNotificationBell');
+      const dropdown = $('#notificationDropdown');
+      const badgeCount = $('#notifBadgeCount');
+      const markAllBtn = $('#btnMarkAllNotifsRead');
+      const viewLogsBtn = $('#btnViewAllLogsLink');
+      const container = $('#notifListContainer');
+
+      if (!bellBtn || !dropdown) return;
+
+      bellBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('show');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.notification-wrap')) {
+          dropdown.classList.remove('show');
+        }
+      });
+
+      function updateBadgeCount() {
+        const unreadCount = container?.querySelectorAll('.notif-item.unread').length || 0;
+        if (badgeCount) {
+          if (unreadCount > 0) {
+            badgeCount.textContent = unreadCount;
+            badgeCount.classList.remove('hidden');
+          } else {
+            badgeCount.classList.add('hidden');
+          }
+        }
+      }
+
+      markAllBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        container?.querySelectorAll('.notif-item.unread').forEach(item => {
+          item.classList.remove('unread');
+          item.classList.add('read');
+          item.querySelector('.notif-tag-new')?.remove();
+          item.querySelector('.notif-dot-unread')?.remove();
+        });
+        updateBadgeCount();
+        toast('Todas as notificações foram marcadas como lidas.');
+      });
+
+      container?.addEventListener('click', (e) => {
+        const item = e.target.closest('.notif-item');
+        if (!item) return;
+
+        if (item.classList.contains('unread')) {
+          item.classList.remove('unread');
+          item.classList.add('read');
+          item.querySelector('.notif-tag-new')?.remove();
+          item.querySelector('.notif-dot-unread')?.remove();
+          updateBadgeCount();
+        }
+
+        dropdown.classList.remove('show');
+
+        const studentName = item.dataset.student || 'Ana Clara Nascimento';
+        const ficaiNum = item.dataset.ficai || '0021/2026';
+        const turma = item.dataset.turma || '7º Ano B';
+        const situacao = item.dataset.sit || 'Infrequente';
+
+        if (typeof openStudentInfoModal === 'function') {
+          openStudentInfoModal(studentName, ficaiNum, turma, situacao);
+        } else {
+          toast(`Visualizando ficha de ${studentName} (${ficaiNum})`);
+        }
+      });
+
+      viewLogsBtn?.addEventListener('click', () => {
+        dropdown.classList.remove('show');
+        showView('logs');
+      });
+
+      updateBadgeCount();
+    }
+
     initActionButtonsBindings();
     initSystemLogsListeners();
+    initNotificationCenter();
     initAuthSystem(); restore(); autoPopulateLoggedSchoolInForm(); syncPrint(); loadSavedStudents(); loadSavedFicais(); setWizardStep(1);
   </script>
 </body>
