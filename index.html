@@ -3237,7 +3237,35 @@
       align-items: center;
       justify-content: center;
       border-radius: 8px;
-      transition: transform 0.15s ease, background-color 0.15s ease;
+    /* Marcador Visualizado pelo Conselho Tutelar UX */
+    .ct-viewed-chip {
+      font-size: 10.5px;
+      font-weight: 700;
+      background: rgba(124, 58, 237, 0.12);
+      color: #7c3aed;
+      border: 1px solid rgba(124, 58, 237, 0.28);
+      border-radius: 12px;
+      padding: 2px 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: 6px;
+      vertical-align: middle;
+      letter-spacing: 0.1px;
+      box-shadow: 0 2px 5px rgba(124, 58, 237, 0.08);
+      transition: all 0.2s ease;
+      cursor: help;
+    }
+
+    .ct-viewed-chip:hover {
+      background: rgba(124, 58, 237, 0.2);
+      transform: translateY(-1px);
+    }
+
+    body.dark-mode .ct-viewed-chip {
+      background: rgba(167, 139, 250, 0.18);
+      color: #c4b5fd;
+      border-color: rgba(167, 139, 250, 0.35);
     }
 
     .dash-action-btn:hover {
@@ -10534,19 +10562,71 @@
       toast('Marcador removido com sucesso!');
     });
 
-    // Renderizar marcadores ativos nas linhas das tabelas
+    // ==============================================================================
+    // MARCADOR DE VISUALIZAÇÃO DO CONSELHO TUTELAR (CT VIEW TRACKER UX)
+    // ==============================================================================
+    const CT_VIEWED_MAP_KEY = 'ficai_ct_viewed_map_v1';
+
+    function getCtViewedMap() {
+      try {
+        const raw = localStorage.getItem(CT_VIEWED_MAP_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') return parsed;
+        }
+      } catch (_e) { }
+
+      const initialMap = {
+        '0021/2026': {
+          viewedAt: '24/08/2026 - 08:35',
+          user: 'conselhotutelar@itaguai.rj.gov.br'
+        },
+        '0018/2026': {
+          viewedAt: '24/08/2026 - 09:12',
+          user: 'conselhotutelar@itaguai.rj.gov.br'
+        }
+      };
+      saveCtViewedMap(initialMap);
+      return initialMap;
+    }
+
+    function saveCtViewedMap(map) {
+      try {
+        localStorage.setItem(CT_VIEWED_MAP_KEY, JSON.stringify(map));
+      } catch (_e) { }
+    }
+
+    function markCtViewed(ficaiNum, userEmail = 'conselhotutelar@itaguai.rj.gov.br') {
+      if (!ficaiNum) return;
+      const map = getCtViewedMap();
+      const numTrim = ficaiNum.trim();
+
+      const nowStr = new Date().toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).replace(',', ' -');
+      map[numTrim] = {
+        viewedAt: nowStr,
+        user: userEmail || 'conselhotutelar@itaguai.rj.gov.br'
+      };
+
+      saveCtViewedMap(map);
+      refreshAllRowTags();
+    }
+
+    // Renderizar marcadores ativos nas linhas das tabelas (incluindo o Marcador Visualizado pelo CT)
     function refreshAllRowTags() {
-      const map = getStudentTagsMap();
+      const tagMap = getStudentTagsMap();
+      const ctMap = getCtViewedMap();
       const rows = document.querySelectorAll('.dash-list-row, #fichaTable tbody tr');
 
       rows.forEach(row => {
-        const ficaiNum = row.dataset.ficai || row.dataset.dbFicai || row.querySelector('.dash-item-link')?.dataset.ficai || '';
-        if (!ficaiNum) return;
+        const rawNum = (row.dataset.ficai || row.dataset.dbFicai || row.querySelector('.dash-item-link')?.dataset.ficai || '').trim();
+        if (!rawNum) return;
 
-        const tags = map[ficaiNum.trim()] || [];
+        const tags = tagMap[rawNum] || [];
+        const ctViewInfo = ctMap[rawNum] || ctMap[rawNum.replace('/2026', '')] || ctMap[rawNum + '/2026'];
+
         let container = row.querySelector('.dash-row-tags-container');
 
-        if (tags.length > 0) {
+        if (tags.length > 0 || ctViewInfo) {
           if (!container) {
             container = document.createElement('div');
             container.className = 'dash-row-tags-container';
@@ -10554,6 +10634,17 @@
             if (contentBox) contentBox.appendChild(container);
           }
           container.innerHTML = '';
+
+          // 1. Renderizar Marcador de Visualização do CT (se a ficha foi visualizada pelo CT)
+          if (ctViewInfo) {
+            const ctChip = document.createElement('span');
+            ctChip.className = 'ct-viewed-chip';
+            ctChip.dataset.tooltip = `Visualizado pelo Conselho Tutelar em ${ctViewInfo.viewedAt} por ${ctViewInfo.user}`;
+            ctChip.innerHTML = `<i class="fa-solid fa-eye"></i> Visualizado pelo CT`;
+            container.appendChild(ctChip);
+          }
+
+          // 2. Renderizar Marcadores Genéricos do Catálogo
           tags.forEach(t => {
             const chip = document.createElement('span');
             chip.className = 'dash-tag-chip';
@@ -12334,21 +12425,51 @@
 
     function renderInfoModal(r) {
       activeInfoRecord = r; const d = r.data || {}; const name = r.aluno || d.nomeCompleto || 'Aluno';
-      $('#infoAvatar').textContent = initials(name); $('#infoStudentName').textContent = name; $('#infoModalNumber').textContent = `${r.numero || '00021/2026'} · acompanhamento de caso`;
+      const num = r.numero || '0021/2026';
+
+      // Registrar a visualização do Conselho Tutelar no mapa de leituras
+      markCtViewed(num, getActiveUserEmail());
+
+      const ctView = getCtViewedMap()[num] || getCtViewedMap()[num.replace('/2026', '')] || getCtViewedMap()[num + '/2026'];
+
+      $('#infoAvatar').textContent = initials(name); $('#infoStudentName').textContent = name; $('#infoModalNumber').textContent = `${num} · acompanhamento de caso`;
       $('#infoStudentMeta').textContent = r.turma || d.turma || '7º Ano B';
-      $('#infoNumber').textContent = r.numero || '—'; $('#infoYear').textContent = r.ano || d.anoLetivo || '—';
+      $('#infoNumber').textContent = num; $('#infoYear').textContent = r.ano || d.anoLetivo || '—';
       const period = [fmtDate(d.faltaInicio || ''), fmtDate(d.faltaFim || '')].filter(Boolean).join(' à '); $('#infoAbsencePeriod').textContent = period || '—'; $('#infoUpdated').textContent = displayDateTime(r.updatedAt) || '—';
-      const sit = r.situacao || d.situacao || 'Não informada'; $('#infoSituation').innerHTML = `<span class="info-status ${statusClass(sit)}"><i class="fa-solid fa-triangle-exclamation"></i>${escapeHtml(sit)}</span>${d.dataComunicacao ? `<div class="info-student-meta" style="margin-top:9px">Comunicação: ${escapeHtml(fmtDate(d.dataComunicacao))}</div>` : ''}`;
+      
+      const sit = r.situacao || d.situacao || 'Não informada'; 
+      let sitHtml = `<span class="info-status ${statusClass(sit)}"><i class="fa-solid fa-triangle-exclamation"></i>${escapeHtml(sit)}</span>`;
+      if (ctView) {
+        sitHtml += `<span class="ct-viewed-chip" style="margin-left:8px;" data-tooltip="Visualizado pelo Conselho Tutelar em ${escapeHtml(ctView.viewedAt)} por ${escapeHtml(ctView.user)}"><i class="fa-solid fa-eye"></i> Visualizado pelo CT</span>`;
+      }
+      if (d.dataComunicacao) {
+        sitHtml += `<div class="info-student-meta" style="margin-top:9px">Comunicação: ${escapeHtml(fmtDate(d.dataComunicacao))}</div>`;
+      }
+      $('#infoSituation').innerHTML = sitHtml;
+
       const vuln = d.vulnerabilidades || []; $('#infoVulnerabilities').innerHTML = vuln.length ? vuln.map(v => `<span class="info-chip alert"><i class="fa-solid fa-shield-halved"></i>${escapeHtml(v)}</span>`).join('') : '<span class="info-empty">Nenhuma vulnerabilidade marcada.</span>';
       $('#infoObservation').textContent = d.observacaoInicial || 'Nenhuma observação inicial registrada.';
       $('#infoProcedures').innerHTML = procedureRows(d);
       const diag = diagnosticValues(d); $('#infoDiagnostics').innerHTML = diag.length ? diag.map(v => `<span class="info-chip">${escapeHtml(v)}</span>`).join('') : '<span class="info-empty">Nenhum diagnóstico marcado.</span>';
+      
       const entries = [...(r.infoEntries || [])].sort((a, b) => (b.date || '').localeCompare(a.date || '') || (b.createdAt || '').localeCompare(a.createdAt || ''));
-      $('#infoHistoryCount').textContent = `${entries.length} REGISTRO${entries.length === 1 ? '' : 'S'}`;
-      $('#infoTimeline').innerHTML = entries.length ? entries.map(e => `<div class="timeline-item"><div class="timeline-top"><span class="timeline-type">${escapeHtml(e.type || 'Registro')}</span><span class="timeline-date">${escapeHtml(fmtDate(e.date || ''))}</span></div><div class="timeline-text">${escapeHtml(e.text || '')}</div><div class="timeline-by"><i class="fa-regular fa-user"></i> ${escapeHtml(e.responsible || 'Usuário')} · registrado em ${escapeHtml(displayDateTime(e.createdAt) || 'agora')}</div></div>`).join('') : '<div class="info-empty">Ainda não há registros posteriores à geração da FICAI.</div>';
+      let timelineHtml = '';
+      if (ctView) {
+        timelineHtml += `<div class="timeline-item" style="border-left: 3.5px solid #7c3aed; background: rgba(124, 58, 237, 0.04);"><div class="timeline-top"><span class="timeline-type" style="color: #7c3aed; font-weight:700;"><i class="fa-solid fa-eye"></i> Visualização pelo CT</span><span class="timeline-date">${escapeHtml(ctView.viewedAt)}</span></div><div class="timeline-text">Prontuário e acompanhamento escolar visualizados pelo Conselho Tutelar.</div><div class="timeline-by"><i class="fa-regular fa-user"></i> ${escapeHtml(ctView.user)}</div></div>`;
+      }
+      if (entries.length) {
+        timelineHtml += entries.map(e => `<div class="timeline-item"><div class="timeline-top"><span class="timeline-type">${escapeHtml(e.type || 'Registro')}</span><span class="timeline-date">${escapeHtml(fmtDate(e.date || ''))}</span></div><div class="timeline-text">${escapeHtml(e.text || '')}</div><div class="timeline-by"><i class="fa-regular fa-user"></i> ${escapeHtml(e.responsible || 'Usuário')} · registrado em ${escapeHtml(displayDateTime(e.createdAt) || 'agora')}</div></div>`).join('');
+      } else if (!ctView) {
+        timelineHtml = '<div class="info-empty">Ainda não há registros posteriores à geração da FICAI.</div>';
+      }
+
+      const totalCount = entries.length + (ctView ? 1 : 0);
+      $('#infoHistoryCount').textContent = `${totalCount} REGISTRO${totalCount === 1 ? '' : 'S'}`;
+      $('#infoTimeline').innerHTML = timelineHtml;
+      
       $('#infoEntryDate').value = isoToday(); $('#infoEntryResponsible').value = $('.user span')?.textContent?.trim() || 'Usuário'; $('#infoEntryText').value = '';
 
-      // Inicializar e traçar a rota no OpenFreeMap
+      // Inicializar e traçar a rota no MapLibre GL
       const coords = getMapCoordinatesForFicai(r);
       setTimeout(() => {
         initOrUpdateInfoMap(coords.escola, coords.aluno, coords.escola.name, coords.aluno.name, coords.aluno.endereco);

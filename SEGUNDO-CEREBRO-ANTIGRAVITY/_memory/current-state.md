@@ -40,6 +40,15 @@ updated: 2026-08-24
    - As regras de geocodificação no MapLibre GL foram expandidas em `REGION_GEO_LOCATIONS` para cobrir Fazenda Caxias, São Salvador, Parque de Santana, Monte Serrat e Vila Nova.
    - Registros sincronizados no Supabase Cloud.
 
+6. **Marcador Visual "Visualizado pelo CT" (CT View Tracker UX):**
+   - Exibição de um selo em lilás/roxo `👁️ Visualizado pelo CT` com efeito hover e tooltip com data, hora e e-mail auditável da leitura (`conselhotutelar@itaguai.rj.gov.br`).
+   - Apresentado nas tabelas do Split Grid e destacado na área de Situação e Linha do Tempo do Modal de Informações da FICAI.
+
+7. **Centro de Notificações Popover (Notificações NOVAS vs LIDAS):**
+   - Popover flutuante no sino com badge pulsante vermelho.
+   - Distinção clara em fundo roxo com borda roxa espessa e tag `NOVA` para mensagens não lidas.
+   - Botão para *Marcar todas como lidas* e navegação direta ao prontuário do aluno.
+
 6. **Gerador Automático Sequencial de Número FICAI:**
    - Numeração dinâmica no formato `XXXXX/2026` com botão de recálculo `[🔄]` e selo `[✨ Auto]`.
 
