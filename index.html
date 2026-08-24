@@ -2541,6 +2541,110 @@
       margin-top: 4px
     }
 
+    /* HISTORICO DOCUMENTAL - NOVOS ESTILOS */
+    .hist-add-wrap { position: relative; display: inline-flex; align-items: center; }
+    .btn-hist-add {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #0877c9; color: #fff; border: none;
+      border-radius: 7px; padding: 4px 11px; font-size: 11.5px; font-weight: 750;
+      cursor: pointer; transition: background .15s, transform .12s;
+    }
+    .btn-hist-add:hover { background: #065fa0; transform: translateY(-1px); }
+    .hist-add-dropdown {
+      display: none; position: absolute; top: calc(100% + 6px); right: 0;
+      background: #fff; border: 1px solid #cbd5e1; border-radius: 10px;
+      box-shadow: 0 8px 28px rgba(15,23,42,.14); z-index: 9999; min-width: 190px;
+      overflow: hidden; animation: fadeSlideDown .14s ease;
+    }
+    .hist-add-dropdown.open { display: block; }
+    @keyframes fadeSlideDown {
+      from { opacity:0; transform:translateY(-6px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .hist-add-option {
+      display: flex; align-items: center; gap: 8px; width: 100%; border: none;
+      background: transparent; padding: 10px 14px; font-size: 12.5px; font-weight: 700;
+      color: #1e293b; cursor: pointer; text-align: left; transition: background .1s;
+    }
+    .hist-add-option:hover { background: #f0f7ff; color: #0877c9; }
+    .hist-add-option + .hist-add-option { border-top: 1px solid #f1f5f9; }
+    .hist-micro-desc { font-size: 11px; color: #8393a6; margin: 4px 0 8px; font-style: italic; }
+    .hist-inline-form {
+      background: #f8fafc; border: 1.5px solid #bfdbfe; border-radius: 12px;
+      padding: 14px 16px; margin-bottom: 12px; animation: fadeSlideDown .18s ease;
+    }
+    .hist-form-title { font-size: 12.5px; font-weight: 800; color: #1e3a5f; margin-bottom: 10px; }
+    .hist-form-grid { display: grid; grid-template-columns: 150px 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+    .hist-form-grid label, .hist-inline-form > label {
+      display: block; font-size: 11px; font-weight: 750; color: #475569; margin-bottom: 3px;
+    }
+    .hist-form-grid input, .hist-form-grid select,
+    .hist-inline-form input[type=text], .hist-inline-form input[type=date], .hist-inline-form select {
+      width: 100%; padding: 7px 10px; border-radius: 8px; border: 1px solid #cbd5e1;
+      font-size: 12.5px; font-weight: 600; color: #1e293b; background: #fff;
+      font-family: inherit; box-sizing: border-box;
+    }
+    .hist-form-grid input:focus, .hist-form-grid select:focus,
+    .hist-inline-form input:focus, .hist-inline-form select:focus { border-color: #0877c9; outline: none; }
+    .hist-form-textarea {
+      width: 100%; box-sizing: border-box; min-height: 70px; resize: vertical;
+      padding: 8px 10px; border-radius: 8px; border: 1px solid #cbd5e1;
+      font-size: 12.5px; color: #1e293b; background: #fff;
+      font-family: inherit; margin-bottom: 8px; line-height: 1.45;
+    }
+    .hist-form-textarea:focus { border-color: #0877c9; outline: none; box-shadow: 0 0 0 3px rgba(8,119,201,.1); }
+    .hist-dropzone {
+      border: 2px dashed #94a3b8; border-radius: 10px; padding: 14px 16px;
+      text-align: center; color: #64748b; font-size: 12px; cursor: pointer;
+      background: #fff; transition: border-color .15s, background .15s; margin-bottom: 8px;
+    }
+    .hist-dropzone:hover, .hist-dropzone.drag-over { border-color: #0877c9; background: #eff6ff; color: #0877c9; }
+    .hist-dropzone i { font-size: 20px; display: block; margin-bottom: 4px; }
+    .hist-dropzone small { display: block; margin-top: 3px; font-size: 10.5px; color: #94a3b8; }
+    .hist-file-list { display: flex; flex-direction: column; gap: 5px; margin-bottom: 8px; }
+    .hist-file-card {
+      display: flex; align-items: center; gap: 8px; background: #fff;
+      border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px 10px; font-size: 11.5px;
+    }
+    .hist-file-card .fc-icon { font-size: 16px; flex-shrink: 0; }
+    .hist-file-card .fc-name { font-weight: 700; color: #1e293b; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .hist-file-card .fc-meta { color: #64748b; font-size: 10.5px; flex-shrink: 0; }
+    .hist-file-card .fc-del { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 14px; padding: 0 2px; flex-shrink: 0; }
+    .hist-file-card .fc-del:hover { color: #b91c1c; }
+    .hist-form-footer { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 4px; }
+    .hist-btn-cancel {
+      background: #f1f5f9; border: 1px solid #cbd5e1; color: #475569;
+      border-radius: 8px; padding: 7px 14px; font-size: 12px; font-weight: 700; cursor: pointer;
+    }
+    .hist-btn-cancel:hover { background: #e2e8f0; }
+    .hist-btn-save {
+      background: linear-gradient(135deg, #0f172a, #1e3a5f); border: none; color: #fff;
+      border-radius: 8px; padding: 7px 16px; font-size: 12px; font-weight: 750; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px; transition: all .15s;
+    }
+    .hist-btn-save:hover { background: linear-gradient(135deg, #1e293b, #2563eb); transform: translateY(-1px); }
+    .hist-btn-send {
+      background: linear-gradient(135deg, #0066cc, #0877c9); border: none; color: #fff;
+      border-radius: 8px; padding: 7px 16px; font-size: 12px; font-weight: 750; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px; transition: all .15s;
+    }
+    .hist-btn-send:hover { background: linear-gradient(135deg, #0052a3, #0660a3); transform: translateY(-1px); }
+    .hist-audit-note { display: flex; align-items: center; gap: 5px; font-size: 10.5px; color: #64748b; margin-right: auto; }
+    .hist-audit-note i { color: #16a34a; }
+    .timeline-attachments { margin-top: 6px; display: flex; flex-direction: column; gap: 4px; }
+    .timeline-attach-card {
+      display: inline-flex; align-items: center; gap: 7px; background: #f8fafc;
+      border: 1px solid #e2e8f0; border-radius: 7px; padding: 5px 10px; font-size: 11.5px; max-width: 100%;
+    }
+    .tac-icon { font-size: 14px; flex-shrink: 0; }
+    .tac-name { font-weight: 700; color: #1e293b; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tac-meta { color: #64748b; font-size: 10px; flex-shrink: 0; }
+    .tac-btn { background: none; border: none; cursor: pointer; padding: 2px 4px; font-size: 13px; border-radius: 4px; transition: background .12s; flex-shrink: 0; }
+    .tac-btn:hover { background: #e0f2fe; }
+    .timeline-kind-doc { border-left-color: #0284c7 !important; background: rgba(2,132,199,.03); }
+    .timeline-kind-doc .timeline-type { color: #0284c7 !important; }
+    .timeline-kind-doc::before { background: #0284c7 !important; box-shadow: 0 0 0 2px #bfdbfe !important; }
+
     .info-compose {
       background: #ffffff;
       border: 1px solid #dbe5f0;
@@ -8265,8 +8369,27 @@
               <div class="info-chip-list" id="infoDiagnostics"></div>
             </div>
             <div class="info-box">
-              <div class="info-box-title"><span>Histórico de acompanhamento após a geração</span><span
-                  class="info-badge-history" id="infoHistoryCount">0 REGISTROS</span></div>
+              <div class="info-box-title" style="align-items:center;flex-wrap:wrap;gap:6px;">
+                <span>Hist&oacute;rico de acompanhamento ap&oacute;s a gera&ccedil;&atilde;o</span>
+                <div style="display:flex;align-items:center;gap:8px;margin-left:auto;">
+                  <span class="info-badge-history" id="infoHistoryCount">0 REGISTROS</span>
+                  <div class="hist-add-wrap" id="histAddWrap">
+                    <button class="btn-hist-add" id="btnHistAdd" type="button" data-tooltip="Adicionar informa&ccedil;&atilde;o ou documento ao hist&oacute;rico desta FICAI">
+                      <i class="fa-solid fa-plus"></i> Adicionar
+                    </button>
+                    <div class="hist-add-dropdown" id="histAddDropdown">
+                      <button class="hist-add-option" data-kind="info" type="button">
+                        <i class="fa-solid fa-pen-to-square" style="color:#0877c9;"></i> Adicionar informa&ccedil;&atilde;o
+                      </button>
+                      <button class="hist-add-option" data-kind="document" type="button">
+                        <i class="fa-solid fa-paperclip" style="color:#0284c7;"></i> Anexar documento
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="hist-micro-desc">Registre acompanhamentos, provid&ecirc;ncias e documentos relacionados a esta FICAI.</p>
+              <div id="histInlineForm" style="display:none;"></div>
               <div class="timeline" id="infoTimeline"></div>
             </div>
 
@@ -8311,44 +8434,7 @@
           </div>
         </div>
 
-        <div class="info-compose">
-          <div class="info-compose-head">
-            <div>
-              <h3><i class="fa-solid fa-plus-circle"></i> Adicionar informação importante</h3>
-              <p>Use este campo para registrar fatos novos mesmo depois que a FICAI já tiver sido gerada.</p>
-            </div><span class="badge-gold">Salva no histórico</span>
-          </div>
-          <div class="info-compose-grid">
-            <div><label>Data do fato</label><input id="infoEntryDate" type="date"></div>
-            <div><label>Tipo de registro</label><select id="infoEntryType">
-                <option>Contato com responsável</option>
-                <option>Visita domiciliar</option>
-                <option>Retorno à escola</option>
-                <option>Conselho Tutelar</option>
-                <option>Saúde</option>
-                <option>Observação pedagógica</option>
-                <option>Atualização cadastral</option>
-                <option>Encaminhamento</option>
-                <option>Outro</option>
-              </select></div>
-            <div><label>Responsável pelo registro</label><input id="infoEntryResponsible"
-                placeholder="Nome / função do servidor"></div>
-          </div>
-          <textarea id="infoEntryText" maxlength="12000"
-            placeholder="Descreva objetivamente a nova informação, providência, devolutiva ou fato relevante..."></textarea>
-          <div class="info-compose-footer">
-            <div class="audit-note"><i class="fa-solid fa-lock"></i><span>O novo registro é acrescentado à linha do
-                tempo e não substitui os registros anteriores.</span></div>
-            <div class="info-compose-actions" style="display:flex;gap:10px;align-items:center">
-              <button class="btn-navy-submit" type="button" id="saveInfoEntry"
-                data-tooltip="Salvar registro no histórico sem alterar a tela/situação da ficha"><i
-                  class="fa-solid fa-plus"></i> Adicionar ao histórico</button>
-              <button class="send-devolver-btn" type="button" id="sendDevolverInfoEntry"
-                data-tooltip="Devolver / Enviar a FICAI para o tipo de registro selecionado e mover para a tela GERADOS"><i
-                  class="fa-solid fa-paper-plane"></i> Enviar</button>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -13781,20 +13867,83 @@
       $('#infoProcedures').innerHTML = procedureRows(d);
       const diag = diagnosticValues(d); $('#infoDiagnostics').innerHTML = diag.length ? diag.map(v => `<span class="info-chip">${escapeHtml(v)}</span>`).join('') : '<span class="info-empty">Nenhum diagnóstico marcado.</span>';
       
-      const entries = [...(r.infoEntries || [])].sort((a, b) => (b.date || '').localeCompare(a.date || '') || (b.createdAt || '').localeCompare(a.createdAt || ''));
+      // RENDERIZACAO DA TIMELINE - HISTORICO DOCUMENTAL
+      const entries = [...(r.infoEntries || [])].sort((a, b) => (a.date || '').localeCompare(b.date || '') || (a.createdAt || '').localeCompare(b.createdAt || ''));
+      function typeIcon(tp) {
+        const t = (tp||'').toLowerCase();
+        if (t.includes('visita')) return '&#x1F3E0;';
+        if (t.includes('encaminhamento')) return '&#x279C;';
+        if (t.includes('retorno') || t.includes('devolutiva')) return '&#x1F4E9;';
+        if (t.includes('documento') || t.includes('anexo')) return '&#x1F4CE;';
+        if (t.includes('conselho') || t.includes('ct')) return '&#x1F6E1;';
+        if (t.includes('contato')) return '&#x1F4DE;';
+        return '&#x1F4AC;';
+      }
+      function fileIconHist(ext) {
+        const e = (ext||'').toLowerCase();
+        if (e==='pdf') return '&#x1F4D5;';
+        if (e==='xls'||e==='xlsx') return '&#x1F4CA;';
+        if (e==='doc'||e==='docx') return '&#x1F4C4;';
+        if (['png','jpg','jpeg'].includes(e)) return '&#x1F5BC;';
+        return '&#x1F4CE;';
+      }
+      function fmtBytesH(n) {
+        if (!n) return '';
+        if (n<1024) return n+'B';
+        if (n<1048576) return (n/1024).toFixed(0)+' KB';
+        return (n/1048576).toFixed(1)+' MB';
+      }
+      function renderAttachCards(atts) {
+        if (!atts || !atts.length) return '';
+        const cards = atts.map(function(a) {
+          const shortName = a.name && a.name.length>38 ? a.name.slice(0,35)+'...' : (a.name||'');
+          const safeA = encodeURIComponent(JSON.stringify(a));
+          return '<div class=\'timeline-attach-card\'>'
+            + '<span class=\'tac-icon\'>'+fileIconHist(a.ext)+'</span>'
+            + '<span class=\'tac-name\' title=\''+escapeHtml(a.name)+'\'>'+escapeHtml(shortName)+'</span>'
+            + '<span class=\'tac-meta\'>'+(a.ext||'').toUpperCase()+' &bull; '+fmtBytesH(a.size)+'</span>'
+            + '<button class=\'tac-btn\' title=\'Visualizar\' onclick=\'histPreviewFile(JSON.parse(decodeURIComponent("'+safeA+'")))\'>&#x1F441;</button>'
+            + '<button class=\'tac-btn\' title=\'Baixar\' onclick=\'histDownloadFile(JSON.parse(decodeURIComponent("'+safeA+'")))\'>&#x2B07;</button>'
+            + '</div>';
+        });
+        return '<div class=\'timeline-attachments\'>'+cards.join('')+'</div>';
+      }
       let timelineHtml = '';
       if (ctView) {
-        timelineHtml += `<div class="timeline-item" style="border-left: 3.5px solid #7c3aed; background: rgba(124, 58, 237, 0.04);"><div class="timeline-top"><span class="timeline-type" style="color: #7c3aed; font-weight:700;"><i class="fa-solid fa-eye"></i> Visualização pelo CT</span><span class="timeline-date">${escapeHtml(ctView.viewedAt)}</span></div><div class="timeline-text">Prontuário e acompanhamento escolar visualizados pelo Conselho Tutelar.</div><div class="timeline-by"><i class="fa-regular fa-user"></i> ${escapeHtml(ctView.user)}</div></div>`;
+        timelineHtml += '<div class=\'timeline-item\' style=\'border-left:3.5px solid #7c3aed;background:rgba(124,58,237,.04);\'>'
+          + '<div class=\'timeline-top\'>'
+          + '<span class=\'timeline-type\' style=\'color:#7c3aed;font-weight:700;\'>&#x1F441; Visualiza&ccedil;&atilde;o pelo CT</span>'
+          + '<span class=\'timeline-date\'>'+escapeHtml(ctView.viewedAt)+'</span>'
+          + '</div>'
+          + '<div class=\'timeline-text\'>Prontu&aacute;rio e acompanhamento escolar visualizados pelo Conselho Tutelar.</div>'
+          + '<div class=\'timeline-by\'><i class=\'fa-regular fa-user\'></i> '+escapeHtml(ctView.user)+'</div>'
+          + '</div>';
       }
       if (entries.length) {
-        timelineHtml += entries.map(e => `<div class="timeline-item"><div class="timeline-top"><span class="timeline-type">${escapeHtml(e.type || 'Registro')}</span><span class="timeline-date">${escapeHtml(fmtDate(e.date || ''))}</span></div><div class="timeline-text">${escapeHtml(e.text || '')}</div><div class="timeline-by"><i class="fa-regular fa-user"></i> ${escapeHtml(e.responsible || 'Usuário')} · registrado em ${escapeHtml(displayDateTime(e.createdAt) || 'agora')}</div></div>`).join('');
+        timelineHtml += entries.map(function(e) {
+          const isDoc = e.entryKind === 'document';
+          const icon  = isDoc ? '&#x1F4CE;' : typeIcon(e.type);
+          const kindClass = isDoc ? 'timeline-kind-doc' : '';
+          const dateStr = e.date ? fmtDate(e.date) : '';
+          const timeStr = e.createdAt ? displayDateTime(e.createdAt) : '';
+          const attachHtml = renderAttachCards(e.attachments);
+          const textPart = e.text ? '<div class=\'timeline-text\'>'+escapeHtml(e.text)+'</div>' : '';
+          return '<div class=\'timeline-item '+kindClass+'\'>'
+            + '<div class=\'timeline-top\'>'
+            + '<span class=\'timeline-type\'><span style=\'font-size:12px;margin-right:3px;\'>'+icon+'</span>'+escapeHtml(e.type||'Registro')+'</span>'
+            + '<span class=\'timeline-date\'>'+escapeHtml(dateStr)+(dateStr&&timeStr?' &bull; ':'')+'</span>'
+            + '</div>'
+            + textPart
+            + attachHtml
+            + '<div class=\'timeline-by\'><i class=\'fa-regular fa-user\'></i> '+escapeHtml(e.responsible||'Usu&aacute;rio')+' &middot; registrado em '+escapeHtml(timeStr||dateStr)+'</div>'
+            + '</div>';
+        }).join('');
       } else if (!ctView) {
-        timelineHtml = '<div class="info-empty">Ainda não há registros posteriores à geração da FICAI.</div>';
+        timelineHtml = '<div style=\'font-size:12px;color:#94a3b8;padding:10px 0;font-style:italic;\'>Ainda n&atilde;o h&aacute; registros posteriores &agrave; gera&ccedil;&atilde;o da FICAI.</div>';
       }
-
       const totalCount = entries.length + (ctView ? 1 : 0);
-      $('#infoHistoryCount').textContent = `${totalCount} REGISTRO${totalCount === 1 ? '' : 'S'}`;
-      $('#infoTimeline').innerHTML = timelineHtml;
+      const _countEl = document.getElementById('infoHistoryCount'); if(_countEl) _countEl.textContent = totalCount + ' REGISTRO' + (totalCount===1?'':'S');
+      document.getElementById('infoTimeline').innerHTML = timelineHtml;
       
       $('#infoEntryDate').value = isoToday(); $('#infoEntryResponsible').value = $('.user span')?.textContent?.trim() || 'Usuário'; $('#infoEntryText').value = '';
 
@@ -14032,52 +14181,201 @@
       filterSplitLists();
     }
 
-    $('#saveInfoEntry').onclick = async () => {
-      if (!activeInfoRecord) return; const date = $('#infoEntryDate').value; const type = $('#infoEntryType').value; const txt = $('#infoEntryText').value.trim(); const responsible = $('#infoEntryResponsible').value.trim() || 'Usuário';
-      if (!date) { $('#infoEntryDate').focus(); toast('Informe a data do novo registro.'); return } if (!txt) { $('#infoEntryText').focus(); toast('Descreva a informação que será adicionada ao histórico.'); return }
-      const entry = { id: (crypto.randomUUID?.() || ('reg-' + Date.now())), date, type, text: txt, responsible, createdAt: new Date().toISOString() };
-      activeInfoRecord.infoEntries = [...(activeInfoRecord.infoEntries || []), entry]; activeInfoRecord.updatedAt = new Date().toISOString(); activeInfoRecord.demoOnly = false;
-      try { await dbPut('ficais', activeInfoRecord); renderSavedFicai(activeInfoRecord); renderInfoModal(activeInfoRecord); toast('Nova informação adicionada ao histórico da FICAI.') } catch (err) { console.error(err); toast('Não foi possível salvar o novo registro no banco local.') }
+    // HISTORICO DOCUMENTAL - LOGICA DO FORMULARIO INLINE
+    let histPendingFiles = [];
+
+    window.histPreviewFile = function(a) {
+      if (!a || !a.data) { toast('Arquivo sem dados armazenados.'); return; }
+      const previewTypes = ['pdf','png','jpg','jpeg'];
+      if (previewTypes.includes((a.ext||'').toLowerCase())) {
+        const win = window.open();
+        win.document.write('<html><body style=\\'margin:0\\'><iframe src=\\''+a.data+'\\' style=\\'width:100%;height:100vh;border:none\\'></iframe></body></html>');
+      } else { window.histDownloadFile(a); }
     };
 
-    $('#sendDevolverInfoEntry').onclick = async () => {
-      if (!activeInfoRecord) return;
-      const date = $('#infoEntryDate').value;
-      const type = $('#infoEntryType').value;
-      const txt = $('#infoEntryText').value.trim();
-      const responsible = $('#infoEntryResponsible').value.trim() || 'Usuário';
-      if (!date) { $('#infoEntryDate').focus(); toast('Informe a data do novo registro.'); return }
-      if (!txt) { $('#infoEntryText').focus(); toast('Descreva a informação/devolutiva que será adicionada.'); return }
+    window.histDownloadFile = function(a) {
+      if (!a || !a.data) { toast('Arquivo sem dados armazenados.'); return; }
+      const link = document.createElement('a');
+      link.href = a.data; link.download = a.name; document.body.appendChild(link); link.click(); document.body.removeChild(link);
+    };
 
+    function fileToBase64(file) {
+      return new Promise(function(resolve, reject) {
+        const reader = new FileReader();
+        reader.onload  = function() { resolve(reader.result); };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function getFileExtH(name) { return (name.split('.').pop() || '').toLowerCase(); }
+
+    const HIST_ALLOWED_EXTS = ['pdf','doc','docx','xls','xlsx','png','jpg','jpeg'];
+    const HIST_MAX_BYTES    = 5 * 1024 * 1024;
+
+    function renderHistFileCards() {
+      const list = document.getElementById('histFileList');
+      if (!list) return;
+      if (!histPendingFiles.length) { list.innerHTML = ''; return; }
+      function fc(ext) {
+        if (ext==='pdf') return '&#x1F4D5;';
+        if (ext==='xls'||ext==='xlsx') return '&#x1F4CA;';
+        if (ext==='doc'||ext==='docx') return '&#x1F4C4;';
+        if (['png','jpg','jpeg'].includes(ext)) return '&#x1F5BC;';
+        return '&#x1F4CE;';
+      }
+      list.innerHTML = histPendingFiles.map(function(f, i) {
+        const ext = getFileExtH(f.name);
+        const szTxt = f.size<1048576?(f.size/1024).toFixed(0)+' KB':(f.size/1048576).toFixed(1)+' MB';
+        const nm = f.name.length>40?f.name.slice(0,37)+'...':f.name;
+        return '<div class=\\'hist-file-card\\'>'
+          + '<span class=\\'fc-icon\\'>'+fc(ext)+'</span>'
+          + '<span class=\\'fc-name\\' title=\\''+escapeHtml(f.name)+'\\'>'+escapeHtml(nm)+'</span>'
+          + '<span class=\\'fc-meta\\'>'+ext.toUpperCase()+' &bull; '+szTxt+'</span>'
+          + '<button class=\\'fc-del\\' onclick=\\'histRemoveFile('+i+')\\'>&times;</button>'
+          + '</div>';
+      }).join('');
+    }
+
+    window.histRemoveFile = function(idx) { histPendingFiles.splice(idx,1); renderHistFileCards(); };
+
+    function histAddFiles(fileList) {
+      for (let i=0; i<fileList.length; i++) {
+        const f = fileList[i];
+        const ext = getFileExtH(f.name);
+        if (!HIST_ALLOWED_EXTS.includes(ext)) { toast('Tipo nao permitido: .'+ext+'. Use: '+HIST_ALLOWED_EXTS.join(', ')); continue; }
+        if (f.size > HIST_MAX_BYTES) { toast('Arquivo muito grande (max 5 MB): '+f.name); continue; }
+        if (histPendingFiles.find(function(x){return x.name===f.name&&x.size===f.size;})) continue;
+        histPendingFiles.push(f);
+      }
+      renderHistFileCards();
+    }
+
+    function buildHistFormHTML(kind) {
+      const isDoc = kind === 'document';
+      const title = isDoc ? '<i class=\\'fa-solid fa-paperclip\\'></i> Anexar documento' : '<i class=\\'fa-solid fa-pen-to-square\\'></i> Adicionar informa&ccedil;&atilde;o';
+      const typeOptionsInfo = ['Acompanhamento','Contato com responsavel','Contato com aluno','Visita domiciliar','Encaminhamento','Retorno do Conselho Tutelar','Retorno da escola','Providencia adotada','Comunicacao','Observacao','Outro'];
+      const typeOptionsDoc  = ['Oficio','Relatorio','Declaracao','Comunicacao','Encaminhamento','Resposta','Termo','Documento escolar','Documento do Conselho Tutelar','Comprovante','Planilha','Outro'];
+      const typeOpts = (isDoc ? typeOptionsDoc : typeOptionsInfo).map(function(o){return '<option value=\\''+o+'\\'>'+o+'</option>';}).join('');
+      const today = isoToday();
+      const user  = (document.querySelector('.user span')||{}).textContent || (typeof getActiveSession==='function'&&getActiveSession()?getActiveSession().nome:'') || 'Usuario';
+      const textLabel = isDoc ? 'Descri&ccedil;&atilde;o / t&iacute;tulo do documento' : 'Descri&ccedil;&atilde;o';
+      const textPlaceholder = isDoc ? 'Ex: Of&iacute;cio de encaminhamento ao Conselho Tutelar...' : 'Descreva objetivamente a informa&ccedil;&atilde;o, provid&ecirc;ncia ou fato relevante...';
+      const fileLabel = isDoc ? 'Arquivo(s) <span style=\\'color:#ef4444\\'>*</span>' : 'Anexo (opcional)';
+      const sendBtn  = isDoc ? '' : '<button class=\\'hist-btn-send\\' type=\\'button\\' id=\\'hfBtnSend\\'><i class=\\'fa-solid fa-paper-plane\\'></i> Enviar</button>';
+      return '<div class=\\'hist-inline-form\\'>'
+        + '<div class=\\'hist-form-title\\'>'+title+'</div>'
+        + '<div class=\\'hist-form-grid\\'>'
+        + '<div><label>Data do fato</label><input type=\\'date\\' id=\\'hfDate\\' value=\\''+today+'\\'></div>'
+        + '<div><label>Tipo de registro</label><select id=\\'hfType\\'>'+typeOpts+'</select></div>'
+        + '<div><label>Respons&aacute;vel</label><input type=\\'text\\' id=\\'hfResponsible\\' value=\\''+escapeHtml(user.trim())+'\\'></div>'
+        + '</div>'
+        + '<label style=\\'font-size:11px;font-weight:750;color:#475569;display:block;margin-bottom:3px;\\'>'+textLabel+'</label>'
+        + '<textarea class=\\'hist-form-textarea\\' id=\\'hfText\\' placeholder=\\''+textPlaceholder+'\\'></textarea>'
+        + '<label style=\\'font-size:11px;font-weight:750;color:#475569;display:block;margin-bottom:3px;\\'>'+fileLabel+'</label>'
+        + '<div class=\\'hist-dropzone\\' id=\\'histDropzone\\'>'
+        + '<i class=\\'fa-solid fa-paperclip\\'></i>'
+        + 'Arraste arquivos aqui ou <strong>clique para selecionar</strong>'
+        + '<small>PDF, DOC, DOCX, XLS, XLSX, PNG, JPG &mdash; m&aacute;x 5 MB por arquivo</small>'
+        + '</div>'
+        + '<input type=\\'file\\' id=\\'histFileInput\\' multiple accept=\\'.pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg\\' style=\\'display:none;\\'>'
+        + '<div class=\\'hist-file-list\\' id=\\'histFileList\\'></div>'
+        + '<div class=\\'hist-form-footer\\'>'
+        + '<span class=\\'hist-audit-note\\'><i class=\\'fa-solid fa-lock\\'></i>Acrescenta ao hist&oacute;rico sem substituir registros anteriores.</span>'
+        + '<button class=\\'hist-btn-cancel\\' type=\\'button\\' id=\\'hfBtnCancel\\'>Cancelar</button>'
+        + sendBtn
+        + '<button class=\\'hist-btn-save\\' type=\\'button\\' id=\\'hfBtnSave\\'><i class=\\'fa-solid fa-plus\\'></i> Salvar no hist&oacute;rico</button>'
+        + '</div>'
+        + '</div>';
+    }
+
+    function openHistInlineForm(kind) {
+      histPendingFiles = [];
+      const formWrap = document.getElementById('histInlineForm');
+      if (!formWrap) return;
+      formWrap.innerHTML = buildHistFormHTML(kind);
+      formWrap.style.display = 'block';
+      const dz = document.getElementById('histDropzone');
+      const fi = document.getElementById('histFileInput');
+      if (dz && fi) {
+        dz.addEventListener('click', function() { fi.click(); });
+        fi.addEventListener('change', function(ev) { histAddFiles(ev.target.files); ev.target.value=''; });
+        ['dragenter','dragover'].forEach(function(ev) { dz.addEventListener(ev, function(e){ e.preventDefault(); dz.classList.add('drag-over'); }); });
+        ['dragleave','drop'].forEach(function(ev) { dz.addEventListener(ev, function(e){ e.preventDefault(); dz.classList.remove('drag-over'); }); });
+        dz.addEventListener('drop', function(e) { histAddFiles(e.dataTransfer.files); });
+      }
+      const btnCancel = document.getElementById('hfBtnCancel');
+      const btnSave   = document.getElementById('hfBtnSave');
+      const btnSend   = document.getElementById('hfBtnSend');
+      if (btnCancel) btnCancel.addEventListener('click', closeHistInlineForm);
+      if (btnSave)   btnSave.addEventListener('click', function(){ saveHistEntry(kind, false); });
+      if (btnSend)   btnSend.addEventListener('click', function(){ saveHistEntry(kind, true); });
+      const dd = document.getElementById('histAddDropdown');
+      if (dd) dd.classList.remove('open');
+    }
+
+    function closeHistInlineForm() {
+      const formWrap = document.getElementById('histInlineForm');
+      if (formWrap) { formWrap.innerHTML = ''; formWrap.style.display = 'none'; }
+      histPendingFiles = [];
+    }
+
+    async function saveHistEntry(kind, isSend) {
+      if (!activeInfoRecord) { toast('Nenhuma FICAI ativa.'); return; }
+      const date        = (document.getElementById('hfDate')||{}).value || '';
+      const type        = (document.getElementById('hfType')||{}).value || '';
+      const txt         = ((document.getElementById('hfText')||{}).value || '').trim();
+      const responsible = ((document.getElementById('hfResponsible')||{}).value || '').trim() || 'Usuario';
+      const isDoc = kind === 'document';
+      if (!date) { toast('Informe a data do registro.'); return; }
+      if (!isDoc && !txt && !histPendingFiles.length) { toast('Descreva a informacao ou adicione um arquivo.'); return; }
+      if (isDoc && !histPendingFiles.length) { toast('Selecione ao menos um arquivo para anexar.'); return; }
+      const attachments = [];
+      for (let i=0; i<histPendingFiles.length; i++) {
+        const f = histPendingFiles[i];
+        try {
+          const dataUrl = await fileToBase64(f);
+          attachments.push({ id: (crypto.randomUUID ? crypto.randomUUID() : 'att-'+Date.now()+'-'+i), name: f.name, ext: getFileExtH(f.name), mime: f.type, size: f.size, data: dataUrl, uploadedAt: new Date().toISOString() });
+        } catch(ex) { toast('Erro ao ler arquivo: '+f.name); return; }
+      }
       const entry = {
-        id: (crypto.randomUUID?.() || ('reg-' + Date.now())),
-        date,
-        type,
-        text: `${txt} (Devolvida/Enviada para ${type})`,
-        responsible,
-        isDevolutiva: true,
-        action: 'Enviar / Devolver',
+        id: (crypto.randomUUID ? crypto.randomUUID() : 'reg-'+Date.now()),
+        date: date, type: type,
+        entryKind: isDoc ? 'document' : 'info',
+        text: isSend ? txt+' (Enviada/Devolvida para '+type+')' : txt,
+        responsible: responsible,
+        attachments: attachments.length ? attachments : undefined,
+        isDevolutiva: isSend || undefined,
         createdAt: new Date().toISOString()
       };
-
       activeInfoRecord.infoEntries = [...(activeInfoRecord.infoEntries || []), entry];
       activeInfoRecord.updatedAt = new Date().toISOString();
-      activeInfoRecord.situacao = `Devolvida: ${type}`;
-      activeInfoRecord.section = 'GERADOS';
       activeInfoRecord.demoOnly = false;
-
+      if (isSend) { activeInfoRecord.situacao = 'Devolvida: '+type; activeInfoRecord.section = 'GERADOS'; }
       try {
         await dbPut('ficais', activeInfoRecord);
         renderSavedFicai(activeInfoRecord);
+        if (isSend) { moveFicaiToGerados(activeInfoRecord, type); closeInfoModal(); }
+        closeHistInlineForm();
         renderInfoModal(activeInfoRecord);
-        moveFicaiToGerados(activeInfoRecord, type);
-        closeInfoModal();
-        toast(`FICAI ${activeInfoRecord.numero} enviada com sucesso para "${type}" e movida para a tela GERADOS.`);
-      } catch (err) {
-        console.error(err);
-        toast('Não foi possível salvar e enviar a FICAI no banco local.');
+        toast(isDoc ? 'Documento adicionado ao historico da FICAI '+activeInfoRecord.numero+'.' : 'Registro adicionado ao historico da FICAI '+activeInfoRecord.numero+'.');
+      } catch(err) { console.error(err); toast('Nao foi possivel salvar no banco local.'); }
+    }
+
+    // Botao + Adicionar — delegacao de eventos
+    document.addEventListener('click', function(ev) {
+      const btnAdd  = ev.target.closest('#btnHistAdd');
+      const option  = ev.target.closest('.hist-add-option');
+      const dropdown = document.getElementById('histAddDropdown');
+      if (btnAdd) { if(dropdown) dropdown.classList.toggle('open'); ev.stopPropagation(); return; }
+      if (option) {
+        const kind = option.dataset.kind;
+        openHistInlineForm(kind);
+        if(dropdown) dropdown.classList.remove('open');
+        ev.stopPropagation(); return;
       }
-    };
+      if (!ev.target.closest('#histAddWrap') && dropdown) dropdown.classList.remove('open');
+    });
     $('#infoEdit').onclick = () => { if (!activeInfoRecord) return; applyFormData(activeInfoRecord.data || {}); const st = studentData['db:' + activeInfoRecord.studentKey]; if (st) $('#aluno').value = 'db:' + activeInfoRecord.studentKey; closeInfoModal(); showView('gerar'); toast(`FICAI ${activeInfoRecord.numero} aberta para edição.`) };
     $('#infoPdf').onclick = () => { if (!activeInfoRecord) return; applyFormData(activeInfoRecord.data || {}); closeInfoModal(); openPreview() };
     $('#openCurrentInfo').onclick = async e => { e.preventDefault(); normalizeNumber(); const n = $('#numeroFicai').value; let r = null; try { r = await dbGet('ficais', n) } catch (_e) { } if (!r) { toast('Salve a FICAI antes de abrir o histórico de informações.'); return } openInfoModal(n) };
