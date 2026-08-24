@@ -44,10 +44,21 @@ updated: 2026-08-24
    - Exibição de um selo em lilás/roxo `👁️ Visualizado pelo CT` com efeito hover e tooltip com data, hora e e-mail auditável da leitura (`conselhotutelar@itaguai.rj.gov.br`).
    - Apresentado nas tabelas do Split Grid e destacado na área de Situação e Linha do Tempo do Modal de Informações da FICAI.
 
-7. **Centro de Notificações Popover (Notificações NOVAS vs LIDAS):**
-   - Popover flutuante no sino com badge pulsante vermelho.
-   - Distinção clara em fundo roxo com borda roxa espessa e tag `NOVA` para mensagens não lidas.
-   - Botão para *Marcar todas como lidas* e navegação direta ao prontuário do aluno.
+8. **Redesign em 3 Colunas da Tela de Cancelamento de FICAI (`#view-cancelamento`):**
+   - Layout 100% fidedigno ao protótipo de UX/UI com 3 colunas estruturadas:
+     - **Coluna 1 (Esquerda):** Cards clicáveis de *FICAIs encontradas* (com busca dinâmica e contadores em tempo real) e a *Linha do tempo vertical* do registro selecionado.
+     - **Coluna 2 (Central):** Wizard Stepper numerado (1 Selecionar FICAI, 2 Informar motivo, 3 Revisar e confirmar), mini-tabela do registro ativo, card dica *"O que fazer agora?"*, callout de atenção amarelo, campos do formulário e botões de ação (`Cancelar ação` / `Avançar para revisão ➔`).
+     - **Coluna 3 (Direita):** Card resumo *"Dados da FICAI"* com chave/valor de todas as propriedades.
+   - **Histórico Auditável de FICAIs Canceladas (Registro Permanente):** Tabela no rodapé da tela em tom carmim com botão `👁️ Visualizar prontuário`, garantindo que nenhuma FICAI seja apagada e o cancelamento permaneça 100% rastreável no sistema.
+   - **Filtros e Busca em Tempo Real:** Suporte completo para busca por `N.º FICAI`, `Nome do Aluno`, `Turma`, `Status` e busca instantânea com botão de limpeza.
+   - **Integração com Supabase Cloud:** Tabela `cancelamentos_ficais` criada no `supabase_schema.sql` (100% idempotente) e encapsulada em `CancelamentoService` no `supabase_client.js`.
+
+9. **Ilustração Escolar Vetorial em SVG Premium:**
+   - O cabeçalho do Passo 1 do formulário principal de geração de FICAI foi enriquecido com uma ilustração arquitetônica clássica de instituição de ensino (frontão com relógio escolar, colunas, salas de aula com janelas reflexivas e mastro com bandeira).
+
+10. **Sincronização e Deploy no GitHub (`DevFicai` e `main`):**
+   - Repositório: `https://github.com/repositoriocpd4-collab/2026Ficai.git`
+   - Branches `DevFicai` e `main` 100% atualizadas e sincronizadas no commit `9d47c27`.
 
 6. **Gerador Automático Sequencial de Número FICAI:**
    - Numeração dinâmica no formato `XXXXX/2026` com botão de recálculo `[🔄]` e selo `[✨ Auto]`.
