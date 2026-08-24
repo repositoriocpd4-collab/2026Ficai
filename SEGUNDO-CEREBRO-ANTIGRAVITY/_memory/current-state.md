@@ -110,6 +110,12 @@ updated: 2026-08-24
     - Zerados os contadores de estatísticas para **0** casos ativos, permitindo o cadastro de novos registros reais a partir do número `00001/2026`.
     - **Commits `4275ec6`, `62c1d2d` e `b3b66fc` enviados ao GitHub:** `feat: zerar FICAIs geradas, recebidas do CT, historico de cancelamento e notificacoes para testes reais`.
 
+21. **Correção do Preenchimento Automático da Modalidade no Formulário (`Gerar FICAI`):**
+    - Criada a função reativa `updateModalidadeFromTurma()` que escuta a seleção do campo **Turma**.
+    - Ao selecionar qualquer turma (ex: `6º Ano A`, `7º Ano B`, `NCEJA VI A`, `Pré II A`), o sistema automaticamente lê a modalidade vinculada cadastrada no menu *Configurações & Cadastros* (ou dataset) e preenche instantaneamente o campo **Modalidade** (ex: *Ensino Fundamental*, *EJA*, *Educação Infantil*).
+    - Também auto-seleciona o **Ano Escolar** e **Turno** caso ainda não estejam preenchidos.
+    - **Commit `24b89e8` enviado ao GitHub:** `fix: auto-preencher campo Modalidade ao selecionar a Turma na criacao de FICAI`.
+
 ---
 
 ### 🟡 O Que Está em Desenvolvimento ou Requer Validação Fina
