@@ -13945,18 +13945,40 @@
       const _countEl = document.getElementById('infoHistoryCount'); if(_countEl) _countEl.textContent = totalCount + ' REGISTRO' + (totalCount===1?'':'S');
       document.getElementById('infoTimeline').innerHTML = timelineHtml;
       
-      $('#infoEntryDate').value = isoToday(); $('#infoEntryResponsible').value = $('.user span')?.textContent?.trim() || 'Usuário'; $('#infoEntryText').value = '';
+      if ($('#infoEntryDate')) $('#infoEntryDate').value = isoToday();
+      if ($('#infoEntryResponsible')) $('#infoEntryResponsible').value = $('.user span')?.textContent?.trim() || (typeof getActiveSession === 'function' && getActiveSession()?.nome) || 'Usuário';
+      if ($('#infoEntryText')) $('#infoEntryText').value = '';
 
       // Inicializar e traçar a rota no MapLibre GL
-      const coords = getMapCoordinatesForFicai(r);
-      setTimeout(() => {
-        initOrUpdateInfoMap(coords.escola, coords.aluno, coords.escola.name, coords.aluno.name, coords.aluno.endereco);
-      }, 100);
+      try {
+        const coords = getMapCoordinatesForFicai(r);
+        if (coords && coords.escola && coords.aluno) {
+          setTimeout(() => {
+            initOrUpdateInfoMap(coords.escola, coords.aluno, coords.escola.name, coords.aluno.name, coords.aluno.endereco);
+          }, 100);
+        }
+      } catch (errMap) {
+        console.warn('Erro ao inicializar mapa no modal de informações:', errMap);
+      }
     }
     async function openInfoModal(numero) {
-      let r = null; try { r = await dbGet('ficais', numero) } catch (_e) { } if (!r) r = demoRecordFromTable(numero); if (!r) { toast('FICAI não encontrada.'); return }
-      renderInfoModal(r); $('#infoModal').classList.add('open'); $('#infoModal').setAttribute('aria-hidden', 'false');
+      if (!numero) { toast('Número de FICAI inválido.'); return; }
+      let r = null;
+      try { r = await dbGet('ficais', numero); } catch (_e) { }
+      if (!r) r = demoRecordFromTable(numero);
+      if (!r) {
+        // Tentar buscar por variações com ou sem sufixo /2026
+        const numAlt = numero.includes('/2026') ? numero.replace('/2026', '') : (numero.padStart(5, '0') + '/2026');
+        try { r = await dbGet('ficais', numAlt); } catch (_e2) { }
+        if (!r) r = demoRecordFromTable(numAlt);
+      }
+      if (!r) { toast('FICAI não encontrada.'); return; }
+      renderInfoModal(r);
+      $('#infoModal')?.classList.add('open');
+      $('#infoModal')?.setAttribute('aria-hidden', 'false');
     }
+    window.openInfoModal = openInfoModal;
+    window.closeInfoModal = closeInfoModal;
     function closeInfoModal() {
       $('#infoModal')?.classList.remove('open');
       $('#infoModal')?.setAttribute('aria-hidden', 'true');
