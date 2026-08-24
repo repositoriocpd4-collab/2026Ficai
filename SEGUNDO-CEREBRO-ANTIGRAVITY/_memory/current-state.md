@@ -106,8 +106,9 @@ updated: 2026-08-24
     - Zerados os registros simulados das listas **"Gerados"** (`0 registros`) e **"Recebidos do CT"** (`0 registros`) no Dashboard.
     - Zerados os cartões simulados em **"Dados da Ficha"** e na tela de **"Cancelamento de FICAI"**.
     - Zerada a tabela do **"Histórico Auditável de FICAIs Canceladas (Registro Permanente)"** (`0 registros`).
+    - Zeradas as notificações do sininho de alertas do cabeçalho (badge de não lidas zerado/ocultado e dropdown com mensagem de estado vazio).
     - Zerados os contadores de estatísticas para **0** casos ativos, permitindo o cadastro de novos registros reais a partir do número `00001/2026`.
-    - **Commits `4275ec6` e `62c1d2d` enviados ao GitHub:** `feat: zerar FICAIs geradas, recebidas do CT e historico de cancelamento para testes reais`.
+    - **Commits `4275ec6`, `62c1d2d` e `b3b66fc` enviados ao GitHub:** `feat: zerar FICAIs geradas, recebidas do CT, historico de cancelamento e notificacoes para testes reais`.
 
 ---
 
