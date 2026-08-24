@@ -3168,63 +3168,131 @@
 
     .dash-split-card {
       border: 1px solid #e2e8f0;
-      border-radius: 14px;
+      border-radius: 16px;
       background: #ffffff;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+      transition: all 0.25s ease;
+    }
+
+    .dash-split-card.ct-card {
+      border-top: 4px solid #7c3aed;
+    }
+
+    .dash-split-card.gerados-card {
+      border-top: 4px solid #0284c7;
     }
 
     .dash-split-card:hover {
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
     }
 
     .dash-split-head {
-      padding: 14px 18px;
+      padding: 16px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #f1f5f9;
-      background: #ffffff;
+      transition: background 0.2s ease;
+    }
+
+    .dash-split-head.ct-head {
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.06) 0%, rgba(255, 255, 255, 1) 100%);
+    }
+
+    .dash-split-head.gerados-head {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.06) 0%, rgba(255, 255, 255, 1) 100%);
     }
 
     .dash-split-title-group {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .dash-split-icon-badge {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
+    .dash-title-meta {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-    }
-
-    .dash-split-icon-badge.ct-icon {
-      background: #e0f2fe;
-      color: #0284c7;
-    }
-
-    .dash-split-icon-badge.gerados-icon {
-      background: #e0f2fe;
-      color: #0284c7;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .dash-split-title {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
       color: #0f172a;
+      letter-spacing: -0.2px;
+    }
+
+    .dash-split-subtitle {
+      font-size: 11.5px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .ct-head .dash-split-subtitle {
+      color: #7c3aed;
+    }
+
+    .gerados-head .dash-split-subtitle {
+      color: #0284c7;
+    }
+
+    .dash-split-icon-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+
+    .dash-split-icon-badge.ct-icon {
+      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.28);
+    }
+
+    .dash-split-icon-badge.gerados-icon {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.28);
     }
 
     .dash-split-counter {
       font-size: 12px;
-      color: #64748b;
-      font-weight: 500;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.1px;
+    }
+
+    .dash-split-counter.ct-pill {
+      background: rgba(124, 58, 237, 0.1);
+      color: #6d28d9;
+      border: 1px solid rgba(124, 58, 237, 0.22);
+    }
+
+    .dash-split-counter.gerados-pill {
+      background: rgba(2, 132, 199, 0.1);
+      color: #0369a1;
+      border: 1px solid rgba(2, 132, 199, 0.22);
+    }
+
+    #listRecebidosCT .dash-list-row {
+      border-left: 3.5px solid #8b5cf6;
+    }
+
+    #listGerados .dash-list-row {
+      border-left: 3.5px solid #0284c7;
     }
 
     /* Tabela interna da lista */
@@ -4420,6 +4488,605 @@
       color: #0369a1 !important;
       transform: translateY(-1px) !important;
     }
+
+    /* ========================================================
+       TELA LOGS DO SISTEMA (HISTÓRICO DE ATIVIDADES E EVENTOS)
+       ======================================================== */
+    .logs-page-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .logs-page-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+      flex-shrink: 0;
+    }
+
+    .logs-page-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0;
+      letter-spacing: -0.3px;
+    }
+
+    .logs-page-subtitle {
+      font-size: 13.5px;
+      color: #64748b;
+      margin: 3px 0 0;
+    }
+
+    .logs-main-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .logs-filter-toolbar {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) 220px 180px auto;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .logs-filter-toolbar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .logs-search-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .logs-search-wrap i {
+      position: absolute;
+      left: 14px;
+      color: #94a3b8;
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    .logs-search-input {
+      width: 100%;
+      height: 44px;
+      padding: 0 14px 0 40px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 13.5px;
+      color: #1e293b;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .logs-search-input:focus {
+      background: #ffffff;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+    }
+
+    .logs-select {
+      height: 44px;
+      padding: 0 14px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 13.5px;
+      color: #334155;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .logs-select:focus {
+      background: #ffffff;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+    }
+
+    .logs-date-input {
+      height: 44px;
+      padding: 0 14px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 13.5px;
+      color: #334155;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .logs-date-input:focus {
+      background: #ffffff;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+    }
+
+    .logs-btn-clear {
+      height: 44px;
+      padding: 0 22px;
+      background: #e2e8f0;
+      color: #334155;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .logs-btn-clear:hover {
+      background: #cbd5e1;
+      color: #0f172a;
+    }
+
+    .logs-list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .log-item-card {
+      background: #ffffff;
+      border: 1px solid #edf2f7;
+      border-left: 4px solid #3b82f6;
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    .log-item-card:hover {
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+      border-color: #cbd5e1;
+    }
+
+    .log-item-card.level-create {
+      border-left-color: #22c55e;
+      background: #fcfdfc;
+    }
+
+    .log-item-card.level-update {
+      border-left-color: #0ea5e9;
+      background: #fcfdfe;
+    }
+
+    .log-item-card.level-cancel {
+      border-left-color: #ef4444;
+      background: #fffcfc;
+    }
+
+    .log-item-card.level-alert {
+      border-left-color: #f59e0b;
+      background: #fffdfa;
+    }
+
+    .log-item-card.level-auth {
+      border-left-color: #8b5cf6;
+      background: #faf8ff;
+    }
+
+    .log-item-icon {
+      font-size: 19px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .log-item-card.level-create .log-item-icon { color: #22c55e; }
+    .log-item-card.level-update .log-item-icon { color: #0ea5e9; }
+    .log-item-card.level-cancel .log-item-icon { color: #ef4444; }
+    .log-item-card.level-alert .log-item-icon { color: #f59e0b; }
+    .log-item-card.level-auth .log-item-icon { color: #8b5cf6; }
+
+    .log-item-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .log-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .log-item-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+    }
+
+    .log-item-time {
+      font-size: 12.5px;
+      color: #64748b;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .log-item-desc {
+      font-size: 13.5px;
+      color: #475569;
+      margin: 3px 0 0;
+      line-height: 1.45;
+    }
+
+    .log-item-user {
+      font-size: 12.5px;
+      color: #64748b;
+      margin-top: 3px;
+    }
+
+    .log-tech-toggle {
+      font-size: 12px;
+      color: #0284c7;
+      font-weight: 600;
+      margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      transition: color 0.15s ease;
+    }
+
+    .log-tech-toggle:hover {
+      color: #0369a1;
+      text-decoration: underline;
+    }
+
+    .log-tech-details {
+      margin-top: 10px;
+      padding: 12px 14px;
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 8px;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.45;
+      overflow-x: auto;
+      position: relative;
+      display: none;
+    }
+
+    .log-tech-details.open {
+      display: block;
+    }
+
+    .log-tech-copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      border-radius: 6px;
+      font-size: 11px;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+
+    .log-tech-copy-btn:hover {
+      background: #334155;
+      color: #f8fafc;
+    }
+
+    /* Dark Mode para Logs */
+    body.dark .logs-page-title { color: #f1f5f9; }
+    body.dark .logs-page-subtitle { color: #94a3b8; }
+    body.dark .logs-main-card { background: #162032; border-color: #24334a; }
+    body.dark .logs-search-input,
+    body.dark .logs-select,
+    body.dark .logs-date-input {
+      background: #1e293b;
+      border-color: #334155;
+      color: #f1f5f9;
+    }
+    body.dark .logs-btn-clear { background: #334155; color: #f1f5f9; }
+    body.dark .logs-btn-clear:hover { background: #475569; }
+    body.dark .log-item-card { background: #192437; border-color: #24334a; }
+    body.dark .log-item-title { color: #f1f5f9; }
+    body.dark .log-item-desc { color: #cbd5e1; }
+    body.dark .log-item-user { color: #94a3b8; }
+    body.dark .log-item-time { color: #94a3b8; }
+
+    /* ========================================================
+       MODAL DE CADASTROS E ESCOLAS - DESIGN UX/UI PREMIUM
+       ======================================================== */
+    .config-form-modal {
+      width: min(94vw, 780px) !important;
+      max-height: 92vh !important;
+      border-radius: 18px !important;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(226, 232, 240, 0.8) !important;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .config-form-modal .modal-head {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .config-modal-header-content {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .config-modal-icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+      flex-shrink: 0;
+    }
+
+    #configModalTitle {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      display: block;
+      letter-spacing: -0.2px;
+    }
+
+    .config-modal-subtitle {
+      font-size: 12.5px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .config-form-modal .modal-body {
+      background: #f8fafc;
+      padding: 24px;
+      max-height: calc(92vh - 140px);
+      overflow-y: auto;
+    }
+
+    .config-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px 16px;
+    }
+
+    @media (max-width: 680px) {
+      .config-form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .config-form-grid .full,
+    .config-form-grid .col-span-2 {
+      grid-column: 1 / -1;
+    }
+
+    .config-field-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .config-field-group label {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .config-field-group label .req-star {
+      color: #ef4444;
+      font-size: 14px;
+    }
+
+    .config-input-icon-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .config-input-icon-wrap i.field-icon {
+      position: absolute;
+      left: 14px;
+      color: #94a3b8;
+      font-size: 14.5px;
+      pointer-events: none;
+      transition: color 0.18s ease;
+      z-index: 2;
+    }
+
+    .config-input-icon-wrap input,
+    .config-input-icon-wrap select,
+    .config-input-icon-wrap textarea {
+      width: 100%;
+      height: 44px;
+      padding: 0 14px 0 40px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 13.5px;
+      color: #0f172a;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    }
+
+    .config-input-icon-wrap textarea {
+      height: auto;
+      min-height: 76px;
+      padding: 10px 14px 10px 40px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    .config-input-icon-wrap input:focus,
+    .config-input-icon-wrap select:focus,
+    .config-input-icon-wrap textarea:focus {
+      background: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 0 0 3.5px rgba(2, 132, 199, 0.14);
+    }
+
+    .config-input-icon-wrap input:focus + i.field-icon,
+    .config-input-icon-wrap select:focus + i.field-icon,
+    .config-input-icon-wrap textarea:focus + i.field-icon,
+    .config-input-icon-wrap:focus-within i.field-icon {
+      color: #0284c7;
+    }
+
+    /* Card Toggle Switch para Unidade Ativa */
+    .config-toggle-card {
+      grid-column: 1 / -1;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s ease;
+    }
+
+    .config-toggle-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+    }
+
+    .config-toggle-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      width: 100%;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .config-toggle-label input[type="checkbox"] {
+      display: none;
+    }
+
+    .toggle-slider {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      background: #cbd5e1;
+      border-radius: 99px;
+      transition: background 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+    }
+
+    .toggle-slider::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      background: #ffffff;
+      border-radius: 50%;
+      transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .config-toggle-label input:checked + .toggle-slider {
+      background: #22c55e;
+    }
+
+    .config-toggle-label input:checked + .toggle-slider::after {
+      transform: translateX(20px);
+    }
+
+    .toggle-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .toggle-info strong {
+      font-size: 13.5px;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .toggle-info small {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 1px;
+    }
+
+    .config-form-modal .modal-foot {
+      padding: 16px 24px;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    /* Dark Mode para Modal Config */
+    body.dark .config-form-modal { background: #1e293b !important; border-color: #334155 !important; }
+    body.dark .config-form-modal .modal-head { background: #1e293b; border-color: #334155; }
+    body.dark #configModalTitle { color: #f8fafc; }
+    body.dark .config-modal-subtitle { color: #94a3b8; }
+    body.dark .config-form-modal .modal-body { background: #0f172a; }
+    body.dark .config-field-group label { color: #cbd5e1; }
+    body.dark .config-input-icon-wrap input,
+    body.dark .config-input-icon-wrap select,
+    body.dark .config-input-icon-wrap textarea {
+      background: #1e293b;
+      border-color: #334155;
+      color: #f8fafc;
+    }
+    body.dark .config-input-icon-wrap input:focus,
+    body.dark .config-input-icon-wrap select:focus,
+    body.dark .config-input-icon-wrap textarea:focus {
+      background: #1e293b;
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3.5px rgba(56, 189, 248, 0.18);
+    }
+    body.dark .config-toggle-card { background: #1e293b; border-color: #334155; }
+    body.dark .toggle-info strong { color: #f8fafc; }
+    body.dark .toggle-info small { color: #94a3b8; }
+    body.dark .config-form-modal .modal-foot { background: #1e293b; border-color: #334155; }
   </style>
 </head>
 
@@ -4510,6 +5177,8 @@
       <div class="menu-section-title">Cadastros</div>
       <a class="nav-item" data-view="config" data-tooltip="Gestão de escolas, turmas, usuários e tabelas auxiliares"
         data-tooltip-pos="right"><i class="fa-solid fa-gear"></i><span class="nav-label">Configurações</span></a>
+      <a class="nav-item" data-view="logs" data-tooltip="Histórico de atividades, cancelamentos e cadastros no sistema"
+        data-tooltip-pos="right"><i class="fa-solid fa-file-shield"></i><span class="nav-label">Logs do Sistema</span></a>
       <div class="menu-divider"></div>
       <a class="nav-item" data-view="sobre" data-tooltip="Diretrizes legais e informações do sistema FICAI 4.0"
         data-tooltip-pos="right"><i class="fa-solid fa-circle-info"></i><span class="nav-label">Sobre o
@@ -4567,9 +5236,9 @@
               <div class="stat-card-head"><span class="stat-tag"><i class="fa-solid fa-bolt"></i> Ativo</span>
                 <div class="stat-icon-wrap"><i class="fa-solid fa-folder-open"></i></div>
               </div>
-              <div class="stat-number" id="dashStatAtivos">24</div>
+              <div class="stat-number" id="dashStatAtivos">5</div>
               <div class="stat-label">Casos Ativos</div>
-              <div class="stat-trend"><i class="fa-solid fa-arrow-trend-up"></i> +2 registrados esta semana</div>
+              <div class="stat-trend" id="dashStatAtivosTrend"><i class="fa-solid fa-arrow-trend-up"></i> Casos em acompanhamento escolar</div>
             </div>
             <div class="stat-card"
               data-tooltip="Principal motivo diagnosticado nos relatos escolares e visitas às famílias">
@@ -4578,7 +5247,7 @@
               </div>
               <div class="stat-number" id="dashStatMotivacao">45%</div>
               <div class="stat-label">Falta de motivação</div>
-              <div class="stat-trend"><i class="fa-solid fa-circle-info"></i> Maior incidência no 7º e 8º ano</div>
+              <div class="stat-trend"><i class="fa-solid fa-circle-info"></i> Diagnóstico de causa escolar</div>
             </div>
             <div class="stat-card orange"
               data-tooltip="Casos em que o estudante auxilia no sustento da família ou cuidados domésticos">
@@ -4603,7 +5272,7 @@
               <div class="stat-card-head"><span class="stat-tag"><i class="fa-solid fa-person-walking"></i> Alerta</span>
                 <div class="stat-icon-wrap"><i class="fa-solid fa-user-xmark"></i></div>
               </div>
-              <div class="stat-number" id="dashStatBuscaAtiva">71</div>
+              <div class="stat-number" id="dashStatBuscaAtiva">5</div>
               <div class="stat-label">Alunos Desistentes</div>
               <div class="stat-trend"><i class="fa-solid fa-magnifying-glass"></i> Em processo de busca ativa</div>
             </div>
@@ -4612,7 +5281,7 @@
               <div class="stat-card-head"><span class="stat-tag"><i class="fa-solid fa-check"></i> Sucesso</span>
                 <div class="stat-icon-wrap"><i class="fa-solid fa-circle-check"></i></div>
               </div>
-              <div class="stat-number" id="dashStatFinalizadas">138</div>
+              <div class="stat-number" id="dashStatFinalizadas">0</div>
               <div class="stat-label">FICAI Finalizadas</div>
               <div class="stat-trend"><i class="fa-solid fa-shield-halved"></i> Casos regularizados em 2026</div>
             </div>
@@ -4723,15 +5392,18 @@
             <!-- Grid Duas Colunas: Recebidos CT e Gerados -->
             <div class="dash-split-grid">
               <!-- Coluna 1: Recebidos CT -->
-              <div class="dash-split-card">
-                <div class="dash-split-head">
+              <div class="dash-split-card ct-card">
+                <div class="dash-split-head ct-head">
                   <div class="dash-split-title-group">
-                    <div class="dash-split-icon-badge ct-icon">
+                    <div class="dash-split-icon-badge ct-icon" data-tooltip="Documentos e devolutivas retornados pelo Conselho Tutelar">
                       <i class="fa-solid fa-inbox"></i>
                     </div>
-                    <strong class="dash-split-title">Recebidos do CT</strong>
+                    <div class="dash-title-meta">
+                      <strong class="dash-split-title">Recebidos do CT</strong>
+                      <span class="dash-split-subtitle"><i class="fa-solid fa-shield-halved"></i> Devolutivas & Retornos CT</span>
+                    </div>
                   </div>
-                  <span class="dash-split-counter" id="countRecebidosCT">Documentos recebidos (1 registro)</span>
+                  <span class="dash-split-counter ct-pill" id="countRecebidosCT">1 registro</span>
                 </div>
 
                 <div class="dash-list-table">
@@ -4765,15 +5437,18 @@
               </div>
 
               <!-- Coluna 2: Gerados -->
-              <div class="dash-split-card">
-                <div class="dash-split-head">
+              <div class="dash-split-card gerados-card">
+                <div class="dash-split-head gerados-head">
                   <div class="dash-split-title-group">
-                    <div class="dash-split-icon-badge gerados-icon">
-                      <i class="fa-solid fa-tag"></i>
+                    <div class="dash-split-icon-badge gerados-icon" data-tooltip="Fichas FICAI geradas e em acompanhamento pela escola">
+                      <i class="fa-solid fa-file-circle-plus"></i>
                     </div>
-                    <strong class="dash-split-title">Gerados</strong>
+                    <div class="dash-title-meta">
+                      <strong class="dash-split-title">Gerados</strong>
+                      <span class="dash-split-subtitle"><i class="fa-solid fa-school"></i> Fichas Criadas na Escola</span>
+                    </div>
                   </div>
-                  <span class="dash-split-counter" id="countGerados">Documentos gerados (4 registros)</span>
+                  <span class="dash-split-counter gerados-pill" id="countGerados">4 registros</span>
                 </div>
 
                 <div class="dash-list-table">
@@ -6571,6 +7246,63 @@
           </div>
         </section>
 
+        <!-- LOGS DO SISTEMA (HISTÓRICO DE ATIVIDADES E EVENTOS) -->
+        <section class="view" id="view-logs">
+          <div class="logs-page-header">
+            <div class="logs-page-badge">
+              <i class="fa-solid fa-file-lines"></i>
+            </div>
+            <div>
+              <h1 class="logs-page-title">Logs do Sistema</h1>
+              <p class="logs-page-subtitle">Registro de atividades e eventos importantes</p>
+            </div>
+          </div>
+
+          <div class="logs-main-card">
+            <div class="logs-filter-toolbar">
+              <div class="logs-search-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="logsSearchInput" class="logs-search-input" placeholder="Pesquisar...">
+              </div>
+              <div>
+                <select id="logsLevelFilter" class="logs-select" style="width: 100%;" title="Filtrar por nível ou tipo de evento">
+                  <option value="">Todos os níveis</option>
+                  <option value="create">Criação / Cadastro</option>
+                  <option value="update">Atualização em registros</option>
+                  <option value="cancel">Cancelamentos de FICAI</option>
+                  <option value="auth">Acessos e Autenticação</option>
+                  <option value="alert">Alertas e Avisos</option>
+                </select>
+              </div>
+              <div>
+                <input type="date" id="logsDateFilter" class="logs-date-input" style="width: 100%;" title="Filtrar por data específica">
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button type="button" id="logsBtnClear" class="logs-btn-clear">Limpar Filtros</button>
+                <button type="button" id="logsBtnExport" class="btn soft" style="height: 44px; padding: 0 16px; border-radius: 10px; font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;" title="Exportar logs em formato CSV"><i class="fa-solid fa-download"></i> Exportar</button>
+              </div>
+            </div>
+
+            <div class="logs-status-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 12.5px; color: #64748b; flex-wrap: wrap; gap: 8px;">
+              <span id="logsCounterText"><strong id="logsCountValue" style="color: #0f172a;">0</strong> registros de atividade encontrados</span>
+              <span style="display: flex; align-items: center; gap: 8px; font-weight: 500;">
+                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 2px rgba(34,197,94,0.2);"></span>
+                Monitoramento ativo em tempo real
+              </span>
+            </div>
+
+            <div id="logsTimelineList" class="logs-list-container">
+              <!-- Renderizado dinamicamente pelo JavaScript -->
+            </div>
+
+            <div id="logsEmptyState" class="logs-empty-state" style="display: none; text-align: center; padding: 48px 20px; background: #f8fafc; border-radius: 12px; border: 1px dashed #cbd5e1; margin-top: 10px;">
+              <i class="fa-solid fa-clock-rotate-left" style="font-size: 38px; color: #94a3b8; margin-bottom: 12px; display: block;"></i>
+              <h4 style="margin: 0; font-size: 15.5px; font-weight: 700; color: #334155;">Nenhum registro de log encontrado</h4>
+              <p style="margin: 6px 0 0; font-size: 13px; color: #64748b;">Tente ajustar os termos da pesquisa, limpar a data ou clicar no botão 'Limpar Filtros'.</p>
+            </div>
+          </div>
+        </section>
+
         <section class="view" id="view-sobre">
           <div class="card panel">
             <h1 class="page-title">FICAI 4.0</h1>
@@ -7534,16 +8266,24 @@
   <div class="modal" id="configModal" aria-hidden="true">
     <div class="modal-card config-form-modal" role="dialog" aria-modal="true" aria-labelledby="configModalTitle">
       <div class="modal-head">
-        <div><strong id="configModalTitle">Novo cadastro</strong>
-          <div class="config-modal-subtitle" id="configModalSubtitle">Preencha os dados abaixo.</div>
-        </div><button class="close" type="button" id="closeConfigModal" aria-label="Fechar">×</button>
+        <div class="config-modal-header-content">
+          <div class="config-modal-icon-badge" id="configModalBadge">
+            <i class="fa-solid fa-building-columns"></i>
+          </div>
+          <div>
+            <strong id="configModalTitle">Novo cadastro</strong>
+            <div class="config-modal-subtitle" id="configModalSubtitle">Preencha os dados abaixo.</div>
+          </div>
+        </div>
+        <button class="close" type="button" id="closeConfigModal" aria-label="Fechar">×</button>
       </div>
       <div class="modal-body">
         <form id="configForm" class="config-form-grid" autocomplete="off"></form>
       </div>
-      <div class="modal-foot"><button class="btn small soft" type="button"
-          id="cancelConfigModal">Cancelar</button><button class="btn small primary" type="button"
-          id="saveConfigModal"><i class="fa-solid fa-floppy-disk"></i> Salvar cadastro</button></div>
+      <div class="modal-foot">
+        <button class="btn small soft" type="button" id="cancelConfigModal">Cancelar</button>
+        <button class="btn primary" type="button" id="saveConfigModal"><i class="fa-solid fa-floppy-disk"></i> Salvar cadastro</button>
+      </div>
     </div>
   </div>
 
@@ -7734,13 +8474,13 @@
     const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
     const schoolData = { aparecida: { address: 'Estrada do Teixeira, nº 2 - Itaguaí/RJ', phone: '(21) 3782-9003' }, elmir: { address: 'Itaguaí/RJ - endereço cadastrado da unidade', phone: '(21) 3782-9003' }, mignone: { address: 'Itaguaí/RJ - endereço cadastrado da unidade', phone: '(21) 3782-9003' } };
     const studentData = {
-      demo: { nome: 'Aluno Demonstrativo', social: '', nascimento: '2012-05-14', cpf: '111.222.333-44', rg: '12.345.678-9', filiacao: 'Responsável 1 / Responsável 2', responsavel: 'Responsável Demonstrativo', residencia: 'Endereço demonstrativo - Itaguaí/RJ', telefone: '(21) 99999-0000', referencia: 'Parente de referência - Itaguaí/RJ' },
-      ana: { nome: 'Ana Clara Nascimento', social: '', nascimento: '2012-03-11', cpf: '678.901.234-56', rg: '78.901.234-5', filiacao: 'Clara Nascimento / Antônio Nascimento', responsavel: 'Clara Nascimento', residencia: 'Rua Acre, 15 - Coroa Grande - Itaguaí/RJ', telefone: '(21) 99999-1111', referencia: 'Avó materna' },
-      bruno: { nome: 'Bruno Henrique Silva', social: '', nascimento: '2013-07-21', cpf: '456.789.012-34', rg: '56.789.012-3', filiacao: 'Marta Henrique Silva / Jorge Silva', responsavel: 'Marta Henrique Silva', residencia: 'Rua General Bocaiúva, 210 - Itaguaí/RJ', telefone: '(21) 99999-2222', referencia: 'Tia de referência' },
-      carla: { nome: 'Carla Souza Ribeiro', social: '', nascimento: '2010-11-05', cpf: '345.678.901-23', rg: '45.678.901-2', filiacao: 'Juliana Souza Ribeiro / Carlos Ribeiro', responsavel: 'Juliana Souza Ribeiro', residencia: 'Rua Maria Luiza, 88 - Vila Margarida - Itaguaí/RJ', telefone: '(21) 99887-1122', referencia: 'Padrasto' },
-      diego: { nome: 'Diego Santos Alves', social: '', nascimento: '2011-01-30', cpf: '567.890.123-45', rg: '67.890.123-4', filiacao: 'Patrícia Santos / Marcos Alves', responsavel: 'Patrícia Santos', residencia: 'Rua Prefeito Dudu, 45 - Monte Serrat - Itaguaí/RJ', telefone: '(21) 98765-4321', referencia: 'Tio de referência' },
-      eduarda: { nome: 'Eduarda Gomes', social: '', nascimento: '2011-09-18', cpf: '123.456.789-01', rg: '23.456.789-0', filiacao: 'Mariana Gomes / Roberto Gomes', responsavel: 'Mariana Gomes', residencia: 'Rua das Flores, 142 - Centro - Itaguaí/RJ', telefone: '(21) 98877-6655', referencia: 'Tia paterna' },
-      lucas: { nome: 'Lucas Mendonça', social: '', nascimento: '2012-04-22', cpf: '234.567.890-12', rg: '34.567.890-1', filiacao: 'Fernanda Mendonça / Paulo Mendonça', responsavel: 'Fernanda Mendonça', residencia: 'Av. Prefeito Ismael Cavalcanti, 500 - Itaguaí/RJ', telefone: '(21) 97766-5544', referencia: 'Madrinha' }
+      demo: { nome: 'Aluno Demonstrativo', social: '', nascimento: '2012-05-14', cpf: '111.222.333-44', rg: '12.345.678-9', filiacao: 'Responsável 1 / Responsável 2', responsavel: 'Responsável Demonstrativo', residencia: 'Rua Amélia Louzada, 45 - Fazenda Caxias, Itaguaí - RJ, 23835-006', telefone: '(21) 99999-0000', referencia: 'Parente de referência - Itaguaí/RJ' },
+      ana: { nome: 'Ana Clara Nascimento', social: '', nascimento: '2012-03-11', cpf: '678.901.234-56', rg: '78.901.234-5', filiacao: 'Clara Nascimento / Antônio Nascimento', responsavel: 'Clara Nascimento', residencia: 'Rua Pastor Manuel Avelino de Souza, 120 - Fazenda Caxias, Itaguaí - RJ, 23835-006', telefone: '(21) 99999-1111', referencia: 'Avó materna' },
+      bruno: { nome: 'Bruno Henrique Silva', social: '', nascimento: '2013-07-21', cpf: '456.789.012-34', rg: '56.789.012-3', filiacao: 'Marta Henrique Silva / Jorge Silva', responsavel: 'Marta Henrique Silva', residencia: 'R. João Ramalho, 73 - São Salvador, Itaguaí - RJ, 23810-290', telefone: '(21) 99999-2222', referencia: 'Tia de referência' },
+      carla: { nome: 'Carla Souza Ribeiro', social: '', nascimento: '2010-11-05', cpf: '345.678.901-23', rg: '45.678.901-2', filiacao: 'Juliana Souza Ribeiro / Carlos Ribeiro', responsavel: 'Juliana Souza Ribeiro', residencia: 'Estrada Reta de Piranema, 450 - Parque de Santana, Itaguaí - RJ, 23810-000', telefone: '(21) 99887-1122', referencia: 'Padrasto' },
+      diego: { nome: 'Diego Santos Alves', social: '', nascimento: '2011-01-30', cpf: '567.890.123-45', rg: '67.890.123-4', filiacao: 'Patrícia Santos / Marcos Alves', responsavel: 'Patrícia Santos', residencia: 'Rua Prefeito Dudu, 105 - Monte Serrat, Itaguaí - RJ, 23810-280', telefone: '(21) 98765-4321', referencia: 'Tio de referência' },
+      eduarda: { nome: 'Eduarda Gomes', social: '', nascimento: '2011-09-18', cpf: '123.456.789-01', rg: '23.456.789-0', filiacao: 'Mariana Gomes / Roberto Gomes', responsavel: 'Mariana Gomes', residencia: 'Rua General Bocaiúva, 340 - Centro, Itaguaí - RJ, 23810-000', telefone: '(21) 98877-6655', referencia: 'Tia paterna' },
+      lucas: { nome: 'Lucas Mendonça', social: '', nascimento: '2012-04-22', cpf: '234.567.890-12', rg: '34.567.890-1', filiacao: 'Fernanda Mendonça / Paulo Mendonça', responsavel: 'Fernanda Mendonça', residencia: 'Estrada do Mazomba, 85 - Vila Nova, Itaguaí - RJ, 23815-000', telefone: '(21) 97766-5544', referencia: 'Madrinha' }
     };
 
     // Banco local do protótipo: IndexedDB (persiste alunos e FICAIs neste navegador)
@@ -7998,7 +8738,7 @@
     function setText(id, val) { const el = $(id); if (el) el.value = val || '' }
 
     // Navegação
-    function showView(name) { $$('.view').forEach(v => v.classList.remove('active')); $('#view-' + name)?.classList.add('active'); $$('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.view === name)); window.scrollTo({ top: 0, behavior: 'smooth' }); if (innerWidth < 980) $('#sidebar').classList.remove('open'); if (name === 'encerramento') populateEncerrarOptions(); }
+    function showView(name) { $$('.view').forEach(v => v.classList.remove('active')); $('#view-' + name)?.classList.add('active'); $$('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.view === name)); window.scrollTo({ top: 0, behavior: 'smooth' }); if (innerWidth < 980) $('#sidebar').classList.remove('open'); if (name === 'encerramento') populateEncerrarOptions(); if (name === 'logs') renderSystemLogs(); }
     $$('.nav-item').forEach(n => n.addEventListener('click', () => showView(n.dataset.view))); $$('[data-go]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); showView(b.dataset.go) }));
     const appShell = $('.app-shell'), sidebar = $('#sidebar'), hamb = $('#hamb');
     function applySidebarState(collapsed) {
@@ -8569,6 +9309,24 @@
       $('#subModalConfirmCancelamento')?.classList.remove('open');
       closeCancelamentoModal();
       toast(`FICAI n.º ${target.ficai} de ${target.student} cancelada com sucesso.`);
+
+      // Registrar nos Logs do Sistema
+      logSystemEvent({
+        level: 'cancel',
+        action: 'Cancelamento de FICAI',
+        description: `FICAI nº ${target.ficai} cancelada para o aluno ${target.student}. Motivo: ${motivo}.`,
+        user: resp || getActiveUserEmail(),
+        details: {
+          ficaiNumero: target.ficai,
+          aluno: target.student,
+          escola: target.escola || 'Não informada',
+          turma: target.turma || '-',
+          motivo: motivo,
+          justificativa: just,
+          responsavel: resp,
+          dataCancelamento: new Date().toISOString()
+        }
+      });
     });
 
     $('#btnActionEncerrar')?.addEventListener('click', () => {
@@ -8617,6 +9375,367 @@
 
     function saveStudentTagsMap(map) {
       localStorage.setItem(STUDENT_TAGS_KEY, JSON.stringify(map));
+    }
+
+    // ==============================================================================
+    // LOGS DO SISTEMA (HISTÓRICO DE ATIVIDADES, CANCELAMENTOS E CADASTROS)
+    // ==============================================================================
+    const SYSTEM_LOGS_KEY = 'ficai_system_logs_v2';
+
+    function getInitialSystemLogs() {
+      const now = Date.now();
+      const oneHourAgo = new Date(now - 1 * 3600 * 1000).toISOString();
+      const oneDayAgo = new Date(now - 1 * 24 * 3600 * 1000).toISOString();
+      const twoDaysAgo = new Date(now - 2 * 24 * 3600 * 1000).toISOString();
+      const threeDaysAgo = new Date(now - 3 * 24 * 3600 * 1000).toISOString();
+      const fourDaysAgo = new Date(now - 4 * 24 * 3600 * 1000).toISOString();
+
+      return [
+        {
+          id: 'log-101',
+          level: 'auth',
+          action: 'Login no Sistema',
+          description: 'Sessão iniciada com sucesso para CPD Infra / SMEDU (Administrador).',
+          user: 'cpdinfra@edu.itaguai.rj.gov.br',
+          timestamp: oneHourAgo,
+          details: {
+            usuario: 'CPD Infra / SMEDU',
+            email: 'cpdinfra@edu.itaguai.rj.gov.br',
+            perfil: 'Administrador (SMEDU / CPD)',
+            ip: '189.120.45.12 (Rede Municipal Itaguaí)'
+          }
+        },
+        {
+          id: 'log-102',
+          level: 'update',
+          action: 'Devolutiva do Conselho Tutelar',
+          description: 'Devolutiva formal registrada para FICAI nº 0021/2026 da aluna Ana Clara Nascimento. Movida para "Recebidos do CT".',
+          user: 'conselhotutelar@itaguai.rj.gov.br',
+          timestamp: oneHourAgo,
+          details: {
+            ficaiNumero: '0021/2026',
+            aluno: 'Ana Clara Nascimento',
+            turma: '7º Ano B',
+            escola: 'E.M. Elmir Figueira',
+            diligencia: 'Visita domiciliar realizada pela equipe do CT. Família notificada e orientado retorno imediato às aulas.',
+            status: 'Recebidos do CT'
+          }
+        },
+        {
+          id: 'log-103',
+          level: 'create',
+          action: 'Criação de FICAI',
+          description: 'Nova FICAI nº 0020/2026 gerada para a aluna Ana Clara Nascimento na C.M. Aparecida Azêdo.',
+          user: 'cm.aparecidaazedo@edu.itaguai.rj.gov.br',
+          timestamp: oneDayAgo,
+          details: {
+            ficaiNumero: '0020/2026',
+            ano: '2026',
+            aluno: 'Ana Clara Nascimento',
+            turma: '7º Ano B',
+            escola: 'C.M. Aparecida Azêdo',
+            motivoPrincipal: 'Falta de motivação / Risco Social',
+            totalFaltas: 14
+          }
+        },
+        {
+          id: 'log-104',
+          level: 'update',
+          action: 'Encaminhamento ao Conselho Tutelar',
+          description: 'FICAI nº 0018/2026 da aluna Carla Souza Ribeiro encaminhada ao Conselho Tutelar para diligências externas.',
+          user: 'em.elmirfigueira@edu.itaguai.rj.gov.br',
+          timestamp: twoDaysAgo,
+          details: {
+            ficaiNumero: '0018/2026',
+            aluno: 'Carla Souza Ribeiro',
+            turma: '9º Ano A',
+            escola: 'E.M. Elmir Figueira',
+            destino: 'Conselho Tutelar de Itaguaí',
+            parecerInicial: 'Aluno com 18 faltas injustificadas e responsável não atendeu convocações escolares.'
+          }
+        },
+        {
+          id: 'log-105',
+          level: 'create',
+          action: 'Criação de FICAI',
+          description: 'Nova FICAI nº 0019/2026 gerada para o aluno Diego Santos Alves no CIEP 496 Maestro Francisco Mignone.',
+          user: 'ciep496@edu.itaguai.rj.gov.br',
+          timestamp: twoDaysAgo,
+          details: {
+            ficaiNumero: '0019/2026',
+            ano: '2026',
+            aluno: 'Diego Santos Alves',
+            turma: '8º Ano C',
+            escola: 'CIEP 496 Maestro Francisco Mignone',
+            motivoPrincipal: 'Trabalho familiar / Cuidado com irmãos',
+            totalFaltas: 16
+          }
+        },
+        {
+          id: 'log-106',
+          level: 'create',
+          action: 'Criação de FICAI',
+          description: 'Nova FICAI nº 0017/2026 gerada para o aluno Bruno Henrique Silva na E.M. Elmir Figueira.',
+          user: 'em.elmirfigueira@edu.itaguai.rj.gov.br',
+          timestamp: threeDaysAgo,
+          details: {
+            ficaiNumero: '0017/2026',
+            ano: '2026',
+            aluno: 'Bruno Henrique Silva',
+            turma: '6º Ano A',
+            escola: 'E.M. Elmir Figueira',
+            endereco: 'R. João Ramalho, 73 - São Salvador, Itaguaí - RJ, 23810-290',
+            motivoPrincipal: 'Aviso de faltas / Busca ativa em andamento'
+          }
+        },
+        {
+          id: 'log-107',
+          level: 'update',
+          action: 'Sincronização de Escolas Supabase',
+          description: 'Sincronização cadastral das 64 unidades escolares municipais de Itaguaí com o banco Supabase.',
+          user: 'cpdinfra@edu.itaguai.rj.gov.br',
+          timestamp: fourDaysAgo,
+          details: {
+            modulo: 'escolas',
+            totalUnidades: 67,
+            municipio: 'Itaguaí / RJ',
+            bancoCloud: 'https://ojvxsrvmmkjxfgyczypm.supabase.co',
+            resultado: 'Sucesso'
+          }
+        }
+      ];
+    }
+
+    function getSystemLogs() {
+      try {
+        const raw = localStorage.getItem(SYSTEM_LOGS_KEY);
+        if (raw) {
+          const list = JSON.parse(raw);
+          if (Array.isArray(list) && list.length > 0) return list;
+        }
+      } catch (_e) { }
+      const initial = getInitialSystemLogs();
+      saveSystemLogs(initial);
+      return initial;
+    }
+
+    function saveSystemLogs(logs) {
+      try {
+        localStorage.setItem(SYSTEM_LOGS_KEY, JSON.stringify(logs));
+      } catch (_e) { }
+    }
+
+    function getActiveUserEmail() {
+      try {
+        const s = getActiveSession();
+        if (s && s.email) return s.email;
+      } catch (_e) { }
+      return 'cpdinfra@edu.itaguai.rj.gov.br';
+    }
+
+    function logSystemEvent({ level = 'update', action = 'Evento do Sistema', description = '', user = '', details = null, timestamp = null }) {
+      const logs = getSystemLogs();
+      const newLog = {
+        id: 'log-' + Date.now() + '-' + Math.floor(Math.random() * 10000),
+        level,
+        action,
+        description,
+        user: user || getActiveUserEmail() || 'Sistema',
+        details: details || {},
+        timestamp: timestamp || new Date().toISOString()
+      };
+      logs.unshift(newLog);
+      if (logs.length > 500) logs.length = 500;
+      saveSystemLogs(logs);
+      if ($('#view-logs')?.classList.contains('active')) {
+        renderSystemLogs();
+      }
+      return newLog;
+    }
+
+    function formatRelativeTime(isoString) {
+      if (!isoString) return 'recentemente';
+      try {
+        const date = new Date(isoString);
+        if (isNaN(date.getTime())) return isoString;
+        const now = new Date();
+        const diffMs = now - date;
+        const diffSec = Math.floor(diffMs / 1000);
+        const diffMin = Math.floor(diffSec / 60);
+        const diffHours = Math.floor(diffMin / 60);
+        const diffDays = Math.floor(diffHours / 24);
+
+        if (diffSec < 45) return 'agora mesmo';
+        if (diffMin < 60) return `há ${diffMin} ${diffMin === 1 ? 'minuto' : 'minutos'}`;
+        if (diffHours < 24) return `há ${diffHours} ${diffHours === 1 ? 'hora' : 'horas'}`;
+        if (diffDays === 1) return 'há 1 dia';
+        if (diffDays < 7) return `há ${diffDays} dias`;
+        if (diffDays < 30) return `há ${Math.floor(diffDays / 7)} sem.`;
+        return date.toLocaleDateString('pt-BR');
+      } catch (_e) {
+        return isoString;
+      }
+    }
+
+    function getLogIconClass(level) {
+      switch (level) {
+        case 'create': return 'fa-regular fa-circle-check';
+        case 'cancel': return 'fa-solid fa-circle-xmark';
+        case 'alert': return 'fa-solid fa-triangle-exclamation';
+        case 'auth': return 'fa-solid fa-shield-halved';
+        case 'update':
+        default: return 'fa-regular fa-circle-info';
+      }
+    }
+
+    function renderSystemLogs() {
+      const container = $('#logsTimelineList');
+      const emptyState = $('#logsEmptyState');
+      const counterVal = $('#logsCountValue');
+      if (!container) return;
+
+      const search = ($('#logsSearchInput')?.value || '').toLowerCase().trim();
+      const levelFilter = $('#logsLevelFilter')?.value || '';
+      const dateFilter = $('#logsDateFilter')?.value || '';
+
+      const allLogs = getSystemLogs();
+      const filtered = allLogs.filter(log => {
+        if (levelFilter && log.level !== levelFilter) return false;
+        if (dateFilter) {
+          const logDate = (log.timestamp || '').split('T')[0];
+          if (logDate !== dateFilter) return false;
+        }
+        if (search) {
+          const hay = `${log.action} ${log.description} ${log.user} ${JSON.stringify(log.details || {})}`.toLowerCase();
+          if (!hay.includes(search)) return false;
+        }
+        return true;
+      });
+
+      if (counterVal) counterVal.textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        if (emptyState) emptyState.style.display = 'block';
+        return;
+      }
+
+      if (emptyState) emptyState.style.display = 'none';
+
+      container.innerHTML = filtered.map(log => {
+        const iconClass = getLogIconClass(log.level);
+        const relTime = formatRelativeTime(log.timestamp);
+        const formattedDetails = log.details && Object.keys(log.details).length > 0
+          ? JSON.stringify(log.details, null, 2)
+          : null;
+
+        return `
+          <div class="log-item-card level-${escapeHtml(log.level)}" id="log-card-${log.id}">
+            <div class="log-item-icon">
+              <i class="${iconClass}"></i>
+            </div>
+            <div class="log-item-body">
+              <div class="log-item-header">
+                <h4 class="log-item-title">${escapeHtml(log.action)}</h4>
+                <span class="log-item-time" title="${escapeHtml(log.timestamp || '')}">${escapeHtml(relTime)}</span>
+              </div>
+              <div class="log-item-desc">${escapeHtml(log.description)}</div>
+              <div class="log-item-user">Usuário: ${escapeHtml(log.user)}</div>
+              ${formattedDetails ? `
+                <button type="button" class="log-tech-toggle" data-log-id="${log.id}">
+                  <span>Ver Detalhes Técnicos</span> <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="log-tech-details" id="log-tech-${log.id}">
+                  <button type="button" class="log-tech-copy-btn" data-copy-id="${log.id}" title="Copiar detalhes em JSON"><i class="fa-regular fa-copy"></i> Copiar</button>
+                  <pre style="margin: 0; white-space: pre-wrap; word-break: break-all;">${escapeHtml(formattedDetails)}</pre>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Adiciona eventos aos acordeões de detalhes técnicos
+      container.querySelectorAll('.log-tech-toggle').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const logId = btn.dataset.logId;
+          const detailsBox = document.getElementById(`log-tech-${logId}`);
+          if (!detailsBox) return;
+          const isOpen = detailsBox.classList.contains('open');
+          if (isOpen) {
+            detailsBox.classList.remove('open');
+            btn.innerHTML = `<span>Ver Detalhes Técnicos</span> <i class="fa-solid fa-chevron-down"></i>`;
+          } else {
+            detailsBox.classList.add('open');
+            btn.innerHTML = `<span>Ocultar Detalhes Técnicos</span> <i class="fa-solid fa-chevron-up"></i>`;
+          }
+        });
+      });
+
+      // Adiciona evento de cópia
+      container.querySelectorAll('.log-tech-copy-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const logId = btn.dataset.copyId;
+          const log = allLogs.find(l => l.id === logId);
+          if (log && log.details) {
+            navigator.clipboard?.writeText(JSON.stringify(log.details, null, 2)).then(() => {
+              toast('Detalhes técnicos copiados para a área de transferência!');
+            }).catch(() => {
+              toast('Não foi possível copiar automaticamente.');
+            });
+          }
+        });
+      });
+    }
+
+    function exportSystemLogsCsv() {
+      const logs = getSystemLogs();
+      if (!logs || logs.length === 0) {
+        toast('Nenhum log disponível para exportação.');
+        return;
+      }
+
+      const headers = ['ID', 'Data/Hora', 'Nível', 'Ação', 'Descrição', 'Usuário', 'Detalhes'];
+      const rows = logs.map(l => [
+        `"${l.id}"`,
+        `"${l.timestamp || ''}"`,
+        `"${l.level || ''}"`,
+        `"${(l.action || '').replace(/"/g, '""')}"`,
+        `"${(l.description || '').replace(/"/g, '""')}"`,
+        `"${(l.user || '').replace(/"/g, '""')}"`,
+        `"${JSON.stringify(l.details || {}).replace(/"/g, '""')}"`
+      ]);
+
+      const csvContent = '\uFEFF' + [headers.join(';'), ...rows.map(r => r.join(';'))].join('\r\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `FICAI_Logs_Sistema_${new Date().toISOString().split('T')[0]}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      toast('Exportação de logs em CSV concluída com sucesso!');
+    }
+
+    function initSystemLogsListeners() {
+      $('#logsSearchInput')?.addEventListener('input', () => renderSystemLogs());
+      $('#logsLevelFilter')?.addEventListener('change', () => renderSystemLogs());
+      $('#logsDateFilter')?.addEventListener('change', () => renderSystemLogs());
+
+      $('#logsBtnClear')?.addEventListener('click', () => {
+        if ($('#logsSearchInput')) $('#logsSearchInput').value = '';
+        if ($('#logsLevelFilter')) $('#logsLevelFilter').value = '';
+        if ($('#logsDateFilter')) $('#logsDateFilter').value = '';
+        renderSystemLogs();
+        toast('Filtros de logs redefinidos.');
+      });
+
+      $('#logsBtnExport')?.addEventListener('click', () => {
+        exportSystemLogsCsv();
+      });
     }
 
     // Retorna todos os alunos cujas checkboxes estão marcadas
@@ -9269,6 +10388,27 @@
         await loadSavedStudents();
         await updateAllDynamicStats();
         if (!silent) toast(`FICAI ${record.numero} salva com sucesso e listada em Gerados no Dashboard.`);
+
+        // Registrar nos Logs do Sistema
+        logSystemEvent({
+          level: existing ? 'update' : 'create',
+          action: existing ? 'Atualização de FICAI' : 'Criação de FICAI',
+          description: existing
+            ? `FICAI nº ${record.numero} atualizada para o aluno ${record.aluno}. Escola: ${record.escola || 'Não informada'}.`
+            : `Novo registro de FICAI nº ${record.numero} criado para o aluno ${record.aluno}. Escola: ${record.escola || 'Não informada'}.`,
+          user: getActiveUserEmail(),
+          details: {
+            numero: record.numero,
+            ano: record.ano,
+            aluno: record.aluno,
+            escola: record.escola,
+            turma: record.turma,
+            situacao: record.situacao,
+            faltas: form.totalFaltas || 0,
+            timestamp: now
+          }
+        });
+
         return record;
       } catch (err) {
         console.error(err);
@@ -9288,6 +10428,19 @@
       const escolaName = record.escola || 'E.M. Elmir Figueira';
       const now = new Date().toISOString();
       const dateToday = isoToday();
+
+      logSystemEvent({
+        level: 'update',
+        action: 'Encaminhamento ao Conselho Tutelar',
+        description: `FICAI nº ${ficaiNum} de ${studentName} encaminhada formalmente ao Conselho Tutelar.`,
+        user: getActiveUserEmail(),
+        details: {
+          ficaiNumero: ficaiNum,
+          aluno: studentName,
+          escola: escolaName,
+          dataEncaminhamento: now
+        }
+      });
 
       const entry = {
         id: (crypto.randomUUID?.() || ('enc-ct-' + Date.now())),
@@ -10351,7 +11504,7 @@
     function activeBadge(v) { return v !== false ? '<span class="status-pill"><i class="fa-solid fa-circle"></i>Ativo</span>' : '<span class="status-pill off"><i class="fa-solid fa-circle"></i>Inativo</span>' }
     const CONFIG_META = {
       usuarios: { title: 'usuário', columns: ['usuario', 'nivel', 'cargo', 'funcao', 'unidade', 'ativo'], fields: [['usuario', 'Nome do usuário', 'text', true], ['email', 'E-mail / login', 'email', false], ['nivel', 'Nível de acesso', 'select', true, ['Operacional', 'Gestor', 'Administrador', 'Conselho Tutelar']], ['cargo', 'Cargo', 'text', true], ['funcao', 'Função', 'text', true], ['unidade', 'Unidade', 'text', true], ['ativo', 'Usuário ativo', 'checkbox', false]] },
-      escolas: { title: 'escola', columns: ['inep', 'nome', 'diretor', 'bairro', 'telefone', 'email', 'modalidade', 'ativo'], fields: [['inep', 'Código INEP', 'text', false], ['nome', 'Nome da unidade escolar', 'text', true], ['diretor', 'Diretor(a)', 'text', false], ['endereco', 'Endereço completo', 'text', true], ['bairro', 'Bairro / Localidade', 'text', false], ['telefone', 'Telefone / Ramal', 'text', false], ['email', 'E-mail institucional', 'email', false], ['modalidade', 'Modalidade de Ensino', 'text', false], ['maps_link', 'Link no Google Maps', 'text', false], ['ativo', 'Unidade ativa', 'checkbox', false]] },
+      escolas: { title: 'escola', columns: ['inep', 'nome', 'diretor', 'bairro', 'telefone', 'email', 'modalidade', 'ativo'], fields: [['inep', 'Código INEP', 'text', false], ['nome', 'Nome da unidade escolar', 'text', true], ['diretor', 'Diretor(a)', 'text', false], ['endereco', 'Endereço completo', 'text', true], ['bairro', 'Bairro / Localidade', 'text', false], ['telefone', 'Telefone / Ramal', 'text', false], ['email', 'E-mail institucional', 'email', false], ['modalidade', 'Modalidade de Ensino', 'dynamic-modalidade', false], ['maps_link', 'Link no Google Maps', 'text', false], ['ativo', 'Unidade ativa', 'checkbox', false]] },
       turmas: { title: 'turma', columns: ['ano', 'turma', 'turno', 'modalidade', 'escola', 'ativo'], fields: [['ano', 'Ano Escolar', 'text', true], ['turma', 'Turma', 'text', true], ['turno', 'Turno', 'select', true, ['Manhã', 'Tarde', 'Noite', 'Integral']], ['modalidade', 'Modalidade', 'dynamic-modalidade', true], ['escola', 'Escola', 'dynamic-escola', false], ['ativo', 'Turma ativa', 'checkbox', false]] },
       modalidades: { title: 'modalidade', columns: ['nome', 'descricao', 'ativo'], fields: [['nome', 'Nome da modalidade', 'text', true], ['descricao', 'Descrição', 'textarea', false], ['ativo', 'Modalidade ativa', 'checkbox', false]] },
       permissoes: { title: 'permissão', columns: ['perfil', 'modulo', 'visualizar', 'cadastrar', 'editar', 'excluir'], fields: [['perfil', 'Perfil / nível de acesso', 'text', true], ['modulo', 'Módulo', 'select', true, ['Dashboard', 'Gerar FICAI', 'Dados da Ficha', 'RAE', 'Conselho Tutelar', 'Encerramento de Casos', 'Configurações', 'Todos os módulos']], ['visualizar', 'Pode visualizar', 'checkbox', false], ['cadastrar', 'Pode cadastrar', 'checkbox', false], ['editar', 'Pode editar', 'checkbox', false], ['excluir', 'Pode excluir', 'checkbox', false]] },
@@ -10369,18 +11522,135 @@
       const count = $(`[data-config-count="${type}"]`); if (count) count.textContent = `${rows.length} registro${rows.length === 1 ? '' : 's'}`;
     }
     function renderAllConfigs() { Object.keys(CONFIG_META).forEach(renderConfig) }
-    function optionsForField(kind) { if (kind === 'dynamic-modalidade') return (configData.modalidades || []).filter(x => x.ativo !== false).map(x => x.nome); if (kind === 'dynamic-escola') return (configData.escolas || []).filter(x => x.ativo !== false).map(x => x.nome); return [] }
+    function optionsForField(kind) {
+      if (kind === 'dynamic-modalidade') {
+        const list = (configData.modalidades || []).filter(x => x.ativo !== false).map(x => x.nome);
+        const defaults = [
+          'Pré ao 5º Ano',
+          'Pré ao 9º Ano',
+          'Berçário NI e NII',
+          'Pré ao 9º Ano EJA',
+          'Ensino Fundamental I',
+          'Ensino Fundamental II',
+          'EJA - Educação de Jovens e Adultos',
+          'Educação Especial AEE'
+        ];
+        const set = new Set([...list, ...defaults]);
+        return Array.from(set);
+      }
+      if (kind === 'dynamic-escola') return (configData.escolas || []).filter(x => x.ativo !== false).map(x => x.nome);
+      return [];
+    }
+
+    function getConfigFieldIcon(key) {
+      switch (key) {
+        case 'inep': return 'fa-solid fa-hashtag';
+        case 'nome': return 'fa-solid fa-school';
+        case 'diretor': return 'fa-solid fa-user-tie';
+        case 'endereco': return 'fa-solid fa-location-dot';
+        case 'bairro': return 'fa-solid fa-map-pin';
+        case 'telefone': return 'fa-solid fa-phone';
+        case 'email': return 'fa-solid fa-envelope';
+        case 'modalidade': return 'fa-solid fa-layer-group';
+        case 'maps_link': return 'fa-solid fa-link';
+        case 'usuario': return 'fa-solid fa-user';
+        case 'cargo': return 'fa-solid fa-id-badge';
+        case 'funcao': return 'fa-solid fa-briefcase';
+        case 'unidade': return 'fa-solid fa-building';
+        case 'ano': return 'fa-solid fa-calendar';
+        case 'turma': return 'fa-solid fa-chalkboard-user';
+        case 'turno': return 'fa-solid fa-clock';
+        case 'tipo': return 'fa-solid fa-user-gear';
+        case 'matricula': return 'fa-solid fa-id-card';
+        case 'ordem': return 'fa-solid fa-arrow-down-1-9';
+        case 'grupo': return 'fa-solid fa-folder-tree';
+        default: return 'fa-solid fa-pen';
+      }
+    }
+
+    function getConfigModalBadgeIcon(type) {
+      switch (type) {
+        case 'escolas': return 'fa-solid fa-building-columns';
+        case 'usuarios': return 'fa-solid fa-users';
+        case 'turmas': return 'fa-solid fa-chalkboard-user';
+        case 'modalidades': return 'fa-solid fa-layer-group';
+        case 'permissoes': return 'fa-solid fa-shield-halved';
+        case 'pessoas': return 'fa-solid fa-user-check';
+        case 'procedimentos': return 'fa-solid fa-list-check';
+        case 'motivos': return 'fa-solid fa-file-medical';
+        default: return 'fa-solid fa-pen-to-square';
+      }
+    }
+
     function openConfigModal(type, id = null) {
       const meta = CONFIG_META[type]; if (!meta) return; configEditing = { type, id }; const rec = id ? (configData[type] || []).find(x => x.id === id) || {} : {};
-      $('#configModalTitle').textContent = id ? `Editar ${meta.title}` : `Adicionar ${meta.title}`; $('#configModalSubtitle').textContent = 'Os dados ficam salvos neste protótipo e podem ser alterados posteriormente.';
+      const badgeIcon = getConfigModalBadgeIcon(type);
+      const badgeEl = $('#configModalBadge');
+      if (badgeEl) badgeEl.innerHTML = `<i class="${badgeIcon}"></i>`;
+
+      $('#configModalTitle').textContent = id ? `Editar ${meta.title}` : `Adicionar ${meta.title}`;
+      $('#configModalSubtitle').textContent = 'Os dados ficam salvos no sistema e podem ser alterados a qualquer momento.';
+      
       $('#configForm').innerHTML = meta.fields.map(([key, label, kind, required, opts]) => {
-        const val = rec[key]; const req = required ? 'required' : ''; const full = (kind === 'textarea' || key === 'endereco' || key === 'descricao') ? ' full' : '';
-        if (kind === 'checkbox') return `<label class="config-check-field${full}"><input type="checkbox" data-config-field="${key}" ${val !== false && !id ? 'checked' : val ? 'checked' : ''}><span>${escapeHtml(label)}</span></label>`;
-        let options = opts || optionsForField(kind); if (kind === 'select' || kind.startsWith('dynamic-')) return `<div class="${full.trim()}"><label>${escapeHtml(label)}${required ? ' *' : ''}</label><select data-config-field="${key}" ${req}><option value="">Selecione...</option>${options.map(o => `<option ${String(val || '') === String(o) ? 'selected' : ''}>${escapeHtml(o)}</option>`).join('')}</select></div>`;
-        if (kind === 'textarea') return `<div class="full"><label>${escapeHtml(label)}${required ? ' *' : ''}</label><textarea data-config-field="${key}" ${req}>${escapeHtml(String(val || ''))}</textarea></div>`;
-        return `<div class="${full.trim()}"><label>${escapeHtml(label)}${required ? ' *' : ''}</label><input data-config-field="${key}" type="${kind}" ${kind === 'number' ? 'min="1" step="1"' : ''} value="${escapeHtml(String(val ?? (kind === 'number' ? '1' : '')))}" ${req}></div>`;
+        const val = rec[key];
+        const req = required ? 'required' : '';
+        const isFull = (kind === 'textarea' || key === 'nome' || key === 'endereco' || key === 'descricao' || key === 'maps_link');
+        const fullClass = isFull ? ' full' : '';
+        const iconClass = getConfigFieldIcon(key);
+
+        if (kind === 'checkbox') {
+          const isChecked = val !== false && !id ? true : !!val;
+          let toggleDesc = 'Permite utilização e exibição ativa deste registro no sistema';
+          if (key === 'dashboard') toggleDesc = 'Exibe este motivo como indicador no Dashboard analítico';
+          if (key === 'visualizar' || key === 'cadastrar' || key === 'editar' || key === 'excluir') toggleDesc = 'Concede esta ação para o perfil selecionado';
+
+          return `
+            <div class="config-toggle-card">
+              <label class="config-toggle-label">
+                <input type="checkbox" data-config-field="${key}" ${isChecked ? 'checked' : ''}>
+                <span class="toggle-slider"></span>
+                <span class="toggle-info">
+                  <strong>${escapeHtml(label)}</strong>
+                  <small>${toggleDesc}</small>
+                </span>
+              </label>
+            </div>
+          `;
+        }
+
+        let options = opts || optionsForField(kind);
+        if (val && !options.includes(val) && (kind === 'select' || kind.startsWith('dynamic-'))) {
+          options = [val, ...options];
+        }
+
+        let inputHtml = '';
+        if (kind === 'select' || kind.startsWith('dynamic-')) {
+          inputHtml = `
+            <select data-config-field="${key}" ${req}>
+              <option value="">Selecione...</option>
+              ${options.map(o => `<option ${String(val || '') === String(o) ? 'selected' : ''}>${escapeHtml(o)}</option>`).join('')}
+            </select>
+          `;
+        } else if (kind === 'textarea') {
+          inputHtml = `<textarea data-config-field="${key}" ${req} placeholder="Digite ${label.toLowerCase()}...">${escapeHtml(String(val || ''))}</textarea>`;
+        } else {
+          inputHtml = `<input data-config-field="${key}" type="${kind}" ${kind === 'number' ? 'min="1" step="1"' : ''} value="${escapeHtml(String(val ?? (kind === 'number' ? '1' : '')))}" ${req} placeholder="Digite ${label.toLowerCase()}...">`;
+        }
+
+        return `
+          <div class="config-field-group${fullClass}">
+            <label>${escapeHtml(label)}${required ? ' <span class="req-star">*</span>' : ''}</label>
+            <div class="config-input-icon-wrap">
+              <i class="field-icon ${iconClass}"></i>
+              ${inputHtml}
+            </div>
+          </div>
+        `;
       }).join('');
-      $('#configModal').classList.add('open'); $('#configModal').setAttribute('aria-hidden', 'false'); setTimeout(() => $('#configForm [data-config-field]')?.focus(), 30);
+
+      $('#configModal').classList.add('open');
+      $('#configModal').setAttribute('aria-hidden', 'false');
+      setTimeout(() => $('#configForm [data-config-field]')?.focus(), 40);
     }
     function closeConfigModal() { $('#configModal').classList.remove('open'); $('#configModal').setAttribute('aria-hidden', 'true'); configEditing = { type: null, id: null } }
     function collectConfigForm() { const data = {}; $$('#configForm [data-config-field]').forEach(el => { const k = el.dataset.configField; data[k] = el.type === 'checkbox' ? el.checked : (el.type === 'number' ? Number(el.value || 0) : el.value.trim()) }); return data }
@@ -10473,8 +11743,14 @@
       'raiz da serra': { lng: -43.7280, lat: -22.8050, label: 'Raiz da Serra, Itaguaí' },
       'mazomba': { lng: -43.7550, lat: -22.8350, label: 'Mazomba, Itaguaí' },
       'saco da prata': { lng: -43.7420, lat: -22.8300, label: 'Saco da Prata, Itaguaí' },
-      'jardim america': { lng: -43.7720, lat: -22.8640, label: 'Jardim América, Itaguaí' },
-      'jardim américa': { lng: -43.7720, lat: -22.8640, label: 'Jardim América, Itaguaí' },
+      'fazenda caxias': { lng: -43.7758, lat: -22.8584, label: 'Fazenda Caxias, Itaguaí' },
+      'caxias': { lng: -43.7758, lat: -22.8584, label: 'Fazenda Caxias, Itaguaí' },
+      'sao salvador': { lng: -43.7790, lat: -22.8620, label: 'São Salvador, Itaguaí' },
+      'são salvador': { lng: -43.7790, lat: -22.8620, label: 'São Salvador, Itaguaí' },
+      'joao ramalho': { lng: -43.7790, lat: -22.8620, label: 'São Salvador, Itaguaí' },
+      'joão ramalho': { lng: -43.7790, lat: -22.8620, label: 'São Salvador, Itaguaí' },
+      'parque de santana': { lng: -43.7650, lat: -22.8540, label: 'Parque de Santana, Itaguaí' },
+      'santana': { lng: -43.7650, lat: -22.8540, label: 'Parque de Santana, Itaguaí' },
       'ibirapitanga': { lng: -43.7680, lat: -22.8600, label: 'Ibirapitanga, Itaguaí' }
     };
 
@@ -11728,29 +13004,30 @@
       try {
         const ficais = await dbGetAll('ficais');
         
-        // Contagem de status a partir do banco
+        // Contagem de registros ativos no layout split (Recebidos CT e Gerados)
+        const countCT = $$('#listRecebidosCT .dash-list-row').length;
+        const countGerados = $$('#listGerados .dash-list-row').length;
+        const demoAtivos = countCT + countGerados;
+
+        // Contagem de status a partir do banco (IndexedDB / Supabase)
         const encerradas = ficais.filter(r => r.isEncerrado || (r.situacao && r.situacao.toLowerCase().includes('encerrad'))).length;
         const ativasSalvas = ficais.filter(r => !r.isEncerrado && (!r.situacao || !r.situacao.toLowerCase().includes('encerrad'))).length;
         
-        // Valores base de referência da rede somados às FICAIs persistidas
-        const baseAtivos = 24;
-        const baseFinalizadas = 138;
-        const baseDesistentes = 71;
-        
-        const totalAtivos = baseAtivos + ativasSalvas;
-        const totalFinalizadas = baseFinalizadas + encerradas;
-        const totalDesistentes = baseDesistentes + ativasSalvas;
+        // Cálculo real de estatísticas sem offsets estáticos
+        const totalAtivos = demoAtivos + ativasSalvas;
+        const totalFinalizadas = encerradas;
+        const totalDesistentes = totalAtivos;
         
         if ($('#dashStatAtivos')) $('#dashStatAtivos').textContent = totalAtivos.toString();
         if ($('#dashStatFinalizadas')) $('#dashStatFinalizadas').textContent = totalFinalizadas.toString();
         if ($('#dashStatBuscaAtiva')) $('#dashStatBuscaAtiva').textContent = totalDesistentes.toString();
 
-        // Contagem proporcional dos motivos de infrequência registrados
+        // Contagem de motivos de infrequência registrados nas FICAIs salvas
         let countMotivacao = 0, countSocial = 0, countSaude = 0, countTotal = 0;
         ficais.forEach(r => {
           const motivos = r.data?.motivos || [];
           motivos.forEach(m => {
-            const lower = m.toLowerCase();
+            const lower = String(m || '').toLowerCase();
             countTotal++;
             if (lower.includes('motiva') || lower.includes('desinteresse') || lower.includes('rendimento')) countMotivacao++;
             else if (lower.includes('trabalho') || lower.includes('fam') || lower.includes('renda') || lower.includes('social')) countSocial++;
@@ -11759,12 +13036,17 @@
         });
 
         if (countTotal > 0) {
-          const pctMotivacao = Math.max(10, Math.round((countMotivacao / countTotal) * 100)) || 45;
-          const pctSocial = Math.max(5, Math.round((countSocial / countTotal) * 100)) || 30;
-          const pctSaude = Math.max(5, Math.round((countSaude / countTotal) * 100)) || 15;
+          const pctMotivacao = Math.max(0, Math.round((countMotivacao / countTotal) * 100));
+          const pctSocial = Math.max(0, Math.round((countSocial / countTotal) * 100));
+          const pctSaude = Math.max(0, Math.round((countSaude / countTotal) * 100));
           if ($('#dashStatMotivacao')) $('#dashStatMotivacao').textContent = `${pctMotivacao}%`;
           if ($('#dashStatSocial')) $('#dashStatSocial').textContent = `${pctSocial}%`;
           if ($('#dashStatSaude')) $('#dashStatSaude').textContent = `${pctSaude}%`;
+        } else {
+          // Percentuais referenciais padrão da rede para protótipo
+          if ($('#dashStatMotivacao')) $('#dashStatMotivacao').textContent = '45%';
+          if ($('#dashStatSocial')) $('#dashStatSocial').textContent = '30%';
+          if ($('#dashStatSaude')) $('#dashStatSaude').textContent = '15%';
         }
 
         // Estatísticas do Conselho Tutelar
@@ -11772,8 +13054,11 @@
         const devolvidasCT = ficais.filter(r => r.hasDevolutivaCT || (r.situacao && r.situacao.includes('Devolutiva CT'))).length;
         const pendentesCT = Math.max(0, encaminhadasCT - devolvidasCT);
 
-        if ($('#ctStatAguardando')) $('#ctStatAguardando').textContent = (12 + pendentesCT).toString();
-        if ($('#ctStatDevolvidas')) $('#ctStatDevolvidas').textContent = (43 + devolvidasCT).toString();
+        if ($('#ctStatAguardando')) $('#ctStatAguardando').textContent = (countCT + pendentesCT).toString();
+        if ($('#ctStatDevolvidas')) $('#ctStatDevolvidas').textContent = (devolvidasCT).toString();
+
+        // Atualizar contadores das listas do Split Grid
+        filterSplitLists();
 
       } catch (e) {
         console.warn('Erro ao sincronizar estatísticas dos stat-cards:', e);
@@ -12316,6 +13601,20 @@
     }
 
     function clearUserSession() {
+      const currSession = getActiveSession();
+      if (currSession) {
+        logSystemEvent({
+          level: 'auth',
+          action: 'Logout do Sistema',
+          description: `Sessão finalizada para o usuário ${currSession.nome || currSession.email}.`,
+          user: currSession.email || 'Usuário',
+          details: {
+            email: currSession.email,
+            nome: currSession.nome,
+            timestamp: new Date().toISOString()
+          }
+        });
+      }
       localStorage.removeItem(AUTH_SESSION_KEY);
       try { getSupabase()?.auth?.signOut(); } catch (_e) { }
       showLoginView();
@@ -12485,6 +13784,21 @@
       if (authenticated && sessionData) {
         setActiveSession(sessionData);
         toast(`Login realizado com sucesso! Bem-vindo(a), ${sessionData.nome}`);
+
+        // Registrar nos Logs do Sistema
+        logSystemEvent({
+          level: 'auth',
+          action: 'Login no Sistema',
+          description: `Sessão iniciada com sucesso para ${sessionData.nome} (${sessionData.unidade || sessionData.nivel}).`,
+          user: sessionData.email,
+          details: {
+            nome: sessionData.nome,
+            email: sessionData.email,
+            unidade: sessionData.unidade,
+            nivel: sessionData.nivel,
+            timestamp: new Date().toISOString()
+          }
+        });
       } else {
         toast('E-mail ou senha incorretos. Verifique suas credenciais e tente novamente.');
       }
@@ -12591,6 +13905,7 @@
     }
 
     initActionButtonsBindings();
+    initSystemLogsListeners();
     initAuthSystem(); restore(); autoPopulateLoggedSchoolInForm(); syncPrint(); loadSavedStudents(); loadSavedFicais(); setWizardStep(1);
   </script>
 </body>
