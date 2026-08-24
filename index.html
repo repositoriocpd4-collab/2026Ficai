@@ -9835,12 +9835,25 @@
     }
 
     function selectCancScreenRow(row) {
-      document.querySelectorAll('.canc-screen-row').forEach(r => {
-        r.style.background = '';
+      document.querySelectorAll('#cancScreenCardsList .canc-screen-row').forEach(r => {
+        r.style.background = '#ffffff';
+        r.style.borderColor = '#e2e8f0';
         r.classList.remove('active');
+        const checkIcon = r.querySelector('.selected-check-icon');
+        if (checkIcon) checkIcon.remove();
       });
       row.style.background = '#eff6ff';
+      row.style.borderColor = '#2563eb';
       row.classList.add('active');
+
+      const chipWrap = row.querySelector('.chip')?.parentElement;
+      if (chipWrap && !chipWrap.querySelector('.selected-check-icon')) {
+        const check = document.createElement('div');
+        check.className = 'selected-check-icon';
+        check.style.cssText = 'width: 18px; height: 18px; border-radius: 50%; background: #2563eb; color: #fff; display: grid; place-items: center; font-size: 10px; margin-left: 6px;';
+        check.innerHTML = '<i class="fa-solid fa-check"></i>';
+        chipWrap.appendChild(check);
+      }
 
       const d = {
         ficai: row.dataset.ficai,
@@ -9855,6 +9868,95 @@
 
     document.querySelectorAll('.canc-screen-row').forEach(row => {
       row.addEventListener('click', () => selectCancScreenRow(row));
+    });
+
+    // ==============================================================================
+    // FILTROS E BUSCA DA TELA DE CANCELAMENTO DE FICAI (#view-cancelamento)
+    // ==============================================================================
+    function filterCancScreenFicais() {
+      const filterNum = ($('#cancScreenFilterNum')?.value || '').trim().toLowerCase();
+      const filterNome = ($('#cancScreenFilterNome')?.value || '').trim().toLowerCase();
+      const filterTurma = ($('#cancScreenFilterTurma')?.value || '').trim().toLowerCase();
+      const filterStatus = ($('#cancScreenFilterStatus')?.value || '').trim().toLowerCase();
+      const subSearch = ($('#cancSearchSubInput')?.value || '').trim().toLowerCase();
+
+      const rows = document.querySelectorAll('#cancScreenCardsList .canc-screen-row');
+      let visibleCount = 0;
+      let firstVisible = null;
+
+      rows.forEach(row => {
+        const ficai = (row.dataset.ficai || '').toLowerCase();
+        const student = (row.dataset.student || '').toLowerCase();
+        const turma = (row.dataset.turma || '').toLowerCase();
+        const status = (row.dataset.status || '').toLowerCase();
+        const escola = (row.dataset.escola || '').toLowerCase();
+
+        const matchNum = !filterNum || ficai.includes(filterNum);
+        const matchNome = !filterNome || student.includes(filterNome);
+        const matchTurma = !filterTurma || turma.includes(filterTurma);
+        const matchStatus = !filterStatus || status === filterStatus;
+        const matchSub = !subSearch || ficai.includes(subSearch) || student.includes(subSearch) || turma.includes(subSearch) || escola.includes(subSearch);
+
+        if (matchNum && matchNome && matchTurma && matchStatus && matchSub) {
+          row.style.display = 'block';
+          visibleCount++;
+          if (!firstVisible) firstVisible = row;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      // Atualiza o contador de registros
+      if ($('#cancTotalCount')) {
+        $('#cancTotalCount').textContent = `${visibleCount} registro${visibleCount === 1 ? '' : 's'}`;
+      }
+
+      // Se o item atualmente selecionado estiver oculto, seleciona o primeiro visível
+      const currentActive = document.querySelector('#cancScreenCardsList .canc-screen-row.active');
+      if (currentActive && currentActive.style.display === 'none' && firstVisible) {
+        selectCancScreenRow(firstVisible);
+      } else if (!currentActive && firstVisible) {
+        selectCancScreenRow(firstVisible);
+      }
+
+      // Mensagem de estado vazio
+      let emptyMsg = $('#cancSearchEmptyMsg');
+      if (visibleCount === 0) {
+        if (!emptyMsg) {
+          emptyMsg = document.createElement('div');
+          emptyMsg.id = 'cancSearchEmptyMsg';
+          emptyMsg.style.cssText = 'padding: 24px 12px; text-align: center; color: #94a3b8; font-size: 12.5px; border: 1px dashed #e2e8f0; border-radius: 10px; background: #f8fafc;';
+          emptyMsg.innerHTML = '<i class="fa-solid fa-filter-circle-xmark" style="font-size: 20px; color: #cbd5e1; margin-bottom: 6px; display: block;"></i>Nenhuma FICAI encontrada com os filtros informados.';
+          $('#cancScreenCardsList')?.appendChild(emptyMsg);
+        }
+        emptyMsg.style.display = 'block';
+      } else if (emptyMsg) {
+        emptyMsg.style.display = 'none';
+      }
+    }
+
+    // Eventos de Busca Dinâmica / Tempo Real
+    $('#cancScreenFilterNum')?.addEventListener('input', filterCancScreenFicais);
+    $('#cancScreenFilterNome')?.addEventListener('input', filterCancScreenFicais);
+    $('#cancScreenFilterTurma')?.addEventListener('change', filterCancScreenFicais);
+    $('#cancScreenFilterStatus')?.addEventListener('change', filterCancScreenFicais);
+    $('#cancSearchSubInput')?.addEventListener('input', filterCancScreenFicais);
+    $('#btnCancScreenSearch')?.addEventListener('click', filterCancScreenFicais);
+
+    // Botão Limpar Filtros
+    $('#btnCancScreenClear')?.addEventListener('click', () => {
+      if ($('#cancScreenFilterNum')) $('#cancScreenFilterNum').value = '';
+      if ($('#cancScreenFilterNome')) $('#cancScreenFilterNome').value = '';
+      if ($('#cancScreenFilterTurma')) $('#cancScreenFilterTurma').value = '';
+      if ($('#cancScreenFilterStatus')) $('#cancScreenFilterStatus').value = '';
+      if ($('#cancSearchSubInput')) $('#cancSearchSubInput').value = '';
+      filterCancScreenFicais();
+      toast('Filtros de cancelamento limpos com sucesso.');
+    });
+
+    $('#cancReloadBtn')?.addEventListener('click', () => {
+      filterCancScreenFicais();
+      toast('Dados de cancelamento atualizados.');
     });
 
     // Clique em "Visualizar" abre o Modal Completo da FICAI (openInfoModal)

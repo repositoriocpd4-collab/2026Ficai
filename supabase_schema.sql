@@ -365,14 +365,14 @@ INSERT INTO public.escolas (id, nome, endereco, telefone, email, ativo) VALUES
 ('aparecida', 'C. M. Aparecida Azêdo', 'Estrada do Teixeira, nº 2 - Itaguaí/RJ', '(21) 3782-9003', 'aparecida.azedo@itaguai.rj.gov.br', true),
 ('elmir', 'E.M. Elmir Figueira', 'Itaguaí/RJ - endereço cadastrado da unidade', '(21) 3782-9003', 'elmir.figueira@itaguai.rj.gov.br', true),
 ('mignone', 'CIEP 496 Maestro Francisco Mignone', 'Itaguaí/RJ - endereço cadastrado da unidade', '(21) 3782-9003', 'ciep496@itaguai.rj.gov.br', true)
-ON CONFLICT (nome) DO NOTHING;
+ON CONFLICT (id) DO UPDATE SET nome = EXCLUDED.nome, endereco = EXCLUDED.endereco, telefone = EXCLUDED.telefone, email = EXCLUDED.email, ativo = EXCLUDED.ativo;
 
 -- Modalidades
 INSERT INTO public.modalidades (id, nome, descricao, ativo) VALUES
 ('mod-infantil', 'Educação Infantil', 'Pré e etapas da Educação Infantil.', true),
 ('mod-fundamental', 'Ensino Fundamental', 'Anos Iniciais e Anos Finais.', true),
 ('mod-eja', 'EJA', 'Educação de Jovens e Adultos / NCEJA.', true)
-ON CONFLICT (nome) DO NOTHING;
+ON CONFLICT (id) DO UPDATE SET nome = EXCLUDED.nome, descricao = EXCLUDED.descricao, ativo = EXCLUDED.ativo;
 
 -- Turmas
 INSERT INTO public.turmas (id, ano, turma, turno, modalidade, escola, ativo) VALUES
@@ -412,7 +412,7 @@ INSERT INTO public.procedimentos (id, ordem, nome, ativo) VALUES
 ('proc-5', 5, 'Telegrama ao responsável', true),
 ('proc-6', 6, 'Visita ao domicílio do aluno', true),
 ('proc-7', 7, 'Comparecimento do responsável e assinatura do termo de responsabilidade', true)
-ON CONFLICT (nome) DO NOTHING;
+ON CONFLICT (id) DO UPDATE SET ordem = EXCLUDED.ordem, nome = EXCLUDED.nome, ativo = EXCLUDED.ativo;
 
 -- Motivos e Diagnósticos
 INSERT INTO public.motivos (id, grupo, nome, dashboard, ativo) VALUES
