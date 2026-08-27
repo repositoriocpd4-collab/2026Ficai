@@ -17237,7 +17237,7 @@
       const mobNum = $('#mobileStepNum');
       const mobTitle = $('#mobileStepTitle');
       if (mobNum) mobNum.textContent = currentWizardStep;
-      if (mobTitle) mobTitle.textContent = WIZARD_STEP_NAMES[currentWizardStep - 1] || '';
+      if (mobTitle) mobTitle.textContent = WIZARD_STEP_TITLES[currentWizardStep - 1] || '';
 
       // Atualizar bolinhas no footer
       $$('#wizardDotsRow .wizard-dot').forEach(dot => {
