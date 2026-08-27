@@ -9881,6 +9881,12 @@
 
     // Navegação
     function showView(name) {
+      if (!name) name = 'dashboard';
+      if (name === 'login') {
+        if (typeof showLoginView === 'function') showLoginView();
+        return;
+      }
+
       const session = typeof getActiveSession === 'function' ? getActiveSession() : null;
       const isAdmin = !!(session && (session.isSystemAdmin || session.nivel === 'Administrador' || session.email === 'cpdinfra@edu.itaguai.rj.gov.br'));
       const isCT = !!(session && session.nivel === 'ConselhoTutelar');
@@ -9899,6 +9905,9 @@
       $$('.view').forEach(v => v.classList.remove('active'));
       $('#view-' + name)?.classList.add('active');
       $$('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.view === name));
+      if (window.location.hash !== '#' + name) {
+        try { history.replaceState(null, '', '#' + name); } catch (_e) {}
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
       if (innerWidth < 980) $('#sidebar').classList.remove('open');
       if (name === 'encerramento') populateEncerrarOptions();
@@ -9906,6 +9915,19 @@
       if (name === 'cancelamento' && typeof syncCancScreenCardsFromGerados === 'function') syncCancScreenCardsFromGerados();
       if (name === 'conselho' && typeof syncConselhoTableFromDatabase === 'function') syncConselhoTableFromDatabase();
     }
+
+    function initClientRouter() {
+      const path = (window.location.pathname || '').toLowerCase();
+      const hash = (window.location.hash || '').replace('#', '').toLowerCase();
+      if (path.endsWith('/login') || hash === 'login') {
+        if (typeof showLoginView === 'function') showLoginView();
+      } else if (hash) {
+        showView(hash);
+      }
+    }
+    window.addEventListener('hashchange', initClientRouter);
+    window.addEventListener('popstate', initClientRouter);
+
     $$('.nav-item').forEach(n => n.addEventListener('click', () => showView(n.dataset.view))); $$('[data-go]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); showView(b.dataset.go) }));
     const appShell = $('.app-shell'), sidebar = $('#sidebar'), hamb = $('#hamb');
     function applySidebarState(collapsed) {
@@ -16459,7 +16481,58 @@
           console.warn('Sincronização Supabase em background:', _syncErr);
         }
 
-        const rows = await dbGetAll('ficais');
+        let rows = await dbGetAll('ficais');
+        if (!Array.isArray(rows) || rows.length === 0) {
+          const demoFicaisSeed = [
+            {
+              numero: '0021/2026',
+              ano: '2026',
+              aluno: 'Ana Clara Nascimento',
+              escola: 'E.M. Professora Aparecida',
+              turma: '7º Ano B (7B)',
+              situacao: 'Infrequente',
+              status: 'Ativa',
+              updatedAt: new Date().toISOString(),
+              createdAt: new Date().toISOString(),
+              infoEntries: [
+                { id: '1', date: new Date().toLocaleDateString('pt-BR'), text: 'Abertura de FICAI por infrequência consecutiva (7 faltas).', responsible: 'Orientação Pedagógica' }
+              ]
+            },
+            {
+              numero: '0017/2026',
+              ano: '2026',
+              aluno: 'Bruno Henrique Silva',
+              escola: 'E.M. Elmir Figueira',
+              turma: '6º Ano A (6A)',
+              situacao: 'Cancelada',
+              status: 'Cancelada',
+              updatedAt: new Date().toISOString(),
+              createdAt: new Date().toISOString(),
+              infoEntries: [
+                { id: '2', date: new Date().toLocaleDateString('pt-BR'), text: 'Cancelamento definitivo de FICAI por duplicidade cadastral.', responsible: 'CPD Infra / SMEDU' }
+              ]
+            },
+            {
+              numero: '0015/2026',
+              ano: '2026',
+              aluno: 'Carla Souza Ribeiro',
+              escola: 'E.M. Daisy Mignone',
+              turma: '8º Ano A (8A)',
+              situacao: 'Cancelada',
+              status: 'Cancelada',
+              updatedAt: new Date().toISOString(),
+              createdAt: new Date().toISOString(),
+              infoEntries: [
+                { id: '3', date: new Date().toLocaleDateString('pt-BR'), text: 'Cancelamento formal por transferência de domicílio para outro município.', responsible: 'Direção Escolar' }
+              ]
+            }
+          ];
+          for (const seed of demoFicaisSeed) {
+            try { await dbPut('ficais', seed); } catch (_e) { }
+          }
+          rows = await dbGetAll('ficais');
+        }
+
         if (!Array.isArray(rows)) return;
 
         const visibleRows = rows.filter(r => isFicaiVisibleToSession(r, session));
