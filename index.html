@@ -7669,66 +7669,9 @@
             </div>
           </div>
 
-          <!-- 1. Barra de Filtros Superior (1 Linha Completa) -->
-          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-            <div style="display: grid; grid-template-columns: 130px 1fr 180px 180px auto auto; gap: 12px; align-items: flex-end;">
-              <div>
-                <label style="font-size: 11.5px; font-weight: 700; color: #475569; display: block; margin-bottom: 5px;">N.º FICAI</label>
-                <input type="text" id="cancScreenFilterNum" placeholder="Ex.: 0021" class="dash-input" style="height: 38px; padding: 0 12px; font-size: 13px;">
-              </div>
-              <div>
-                <label style="font-size: 11.5px; font-weight: 700; color: #475569; display: block; margin-bottom: 5px;">Nome do Aluno</label>
-                <input type="text" id="cancScreenFilterNome" placeholder="Digite o nome do aluno" class="dash-input" style="height: 38px; padding: 0 12px; font-size: 13px;">
-              </div>
-              <div>
-                <label style="font-size: 11.5px; font-weight: 700; color: #475569; display: block; margin-bottom: 5px;">Turma</label>
-                <select id="cancScreenFilterTurma" class="dash-select" style="height: 38px; font-size: 12.5px;">
-                  <option value="">Selecione a turma</option>
-                  <option value="6A">6º Ano A (6A)</option>
-                  <option value="7B">7º Ano B (7B)</option>
-                  <option value="8A">8º Ano A (8A)</option>
-                  <option value="9B">9º Ano B (9B)</option>
-                </select>
-              </div>
-              <div>
-                <label style="font-size: 11.5px; font-weight: 700; color: #475569; display: block; margin-bottom: 5px;">Status</label>
-                <select id="cancScreenFilterStatus" class="dash-select" style="height: 38px; font-size: 12.5px;">
-                  <option value="">Selecione o status</option>
-                  <option value="Ativa">Ativa</option>
-                  <option value="Em análise">Em análise</option>
-                  <option value="Encaminhada">Encaminhada</option>
-                  <option value="Cancelada">Cancelada</option>
-                </select>
-              </div>
-              <button type="button" id="btnCancScreenSearch" class="btn primary" style="background: #2563eb; height: 38px; padding: 0 18px; font-weight: 700; border-radius: 9px; font-size: 13px;">
-                <i class="fa-solid fa-magnifying-glass"></i> Buscar
-              </button>
-              <button type="button" id="btnCancScreenClear" class="btn soft" style="height: 38px; padding: 0 16px; font-size: 13px; font-weight: 600; border-radius: 9px;">
-                <i class="fa-solid fa-filter-circle-xmark"></i> Limpar filtros
-              </button>
-            </div>
-          </div>
-
-          <!-- 2. Grid Principal em 2 Colunas -->
-          <div style="display: grid; grid-template-columns: 310px 1fr; gap: 20px; align-items: start;">
-
-            <!-- COLUNA 1 (ESQUERDA): Histórico Vertical da FICAI -->
-            <div style="display: flex; flex-direction: column; gap: 20px;">
-
-              <!-- Card: Histórico da FICAI Selecionada (Linha do Tempo) -->
-              <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
-                <h3 style="font-size: 14px; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 16px;">Histórico da FICAI selecionada</h3>
-                
-                <div id="cancScreenTimelineBox" style="display: flex; flex-direction: column; gap: 16px; position: relative; padding-left: 24px;">
-                  <div style="font-size: 12.5px; color: #94a3b8; font-style: italic; margin-left: -24px; text-align: center; padding: 12px 0;">
-                    Nenhum histórico disponível para a FICAI selecionada.
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- COLUNA 2 (CENTRAL): Form com Stepper 1-2-3 + Mini Tabela + Callouts -->
+          <!-- Conteúdo Principal da Tela de Cancelamento -->
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <!-- Form com Stepper 1-2-3 + Mini Tabela + Callouts -->
             <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); display: flex; flex-direction: column; gap: 20px;">
               <div>
                 <h2 style="font-size: 18px; font-weight: 800; color: #0f172a; margin: 0; display: flex; align-items: center; gap: 8px;">
